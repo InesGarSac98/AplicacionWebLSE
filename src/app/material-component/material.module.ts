@@ -31,6 +31,7 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { SliderComponent } from './slider/slider.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
+import { ProfesorComponent } from './profesor/profesor.component';
 
 @NgModule({
   imports: [
@@ -46,6 +47,7 @@ import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
   providers: [],
   entryComponents: [DialogOverviewExampleDialogComponent],
   declarations: [
+    ProfesorComponent,
     ButtonsComponent,
     GridComponent,
     ListsComponent,
