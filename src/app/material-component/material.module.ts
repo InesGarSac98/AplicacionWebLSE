@@ -32,6 +32,7 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
 import { SliderComponent } from './slider/slider.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { ProfesorComponent } from './profesor/profesor.component';
+import { AlumnoComponent } from './alumno/alumno.component';
 
 @NgModule({
   imports: [
@@ -48,6 +49,7 @@ import { ProfesorComponent } from './profesor/profesor.component';
   entryComponents: [DialogOverviewExampleDialogComponent],
   declarations: [
     ProfesorComponent,
+    AlumnoComponent,
     ButtonsComponent,
     GridComponent,
     ListsComponent,
