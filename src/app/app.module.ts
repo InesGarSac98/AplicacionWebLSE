@@ -17,6 +17,7 @@ import { DemoMaterialModule } from './demo-material-module';
 
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
+import { PublicComponent } from './public/public.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SpinnerComponent } from './shared/spinner.component';
     FullComponent,
     AppHeaderComponent,
     SpinnerComponent,
-    AppSidebarComponent
+    AppSidebarComponent,
+    PublicComponent
   ],
   imports: [
     BrowserModule,
@@ -37,10 +39,7 @@ import { SpinnerComponent } from './shared/spinner.component';
     RouterModule.forRoot(AppRoutes)
   ],
   providers: [
-    {
-      provide: LocationStrategy,
-      useClass: PathLocationStrategy
-    }
+
   ],
   bootstrap: [AppComponent]
 })
