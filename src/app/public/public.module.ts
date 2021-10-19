@@ -20,6 +20,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatTabsModule } from '@angular/material/tabs'; 
 
 
 export const publicRoutes: Routes = [
@@ -50,7 +51,8 @@ export const publicRoutes: Routes = [
     MatSelectModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTabsModule
   ],
   declarations: [
     RegisterComponent,
