@@ -2,14 +2,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: auto;
-    width: auto;
+    height: 100%;
+    background-color: rgb(229, 202, 255);
+    padding-top: 10%;
+    padding-bottom: 20%;
   }
   
   .button-flex-container {
     display: flex;
     width: auto;
     justify-content: flex-end;
+    float: left;
 }
 
 .in{

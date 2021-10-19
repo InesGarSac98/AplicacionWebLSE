@@ -18,20 +18,26 @@ export class LoginComponent implements OnInit {
   
   constructor(private router: Router) { }
 
-  username!: string;
-  password!: string;
 
   ngOnInit() {
   }
 
-  login() : void {
-    if(this.username == 'admin' && this.password == 'admin'){
-     this.router.navigate(["/dashboard"]);
-    }else {
-      this.router.navigate(["/dashboard"]);
-      alert("Invalid credentials");
-    }
+  login():void{
+    this.router.navigate(["/dashboard"]);
   }
+
+  register():void{
+    this.router.navigate(["/register"]);
+  }
+
+  // login() : void {
+  //   if(this.username == 'admin' && this.password == 'admin'){
+  //    this.router.navigate(["/dashboard"]);
+  //   }else {
+  //     this.router.navigate(["/dashboard"]);
+  //     alert("Invalid credentials");
+  //   }
+  // }
   
 
 }

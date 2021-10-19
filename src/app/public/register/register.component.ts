@@ -17,6 +17,7 @@ export const publicRoutes: Routes = [
 })
 export class RegisterComponent implements OnInit {
 
+  hide = true;
   constructor(
     private router: Router
   ) { }
@@ -24,8 +25,10 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
+
   public botonHaSidoPulsado(): void {
     alert('Hola mundo! El botón ha sido pulsado');
     this.router.navigate(['/dashboard']);
+    
   }
 }

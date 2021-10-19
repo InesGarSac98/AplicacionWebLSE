@@ -14,12 +14,9 @@ export const publicRoutes: Routes = [
   }
 ]
 
-
 @NgModule({
   imports: [
-    CommonModule,
-    NavbarComponent,
-    DemoMaterialModule,
+    CommonModule
 
   ],
   declarations: [ComponentsComponent]
