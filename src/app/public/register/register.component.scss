@@ -6,17 +6,21 @@ mat-grid-tile {
   background:#fafafa;
 }
 
-.width-card{
-  width: 20%;
+mat-card{
+  width: 50%;
+  height: auto;
+  margin-left: 25%;
 }
 
-.width-card2{
-  width: 40%;
+.in{
+  padding: 3%;
 }
 
 .login-form-flex {
     justify-content: center;
     align-items: center;
+    padding-top: 5%;
+    padding-bottom: 20%;
   }
 
   .button-flex-container {
@@ -26,7 +30,11 @@ mat-grid-tile {
     float: left;
 }
 
-.in{
-  padding: 5%;
-  align-items: center;
+
+mat-form-field{
+  width: 100%;
+}
+
+.button-flex-container{
+  float: right;
 }

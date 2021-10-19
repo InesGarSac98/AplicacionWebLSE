@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { Routes } from '@angular/router';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
@@ -13,7 +14,8 @@ export const publicRoutes: Routes = [
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'es-ES' }]
 })
 export class RegisterComponent implements OnInit {
 

@@ -18,17 +18,10 @@ export class LoginComponent implements OnInit {
   
   constructor(private router: Router) { }
 
-
+  hide = true;
   ngOnInit() {
   }
 
-  login():void{
-    this.router.navigate(["/dashboard"]);
-  }
-
-  register():void{
-    this.router.navigate(["/register"]);
-  }
 
   // login() : void {
   //   if(this.username == 'admin' && this.password == 'admin'){
@@ -38,6 +31,12 @@ export class LoginComponent implements OnInit {
   //     alert("Invalid credentials");
   //   }
   // }
+
+  public botonHaSidoPulsado(): void {
+    alert('Hola mundo! El botón ha sido pulsado');
+    this.router.navigate(['/dashboard']);
+    
+  }
   
 
 }

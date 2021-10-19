@@ -1,6 +1,6 @@
 <div class="login-form-flex">
     <mat-card>
-        <div class="in">
+        <div class = "in">
             <mat-card-title>
                 Registrar usuario
             </mat-card-title>
@@ -33,36 +33,36 @@
                     </button>
                 </mat-form-field>
 
+                <mat-form-field class="width-card2">
+                    <mat-label>Repita la contraseña</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" >
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+
                 <br>
 
-                <label id="example-radio-group-label">Genero: </label>
+                <label id="example-radio-group-label">Rol: </label>
 
                 <br><br>
 
                 <mat-radio-group aria-label="Select an option">
-                    <mat-radio-button value="1">Hombre</mat-radio-button>
-                    <mat-radio-button class="example-radio-button" value="2">Mujer</mat-radio-button>
+                    <mat-slide-toggle>Profesor</mat-slide-toggle>
                 </mat-radio-group>
 
-                <br><br>
-                <label id="example-radio-group-label">Fecha de nacimiento: </label>
-                <br><br>
-                            
-                <mat-form-field class="width-card" appearance="fill">
-                    <mat-label >Elije una fecha</mat-label>
-                    <input matInput [matDatepicker]="picker">
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-                <button mat-raised-button (click)="picker.open()">Open</button>
-            </mat-card-content>
        
-    <mat-card-actions>
-    <div class="button-flex-container">
-         <button mat-raised-button color="primary" (click)="botonHaSidoPulsado()">Guardar</button>
-    </div>
-    </mat-card-actions>
-    </div>
-</mat-card>
+            <mat-card-actions>
+                <br>
+                ¿Ya tiene cuenta?
+                <a [routerLink]="['/public/login']"> Iniciar sesión</a>
+                <div class="button-flex-container">
+                    <button mat-raised-button color="primary" (click)="botonHaSidoPulsado()">Guardar</button>
+                </div>
+            </mat-card-actions>
+        </mat-card-content>
+        </div>
+    </mat-card>
 
 </div>
 <!-- <button mat-raised-button color="primary" (click)="botonHaSidoPulsado()">Botón</button> -->

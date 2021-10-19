@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
 
 import {FormsModule} from '@angular/forms';
 
@@ -20,13 +19,10 @@ import { MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 export const publicRoutes: Routes = [
-    {
-      path: 'home',
-      pathMatch: 'full',
-      component: HomeComponent
-    },
     {
       path: 'register',
       component: RegisterComponent
@@ -53,12 +49,12 @@ export const publicRoutes: Routes = [
     MatGridListModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatSlideToggleModule
   ],
   declarations: [
     RegisterComponent,
-    LoginComponent,
-    HomeComponent
+    LoginComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }
