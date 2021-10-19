@@ -6,9 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./public.component.scss']
 })
 export class PublicComponent implements OnInit {
+ 
 
   constructor() { }
-
+  
   ngOnInit() {
   }
 

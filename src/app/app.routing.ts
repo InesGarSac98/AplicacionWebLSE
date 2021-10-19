@@ -18,7 +18,7 @@ export const AppRoutes: Routes = [
     },
     {
       path: '',
-      redirectTo: 'public/register',
+      redirectTo: 'public/home',
       pathMatch: 'full'
     },
     {
