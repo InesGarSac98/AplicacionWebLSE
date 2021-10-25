@@ -16,8 +16,8 @@ File: scss
  *	7. Widgets
  *	8. Custom Templates
  */
-/******************* 
-Global Styles 
+/*******************
+Global Styles
 *******************/
 
 * {
@@ -744,7 +744,7 @@ Mat card
         color: $white;
       }
       .mat-card-subtitle {
-        color: rgba(255, 255, 255, 0.7);
+        color: rgba(240, 0, 0, 0.7);
       }
     }
   }

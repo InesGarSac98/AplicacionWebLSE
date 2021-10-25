@@ -16,25 +16,21 @@ mat-toolbar{
     }
     .navbar-header {
         text-align: center;
+        font-size: x-large;
         .navbar-brand {
             display: flex;
             line-height: 18px;
-            align-items: center;
-            .dark-logo {
-                display: none;
-            }
-            b {
-               margin-right: 5px;
-            }
         }
     }
-    
+
     .profile-pic{
         width: 40px;
         height: 40px;
         border-radius: 100%;
     }
 }
+
+
 /*******************
  Topbar
 *******************/

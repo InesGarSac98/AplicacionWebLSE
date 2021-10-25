@@ -10,22 +10,12 @@ import { MenuItems } from '../../shared/menu-items/menu-items';
   styleUrls: []
 })
 export class FullComponent implements OnDestroy, AfterViewInit {
-  mobileQuery: MediaQueryList;
 
-  private _mobileQueryListener: () => void;
 
-  constructor(
-    changeDetectorRef: ChangeDetectorRef,
-    media: MediaMatcher,
-    public menuItems: MenuItems
-  ) {
-    this.mobileQuery = media.matchMedia('(min-width: 768px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
-  }
-
+  constructor(  ) {}
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
+    throw new Error('Method not implemented.');
   }
+
   ngAfterViewInit() {}
 }

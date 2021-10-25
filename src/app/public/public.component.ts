@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,12 +11,31 @@ import { Component, OnInit } from '@angular/core';
 export class PublicComponent implements OnInit {
 
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) {
+  }
 
   ngOnInit() {
   }
 
+  public homePulsado(): void {
+    this.router.navigate(['/public/home']);
 
+  }
+  public AboutUsPulsado(): void {
+    this.router.navigate(['/public/aboutus']);
+
+  }
+  public LoginPulsado(): void {
+    this.router.navigate(['/public/register']);
+
+  }
+
+  ngOnDestroy(): void {
+
+  }
+  ngAfterViewInit() {}
 
 
 }

@@ -20,11 +20,5 @@ export const AppRoutes: Routes = [
       path: '',
       redirectTo: 'public/login',
       pathMatch: 'full'
-    },
-    {
-      path: 'material-components',
-      component: FullComponent,
-      loadChildren:
-        () => import('./material-component/material.module').then(m => m.MaterialComponentsModule)
-    },
+    }
 ];
