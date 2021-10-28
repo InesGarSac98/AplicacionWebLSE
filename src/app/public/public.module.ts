@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,6 +22,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { HomeComponent } from './home/home.component';
 
 
 export const publicRoutes: Routes = [
@@ -31,9 +32,12 @@ export const publicRoutes: Routes = [
     },
     {
       path: 'login',
-      pathMatch: 'full',
       component: LoginComponent
     },
+    {
+        path: 'home',
+        component: HomeComponent
+    }
 ]
 
 @NgModule({
@@ -43,6 +47,7 @@ export const publicRoutes: Routes = [
     MatInputModule,
     MatButtonModule,
     FormsModule,
+    ReactiveFormsModule,
     MatCardModule,
     MatProgressSpinnerModule,
     MatListModule,
@@ -58,10 +63,8 @@ export const publicRoutes: Routes = [
   ],
   declarations: [
     RegisterComponent,
-    LoginComponent
-  ],
-  providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }
+    LoginComponent,
+    HomeComponent
   ]
 
 })

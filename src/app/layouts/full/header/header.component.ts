@@ -21,7 +21,7 @@ export class AppHeaderComponent {
 
   }
   public LoginPulsado(): void {
-    this.router.navigate(['/public/register']);
+    this.router.navigate(['/public/login']);
 
   }
 

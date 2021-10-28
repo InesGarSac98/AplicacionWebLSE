@@ -28,7 +28,7 @@ export class PublicComponent implements OnInit {
 
   }
   public LoginPulsado(): void {
-    this.router.navigate(['/public/register']);
+    this.router.navigate(['/public/login']);
 
   }
 

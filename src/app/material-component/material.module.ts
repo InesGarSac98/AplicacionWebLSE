@@ -27,12 +27,8 @@ import {
   DialogComponent,
   DialogOverviewExampleDialogComponent
 } from './dialog/dialog.component';
-import { TooltipComponent } from './tooltip/tooltip.component';
-import { SnackbarComponent } from './snackbar/snackbar.component';
-import { SliderComponent } from './slider/slider.component';
-import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { ProfesorComponent } from './profesor/profesor.component';
-import { AlumnoComponent } from './alumno/alumno.component';
+import { LoginComponent } from '../public/login/login.component';
 
 @NgModule({
   imports: [
@@ -48,25 +44,7 @@ import { AlumnoComponent } from './alumno/alumno.component';
   providers: [],
   entryComponents: [DialogOverviewExampleDialogComponent],
   declarations: [
-    ProfesorComponent,
-    AlumnoComponent,
-    ButtonsComponent,
-    GridComponent,
-    ListsComponent,
-    MenuComponent,
-    TabsComponent,
-    StepperComponent,
-    ExpansionComponent,
-    ChipsComponent,
-    ToolbarComponent,
-    ProgressSnipperComponent,
-    ProgressComponent,
-    DialogComponent,
-    DialogOverviewExampleDialogComponent,
-    TooltipComponent,
-    SnackbarComponent,
-    SliderComponent,
-    SlideToggleComponent
+    ProfesorComponent
   ]
 })
 export class MaterialComponentsModule {}
