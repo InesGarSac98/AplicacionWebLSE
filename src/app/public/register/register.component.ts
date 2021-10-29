@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { User } from 'src/api/models/user.model';
+import { Teacher } from 'src/api/models/teacher.model';
+import { TeachersService } from 'src/api/services/teachers-service/teachers.service';
 import { UsersService } from 'src/api/services/users-service/users.service';
 
 @Component({
@@ -15,14 +17,21 @@ export class RegisterComponent implements OnInit {
 
     public studentFormGroup: FormGroup;
     hide = true;
+    public teacherFormGroup: FormGroup;
 
     constructor(
         private router: Router,
-        private usersService: UsersService
+        private usersService: UsersService,
+        private teachersService: TeachersService
     ) { }
 
     public ngOnInit(): void {
         this.studentFormGroup = new FormGroup({
+            name: new FormControl('', [Validators.maxLength(100), Validators.required]),
+            email: new FormControl('', [Validators.maxLength(70), Validators.required]),
+            password: new FormControl('', [Validators.maxLength(80), Validators.required])
+        }),
+        this.teacherFormGroup = new FormGroup({
             name: new FormControl('', [Validators.maxLength(100), Validators.required]),
             email: new FormControl('', [Validators.maxLength(70), Validators.required]),
             password: new FormControl('', [Validators.maxLength(80), Validators.required])
@@ -39,5 +48,11 @@ export class RegisterComponent implements OnInit {
                 console.log(user);
                 this.router.navigate(['/dashboard']);
             });
+
+        this.teachersService.createNewTeacher(this.teacherFormGroup.value)
+        .subscribe((teacher: Teacher) => {
+            console.log(teacher);
+            this.router.navigate(['/dashboard']);
+        });
     }
 }
