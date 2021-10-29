@@ -10,6 +10,7 @@ export class TeachersService {
 
     constructor(private http: HttpClient) { }
 
+    // Métodos para crear un nuevo profesor en la bbdd
     public getTeachers(): Observable<Teacher[]> {
         return this.http.get<Teacher[]>('/api/teachers');
     }

@@ -43,16 +43,36 @@ export class RegisterComponent implements OnInit {
         /*alert('Hola mundo! El botón ha sido pulsado');
         this.router.navigate(['/dashboard']);
         */
+
+        // console.log("Valor formulario user:",this.studentFormGroup.value);
+
+
+
+        // if (this.usersService.createNewUser(this.teacherFormGroup.value)){
+
+        //     this.usersService.createNewUser(this.teacherFormGroup.value)
+        //         .subscribe((teacher: Teacher) => {
+        //             console.log(teacher);
+        //             this.router.navigate(['/dashboard']);
+        //         });
+        // }else{
+        //     console.log("No es teacher");
+        // }
+
+
+
         this.usersService.createNewUser(this.studentFormGroup.value)
             .subscribe((user: User) => {
-                console.log(user);
-                this.router.navigate(['/dashboard']);
+
+                console.log("Valor formulario teacher:",this.teacherFormGroup.value);
+
+                this.teachersService.createNewTeacher(this.teacherFormGroup.value)
+                    .subscribe((teacher: Teacher) => {
+                        console.log(teacher);
+                        this.router.navigate(['/dashboard']);
+                    });
             });
 
-        this.teachersService.createNewTeacher(this.teacherFormGroup.value)
-        .subscribe((teacher: Teacher) => {
-            console.log(teacher);
-            this.router.navigate(['/dashboard']);
-        });
+
     }
 }
