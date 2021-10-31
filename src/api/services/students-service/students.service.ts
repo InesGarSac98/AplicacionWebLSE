@@ -12,11 +12,11 @@ export class StudentsService {
 
     // Métodos para crear un nuevo profesor en la bbdd
     public getStudents(): Observable<Student[]> {
-        return this.http.get<Student[]>('/api/teachers');
+        return this.http.get<Student[]>('/api/students');
     }
 
     public createNewStudents(student: Student): Observable<Student> {
-        return this.http.post<Student>('/api/teachers', student);
+        return this.http.post<Student>('/api/students', student);
     }
 
 }

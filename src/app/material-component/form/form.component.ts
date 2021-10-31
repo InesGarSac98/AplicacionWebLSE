@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-alumno',
-  templateUrl: './alumno.component.html',
-  styleUrls: ['./alumno.component.css']
+  selector: 'app-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.css']
 })
 export class AlumnoComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit() {
-    
+
   }
 
 }

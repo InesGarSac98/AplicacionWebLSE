@@ -6,6 +6,8 @@ import { User } from 'src/api/models/user.model';
 import { Teacher } from 'src/api/models/teacher.model';
 import { TeachersService } from 'src/api/services/teachers-service/teachers.service';
 import { UsersService } from 'src/api/services/users-service/users.service';
+import { StudentsService } from 'src/api/services/students-service/students.service';
+import { Student } from 'src/api/models/student.model';
 
 @Component({
     selector: 'app-register',
@@ -15,64 +17,63 @@ import { UsersService } from 'src/api/services/users-service/users.service';
 })
 export class RegisterComponent implements OnInit {
 
-    public studentFormGroup: FormGroup;
+    public formGroup: FormGroup;
     hide = true;
-    public teacherFormGroup: FormGroup;
 
     constructor(
         private router: Router,
         private usersService: UsersService,
-        private teachersService: TeachersService
+        private teachersService: TeachersService,
+        private studentsService: StudentsService
     ) { }
 
     public ngOnInit(): void {
-        this.studentFormGroup = new FormGroup({
-            name: new FormControl('', [Validators.maxLength(100), Validators.required]),
-            email: new FormControl('', [Validators.maxLength(70), Validators.required]),
-            password: new FormControl('', [Validators.maxLength(80), Validators.required])
-        }),
-        this.teacherFormGroup = new FormGroup({
-            name: new FormControl('', [Validators.maxLength(100), Validators.required]),
-            email: new FormControl('', [Validators.maxLength(70), Validators.required]),
-            password: new FormControl('', [Validators.maxLength(80), Validators.required])
+        this.formGroup = new FormGroup({
+            user: new FormGroup({
+                name: new FormControl('', [Validators.maxLength(100), Validators.required]),
+                email: new FormControl('', [Validators.maxLength(70), Validators.required]),
+                password: new FormControl('', [Validators.maxLength(80), Validators.required])
+            }),
+            teacher: new FormGroup({
+                userId: new FormControl('', [Validators.maxLength(100), Validators.required]),
+                schoolName: new FormControl('', [Validators.maxLength(70), Validators.required])
+            }),
+            student: new FormGroup({
+                userId: new FormControl('', [Validators.maxLength(100), Validators.required]),
+                classroomCode: new FormControl('', [Validators.maxLength(70), Validators.required])
+            }),
         })
     }
 
 
-    public botonHaSidoPulsado(): void {
-        /*alert('Hola mundo! El botón ha sido pulsado');
-        this.router.navigate(['/dashboard']);
-        */
+    public saveTeacher(): void {
 
-        // console.log("Valor formulario user:",this.studentFormGroup.value);
-
-
-
-        // if (this.usersService.createNewUser(this.teacherFormGroup.value)){
-
-        //     this.usersService.createNewUser(this.teacherFormGroup.value)
-        //         .subscribe((teacher: Teacher) => {
-        //             console.log(teacher);
-        //             this.router.navigate(['/dashboard']);
-        //         });
-        // }else{
-        //     console.log("No es teacher");
-        // }
-
-
-
-        this.usersService.createNewUser(this.studentFormGroup.value)
+        this.usersService.createNewUser(this.formGroup.controls.user.value)
             .subscribe((user: User) => {
 
-                console.log("Valor formulario teacher:",this.teacherFormGroup.value);
+                (this.formGroup.controls.teacher as FormGroup).controls.userId.setValue(user.id);
+                this.teachersService.createNewTeacher(this.formGroup.controls.teachers.value)
+                .subscribe((teacher: Teacher) => {
+                    console.log(teacher);
+                    this.router.navigate(['/dashboard']);
+                });
 
-                this.teachersService.createNewTeacher(this.teacherFormGroup.value)
-                    .subscribe((teacher: Teacher) => {
-                        console.log(teacher);
-                        this.router.navigate(['/dashboard']);
-                    });
             });
-
-
     }
+
+    public saveStudent(): void {
+
+        this.usersService.createNewUser(this.formGroup.controls.user.value)
+            .subscribe((user: User) => {
+
+                (this.formGroup.controls.student as FormGroup).controls.userId.setValue(user.id);
+                this.studentsService.createNewStudents(this.formGroup.controls.student.value)
+                .subscribe((student: Student) => {
+                    console.log(student);
+                    this.router.navigate(['/dashboard']);
+                });
+
+            });
+    }
+
 }

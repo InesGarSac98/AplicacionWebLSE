@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Student } from 'src/api/models/student.model';
 import { Teacher } from 'src/api/models/teacher.model';
 import { User } from 'src/api/models/user.model';
-import { StudentsService } from 'src/api/services/student-service/students.service';
+import { StudentsService } from 'src/api/services/students-service/students.service';
 import { TeachersService } from 'src/api/services/teachers-service/teachers.service';
 import { UsersService } from 'src/api/services/users-service/users.service';
 

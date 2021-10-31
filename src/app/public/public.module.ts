@@ -25,6 +25,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HomeComponent } from './home/home.component';
 
 
+
 export const publicRoutes: Routes = [
     {
       path: 'register',

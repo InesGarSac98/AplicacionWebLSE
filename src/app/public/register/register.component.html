@@ -12,46 +12,53 @@
                     </mat-card-title>
 
                     <mat-card-content>
-                        <form [formGroup]="studentFormGroup">
-                            <mat-form-field class="width-card">
-                                <mat-label>Nombre</mat-label>
-                                <input matInput formControlName="name">
-                            </mat-form-field>
+                        <form [formGroup]="formGroup">
+                            <div formGroupName="user">
 
-                            <mat-form-field class="width-card">
-                                <mat-label>Apellidos</mat-label>
-                                <input matInput>
-                            </mat-form-field>
+                                <mat-form-field class="width-card">
+                                    <mat-label>Nombre</mat-label>
+                                    <input matInput formControlName="name">
+                                </mat-form-field>
 
-                            <br>
+                                <!-- <mat-form-field class="width-card">
+                                    <mat-label>Apellidos</mat-label>
+                                    <input matInput>
+                                </mat-form-field> -->
 
-                            <mat-form-field class="width-card2">
-                                <mat-label>Nickname</mat-label>
-                                <input matInput placeholder="Ej. innesgs" formControlName="email">
-                            </mat-form-field>
+                             <br>
 
-                            <br>
+                                <mat-form-field class="width-card2">
+                                    <mat-label>Nickname</mat-label>
+                                    <input matInput placeholder="Ej. innesgs" formControlName="email">
+                                </mat-form-field>
 
-                            <mat-form-field class="width-card2">
-                                <mat-label>Contraseña</mat-label>
-                                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-                                <button mat-icon-button matSuffix (click)="hide = !hide">
-                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                </button>
-                            </mat-form-field>
+                                <br>
 
-                            <mat-form-field class="width-card2">
-                                <mat-label>Repita la contraseña</mat-label>
-                                <input matInput [type]="hide ? 'password' : 'text'">
-                                <button mat-icon-button matSuffix (click)="hide = !hide">
-                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                </button>
-                            </mat-form-field>
+                                <mat-form-field class="width-card2">
+                                    <mat-label>Contraseña</mat-label>
+                                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                                    <button mat-icon-button matSuffix (click)="hide = !hide">
+                                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                </mat-form-field>
 
-                            <mat-form-field class="width-card2">
-                                <mat-label>Código de clase</mat-label>
-                                <input matInput placeholder="6h7Jhy1">
-                            </mat-form-field>
+                                <!--
+                                <mat-form-field class="width-card2">
+                                    <mat-label>Repita la contraseña</mat-label>
+                                    <input matInput [type]="hide ? 'password' : 'text'">
+                                    <button mat-icon-button matSuffix (click)="hide = !hide">
+                                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                </mat-form-field> -->
+                            </div>
+
+                            <div formGroupName="student">
+                                <mat-form-field class="width-card2">
+                                    <mat-label>Código de clase</mat-label>
+                                    <input matInput placeholder="6h7Jhy1" formControlName="classroomCode">
+                                </mat-form-field>
+                            </div>
+
 
                             <br>
                         </form>
@@ -62,7 +69,7 @@
                             <a [routerLink]="['/public/login']"> Iniciar sesión</a>
                             <div class="button-flex-container">
                                 <button mat-raised-button color="primary"
-                                    (click)="botonHaSidoPulsado()">Guardar</button>
+                                    (click)="saveStudent()">Guardar</button>
                             </div>
                         </mat-card-actions>
                     </mat-card-content>
@@ -77,42 +84,50 @@
                     </mat-card-title>
 
                     <mat-card-content>
-                        <form [formGroup]="teacherFormGroup">
-                            <mat-form-field class="width-card">
-                                <mat-label>Nombre</mat-label>
-                                <input matInput formControlName="name">
-                            </mat-form-field>
+                        <form [formGroup]="formGroup">
+                            <div formGroupName="user">
+                                <mat-form-field class="width-card">
+                                    <mat-label>Nombre</mat-label>
+                                    <input matInput formControlName="name">
+                                </mat-form-field>
 
-                            <mat-form-field class="width-card">
-                                <mat-label>Apellidos</mat-label>
-                                <input matInput>
-                            </mat-form-field>
+                                <!-- <mat-form-field class="width-card">
+                                    <mat-label>Apellidos</mat-label>
+                                    <input matInput>
+                                </mat-form-field> -->
 
-                            <br>
+                                <br>
 
-                            <mat-form-field class="width-card2">
-                                <mat-label>Email</mat-label>
-                                <input matInput placeholder="Ej. usuario@example.com" formControlName="email">
-                            </mat-form-field>
+                                <mat-form-field class="width-card2">
+                                    <mat-label>Email</mat-label>
+                                    <input matInput placeholder="Ej. usuario@example.com" formControlName="email">
+                                </mat-form-field>
 
-                            <br>
+                                <br>
 
-                            <mat-form-field class="width-card2">
-                                <mat-label>Contraseña</mat-label>
-                                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-                                <button mat-icon-button matSuffix (click)="hide = !hide">
-                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                </button>
-                            </mat-form-field>
+                                <mat-form-field class="width-card2">
+                                    <mat-label>Contraseña</mat-label>
+                                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                                    <button mat-icon-button matSuffix (click)="hide = !hide">
+                                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                </mat-form-field>
 
-                            <mat-form-field class="width-card2">
-                                <mat-label>Repita la contraseña</mat-label>
-                                <input matInput [type]="hide ? 'password' : 'text'">
-                                <button mat-icon-button matSuffix (click)="hide = !hide">
-                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                </button>
-                            </mat-form-field>
+                                <!-- <mat-form-field class="width-card2">
+                                    <mat-label>Repita la contraseña</mat-label>
+                                    <input matInput [type]="hide ? 'password' : 'text'">
+                                    <button mat-icon-button matSuffix (click)="hide = !hide">
+                                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                </mat-form-field> -->
 
+                            </div>
+                            <div formGroupName="teacher">
+                                <mat-form-field class="width-card2">
+                                    <mat-label>Nombre del colegio</mat-label>
+                                    <input matInput placeholder="6h7Jhy1" formControlName="schoolName">
+                                </mat-form-field>
+                            </div>
                             <br>
                         </form>
 
@@ -122,7 +137,7 @@
                             <a [routerLink]="['/public/login']"> Iniciar sesión</a>
                             <div class="button-flex-container">
                                 <button mat-raised-button color="primary"
-                                    (click)="botonHaSidoPulsado()">Guardar</button>
+                                    (click)="saveTeacher()">Guardar</button>
                             </div>
                         </mat-card-actions>
                     </mat-card-content>
