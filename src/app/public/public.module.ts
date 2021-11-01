@@ -23,6 +23,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HomeComponent } from './home/home.component';
+import { UserFormGroupComponent } from './register/form-groups/user-form-group/user-form-group.component';
+import { TeacherFormGroupComponent } from './register/form-groups/teacher-form-group/teacher-form-group.component';
+import { StudentFormGroupComponent } from './register/form-groups/student-form-group/student-form-group.component';
 
 
 
@@ -64,6 +67,9 @@ export const publicRoutes: Routes = [
   ],
   declarations: [
     RegisterComponent,
+    UserFormGroupComponent,
+    TeacherFormGroupComponent,
+    StudentFormGroupComponent,
     LoginComponent,
     HomeComponent
   ]

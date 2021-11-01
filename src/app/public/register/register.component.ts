@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
             .subscribe((user: User) => {
 
                 (this.formGroup.controls.teacher as FormGroup).controls.userId.setValue(user.id);
-                this.teachersService.createNewTeacher(this.formGroup.controls.teachers.value)
+                this.teachersService.createNewTeacher(this.formGroup.controls.teacher.value)
                 .subscribe((teacher: Teacher) => {
                     console.log(teacher);
                     this.router.navigate(['/dashboard']);

@@ -2,6 +2,6 @@ import { User } from "./user.model";
 
 export interface Student {
     id: number;
-    UserId:number;
+    userId:number;
     user : User;
 }
