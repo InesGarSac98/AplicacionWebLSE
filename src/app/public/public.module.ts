@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 
 import { DemoMaterialModule } from '../demo-material-module';
 import { CdkTableModule } from '@angular/cdk/table';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -31,7 +32,8 @@ import { StudentFormGroupComponent } from './register/form-groups/student-form-g
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    CdkTableModule
+    CdkTableModule,
+    MatTabsModule
   ],
   providers: [],
   declarations: [

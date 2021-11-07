@@ -14,9 +14,9 @@ $headingfont: 'Poppins', sans-serif;
 
 /*Material Theme Colors*/
 
-$primary: mat-palette($mat-gray, 200);
-$accent: mat-palette($mat-gray, 500);
-$warn: mat-palette($mat-indigo, 500);
+$primary: mat-palette($mat-blue, 600);
+$accent: mat-palette($mat-indigo, 500);
+$warn: mat-palette($mat-pink, 500);
 $theme: mat-light-theme($primary, $accent, $warn);
 $background: map-get($theme, background);
 $foreground: map-get($theme, foreground);
@@ -26,11 +26,6 @@ $foreground: map-get($theme, foreground);
 $custom-typography: mat-typography-config(
   $font-family: 'Poppins, sans-serif'
 );
-
-
-
-
-
 
 // Override the typography in the core CSS.
 @include mat-core($custom-typography);
@@ -42,7 +37,7 @@ $custom-typography: mat-typography-config(
 
 /*Theme Colors*/
 
-$topbar: #000000;
+$topbar: #2196f3;
 $sidebar: #fff;
 $sidebar-white: #e5edef;
 $sidebar-alt: #f2f6f8;
