@@ -1,40 +1,40 @@
 <div class="login-form-flex">
-    <mat-card>
-        <div class = "in">
-            <mat-card-title>
-                Iniciar sesión
-            </mat-card-title>
+  <mat-card>
+      <div class = "in">
+          <mat-card-title>
+              Iniciar sesión
+          </mat-card-title>
 
-            <mat-card-content>
-                <mat-form-field  class="width-card">
-                    <mat-label>Nombre</mat-label>
-                    <input matInput>
-                </mat-form-field>
+          <mat-card-content>
+              <mat-form-field  class="width-card">
+                  <mat-label>Nombre</mat-label>
+                  <input matInput>
+              </mat-form-field>
 
-                <br>
+              <br>
 
-                <mat-form-field class="width-card2">
-                    <mat-label>Contraseña</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'">
-                    <button mat-icon-button matSuffix (click)="hide = !hide" >
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                </mat-form-field>
+              <mat-form-field class="width-card2">
+                  <mat-label>Contraseña</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" >
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+              </mat-form-field>
 
-                <mat-card-actions>
-                    ¿No tiene cuenta?
-                    <a [routerLink]="['/public/register']"> Registrar</a>
-                    <div class="button-flex-container">
+              <mat-card-actions>
+                  ¿No tiene cuenta?
+                  <a [routerLink]="['/public/register']"> Registrar</a>
+                  <div class="button-flex-container">
 
-                        <button mat-raised-button color="primary" (click)="botonHaSidoPulsado()">Guardar</button>
-                    </div>
-                </mat-card-actions>
+                      <button mat-raised-button color="primary" (click)="botonHaSidoPulsado()">Guardar</button>
+                  </div>
+              </mat-card-actions>
 
-            </mat-card-content>
+          </mat-card-content>
 
 
-        </div>
-    </mat-card>
+      </div>
+  </mat-card>
 </div>
 <!-- <button mat-raised-button color="primary" (click)="botonHaSidoPulsado()">Botón</button> -->
 <!-- <a [routerLink]="['/dashboard']"><button mat-raised-button color="primary">Botón</button></a> -->

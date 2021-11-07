@@ -1,34 +1,8 @@
-.cuerpo{
-    font-size: 1.5em;
-    font-weight: bold;
-    width: 100%;
-    display: flex;
-    min-height: 100vh;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.content{
+  padding-top: 1%;
 }
 
-
-.login_container {
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    z-index: 100;
-    color:white;
-}
-
-.landing_button {
-    cursor: pointer;
-    height: 33px;
-
-}
-
-
-@media screen and (max-width: 600px){
-        .cuerpo{
-            flex-direction: column;
-        }
-
+.btn{
+  display: block;
+  margin:auto;
 }

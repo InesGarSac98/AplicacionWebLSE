@@ -8,9 +8,12 @@ export interface Menu {
 }
 
 const MENUITEMS = [
-  { state: 'home', name: 'Home', type: 'link', icon: 'bookmark' },
-  { state: 'aboutus', name: 'About us', type: 'link', icon: 'av_timer' },
-  { state: 'login', name: 'Login/Register', type: 'link', icon: 'group' },
+  { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer' },
+  { state: 'home', type: 'link', name: 'Home', icon: 'crop_7_5' },
+  { state: 'aboutus', type: 'link', name: 'Aboutus', icon: 'view_comfy' },
+  { state: 'login', type: 'link', name: 'Login', icon: 'view_list' },
+  { state: 'register', type: 'link', name: 'Register', icon: 'view_headline' },
+
 ];
 
 @Injectable()

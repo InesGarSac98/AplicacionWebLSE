@@ -15,11 +15,14 @@ mat-toolbar{
         padding: 0px 15px;
     }
     .navbar-header {
+
         text-align: center;
         font-size: x-large;
         .navbar-brand {
             display: flex;
             line-height: 18px;
+            color: black;
+            padding-left: 28%;
         }
     }
 

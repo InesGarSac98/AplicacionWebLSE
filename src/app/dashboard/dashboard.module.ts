@@ -20,13 +20,6 @@ import { ActivityComponent } from './dashboard-components/activity/activity.comp
     ChartistModule,
     RouterModule.forChild(DashboardRoutes)
   ],
-  declarations: [
-    DashboardComponent,
-    SalesOverviewGrapComponent,
-    VisiterGraphComponent,
-    StickerComponent,
-    ContactsComponent,
-    ActivityComponent
-  ]
+  declarations: [DashboardComponent, SalesOverviewGrapComponent, VisiterGraphComponent, StickerComponent, ContactsComponent, ActivityComponent]
 })
 export class DashboardModule {}
