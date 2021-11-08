@@ -1,18 +1,18 @@
 import { Routes } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
-import { AboutusComponent } from './aboutus/aboutus.component';
+import { ProfileComponent } from './profile/profile.component';
+import { GamesComponent } from './games/games.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
 export const PublicRoutes: Routes = [
   {
-    path: 'home',
-    component: HomeComponent
+    path: 'profile',
+    component: ProfileComponent
   },
   {
-    path: 'aboutus',
-    component: AboutusComponent
+    path: 'games',
+    component: GamesComponent
   },
   {
     path: 'login',

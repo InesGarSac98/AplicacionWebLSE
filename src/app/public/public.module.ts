@@ -12,9 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { PublicRoutes } from './public.routing';
-import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
 
-import { AboutusComponent } from './aboutus/aboutus.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
@@ -40,8 +39,7 @@ import { StudentFormGroupComponent } from './register/form-groups/student-form-g
     UserFormGroupComponent,
     TeacherFormGroupComponent,
     StudentFormGroupComponent,
-    HomeComponent,
-    AboutusComponent,
+    ProfileComponent,
     LoginComponent,
     RegisterComponent
   ]

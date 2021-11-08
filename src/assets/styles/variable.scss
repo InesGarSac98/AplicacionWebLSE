@@ -6,16 +6,18 @@ File: scss
 */
 // Variables
 @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700');
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Rampart+One&display=swap');
 
-$bodyfont: 'Poppins', sans-serif;
-$headingfont: 'Poppins', sans-serif;
+
+$bodyfont: 'Poppins';
+$headingfont: 'Bungee';
 
 @import '~@angular/material/theming';
 
 /*Material Theme Colors*/
 
-$primary: mat-palette($mat-blue, 600);
-$accent: mat-palette($mat-indigo, 500);
+$primary: mat-palette($mat-deep-purple, 200);
+$accent: mat-palette($mat-gray,100);
 $warn: mat-palette($mat-pink, 500);
 $theme: mat-light-theme($primary, $accent, $warn);
 $background: map-get($theme, background);

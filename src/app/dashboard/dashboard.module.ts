@@ -11,6 +11,7 @@ import { VisiterGraphComponent } from './dashboard-components/visiter-graph/visi
 import { StickerComponent } from './dashboard-components/sticker/sticker.component';
 import { ContactsComponent } from './dashboard-components/contacts/contacts.component';
 import { ActivityComponent } from './dashboard-components/activity/activity.component';
+import { ClockComponent } from '../layouts/full/sidebar/clock/clock.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,12 @@ import { ActivityComponent } from './dashboard-components/activity/activity.comp
     ChartistModule,
     RouterModule.forChild(DashboardRoutes)
   ],
-  declarations: [DashboardComponent, SalesOverviewGrapComponent, VisiterGraphComponent, StickerComponent, ContactsComponent, ActivityComponent]
+  declarations: [
+      DashboardComponent,
+      SalesOverviewGrapComponent,
+      VisiterGraphComponent,
+      StickerComponent,
+      ContactsComponent,
+      ActivityComponent]
 })
 export class DashboardModule {}
