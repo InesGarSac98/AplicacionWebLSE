@@ -1,4 +1,4 @@
-<div class="dummy-card">
+<!-- <div class="dummy-card">
     <div class="clock">
         <div class="num num1"><div>1</div></div>
         <div class="num num2"><div>2</div></div>
@@ -16,4 +16,8 @@
         <div class="min-hand" #minHand></div>
         <div class="min-hand" #secHand></div>
     </div>
+</div> -->
+
+<div class="digital">
+     {{ time | date: 'hh:mm:ss a' }}
 </div>

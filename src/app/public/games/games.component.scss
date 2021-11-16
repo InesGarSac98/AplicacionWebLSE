@@ -1,3 +1,18 @@
 mat-grid-tile {
-  background: lightblue;
+  background: rgb(255, 255, 255);
+}
+
+.card{
+    display: inline-block;
+    margin:auto;
+}
+
+mat-card-header{
+    display: inline-block;
+    margin:auto;
+    white-space: nowrap;
+}
+
+h1{
+    text-align: center;
 }

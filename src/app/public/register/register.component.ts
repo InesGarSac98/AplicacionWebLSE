@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
                 userId: new FormControl('', [Validators.maxLength(100), Validators.required]),
                 classroomCode: new FormControl('', [Validators.maxLength(70), Validators.required])
             }),
-        })
+        });
     }
 
 

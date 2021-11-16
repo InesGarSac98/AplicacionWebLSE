@@ -20,6 +20,7 @@ import { RegisterComponent } from './register/register.component';
 import { UserFormGroupComponent } from './register/form-groups/user-form-group/user-form-group.component';
 import { TeacherFormGroupComponent } from './register/form-groups/teacher-form-group/teacher-form-group.component';
 import { StudentFormGroupComponent } from './register/form-groups/student-form-group/student-form-group.component';
+import { GamesComponent } from './games/games.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { StudentFormGroupComponent } from './register/form-groups/student-form-g
     StudentFormGroupComponent,
     ProfileComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    GamesComponent
   ]
 })
 export class PublicModule {}
