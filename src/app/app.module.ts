@@ -18,6 +18,7 @@ import { DemoMaterialModule } from './demo-material-module';
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 import { ClockComponent } from './layouts/full/sidebar/clock/clock.component';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ClockComponent } from './layouts/full/sidebar/clock/clock.component';
     FlexLayoutModule,
     HttpClientModule,
     SharedModule,
+    AuthModule,
     RouterModule.forRoot(AppRoutes)
   ],
   providers: [
