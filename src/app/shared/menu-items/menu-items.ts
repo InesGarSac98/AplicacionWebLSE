@@ -8,9 +8,9 @@ export interface Menu {
 }
 
 const MENUITEMS = [
-  { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer' },
-  { state: 'profile', type: 'link', name: 'Profile', icon: 'crop_7_5' },
-  { state: 'games', type: 'link', name: 'Games', icon: 'view_comfy' }
+  { state: 'students/dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer' },
+  { state: 'students/profile', type: 'link', name: 'Profile', icon: 'crop_7_5' },
+  { state: 'students/games', type: 'link', name: 'Games', icon: 'view_comfy' }
 
 ];
 

@@ -33,7 +33,8 @@
                             <a [routerLink]="['/login']"> Iniciar sesión</a>
                             <div class="button-flex-container">
                                 <button mat-raised-button color="primary"
-                                    (click)="saveStudent()">Guardar</button>
+                                    (click)="saveStudent()"
+                                    [disabled]="!formGroup.valid">Guardar</button>
                             </div>
                         </mat-card-actions>
                     </mat-card-content>
@@ -70,7 +71,8 @@
                             <a [routerLink]="['/login']"> Iniciar sesión</a>
                             <div class="button-flex-container">
                                 <button mat-raised-button color="primary"
-                                    (click)="saveTeacher()">Guardar</button>
+                                    (click)="saveTeacher()"
+                                    [disabled]="!formGroup.valid">Guardar</button>
                             </div>
                         </mat-card-actions>
                     </mat-card-content>

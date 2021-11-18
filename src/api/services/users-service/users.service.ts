@@ -33,6 +33,15 @@ export class UsersService extends CommonApiService {
             });
     }
 
+    public register(name:string, password: string): Observable<any> {
+        return this.post<User>(
+            '/api/users/register/',
+            {
+                name: name,
+                password: password
+            });
+    }
+
     public validateToken(): Observable<any> {
         return this.post<User>('/api/users/validate-token/', {});
     }

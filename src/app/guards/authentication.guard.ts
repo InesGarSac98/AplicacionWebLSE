@@ -11,6 +11,7 @@ export class AuthenticationGuard implements CanActivate {
     constructor(private router: Router, private userService: UsersService) { }
 
     public async canActivate(): Promise<boolean> {
+        //Selecciono el token guardado en la memoria
         const token = localStorage.getItem("token");
 
         if (!token) {

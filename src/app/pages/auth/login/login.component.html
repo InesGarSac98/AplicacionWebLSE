@@ -28,7 +28,7 @@
                   <a [routerLink]="['/register']"> Registrar</a>
                   <div class="button-flex-container">
 
-                      <button mat-raised-button color="primary" (click)="botonHaSidoPulsado()">Guardar</button>
+                      <button mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="loginPressed()">Guardar</button>
                   </div>
               </mat-card-actions>
 

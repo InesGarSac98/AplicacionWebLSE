@@ -45,21 +45,42 @@ export class RegisterComponent implements OnInit {
         });
     }
 
+//SAVE TEACHER BUENO
+
+    // public saveTeacher(): void {
+
+    //     this.usersService.createNewUser(this.formGroup.controls.user.value)
+    //         .subscribe((user: User) => {
+
+    //             (this.formGroup.controls.teacher as FormGroup).controls.userId.setValue(user.id);
+    //             this.teachersService.createNewTeacher(this.formGroup.controls.teacher.value)
+    //             .subscribe((teacher: Teacher) => {
+    //                 console.log(teacher);
+    //                 this.router.navigate(['/dashboard']);
+    //             });
+
+    //         });
+    // }
 
     public saveTeacher(): void {
-
-        this.usersService.createNewUser(this.formGroup.controls.user.value)
+        const name: string = this.formGroup.controls.name.value;
+        const password: string = this.formGroup.controls.password.value;
+        this.usersService.register(name, password)
             .subscribe((user: User) => {
-
                 (this.formGroup.controls.teacher as FormGroup).controls.userId.setValue(user.id);
                 this.teachersService.createNewTeacher(this.formGroup.controls.teacher.value)
-                .subscribe((teacher: Teacher) => {
-                    console.log(teacher);
-                    this.router.navigate(['/dashboard']);
-                });
-
+                    .subscribe((teacher: Teacher) => {
+                        this.usersService.login(name, password)
+                            .subscribe((response: any) => {
+                                localStorage.setItem('token', response.token);
+                                this.router.navigate(['/dashboard']);
+                            },
+                            () => this.router.navigate(['/login']));
+                    });
             });
-    }
+        }
+
+
 
     public saveStudent(): void {
 

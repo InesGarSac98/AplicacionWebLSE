@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { CommonModule, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AppRoutes } from './app.routing';
 import { AppComponent } from './app.component';
 
@@ -17,35 +17,34 @@ import { DemoMaterialModule } from './demo-material-module';
 
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
-import { ClockComponent } from './layouts/full/sidebar/clock/clock.component';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './pages/auth/auth.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FullComponent,
-    AppHeaderComponent,
-    SpinnerComponent,
-    AppSidebarComponent,
-    ClockComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    DemoMaterialModule,
-    FormsModule,
-    FlexLayoutModule,
-    HttpClientModule,
-    SharedModule,
-    AuthModule,
-    RouterModule.forRoot(AppRoutes)
-  ],
-  providers: [
-    {
-      provide: LocationStrategy,
-      useClass: PathLocationStrategy
-    }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        FullComponent,
+        AppHeaderComponent,
+        SpinnerComponent,
+        AppSidebarComponent
+    ],
+    imports: [
+        CommonModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        DemoMaterialModule,
+        FormsModule,
+        FlexLayoutModule,
+        HttpClientModule,
+        SharedModule,
+        AuthModule,
+        RouterModule.forRoot(AppRoutes)
+    ],
+    providers: [
+        {
+            provide: LocationStrategy,
+            useClass: PathLocationStrategy
+        }
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

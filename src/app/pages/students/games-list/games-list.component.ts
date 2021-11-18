@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-games',
-  templateUrl: './games.component.html',
-  styleUrls: ['./games.component.scss']
+  selector: 'app-student-games-list',
+  templateUrl: './games-list.component.html',
+  styleUrls: ['./games-list.component.scss']
 })
-export class GamesComponent {
+export class GamesListComponent {
   tiles = [
     {
       text: 'One',

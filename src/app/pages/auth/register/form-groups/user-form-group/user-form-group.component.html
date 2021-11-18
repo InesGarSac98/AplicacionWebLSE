@@ -3,6 +3,20 @@
         <mat-form-field class="width-card">
             <mat-label>Nombre</mat-label>
             <input matInput formControlName="name">
+            <mat-error *ngIf="formGroup &&
+                userFormGroup &&
+                userFormGroup.controls.name &&
+                userFormGroup.controls.name.errors &&
+                userFormGroup.controls.name.errors.required">
+                El nombre es obligatorio
+            </mat-error>
+            <mat-error *ngIf="formGroup &&
+                userFormGroup &&
+                userFormGroup.controls.name &&
+                userFormGroup.controls.name.errors &&
+                userFormGroup.controls.name.errors.maxlength">
+                La longitud máxima son 100 caracteres
+            </mat-error>
         </mat-form-field>
 
         <!-- <mat-form-field class="width-card">
