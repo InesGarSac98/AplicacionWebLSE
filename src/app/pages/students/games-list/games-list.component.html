@@ -1,11 +1,13 @@
 <h1>¿PREPARADO PARA JUGAR?</h1>
 <div class="content">
     <div fxLayout="row wrap" >
-        <div fxFlex="5%"*ngFor="let num of [1,2,3,4,5,6,7]" class="card">
+        <div fxFlex="5%"*ngFor="let num of [1,2,3,4,5,6,7]" class="card" >
             <mat-card class="card">
                 <mat-card-header>
                     <mat-card-title>
+                        <a [routerLink]="['./game']">
                         {{num}}
+                        </a>
                     </mat-card-title>
                 </mat-card-header>
             </mat-card>

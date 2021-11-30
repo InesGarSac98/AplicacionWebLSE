@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
             .login(this.formGroup.controls.name.value, this.formGroup.controls.password.value)
             .subscribe((response: any) => {
                 localStorage.setItem('token', response.token);
-                this.router.navigate(['/dashboard']);
+                this.router.navigate(['/students/profile']);
             }, (error) => {
                 this.message = error;
               })

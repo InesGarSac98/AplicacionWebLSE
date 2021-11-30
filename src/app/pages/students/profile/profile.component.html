@@ -1,51 +1,18 @@
 <div class="content">
   <div fxLayout="column" >
-      <mat-card fxFlex=100%>
+      <mat-card >
           <mat-card-header>
               <mat-card-title>
                   Perfil
               </mat-card-title>
           </mat-card-header>
+          <img mat-card-image class="img-profile" src="https://material.angular.io/assets/img/examples/shiba2.jpg">
           <mat-card-content>
               Nombre del usuario: <span class="name" *ngIf="userName">{{ userName }}</span>
-              <br>Clase a la que pertenece:
+              <br>Clase a la que pertenece: 2ºC - Primaria
 
           </mat-card-content>
-          <mat-card-actions>
-              <button class="btn">PLAY</button>
-          </mat-card-actions>
       </mat-card>
   </div>
-  <div fxLayout="row">
-      <mat-card fxFlex=25%>
-          <mat-card-header>
-              <mat-card-title>
-                  Progreso
-              </mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-           ghjklñ
-          </mat-card-content>
-          <mat-card-actions>
-              <mat-icon class="btn">arrow_right_alt</mat-icon>
-          </mat-card-actions>
 
-      </mat-card>
-
-      <mat-card fxFlex=50%>
-          <mat-card-header>
-              <mat-card-title>
-                  Niveles
-              </mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-              Acceso a la página donde aparecerán los diferentes niveles de kos juegos
-          </mat-card-content>
-          <mat-card-actions>
-              <mat-icon class="btn">arrow_right_alt</mat-icon>
-          </mat-card-actions>
-
-      </mat-card>
-
-  </div>
 </div>

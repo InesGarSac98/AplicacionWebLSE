@@ -45,22 +45,6 @@ export class RegisterComponent implements OnInit {
         });
     }
 
-//SAVE TEACHER BUENO
-
-    // public saveTeacher(): void {
-
-    //     this.usersService.createNewUser(this.formGroup.controls.user.value)
-    //         .subscribe((user: User) => {
-
-    //             (this.formGroup.controls.teacher as FormGroup).controls.userId.setValue(user.id);
-    //             this.teachersService.createNewTeacher(this.formGroup.controls.teacher.value)
-    //             .subscribe((teacher: Teacher) => {
-    //                 console.log(teacher);
-    //                 this.router.navigate(['/dashboard']);
-    //             });
-
-    //         });
-    // }
 
     public saveTeacher(): void {
         const name: string = this.formGroup.controls.name.value;
@@ -73,7 +57,7 @@ export class RegisterComponent implements OnInit {
                         this.usersService.login(name, password)
                             .subscribe((response: any) => {
                                 localStorage.setItem('token', response.token);
-                                this.router.navigate(['/dashboard']);
+                                this.router.navigate(['/students/profile']);
                             },
                             () => this.router.navigate(['/login']));
                     });
@@ -91,7 +75,7 @@ export class RegisterComponent implements OnInit {
                 this.studentsService.createNewStudents(this.formGroup.controls.student.value)
                 .subscribe((student: Student) => {
                     console.log(student);
-                    this.router.navigate(['/dashboard']);
+                    this.router.navigate(['/students/profile']);
                 });
 
             });
