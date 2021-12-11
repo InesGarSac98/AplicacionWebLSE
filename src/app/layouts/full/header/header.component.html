@@ -2,12 +2,10 @@
 <!-- ============================================================== -->
 <!-- Profile - style you can find in header.scss -->
 <!-- ============================================================== -->
-<button mat-icon-button class="m-r-5" ><a [routerLink]="['/login']">Login</a> </button>
+<button mat-icon-button class="m-r-5" color="white"><a [routerLink]="['/login']">Login</a> </button>
 
-<button [matMenuTriggerFor]="profile" mat-icon-button class="m-r-5"> <mat-icon>settings</mat-icon> </button>
+<button mat-icon-button class="m-r-5" color="white"><a [routerLink]="['/login']"><mat-icon>power_off</mat-icon></a> </button>
 <mat-menu #profile="matMenu" class="mymegamenu">
-    <button mat-menu-item>
-        <mat-icon>account_box</mat-icon> Profile </button>
     <button mat-menu-item>
         <mat-icon>exit_to_app</mat-icon> Sign Out </button>
 </mat-menu>

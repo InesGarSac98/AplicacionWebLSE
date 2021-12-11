@@ -19,6 +19,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { GameComponent } from './game/game.component';
 import { ReviewComponent } from './review/review.component';
 import { ProgressComponent } from './progress/progress.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ProgressComponent } from './progress/progress.component';
     ReactiveFormsModule,
     FlexLayoutModule,
     CdkTableModule,
-    MatTabsModule
+    MatTabsModule,
+    SharedModule
   ],
   providers: [],
   declarations: [

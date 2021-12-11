@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="column">
+        <div>
+            <div *ngIf="currentQuiz < 3">
+            <h1>{{quizzes[currentQuiz].question}}</h1>
+            <mat-card class="list-group" *ngFor="let quiz of quizzes[currentQuiz].answer">
+                <label>
+                    <li class="list-group-items" [correctAnswer]="quiz.correct">
+                        <input type="radio" name="options" (change)="onAnswer(quiz.correct)" [disabled]="answerSelected">
+                        {{quiz.option}}
+                    </li>
+                </label>
+            </mat-card>
+        </div>
+        <div *ngIf="currentQuiz > 2">
+            <button class="btn btn-success btn-black" (click)="showResult()">Show Result</button>
+            <div class="text-center" *ngIf="result">
+                Correct Answers: {{correctAnswers}} | Incorrect Answers: {{incorrectAnswers}}
+            </div>
+        </div>
+            <p class="text-center">
+                {{currentQuiz + 1}} of {{quizzes.length}}
+            </p>
+        </div>
+    </div>
+</div>

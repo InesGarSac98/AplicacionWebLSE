@@ -16,9 +16,9 @@ $headingfont: 'Bungee';
 
 /*Material Theme Colors*/
 
-$primary: mat-palette($mat-deep-purple, 200);
-$accent: mat-palette($mat-gray,100);
-$warn: mat-palette($mat-pink, 500);
+$primary: mat-palette($mat-grey, 700);
+$accent: mat-palette($mat-grey,500);
+$warn: mat-palette($mat-grey, 500);
 $theme: mat-light-theme($primary, $accent, $warn);
 $background: map-get($theme, background);
 $foreground: map-get($theme, foreground);
@@ -39,7 +39,7 @@ $custom-typography: mat-typography-config(
 
 /*Theme Colors*/
 
-$topbar: #2b0f4e;
+$topbar: #141414;
 $sidebar: #fff;
 $sidebar-white: #e5edef;
 $sidebar-alt: #f2f6f8;
@@ -52,8 +52,8 @@ $sidebar-icons: #99abb4;
 $font-16: 16px;
 
 $light-text: #a6b7bf;
-$themecolor: #7460ee;
-$themecolor-alt: #7460ee;
+$themecolor: #100f11;
+$themecolor-alt: #a1a1a1;
 $themecolor-dark: #7460ee;
 
 /*bootstrap Color*/
