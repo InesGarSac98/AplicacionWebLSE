@@ -7,18 +7,19 @@ File: scss
 // Variables
 @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700');
 @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Rampart+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 
 $bodyfont: 'Poppins';
-$headingfont: 'Bungee';
+$headingfont: 'Bebas Neue';
 
 @import '~@angular/material/theming';
 
 /*Material Theme Colors*/
 
-$primary: mat-palette($mat-grey, 700);
-$accent: mat-palette($mat-grey,500);
-$warn: mat-palette($mat-grey, 500);
+$primary: mat-palette($mat-light-blue, 500);
+$accent: mat-palette($mat-light-blue,400);
+$warn: mat-palette($mat-light-blue, 700);
 $theme: mat-light-theme($primary, $accent, $warn);
 $background: map-get($theme, background);
 $foreground: map-get($theme, foreground);
@@ -39,22 +40,16 @@ $custom-typography: mat-typography-config(
 
 /*Theme Colors*/
 
-$topbar: #141414;
-$sidebar: #fff;
-$sidebar-white: #e5edef;
-$sidebar-alt: #f2f6f8;
 $bodycolor: #eef5f9;
-$headingtext: #455a64;
-$bodytext: #67757c;
-$sidebar-text: #607d8b;
-$sidebar-icons: #99abb4;
+$headingtext: #2b97c9;
+$bodytext: #000000;
+$sidebar-text: #000000;
+$sidebar-icons: #000000;
 
 $font-16: 16px;
 
-$light-text: #a6b7bf;
 $themecolor: #100f11;
-$themecolor-alt: #a1a1a1;
-$themecolor-dark: #7460ee;
+$themecolor-alt: #2b97c9;
 
 /*bootstrap Color*/
 $danger: #fc4b6c;

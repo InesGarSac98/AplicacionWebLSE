@@ -22,6 +22,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -33,7 +34,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FlexLayoutModule,
     CdkTableModule,
     MatTabsModule,
-    SharedModule
+    SharedModule,
+
   ],
   providers: [],
   declarations: [

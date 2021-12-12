@@ -9,7 +9,7 @@ import { QuizService } from '../quiz.service';
 })
 export class QuizGameComponent implements OnInit {
 
-    quizzes:Quiz[] = [];
+    cardQuiz:Quiz[] = [];
     currentQuiz = 0;
     answerSelected = false;
     correctAnswers = 0;
@@ -19,7 +19,7 @@ export class QuizGameComponent implements OnInit {
     constructor(private quizService: QuizService) { }
 
     ngOnInit() : void{
-        this.quizzes = this.quizService.getQuizzes();
+        this.cardQuiz = this.quizService.getQuizzes();
     }
 
     //Incrementa cuando seleccionamps la respuesta correcta

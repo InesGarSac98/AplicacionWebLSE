@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { Quiz } from './games/quiz/quiz-model';
 import { QuizGameComponent } from './games/quiz/quiz-game/quiz-game.component';
+import { MatCard, MatCardModule } from '@angular/material/card';
 
 const components = [
     AccordionAnchorDirective,
@@ -26,7 +27,8 @@ const components = [
   imports:[
       CommonModule,
       MatIconModule,
-      MatGridListModule
+      MatGridListModule,
+      MatCardModule
   ],
   exports: [
     ...components

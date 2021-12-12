@@ -19,6 +19,7 @@ import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 import { AuthModule } from './pages/auth/auth.module';
 
+
 @NgModule({
     declarations: [
         AppComponent,

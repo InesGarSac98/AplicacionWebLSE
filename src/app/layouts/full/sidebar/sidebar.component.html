@@ -14,7 +14,7 @@
     <!-- ============================================================== -->
     <!-- Profile - style you can find in header.scss -->
     <!-- ============================================================== -->
-    <div class="profile-text"><a [matMenuTriggerFor]="sdprofile" class=""> Nombre del usuario </a></div>
+    <div class="profile-text"><a [matMenuTriggerFor]="sdprofile" class="" *ngIf="userName"> {{ userName }}</a></div>
     <mat-menu #sdprofile="matMenu" class="mymegamenu">
         <button mat-menu-item>
             <mat-icon>power_off</mat-icon> Settings </button>

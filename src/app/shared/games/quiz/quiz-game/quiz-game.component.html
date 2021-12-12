@@ -1,26 +1,24 @@
-<div class="container">
-    <div class="column">
-        <div>
-            <div *ngIf="currentQuiz < 3">
-            <h1>{{quizzes[currentQuiz].question}}</h1>
-            <mat-card class="list-group" *ngFor="let quiz of quizzes[currentQuiz].answer">
+<mat-card class="container">
+    <div *ngIf="currentQuiz < 3">
+            <mat-card-title>{{cardQuiz[currentQuiz].question}}</mat-card-title>
+            <mat-card-content class="list-group" *ngFor="let quiz of cardQuiz[currentQuiz].answer">
                 <label>
                     <li class="list-group-items" [correctAnswer]="quiz.correct">
                         <input type="radio" name="options" (change)="onAnswer(quiz.correct)" [disabled]="answerSelected">
                         {{quiz.option}}
                     </li>
                 </label>
-            </mat-card>
-        </div>
-        <div *ngIf="currentQuiz > 2">
-            <button class="btn btn-success btn-black" (click)="showResult()">Show Result</button>
-            <div class="text-center" *ngIf="result">
-                Correct Answers: {{correctAnswers}} | Incorrect Answers: {{incorrectAnswers}}
-            </div>
-        </div>
+            </mat-card-content>
             <p class="text-center">
-                {{currentQuiz + 1}} of {{quizzes.length}}
+                {{currentQuiz + 1}} of {{cardQuiz.length}}
             </p>
-        </div>
     </div>
-</div>
+    <div *ngIf="currentQuiz > 2">
+        <button class="btn btn-success btn-black" (click)="showResult()">Show Result</button>
+        <div class="text-center" *ngIf="result">
+            Correct Answers: {{correctAnswers}} | Incorrect Answers: {{incorrectAnswers}}
+        </div>
+
+    </div>
+
+</mat-card>

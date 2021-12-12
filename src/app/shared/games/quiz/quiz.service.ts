@@ -6,11 +6,11 @@ import { Quiz } from './quiz-model';
 })
 export class QuizService {
 
-    quizzes: Quiz[] = [
+    cardQuiz: Quiz[] = [
         {
             question:"¿Hola?",
             answer: [
-                {option:'Good morning',correct: false},
+                {option:'assets/images/dict/hola.png',correct: false},
                 {option:'Hello',correct: true},
             ]
         },
@@ -32,6 +32,7 @@ export class QuizService {
 constructor() { }
 
     getQuizzes(){
-        return this.quizzes;
+        return this.cardQuiz;
     }
 }
+

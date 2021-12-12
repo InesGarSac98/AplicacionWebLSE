@@ -5,8 +5,10 @@ input{
 li{
     list-style: none;
     cursor: pointer;
-    border: solid 0.2px black;
     width: auto;
     height: auto;
 }
 
+li:hover{
+    background-color: rgb(226, 226, 226);
+}

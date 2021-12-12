@@ -1,18 +1,22 @@
-mat-grid-tile {
-  background: rgb(255, 255, 255);
-}
-
 .card{
-    display: inline-block;
-    margin:auto;
+    width: 80%;
+    height: 80%;
 }
 
-mat-card-header{
-    display: inline-block;
-    margin:auto;
-    white-space: nowrap;
-}
 
 h1{
     text-align: center;
+}
+
+.imagen{
+    width: 50%;
+    height:50%;
+}
+
+mat-progress-spinner{
+    margin: auto;
+}
+
+mat-card-title{
+    font-size: 20%;
 }
