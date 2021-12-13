@@ -6,6 +6,18 @@
                   Perfil
               </mat-card-title>
           </mat-card-header>
+
+          <mat-form-field>
+            <mat-label>Selecciona un icono:</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let icon of icons" [value]="icon.value">
+                <img with="20" height="20" [src]="icon.image">
+                {{icon.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
           <img mat-card-image class="img-profile" src="https://material.angular.io/assets/img/examples/shiba2.jpg">
           <mat-card-content>
               Nombre del usuario: <span class="name" *ngIf="userName">{{ userName }}</span>
@@ -16,3 +28,6 @@
   </div>
 
 </div>
+
+
+

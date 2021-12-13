@@ -5,11 +5,9 @@
         <a [routerLink]="['./',game.id]">
             <mat-card class="card" fxLayout="column">
                 <mat-card-title>
-                    {{game.name}}
+                    <img width="80%" height="80%" [src]="game.image">
                 </mat-card-title>
                 <br>
-                {{game.url}}
-                <br><br><br>
                 <mat-progress-spinner mode="determinate" [value]="value" color="accent"></mat-progress-spinner>
                 <div style="position:relative; top: -60px; left: 45%;">
                     {{value}}%

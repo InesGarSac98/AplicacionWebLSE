@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 import { MemoryGameComponent } from './games/memory/memory-game.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { Quiz } from './games/quiz/quiz-model';
 import { QuizGameComponent } from './games/quiz/quiz-game/quiz-game.component';
 import { MatCard, MatCardModule } from '@angular/material/card';
 

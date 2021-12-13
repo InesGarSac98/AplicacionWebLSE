@@ -13,8 +13,8 @@ export class GamesListComponent implements OnInit {
 
     public ngOnInit(): void {
         this.games = [
-            {id:1,name:"memory",url:"./assets/images/games/memory.png"},
-            {id:2, name:"quiz",url:"./assets/images/games/memory.png"}
+            {id:1,name:"memory",image:"./assets/images/games/memory.png"},
+            {id:2, name:"quiz",image:"./assets/images/games/quiz.png"}
         ]
     }
 }
@@ -22,5 +22,5 @@ export class GamesListComponent implements OnInit {
 export class IGame {
     id: number;
     name: string;
-    url: any;
+    image: string;
 }

@@ -2,13 +2,14 @@ input{
     visibility: hidden;
 }
 
-li{
+.list-group-items{
     list-style: none;
     cursor: pointer;
-    width: auto;
-    height: auto;
+    float: left;
+    margin-bottom: 5%;
 }
 
-li:hover{
+.list-group-items:hover{
     background-color: rgb(226, 226, 226);
 }
+

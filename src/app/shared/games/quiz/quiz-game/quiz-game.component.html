@@ -1,14 +1,14 @@
-<mat-card class="container">
+<mat-card >
     <div *ngIf="currentQuiz < 3">
             <mat-card-title>{{cardQuiz[currentQuiz].question}}</mat-card-title>
-            <mat-card-content class="list-group" *ngFor="let quiz of cardQuiz[currentQuiz].answer">
+            <mat-grid-list cols="2"class="list-group" *ngFor="let quiz of cardQuiz[currentQuiz].answer">
                 <label>
-                    <li class="list-group-items" [correctAnswer]="quiz.correct">
+                    <mat-grid-title class="list-group-items" [correctAnswer]="quiz.correct">
                         <input type="radio" name="options" (change)="onAnswer(quiz.correct)" [disabled]="answerSelected">
-                        {{quiz.option}}
-                    </li>
+                        <img width="20%" height="20%" [src]="quiz.option">
+                    </mat-grid-title>
                 </label>
-            </mat-card-content>
+            </mat-grid-list>
             <p class="text-center">
                 {{currentQuiz + 1}} of {{cardQuiz.length}}
             </p>
