@@ -1,7 +1,7 @@
 <mat-card >
     <div *ngIf="currentQuiz < 3">
             <mat-card-title>{{cardQuiz[currentQuiz].question}}</mat-card-title>
-            <mat-grid-list cols="2"class="list-group" *ngFor="let quiz of cardQuiz[currentQuiz].answer">
+            <mat-grid-list cols="2" class="list-group" *ngFor="let quiz of cardQuiz[currentQuiz].answer">
                 <label>
                     <mat-grid-title class="list-group-items" [correctAnswer]="quiz.correct">
                         <input type="radio" name="options" (change)="onAnswer(quiz.correct)" [disabled]="answerSelected">
