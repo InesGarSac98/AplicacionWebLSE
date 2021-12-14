@@ -39,30 +39,39 @@ export class MemoryGameComponent implements OnInit {
     }
 
     public seleccionarTarjeta(tarjeta: HTMLElement): void {
+        console.log("seleccionarTarjeta");
+        if (this.selecciones.length == 2) return;
+
         if (tarjeta.style.transform != "rotateY(180deg)") {
-            tarjeta.style.transform = "rotateY(180deg)"
+            tarjeta.style.transform = "rotateY(180deg)";
             this.selecciones.push(tarjeta);
         }
+
         if (this.selecciones.length == 2) {
-            this.deseleccionar()
-            this.selecciones = []
+            this.deseleccionar();
         }
     }
 
     private deseleccionar(): void {
+        console.log("deseleccionar");
+
+        const primeraSeleccionada = this.selecciones[0];
+        const segundaSeleccionada = this.selecciones[1];
         setTimeout(() => {
+            console.log(this.selecciones);
+
             let trasera1 = document
-                .getElementById(this.selecciones[0].id.replace("tarjeta","trasera"));
+                .getElementById(primeraSeleccionada.id.replace("tarjeta","trasera"));
             let trasera2 = document
-                .getElementById(this.selecciones[1].id.replace("tarjeta","trasera"));
+                .getElementById(segundaSeleccionada.id.replace("tarjeta","trasera"));
 
             if (trasera1 !== null && trasera1 !== undefined &&
                 trasera2 !== null && trasera2 !== undefined)
             {
                 //Si no coinciden
                 if (trasera1.innerHTML != trasera2.innerHTML) {
-                    let tarjeta1 = this.selecciones[0];
-                    let tarjeta2 = this.selecciones[1];
+                    let tarjeta1 = primeraSeleccionada;
+                    let tarjeta2 = segundaSeleccionada;
                     tarjeta1.style.transform = "rotateY(0deg)"
                     tarjeta2.style.transform = "rotateY(0deg)"
                 } else { //Si coincide cambio color
@@ -70,6 +79,7 @@ export class MemoryGameComponent implements OnInit {
                     trasera2.style.background = "green"
                 }
             }
+            this.selecciones = [];
         }, 1000);
     }
 

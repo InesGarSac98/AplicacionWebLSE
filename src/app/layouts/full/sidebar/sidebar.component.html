@@ -1,19 +1,9 @@
-<!-- ============================================================== -->
-<!-- sidebar -->
-<!-- ============================================================== -->
-
 <div class="clock">
     <app-clock></app-clock>
 </div>
 
 <div class="user-profile" >
-    <!-- User profile image -->
 
-
-    <!-- User profile text-->
-    <!-- ============================================================== -->
-    <!-- Profile - style you can find in header.scss -->
-    <!-- ============================================================== -->
     <div class="profile-text"><a [matMenuTriggerFor]="sdprofile" class="" *ngIf="userName"> {{ userName }}</a></div>
     <mat-menu #sdprofile="matMenu" class="mymegamenu">
         <button mat-menu-item>
