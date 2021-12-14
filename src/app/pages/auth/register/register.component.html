@@ -1,0 +1,81 @@
+<div class="login-form-flex">
+    <mat-card>
+        <mat-tab-group>
+            <mat-tab label="Alumno">
+
+                <div class="in">
+                    <mat-card-title>
+                        Registro
+                    </mat-card-title>
+
+                    <mat-card-content>
+                        <form [formGroup]="formGroup">
+                            <app-user-form-group
+                                [formGroup]="formGroup"
+                                [emailLabel]="'Nickname'"
+                                [emailPlaceholder]="'Ej. innesgs'"
+                            >
+                            </app-user-form-group>
+
+                            <app-student-form-group
+                                [formGroup]="formGroup"
+                            >
+                            </app-student-form-group>
+                            <br>
+                        </form>
+
+                        <mat-card-actions>
+                            <br>
+                            ¿Ya tiene cuenta?
+                            <a [routerLink]="['/login']"> Iniciar sesión</a>
+                            <div class="button-flex-container">
+                                <button mat-raised-button color="primary"
+                                    (click)="saveStudent()"
+                                    [disabled]="!formGroup.valid">Guardar</button>
+                            </div>
+                        </mat-card-actions>
+                    </mat-card-content>
+                </div>
+
+            </mat-tab>
+
+            <mat-tab label="Profesor">
+                <div class="in">
+                    <mat-card-title>
+                        Registro
+                    </mat-card-title>
+
+                    <mat-card-content>
+                        <form [formGroup]="formGroup">
+                            <app-user-form-group
+                                [formGroup]="formGroup"
+                                [emailLabel]="'Email'"
+                                [emailPlaceholder]="'Ej. innes@gmail.com'"
+                            >
+                            </app-user-form-group>
+
+                            <app-teacher-form-group
+                                [formGroup]="formGroup"
+                            >
+                            </app-teacher-form-group>
+
+                            <br>
+                        </form>
+
+                        <mat-card-actions>
+                            <br>
+                            ¿Ya tiene cuenta?
+                            <a [routerLink]="['/login']"> Iniciar sesión</a>
+                            <div class="button-flex-container">
+                                <button mat-raised-button color="primary"
+                                    (click)="saveTeacher()"
+                                    [disabled]="!formGroup.valid">Guardar</button>
+                            </div>
+                        </mat-card-actions>
+                    </mat-card-content>
+                </div>
+            </mat-tab>
+
+        </mat-tab-group>
+    </mat-card>
+</div>

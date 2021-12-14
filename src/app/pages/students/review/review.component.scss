@@ -1,0 +1,40 @@
+.search {
+  padding: 0 0px 0 0px; /* Padding for other horizontal elements */
+  width: 90%;
+}
+
+.flexsearch--input {
+    width: 100%;
+  }
+
+.flexsearch--input {
+    -webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+ 	height: 30px;
+    padding: 0 46px 0 10px;
+	border-color: #888;
+    border-radius: 35px; /* (height/2) + border-width */
+    border-style: solid;
+	border-width: 1px;
+    margin-top: 15px;
+    color: #333;
+    font-family: 'Helvetica', sans-serif;
+	font-size: 16px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+
+.flexsearch--input:focus {
+  outline: none;
+  border-color: #333;
+}
+
+.hello{
+    width: 20%;
+}
+
+.d1{
+    float: left;
+}

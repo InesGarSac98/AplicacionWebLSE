@@ -1,0 +1,42 @@
+<div class="login-form-flex">
+  <mat-card>
+      <div class = "in">
+          <mat-card-title>
+              Iniciar sesión
+          </mat-card-title>
+
+          <mat-card-content>
+            <form [formGroup]="formGroup">
+              <mat-form-field  class="width-card">
+                  <mat-label>Nombre</mat-label>
+                  <input matInput formControlName="name">
+              </mat-form-field>
+
+              <br>
+
+              <mat-form-field class="width-card2">
+                  <mat-label>Contraseña</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" >
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+              </mat-form-field>
+              </form>
+
+              <mat-card-actions>
+                  ¿No tiene cuenta?
+                  <a [routerLink]="['/register']"> Registrar</a>
+                  <div class="button-flex-container">
+
+                      <button mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="loginPressed()">Guardar</button>
+                  </div>
+              </mat-card-actions>
+
+          </mat-card-content>
+
+
+      </div>
+  </mat-card>
+</div>
+
+

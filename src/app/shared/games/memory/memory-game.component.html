@@ -1,0 +1,20 @@
+<div class="game-body">
+    <div id="tablero">
+        <mat-grid-list [cols]="4" rowHeight="90px" >
+            <mat-grid-tile *ngFor="let tarjeta of tarjetas; let i = index" class="area-tarjeta" (click)="seleccionarTarjeta(tarjetaHtml)">
+                <div #tarjetaHtml class="tarjeta" id="{{'tarjeta' + i}}">
+                    <div class="cara trasera" id="{{'trasera' + i}}" mat-card-title>
+                        <img [src]="tarjeta" width="85" height="85">
+                    </div>
+                    <div class="cara superior">
+                        <mat-icon>help_outline</mat-icon>
+                    </div>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <br>
+    <div class="nuevo-juego" (click)="generarTablero()">
+        New Game
+    </div>
+</div>

@@ -1,0 +1,6 @@
+<mat-card>
+    <container-element [ngSwitch]="gameId">
+        <app-memory-game *ngSwitchCase="1"></app-memory-game>
+        <app-quiz-game *ngSwitchCase="2"></app-quiz-game>
+    </container-element>
+</mat-card>

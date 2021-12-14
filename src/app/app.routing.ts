@@ -9,18 +9,19 @@ export const AppRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/dashboard',
+        redirectTo: '/login',
         pathMatch: 'full'
       },
       {
         path: '',
         loadChildren:
-          () => import('./material-component/material.module').then(m => m.MaterialComponentsModule)
+          () => import('./pages/auth/auth.module').then(m => m.AuthModule)
       },
       {
-        path: 'dashboard',
-        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
-      }
+        path: 'students',
+        loadChildren:
+          () => import('./pages/students/students.module').then(m => m.StudentsModule)
+      },
     ]
   }
 ];

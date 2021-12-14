@@ -1,0 +1,15 @@
+input{
+    visibility: hidden;
+}
+
+.list-group-items{
+    list-style: none;
+    cursor: pointer;
+    float: left;
+    margin-bottom: 5%;
+}
+
+.list-group-items:hover{
+    background-color: rgb(226, 226, 226);
+}
+
