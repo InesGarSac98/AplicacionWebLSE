@@ -35,16 +35,23 @@ export class RegisterComponent implements OnInit {
                 password: new FormControl('', [Validators.maxLength(80), Validators.required])
             }),
             teacher: new FormGroup({
-                userId: new FormControl('', [Validators.maxLength(100), Validators.required]),
+                userId: new FormControl(''),
                 schoolName: new FormControl('', [Validators.maxLength(70), Validators.required])
             }),
             student: new FormGroup({
-                userId: new FormControl('', [Validators.maxLength(100), Validators.required]),
+                userId: new FormControl(''),
                 classroomCode: new FormControl('', [Validators.maxLength(70), Validators.required])
             }),
         });
     }
 
+    public IsStudentFormValid(): boolean {
+        return this.IsUserFormValid() && this.formGroup.controls.student.valid;
+    }
+
+    public IsTeacherFormValid(): boolean {
+        return this.IsUserFormValid() && this.formGroup.controls.teacher.valid;
+    }
 
     public saveTeacher(): void {
         const name: string = this.formGroup.controls.name.value;
@@ -79,6 +86,10 @@ export class RegisterComponent implements OnInit {
                 });
 
             });
+    }
+
+    private IsUserFormValid(): boolean {
+        return this.formGroup.controls.user.valid;
     }
 
 }

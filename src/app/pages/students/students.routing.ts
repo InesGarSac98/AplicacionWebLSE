@@ -15,7 +15,6 @@ export const StudentsRoutes: Routes = [
     },
     {
         path: 'profile',
-        canActivate: [AuthenticationGuard],
         component: ProfileComponent
     },
     {

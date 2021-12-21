@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthenticationGuard } from './guards/authentication.guard';
 
 import { FullComponent } from './layouts/full/full.component';
 
@@ -19,6 +20,7 @@ export const AppRoutes: Routes = [
       },
       {
         path: 'students',
+        canActivate: [AuthenticationGuard],
         loadChildren:
           () => import('./pages/students/students.module').then(m => m.StudentsModule)
       },
