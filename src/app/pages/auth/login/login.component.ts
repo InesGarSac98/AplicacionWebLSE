@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, Routes } from '@angular/router';
+import { User } from 'src/api/models/user.model';
 import { UsersService } from 'src/api/services/users-service/users.service';
 
 export const publicRoutes: Routes = [
@@ -18,11 +19,11 @@ export class LoginComponent implements OnInit {
     public hide = true;
     private message ='';
 
-    ngOnInit() {
+    public ngOnInit() {
         this.formGroup = new FormGroup({
             name: new FormControl('', [Validators.maxLength(100), Validators.required]),
             password: new FormControl('', [Validators.maxLength(80), Validators.required])
-        })
+        });
     }
 
     public loginPressed(): void {
@@ -33,10 +34,20 @@ export class LoginComponent implements OnInit {
             .login(this.formGroup.controls.name.value, this.formGroup.controls.password.value)
             .subscribe((response: any) => {
                 localStorage.setItem('token', response.token);
-                this.router.navigate(['/students/profile']);
+                this.userService.getUserLoged().subscribe((user: User) => {
+                    if (user.role === 'STUDENT') {
+                        this.router.navigate(['/students/profile']);
+                    }
+                    else if (user.role === 'TEACHER') {
+                        console.log("Soy profesor")
+                        this.router.navigate(['/teachers/profile']);
+                    }
+                });
+
             }, (error) => {
                 this.message = error;
-              })
+            }
+        )
 
     }
 

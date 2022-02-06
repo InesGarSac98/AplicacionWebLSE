@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { WordsService } from 'src/api/services/words-service/words.service';
 
 @Component({
     selector: 'app-memory-game',
@@ -10,7 +12,7 @@ export class MemoryGameComponent implements OnInit {
     public tarjetas: string[];
     private iconos: string[];
     private selecciones: HTMLElement[];
-    constructor() { }
+    constructor(private sanitizer: DomSanitizer, private wordsService: WordsService) { }
 
     public ngOnInit(): void {
         this.iconos = [];
@@ -19,8 +21,8 @@ export class MemoryGameComponent implements OnInit {
         this.generarTablero()
     }
 
-    public generarTablero(): void {
-        this.cargarIconos();
+    public async generarTablero(): Promise<void> {
+        await this.cargarIconos();
         this.selecciones = [];
         let tablero = document.getElementById("tablero");
 
@@ -83,11 +85,13 @@ export class MemoryGameComponent implements OnInit {
         }, 1000);
     }
 
-    private cargarIconos() {
+    private async cargarIconos(): Promise<void> {
         //TODO: Llamar al API para pedir nuevo modelo de datos WORDS, filtrado por studentId
+        let aaa = (await this.wordsService.getWord('patata').toPromise()).imageUrl;
+        let bbb = (await this.wordsService.getWord('tomate').toPromise()).imageUrl;
         this.iconos = [
-            "assets/images/dict/hola.png",
-            "assets/images/dict/si.png",
+            aaa,
+            bbb,
             "assets/images/dict/buenos-dias.png",
             "assets/images/dict/buenas-tardes.png",
             "assets/images/dict/adios.png",

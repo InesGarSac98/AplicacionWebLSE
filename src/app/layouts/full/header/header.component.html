@@ -1,5 +1,6 @@
 
 <button mat-icon-button ><a [routerLink]="['/login']" class="header-a">Login</a> </button>
-<button mat-icon-button ><a [routerLink]="['/login']" class="header-a"><mat-icon>exit_to_app</mat-icon></a> </button>
+<button mat-icon-button (click)="openDialog()"><mat-icon>exit_to_app</mat-icon></button>
+<!-- <button mat-icon-button (click)="openDialog()"><a [routerLink]="['/login']" class="header-a"><mat-icon>exit_to_app</mat-icon></a> </button> -->
 
 

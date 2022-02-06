@@ -31,6 +31,9 @@ export class AppSidebarComponent implements OnDestroy {
 
   public ngOnInit(): void {
     this.userService.getUserLoged()
-        .subscribe((user: User) => this.userName = user.name);
+        .subscribe((user: User) => {
+            this.userName = user.name;
+            this.menuItems.setUserLoggedRole(user.role);
+        });
 }
 }

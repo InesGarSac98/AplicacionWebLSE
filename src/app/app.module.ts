@@ -18,6 +18,10 @@ import { DemoMaterialModule } from './demo-material-module';
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 import { AuthModule } from './pages/auth/auth.module';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogsComponent } from './shared/dialog/dialogs/dialogs.component';
+import { MatButtonModule } from '@angular/material/button';
+import { WordDetailsDialogComponent } from './shared/dialog/word-details-dialog/word-details-dialog.component';
 
 
 @NgModule({
@@ -26,8 +30,11 @@ import { AuthModule } from './pages/auth/auth.module';
         FullComponent,
         AppHeaderComponent,
         SpinnerComponent,
-        AppSidebarComponent
+        AppSidebarComponent,
+        DialogsComponent,
+        WordDetailsDialogComponent
     ],
+    entryComponents:[DialogsComponent, WordDetailsDialogComponent],
     imports: [
         CommonModule,
         BrowserModule,
@@ -38,6 +45,8 @@ import { AuthModule } from './pages/auth/auth.module';
         HttpClientModule,
         SharedModule,
         AuthModule,
+        MatDialogModule,
+        MatButtonModule,
         RouterModule.forRoot(AppRoutes)
     ],
     providers: [

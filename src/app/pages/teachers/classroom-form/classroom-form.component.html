@@ -1,0 +1,30 @@
+<div class="login-form-flex">
+    <mat-card>
+        <div class = "in">
+            <mat-card-title>
+                Añadir clase
+            </mat-card-title>
+
+            <mat-card-content>
+              <form [formGroup]="formGroup">
+                <mat-form-field  class="width-card">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="name">
+                </mat-form-field>
+
+                <br>
+
+                </form>
+            </mat-card-content>
+
+            <mat-card-actions>
+
+                <div class="button-flex-container">
+
+                    <button mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="saveClassroom()">Guardar</button>
+                </div>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+    <!-- <iframe src="https://arasaac.org/lse/search/patata"></iframe> -->
+  </div>

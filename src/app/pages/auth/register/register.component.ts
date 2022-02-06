@@ -32,7 +32,8 @@ export class RegisterComponent implements OnInit {
             user: new FormGroup({
                 name: new FormControl('', [Validators.maxLength(100), Validators.required]),
                 email: new FormControl('', [Validators.maxLength(70), Validators.required]),
-                password: new FormControl('', [Validators.maxLength(80), Validators.required])
+                password: new FormControl('', [Validators.maxLength(80), Validators.required]),
+                role: new FormControl('')
             }),
             teacher: new FormGroup({
                 userId: new FormControl(''),
@@ -54,36 +55,36 @@ export class RegisterComponent implements OnInit {
     }
 
     public saveTeacher(): void {
-        const name: string = this.formGroup.controls.name.value;
-        const password: string = this.formGroup.controls.password.value;
-        this.usersService.register(name, password)
+        (this.formGroup.controls.user as FormGroup).controls.role.setValue('TEACHER');
+        this.usersService.createNewUser(this.formGroup.controls.user.value)
             .subscribe((user: User) => {
                 (this.formGroup.controls.teacher as FormGroup).controls.userId.setValue(user.id);
                 this.teachersService.createNewTeacher(this.formGroup.controls.teacher.value)
                     .subscribe((teacher: Teacher) => {
-                        this.usersService.login(name, password)
+                        this.usersService.login(user.name, (this.formGroup.controls.user as FormGroup).controls.password.value)
+                            .subscribe((response: any) => {
+                                localStorage.setItem('token', response.token);
+                                this.router.navigate(['/teachers/profile']);
+                            },
+                                () => this.router.navigate(['/login']));
+                    });
+            });
+    }
+
+    public saveStudent(): void {
+        (this.formGroup.controls.user as FormGroup).controls.role.setValue('STUDENT');
+        this.usersService.createNewUser(this.formGroup.controls.user.value)
+            .subscribe((user: User) => {
+                (this.formGroup.controls.student as FormGroup).controls.userId.setValue(user.id);
+                this.studentsService.createNewStudents(this.formGroup.controls.student.value)
+                    .subscribe((student: Student) => {
+                        this.usersService.login(user.name, (this.formGroup.controls.user as FormGroup).controls.password.value)
                             .subscribe((response: any) => {
                                 localStorage.setItem('token', response.token);
                                 this.router.navigate(['/students/profile']);
                             },
-                            () => this.router.navigate(['/login']));
+                                () => this.router.navigate(['/login']));
                     });
-            });
-        }
-
-
-
-    public saveStudent(): void {
-
-        this.usersService.createNewUser(this.formGroup.controls.user.value)
-            .subscribe((user: User) => {
-
-                (this.formGroup.controls.student as FormGroup).controls.userId.setValue(user.id);
-                this.studentsService.createNewStudents(this.formGroup.controls.student.value)
-                .subscribe((student: Student) => {
-                    console.log(student);
-                    this.router.navigate(['/students/profile']);
-                });
 
             });
     }
