@@ -14,7 +14,6 @@ import { AppHeaderComponent } from './layouts/full/header/header.component';
 import { AppSidebarComponent } from './layouts/full/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoMaterialModule } from './demo-material-module';
-
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 import { AuthModule } from './pages/auth/auth.module';
@@ -22,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DialogsComponent } from './shared/dialog/dialogs/dialogs.component';
 import { MatButtonModule } from '@angular/material/button';
 import { WordDetailsDialogComponent } from './shared/dialog/word-details-dialog/word-details-dialog.component';
+import { TwoSideMultiSelectComponent } from './shared/two-side-multi-select/two-side-multi-select/two-side-multi-select.component';
 
 
 @NgModule({

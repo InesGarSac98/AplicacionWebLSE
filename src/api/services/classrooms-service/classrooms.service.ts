@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Classroom } from 'src/api/models/classroom.model';
 import { Student } from 'src/api/models/student.model';
+import { Word } from 'src/api/models/word.model';
 import { CommonApiService } from '../common-api/common-api.service';
 
 @Injectable({
@@ -31,4 +32,7 @@ export class ClassroomsService extends CommonApiService {
         return this.get<Student[]>('/api/classrooms/' + classroomId + '/students');
     }
 
+    public getWordsListClassroom(classroomId:number): Observable<Word[]> {
+        return this.get<Word[]>('/api/classrooms/' + classroomId + '/words');
+    }
 }

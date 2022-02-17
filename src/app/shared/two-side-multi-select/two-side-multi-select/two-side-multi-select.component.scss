@@ -1,0 +1,17 @@
+.list-group{
+    height: 450px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    float: left;
+    width: 400px;
+}
+
+.content{
+    margin-left: 100px;
+}
+
+.boxSearch{
+    background: red;
+    height: 30px;
+}

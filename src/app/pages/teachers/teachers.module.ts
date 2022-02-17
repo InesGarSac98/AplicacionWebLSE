@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 import { DemoMaterialModule } from 'src/app/demo-material-module';
-import { CdkTableModule } from '@angular/cdk/table';
 import {MatTabsModule} from '@angular/material/tabs';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -19,6 +18,7 @@ import { ClassroomListComponent } from './classroom-list/classroom-list.componen
 import { GameComponent } from '../students/game/game.component';
 import { GamesListComponent } from './games/game-list/games-list.component';
 import { ClassroomFormComponent } from './classroom-form/classroom-form.component';
+import { AddWordsComponent } from './add-words/add-words.component';
 
 
 
@@ -31,7 +31,6 @@ import { ClassroomFormComponent } from './classroom-form/classroom-form.componen
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    CdkTableModule,
     MatTabsModule,
     SharedModule,
   ],
@@ -41,7 +40,8 @@ import { ClassroomFormComponent } from './classroom-form/classroom-form.componen
     ClassroomComponent,
     ClassroomListComponent,
     GamesListComponent,
-    ClassroomFormComponent
+    ClassroomFormComponent,
+    AddWordsComponent
   ]
 })
 export class TeachersModule {}

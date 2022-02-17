@@ -1,12 +1,10 @@
-import 'hammerjs';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 import { DemoMaterialModule } from 'src/app/demo-material-module';
-import { CdkTableModule } from '@angular/cdk/table';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -32,7 +30,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    CdkTableModule,
     MatTabsModule,
     SharedModule,
 

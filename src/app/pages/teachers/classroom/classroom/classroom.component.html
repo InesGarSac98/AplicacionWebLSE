@@ -11,8 +11,8 @@
                     <input class="flexsearch--input" type="search" placeholder="search">
                 </div>
             </form>
-            <mat-selection-list #shoes [multiple]="false">
-                <mat-list-option *ngFor="let nameStudent of studentsClassroomList" [value]="ines">
+            <mat-selection-list [multiple]="false">
+                <mat-list-option *ngFor="let nameStudent of studentsClassroomList">
                     <ul>
                         <li>
                             <mat-icon>accessibility</mat-icon>
@@ -28,19 +28,23 @@
                 <form>
                     <div>
                         <input class="flexsearch--input" type="search" placeholder="search">
+                        <button mat-button class="btn-primary" style="float:right;"><a [routerLink]="['add-words']">+ Añadir palabra</a></button>
                     </div>
                 </form>
-                <div *ngFor="let nameWord of wordList">
-                    <div (click)="openWord()">
-                        <mat-card>
-                            <mat-card-title>
-                                {{nameWord.name}}
-                            </mat-card-title>
-                            <img [src]="nameWord.image">
-                        </mat-card>
-                    </div>
+                <mat-selection-list [multiple]="false">
+                    <mat-list-option *ngFor="let word of wordsClassroomList">
+                        <ul>
+                            <li>
+                                <mat-icon>accessibility</mat-icon>
+                                {{word.name}}
+                            </li>
+                        </ul>
 
-                </div>
+
+                    </mat-list-option>
+                  </mat-selection-list>
+
+
 
         </mat-tab>
         <mat-tab label="Juegos"> Juegos

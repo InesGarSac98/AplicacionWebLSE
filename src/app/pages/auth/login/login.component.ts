@@ -24,6 +24,12 @@ export class LoginComponent implements OnInit {
             name: new FormControl('', [Validators.maxLength(100), Validators.required]),
             password: new FormControl('', [Validators.maxLength(80), Validators.required])
         });
+
+        document.getElementById('name')?.addEventListener('keypress',function(event){
+            if(event.keyCode == 13){
+                event.preventDefault();
+            }
+        });
     }
 
     public loginPressed(): void {

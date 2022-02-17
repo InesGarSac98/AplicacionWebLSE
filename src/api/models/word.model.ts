@@ -1,7 +1,7 @@
 export interface Word {
     id: number;
     name: string;
-    imageUrl: string;
-    videoUrl: string;
-    videoDefinitionUrl: string;
+    image: string;
+    video: string;
+    videoDefinition: string;
 }

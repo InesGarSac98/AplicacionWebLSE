@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-
 import { MenuItems } from './menu-items/menu-items';
 import { AccordionAnchorDirective, AccordionLinkDirective, AccordionDirective } from './accordion';
 import { ClockComponent } from './clock/clock.component';
@@ -9,6 +8,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { QuizGameComponent } from './games/quiz/quiz-game/quiz-game.component';
 import { MatCard, MatCardModule } from '@angular/material/card';
+import { TwoSideMultiSelectComponent } from './two-side-multi-select/two-side-multi-select/two-side-multi-select.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectionList } from '@angular/material/list';
+import { FilterPipe } from './pipes/filter.pipe';
+import { FormsModule } from '@angular/forms';
 
 const components = [
     AccordionAnchorDirective,
@@ -16,7 +21,9 @@ const components = [
     AccordionDirective,
     ClockComponent,
     MemoryGameComponent,
-    QuizGameComponent
+    QuizGameComponent,
+    TwoSideMultiSelectComponent,
+    FilterPipe
 ]
 
 @NgModule({
@@ -27,7 +34,10 @@ const components = [
       CommonModule,
       MatIconModule,
       MatGridListModule,
-      MatCardModule
+      MatCardModule,
+      ScrollingModule,
+      MatCheckboxModule,
+      FormsModule
   ],
   exports: [
     ...components

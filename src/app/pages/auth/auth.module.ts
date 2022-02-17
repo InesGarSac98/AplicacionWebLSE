@@ -1,11 +1,9 @@
-import 'hammerjs';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 import { DemoMaterialModule } from 'src/app/demo-material-module';
-import { CdkTableModule } from '@angular/cdk/table';
 import {MatTabsModule} from '@angular/material/tabs';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -30,7 +28,6 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    CdkTableModule,
     MatTabsModule
   ],
   providers: [],

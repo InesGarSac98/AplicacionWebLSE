@@ -13,6 +13,10 @@ export class WordsService extends CommonApiService {
         super(http);
     }
 
+    public getWordsList(): Observable<Word[]> {
+        return this.get<Word[]>('/api/words');
+    }
+
     public getWord(name: string): Observable<Word> {
         return this.get<Word>('/api/words/' + name);
     }

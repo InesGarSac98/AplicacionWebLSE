@@ -87,8 +87,8 @@ export class MemoryGameComponent implements OnInit {
 
     private async cargarIconos(): Promise<void> {
         //TODO: Llamar al API para pedir nuevo modelo de datos WORDS, filtrado por studentId
-        let aaa = (await this.wordsService.getWord('patata').toPromise()).imageUrl;
-        let bbb = (await this.wordsService.getWord('tomate').toPromise()).imageUrl;
+        let aaa = (await this.wordsService.getWord('patata').toPromise()).image;
+        let bbb = (await this.wordsService.getWord('tomate').toPromise()).image;
         this.iconos = [
             aaa,
             bbb,
