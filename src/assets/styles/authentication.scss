@@ -1,0 +1,32 @@
+.login-card, .register-card{
+    width: 50%;
+    height: auto;
+    margin-left: 25%;
+}
+
+.in{
+    padding: 3%;
+}
+
+.login-form-flex {
+    justify-content: center;
+    align-items: center;
+    padding-top: 5%;
+    padding-bottom: 20%;
+}
+
+.button-flex-container {
+    display: flex;
+    width: auto;
+    justify-content: flex-end;
+    float: left;
+}
+
+
+mat-form-field{
+    width: 100%;
+}
+
+.button-flex-container{
+    float: right;
+}

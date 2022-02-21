@@ -1,5 +1,5 @@
 <div class="login-form-flex">
-  <mat-card>
+  <mat-card class="login-card">
       <div class = "in">
           <mat-card-title>
               Iniciar sesión
@@ -7,14 +7,14 @@
 
           <mat-card-content>
             <form [formGroup]="formGroup">
-              <mat-form-field  class="width-card">
+              <mat-form-field>
                   <mat-label>Nombre</mat-label>
                   <input matInput formControlName="name">
               </mat-form-field>
 
               <br>
 
-              <mat-form-field class="width-card2">
+              <mat-form-field>
                   <mat-label>Contraseña</mat-label>
                   <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
                   <button mat-icon-button matSuffix (click)="hide = !hide" type="button" >

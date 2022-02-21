@@ -12,8 +12,14 @@ import { TwoSideMultiSelectComponent } from './two-side-multi-select/two-side-mu
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectionList } from '@angular/material/list';
-import { FilterPipe } from './pipes/filter.pipe';
+import { FilterViewNamePipe } from './pipes/filter.pipe';
 import { FormsModule } from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
+import { FilterCheckedStatePipe } from './pipes/filterCheckedState/filter-checked-state.pipe';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 const components = [
     AccordionAnchorDirective,
@@ -23,7 +29,8 @@ const components = [
     MemoryGameComponent,
     QuizGameComponent,
     TwoSideMultiSelectComponent,
-    FilterPipe
+    FilterViewNamePipe,
+    FilterCheckedStatePipe
 ]
 
 @NgModule({
@@ -33,11 +40,16 @@ const components = [
   imports:[
       CommonModule,
       MatIconModule,
+      MatButtonModule,
       MatGridListModule,
       MatCardModule,
       ScrollingModule,
       MatCheckboxModule,
-      FormsModule
+      FormsModule,
+      MatRadioModule,
+      MatTableModule,
+      MatPaginatorModule,
+      MatInputModule
   ],
   exports: [
     ...components

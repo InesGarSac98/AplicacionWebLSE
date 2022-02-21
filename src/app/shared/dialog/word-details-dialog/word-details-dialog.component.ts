@@ -1,6 +1,7 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Word } from 'src/api/models/word.model';
 
 @Component({
   selector: 'app-word-details-dialog',
@@ -9,16 +10,12 @@ import { Router } from '@angular/router';
 })
 export class WordDetailsDialogComponent implements OnInit {
 
-    public wordName: string;
-    public wordVideo: string;
-    public wordImage: string;
+    public word: Word;
 
     constructor(private router: Router,
         public dialogRef: MatDialogRef<WordDetailsDialogComponent>,
         @Inject (MAT_DIALOG_DATA) public data: any) {
-            this.wordName = data.wordName;
-            this.wordVideo = data.wordVideo;
-            this.wordImage = data.wordImage;
+            this.word = data.word;
         }
 
     public ngOnInit() {

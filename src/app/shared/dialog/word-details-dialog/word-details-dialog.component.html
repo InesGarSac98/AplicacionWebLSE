@@ -1,5 +1,11 @@
-<div mat-dialog-content >
-    <p>{{wordName}}</p>
-    <p>{{wordVideo}}</p>
-    <p>{{wordImage}}</p>
+<div mat-dialog-content>
+
+    <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+        <mat-icon color="accent">close</mat-icon>
+      </button>
+
+    <p>Palabra: {{word.name}}</p>
+    <img [src]="word.image" width="250" height="250">
+    <video [src]="word.video" width="250" height="250" autoplay [controls]="false" loop></video>
+    <video [src]="word.videoDefinition" width="250" height="250" autoplay [controls]="false" loop></video>
 </div>

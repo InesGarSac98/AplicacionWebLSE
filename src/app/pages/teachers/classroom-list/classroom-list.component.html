@@ -1,13 +1,13 @@
 <h1>ESTAS SON LAS CLASES QUE TIENES</h1>
 
 <div class="content">
-    <div class="row">
-        <button mat-button class="btn-primary"><a [routerLink]="['classrooms-form']">+ Añadir clase</a></button>
+    <div>
+        <button mat-button><a [routerLink]="['classrooms-form']">+ Añadir clase</a></button>
     </div>
     <div class="row">
-        <div fxFlex="50%" *ngFor="let classroom of classrooms" class="card" >
+        <div fxFlex="25%" *ngFor="let classroom of classrooms">
             <a [routerLink]="['./',classroom.id]">
-                <mat-card class="card" fxLayout="column">
+                <mat-card fxLayout="column">
                     <mat-card-title>
                         <p>{{classroom.name}}</p>
                     </mat-card-title>

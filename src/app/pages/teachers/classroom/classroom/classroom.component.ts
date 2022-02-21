@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { ClassroomWord } from 'src/api/models/classroomWord';
 import { Student } from 'src/api/models/student.model';
 import { User } from 'src/api/models/user.model';
 import { Word } from 'src/api/models/word.model';
@@ -23,7 +24,6 @@ export class ClassroomComponent implements OnInit {
     public userName: string;
     public studentsClassroomList: IStudentClassroomList[];
     public wordsClassroomList: IWordClassroomList[];
-    public wordList: IWordList[];
     @Input() classroom: IStudentClassroomList[];
 
     constructor(
@@ -55,27 +55,19 @@ export class ClassroomComponent implements OnInit {
             });
 
         this.classroomService.getWordsListClassroom(this.classroomId)
-            .subscribe((words: Word[]) => {
+            .subscribe((words: ClassroomWord[]) => {
                 console.log(words);
-                debugger;
                 this.wordsClassroomList = words.map(w => {
                     let result = new IWordClassroomList();
                     result.id = w.id;
-                    result.name = w.name;
-                    result.image = w.image;
-                    result.video = w.video;
-                    result.videoDefinition = w.videoDefinition;
+                    result.wordId = w.word.id;
+                    result.name = w.word.name;
+                    result.image = w.word.image;
+                    result.video = w.word.video;
+                    result.videoDefinition = w.word.videoDefinition;
                     return result;
                 });
             });
-
-        let aaa = (await this.wordsService.getWord('patata').toPromise()).image;
-        let bbb = (await this.wordsService.getWord('tomate').toPromise()).image;
-        this.wordList = [
-            { id: 1, name: "Patata", image: aaa },
-            { id: 2, name: "Tomate", image: bbb }
-        ];
-
     }
 
     public openWord(): void {
@@ -83,9 +75,9 @@ export class ClassroomComponent implements OnInit {
             WordDetailsDialogComponent,
             {
                 data: {
-                    wordName: 'true',
-                    wordVideo: 'creditAgainstEstateSelected',
-                    wordImage: 'this.proceedingId'
+                    wordName: 'patata',
+                    wordVideo: 'url del video',
+                    wordImage: 'url de al imagen'
                 }
             }
         );
@@ -106,6 +98,7 @@ export class IWordList {
 
 export class IWordClassroomList {
     id: number;
+    wordId: number;
     name: string;
     image: string;
     video: string;

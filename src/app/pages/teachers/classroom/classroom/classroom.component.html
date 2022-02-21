@@ -1,11 +1,6 @@
 <mat-card>
-    <!-- <container-element [ngSwitch]="classroomId">
-        <app-memory-game *ngSwitchCase="1"></app-memory-game>
-        <app-quiz-game *ngSwitchCase="2"></app-quiz-game>
-    </container-element> -->
-
     <mat-tab-group>
-        <mat-tab label="Lista de Clase"> Clase  <br>
+        <mat-tab label="Lista de Clase"> Clase <br>
             <form>
                 <div>
                     <input class="flexsearch--input" type="search" placeholder="search">
@@ -22,27 +17,27 @@
 
 
                 </mat-list-option>
-              </mat-selection-list>
+            </mat-selection-list>
         </mat-tab>
         <mat-tab label="Palabras"> Palabras
-                <form>
-                    <div>
-                        <input class="flexsearch--input" type="search" placeholder="search">
-                        <button mat-button class="btn-primary" style="float:right;"><a [routerLink]="['add-words']">+ Añadir palabra</a></button>
-                    </div>
-                </form>
-                <mat-selection-list [multiple]="false">
-                    <mat-list-option *ngFor="let word of wordsClassroomList">
-                        <ul>
-                            <li>
-                                <mat-icon>accessibility</mat-icon>
-                                {{word.name}}
-                            </li>
-                        </ul>
+            <form>
+                <div>
+                    <input class="flexsearch--input" type="search" placeholder="search">
+                    <button mat-button class="pull-right"><a [routerLink]="['add-words']">+ Añadir palabra</a></button>
+                </div>
+            </form>
+            <mat-selection-list [multiple]="false">
+                <mat-list-option *ngFor="let word of wordsClassroomList">
+                    <ul>
+                        <li>
+                            <mat-icon>accessibility</mat-icon>
+                            {{word.name}}
+                        </li>
+                    </ul>
 
 
-                    </mat-list-option>
-                  </mat-selection-list>
+                </mat-list-option>
+            </mat-selection-list>
 
 
 
@@ -54,5 +49,5 @@
                 </div>
             </form>
         </mat-tab>
-      </mat-tab-group>
+    </mat-tab-group>
 </mat-card>

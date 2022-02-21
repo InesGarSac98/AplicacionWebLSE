@@ -15,15 +15,13 @@ mat-toolbar{
         padding: 0px 15px;
     }
     .logo-toolbar{
+        margin-bottom: -1em;
         font-family: 'Bebas Neue';
         height: 80%;
         width: 90%;
         text-align: center;
         font-size: 150%;
-        color: #6d8cc5;
-    }
-    .header-a{
-        color: #6d8cc5;
+        color: primary;
     }
 
 }

@@ -1,1 +1,8 @@
-<app-two-side-multi-select [rightSideItems]="associatedWords" [leftSideItems]="unassociatedWords"></app-two-side-multi-select>
+<div>
+    <div class="card-body">
+        <app-two-side-multi-select *ngIf="dataLoaded" [(items)]="wordsAssociation" (showItemButtonClicked)="showSelectedWord($event)"></app-two-side-multi-select>
+        <button mat-raised-button color="primary" (click)="saveWordsSelection()">Guardar</button>
+        <button mat-raised-button color="primary" (click)="returnWordsSelection()"> Volver</button>
+    </div>
+  </div>
+

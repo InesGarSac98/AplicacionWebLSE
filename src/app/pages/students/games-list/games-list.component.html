@@ -1,17 +1,17 @@
 <h1>¿PREPARADO PARA JUGAR?</h1>
 
 <div class="content">
-    <div fxFlex="50%" *ngFor="let game of games" class="card" >
+    <div fxFlex="50%" *ngFor="let game of games" class="cards" >
         <a [routerLink]="['./',game.id]">
-            <mat-card class="card" fxLayout="column">
+            <mat-card class="cards" fxLayout="column">
                 <mat-card-title>
                     <img width="60%" height="60%" [src]="game.image">
                 </mat-card-title>
                 <br>
-                <mat-progress-spinner mode="determinate" [value]="value" color="accent" ></mat-progress-spinner>
+                <!-- <mat-progress-spinner mode="determinate" [value]="value" color="accent" ></mat-progress-spinner>
                 <div style="position:relative; top: -60px; left: 45%;">
                     {{value}}%
-                </div>
+                </div> -->
             </mat-card>
         </a>
     </div>

@@ -1,16 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'filter'
+  name: 'filterViewName'
 })
-export class FilterPipe implements PipeTransform {
+export class FilterViewNamePipe implements PipeTransform {
 
     transform(value: any, arg: any): any {
-        if (arg === '' || arg.length < 3) return value;
         const resultSearch = [];
 
         for (const item of value) {
-          if (item.viewName.indexOf(arg) > -1) {
+          if (item.viewName.toLowerCase().indexOf(arg.toLowerCase()) > -1) {
             resultSearch.push(item);
           };
         };

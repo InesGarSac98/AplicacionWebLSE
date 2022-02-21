@@ -19,6 +19,16 @@ export class CommonApiService {
             });
     }
 
+    public delete<T>(url: string): Observable<T> {
+        const token = localStorage.getItem("token");
+        return this.http
+            .delete<T>(url, {
+                headers: token ? {
+                    "Authorization": "Bearer " + token
+                } : {}
+            });
+    }
+
     public post<T>(url: string, body: any): Observable<T> {
         const token = localStorage.getItem("token");
         return this.http.post<T>(

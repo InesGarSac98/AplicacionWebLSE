@@ -1,4 +1,8 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatRadioChange } from '@angular/material/radio';
+import { MatTableDataSource } from '@angular/material/table';
 
 interface PendingSelection {
 	[ key: number ]: boolean;
@@ -7,6 +11,7 @@ interface PendingSelection {
 export class SelectableItem {
     id: number;
     viewName: string;
+    isChecked: boolean;
 }
 
 @Component({
@@ -14,71 +19,78 @@ export class SelectableItem {
   templateUrl: './two-side-multi-select.component.html',
   styleUrls: ['./two-side-multi-select.component.scss']
 })
-export class TwoSideMultiSelectComponent implements OnInit {
+export class TwoSideMultiSelectComponent implements OnInit, AfterViewInit {
 
 	public pendingSelection: PendingSelection;
-	@Input() public rightSideItems: SelectableItem[] = [];
-	@Input() public leftSideItems: SelectableItem[] = [];
-    filterItems = '';
-    filterItems2 = '';
+    public radioButtonFilter: string = 'filterAll';
+	@Input() public items: SelectableItem[] = [];
+    @Output() public itemsChange = new EventEmitter<SelectableItem[]>();
+    public filterItems = '';
+    public displayedColumns: string[];
+    @Input() public dataSource: MatTableDataSource<SelectableItem>;
+    @Output() public showItemButtonClicked = new EventEmitter<number>();
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
+    constructor() {
+        this.displayedColumns = ['isChecked','viewName','showButton'];
+    }
 
     public ngOnInit(): void {
-		this.leftSideItems = this.leftSideItems.slice().sort(this.sortSelectableItemsOperator);
+		this.items = this.items.slice().sort(this.sortSelectableItemsOperator);
+        this.dataSource = new MatTableDataSource<SelectableItem>(this.items);
 
 		this.pendingSelection = Object.create(null);
     }
 
+    public ngAfterViewInit(): void {
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.filterPredicate = (data: SelectableItem, filter:string) => {
+            const filterObj = JSON.parse(filter);
 
-	public addToSelectedItems( item?: SelectableItem ) : void {
-		var changeItems = (item)
+            switch(filterObj.filterCheckedState){
+                case "filterAll":
+                    break;
+                case "filterSelected":
+                    if(!data.isChecked) return false;
+                    break;
+                case "filterUnselected":
+                    if(data.isChecked) return false;
+                    break;
+            }
 
-			? [ item ]
-			: this.getPendingSelectionFromCollection(this.leftSideItems);
+            if (filterObj.searchText?.length === 0 || data.viewName.toLowerCase().indexOf(filterObj.searchText.toLowerCase()) > -1) {
+                return true;
+            };
+            return false;
+        };
+        this.dataSource.filter = JSON.stringify({
+            filterCheckedState: 'filterAll',
+            searchText: ''
+        });
+    }
 
-		this.pendingSelection = Object.create(null);
+    public radioButtonFilterChange(event: MatRadioChange): void {
+        const filterObj = JSON.parse(this.dataSource.filter);
 
-		this.leftSideItems = this.removeItemsFromCollection(this.leftSideItems, changeItems);
+        filterObj['filterCheckedState'] = event.value;
 
-		this.rightSideItems = changeItems.concat(this.rightSideItems);
+        this.dataSource.filter = JSON.stringify(filterObj);
+    }
 
-	}
+    public searchTextChange(searchText: string): void {
+        const filterObj = JSON.parse(this.dataSource.filter);
 
-	public removeFromSelectedItems(item?: SelectableItem) : void {
-		var changeItems = (item)
-			? [item]
-			: this.getPendingSelectionFromCollection(this.rightSideItems);
+        filterObj['searchText'] = searchText;
 
-		this.pendingSelection = Object.create( null );
+        this.dataSource.filter = JSON.stringify(filterObj);
+    }
 
-		this.rightSideItems = this.removeItemsFromCollection(this.rightSideItems, changeItems);
+	public changeSelectionItems(event: MatCheckboxChange, item: SelectableItem) : void {
+        let foundItem = this.items.find(x => x.id === item.id);
 
-		this.leftSideItems = changeItems
-			.concat(this.leftSideItems)
-			.sort(this.sortSelectableItemsOperator);
-	}
+        if (!foundItem) return;
 
-	public togglePendingSelection(item: SelectableItem) : void {
-		this.pendingSelection[item.id] = !this.pendingSelection[item.id];
-	}
-
-	private getPendingSelectionFromCollection(itemsCollection: SelectableItem[]) : SelectableItem[] {
-		return itemsCollection.filter(
-			(item) => {
-				return item.id in this.pendingSelection;
-			}
-		);
-	}
-
-	private removeItemsFromCollection(
-        itemsCollection: SelectableItem[],
-        itemsToRemove: SelectableItem[]
-    ) : SelectableItem[] {
-
-		return itemsCollection.filter(
-			(item) => {
-				return(!itemsToRemove.includes(item));
-			}
-		);
+        foundItem.isChecked = event.checked;
 	}
 
 	private sortSelectableItemsOperator(a: SelectableItem, b: SelectableItem) : number {

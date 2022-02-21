@@ -1,149 +1,45 @@
-<section class="content">
-    <div class="leftSide">
-        <div class="boxSearch">
-            <input type="text" placeholder="Buscar..." [(ngModel)]="filterItems" name="filterItems" />
-        </div>
-        <div class="list-group" style="background: gray;">
-            <div>
-                <ul>
-                    <li *ngFor="let item of leftSideItems | filter:filterItems">
-                        <mat-checkbox (click)="addToSelectedItems(item)" (dblclick)="addToSelectedItems(item)">
-                            {{ item.viewName }}
-                        </mat-checkbox>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+<div class="mat-elevation-z8">
+    <mat-radio-group aria-label="Select an option" (change)="radioButtonFilterChange($event)">
+        <mat-radio-button value="filterAll" checked="true">Todos</mat-radio-button>
+        <mat-radio-button value="filterSelected">Seleccionados</mat-radio-button>
+        <mat-radio-button value="filterUnselected">No seleccionados</mat-radio-button>
+    </mat-radio-group>
 
-    <div class="RightSide">
-        <div class="boxSearch">
-            <input type="text" placeholder="Buscar..." [(ngModel)]="filterItems2" name="filterItems2" />
-        </div>
-        <span class="list-group">
+    <mat-form-field appearance="standard">
+        <mat-label>Buscador de palabras</mat-label>
+        <input matInput type="text" placeholder="Buscar..." (input)="searchTextChange($event.target.value)" name="filterItems" />
+        <button matSuffix mat-button><mat-icon >search</mat-icon></button>
+    </mat-form-field>
 
-            <ul>
-                <li *ngFor="let item of rightSideItems | filter:filterItems2">
-                    <mat-checkbox (click)="togglePendingSelection(item)" (dblclick)="addToSelectedItems(item)">
-                        {{ item.viewName }}
-                    </mat-checkbox>
-                </li>
-            </ul>
-        </span>
-    </div>
-</section>
+    <table mat-table [dataSource]="dataSource" matSortDisableClear>
+        <ng-container matColumnDef="isChecked">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let item">
+                <mat-checkbox (change)="changeSelectionItems($event, item)" [checked]="item.isChecked">
+                </mat-checkbox>
+            </td>
+        </ng-container>
 
+        <ng-container matColumnDef="viewName">
+            <th mat-header-cell *matHeaderCellDef>Palabra</th>
+            <td mat-cell *matCellDef="let item">{{item.viewName}}</td>
 
+        </ng-container>
 
-
-
-
-
-
-<!-- <mat-grid-list cols="3" rowHeight="3:1">
-    <mat-grid-tile>
-        <mat-card>
-            <ul class="dual-select__items">
-                <li
-                    *ngFor="let item of leftSideItems"
-                    (click)="togglePendingSelection(item)"
-                    (dblclick)="addToSelectedItems(item)"
-                    class="dual-select__item"
-                    [class.dual-select__item--selected]="pendingSelection[ item.id ]">
-
-                    <div class="item">
-                        <div class="item__name">
-                            {{ item.viewName }}
-                        </div>
-                    </div>
-
-                </li>
-            </ul>
-        </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <mat-card>
-            <button
-                (click)="addToSelectedItems()"
-                class="dual-select__control">
-                &#10503;
-            </button>
-            <button
-                (click)="removeFromSelectedItems()"
-                class="dual-select__control">
-                &#10502;
-            </button>
-        </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <mat-card>
-
-            <ul class="dual-select__items">
-                <li
-                    *ngFor="let item of rightSideItems"
-                    (click)="togglePendingSelection(item)"
-                    (dblclick)="removeFromSelectedItems(item)"
-                    class="dual-select__item dual-select__item--new"
-                    [class.dual-select__item--selected]="pendingSelection[ item.id ]">
-
-                    <div class="item">
-                        <div class="item__name">
-                            {{ item.viewName }}
-                        </div>
-                    </div>
-
-                </li>
-            </ul>
-        </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-
-<p class="note">
-	You have <strong>{{ rightSideItems.length }} of {{ rightSideItems.length + leftSideItems.length }}</strong> items selected.
-</p> -->
-
-
-<!-- <mat-grid-list cols="3" rowHeight="3:1" class="content">
-    <ul style="background: green;">
-        <mat-grid-tile class="list-group" style="background-color: pink;">
-            <li style="background-color: aquamarine; margin: 7px;">
-
-                <div *ngFor="let item of leftSideItems" style="background: red; margin-top: 5px;">
-                    <input type="checkbox" (click)="addToSelectedItems(item)">
-                    <label (click)="togglePendingSelection(item)" (dblclick)="addToSelectedItems(item)"
-                        class="dual-select__item" [class.dual-select__item--selected]="pendingSelection[ item.id ]"
-                        type="checkbox">
-                        {{ item.viewName }}
-
-                    </label>
-                </div>
-
-            </li>
-        </mat-grid-tile>
-        <mat-grid-tile>
-            <mat-card>
-                <button (click)="addToSelectedItems()" class="dual-select__control">
-                    &#10503;
+        <ng-container matColumnDef="showButton">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let item" justify="end">
+                <button mat-icon-button (click)="showItemButtonClicked.emit(item.id)">
+                    <mat-icon>remove_red_eye</mat-icon>
                 </button>
-                <button (click)="removeFromSelectedItems()" class="dual-select__control">
-                    &#10502;
-                </button>
-            </mat-card>
-        </mat-grid-tile>
-        <mat-grid-tile>
-            <li>
-                <div class="list-group">
-                    <div *ngFor="let item of rightSideItems">
-                        <input type="checkbox" (click)="addToSelectedItems(item)">
-                        <label (click)="togglePendingSelection(item)" (dblclick)="removeFromSelectedItems(item)"
-                            class="dual-select__item dual-select__item--new"
-                            [class.dual-select__item--selected]="pendingSelection[ item.id ]" type="checkbox">
-                            {{ item.viewName }}
-                        </label>
-                    </div>
-                </div>
-            </li>
-        </mat-grid-tile>
-    </ul>
+            </td>
 
-</mat-grid-list> -->
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    </table>
+    <mat-paginator [length]="dataSource.data.length" [pageSize]="10" [pageSizeOptions]="[10, 25, 50]"></mat-paginator>
+</div>

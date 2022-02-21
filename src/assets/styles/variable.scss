@@ -17,10 +17,15 @@ $headingfont: 'Bebas Neue';
 
 /*Material Theme Colors*/
 
-$primary: mat-palette($mat-light-blue, 100);
-$accent: mat-palette($mat-light-blue,400);
+$primary: mat-palette($mat-blue, 300);
+$accent: mat-palette($mat-blue,700);
 $warn: mat-palette($mat-pink, 700);
-$theme: mat-light-theme($primary, $accent, $warn);
+$theme: mat-light-theme((
+    color:(
+        primary: $primary,
+        accent: $accent,
+        warm:$warn)
+));
 
 
 @include mat-core();
@@ -39,7 +44,7 @@ $custom-typography: mat-typography-config(
 $font-16: 16px;
 
 $themecolor: #100f11;
-$themecolor-alt: #6d8cc5;
+$themecolor-alt: #2962FF;
 $inverse: #2f3d4a;
 
 
