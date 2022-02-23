@@ -24,6 +24,8 @@ body {
   font-family: $bodyfont;
   margin: 0;
   overflow-x: hidden;
+  height: auto;
+  width: auto;
 }
 
 a:hover,
@@ -131,4 +133,8 @@ td, th {
     a{
         text-decoration: none;
     }
+}
+
+.mat-select-value{
+    max-width: fit-content !important;
 }
