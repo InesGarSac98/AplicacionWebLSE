@@ -15,4 +15,8 @@ constructor(http: HttpClient) {
     public getGame(name: string): Observable<Game> {
         return this.get<Game>('/api/games/' + name);
     }
+
+    public getGamesList(): Observable<Game[]> {
+        return this.get<Game[]>('/api/games');
+    }
 }

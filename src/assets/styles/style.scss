@@ -26,6 +26,8 @@ File: scss
 @import 'sidebar';
 @import 'responsive';
 @import 'authentication';
+@import 'table';
+@import 'progress-bar.scss';
 
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "../styles/icons/material-design-iconic-font/css/materialdesignicons.min.css";

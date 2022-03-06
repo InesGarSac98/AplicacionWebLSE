@@ -1,0 +1,7 @@
+<div>
+    <div class="card-body">
+        <app-two-side-multi-select *ngIf="dataLoaded" [(items)]="gamesAssociation" (showItemButtonClicked)="showSelectedGame($event)"></app-two-side-multi-select>
+        <button mat-raised-button color="primary" (click)="saveGamesSelection()">Guardar</button>
+        <button mat-raised-button color="primary" (click)="returnGamesSelection()"> Volver</button>
+    </div>
+</div>

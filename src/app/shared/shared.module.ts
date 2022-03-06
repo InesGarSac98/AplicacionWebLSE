@@ -20,6 +20,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { DictionaryComponent } from './dictionary/dictionary.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { GameTimerComponent } from './game-timer/game-timer.component';
 
 const components = [
     AccordionAnchorDirective,
@@ -29,8 +32,7 @@ const components = [
     MemoryGameComponent,
     QuizGameComponent,
     TwoSideMultiSelectComponent,
-    FilterViewNamePipe,
-    FilterCheckedStatePipe
+    GameTimerComponent
 ]
 
 @NgModule({
@@ -49,7 +51,8 @@ const components = [
       MatRadioModule,
       MatTableModule,
       MatPaginatorModule,
-      MatInputModule
+      MatInputModule,
+      MatProgressBarModule
   ],
   exports: [
     ...components

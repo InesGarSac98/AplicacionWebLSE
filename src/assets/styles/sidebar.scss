@@ -7,7 +7,8 @@ mat-sidenav {
   padding-top: 0px;
 }
 #snav{
-    box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
+    box-shadow:  1px 0px 10px rgba(0, 0, 0, 0.5);
+    background: #BBDEFB;
     .mat-list-item {
         height: auto;
         &:hover{
@@ -26,15 +27,15 @@ mat-sidenav {
             align-items: center;
             display: flex;
             font-size: 15px;
-
+            color: $white;
+            font-weight: bold;
         }
         &.selected > .mat-list-item-content > a{
-            background: $themecolor-alt;
+            background: $themecolor-sidebar;
             border-radius: $radius;
-            color:$white;
-
+            color:#2196F3;
             mat-icon{
-                color:$white;
+                color:#2196F3;
             }
 
         }
@@ -58,7 +59,6 @@ use profile section -> donde aparece el nombre
             text-decoration: none;
             width: 100%;
             padding: 6px 30px;
-            background: rgba(0, 0, 0, 0.5);
             display: block;
             white-space: nowrap;
             text-align: center;
@@ -78,4 +78,6 @@ use profile section -> donde aparece el nombre
         }
 }
 
-
+.mat-divider{
+    border-top-color: white;
+}

@@ -1,16 +1,12 @@
 <div class="main-container">
-    <mat-toolbar color="white" class="topbar telative">
+    <mat-toolbar class="topbar telative">
 
         <div class="navbar-header">
             <a class="navbar-brand" href="index.html">
-
-                <!--End Logo icon -->
-                <!-- Logo text -->
                 <span fxShow="false" fxShow.gt-xs>
-                    <!-- dark Logo text -->
+
                     <p class="logo-toolbar">Learning LSE</p>
-                    <!-- Light Logo text -->
-                    <!-- <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage"> -->
+
                 </span>
             </a>
         </div>
@@ -21,6 +17,7 @@
         <span fxFlex></span>
         <app-header></app-header>
     </mat-toolbar>
+
     <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 0 : 0">
 
         <mat-sidenav #snav id="snav" class="dark-sidebar pl-xs" [mode]="mobileQuery.matches ? 'side' : 'over'"

@@ -1,68 +1,63 @@
-
-:root {
-	--w: calc(40vw / 2);
-	--h: calc(100vh / 6);
-}
-
 * {
 	transition: all 0.5s;
 }
 
-.game-body {
-	-webkit-perspective: 1000;
-	background: powderblue;
-	min-height: 100vh;
-	display: block;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	font-family: calibri;
-}
-
-
-.area-tarjeta,
-.tarjeta,
-.cara {
+.nuevo-juego {
 	cursor: pointer;
-	width: var(--w);
-	min-width: 100px;
-	height: var(--h);
 }
 
-.tarjeta {
-	position: relative;
-	transform-style: preserve-3d;
-	animation: iniciar 5s;
+.game-body {
+	justify-content: center;
+	text-align: center;
 }
+
 
 .cara {
 	position: absolute;
 	backface-visibility: hidden;
-	box-shadow: inset 0 0 0 5px white;
-	font-size: 500%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    border-radius: 10%;
+    border: 2px solid;
+
+    mat-icon{
+        align-items: center;
+    }
 }
 
 .trasera {
-	background-color: lightcyan;
 	transform: rotateY(180deg);
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
 }
 
-.superior {
-	background: white;
+.tarjeta{
+    transform-style: preserve-3d;
+	animation: iniciar 5s;
+    width: 100px;
+	height: 100px;
+    p{
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        height: fit-content;
+        font-size: 25px;
+        text-align: center;
+    }
+    img{
+        background-color: rgb(23, 0, 151);
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 80px;
+    }
 }
 
-.nuevo-juego {
-	cursor: pointer;
-	background: white;
-	padding: 20px;
-	border-radius: 50px;
-	border: white 5px solid;
-	font-size: 130%;
-}
 
 @keyframes iniciar {
 

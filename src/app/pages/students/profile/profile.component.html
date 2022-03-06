@@ -20,8 +20,8 @@
 
           <img mat-card-image class="img-profile" src="https://material.angular.io/assets/img/examples/shiba2.jpg">
           <mat-card-content>
-              Nombre del usuario: <span class="name" *ngIf="userName">{{ userName }}</span>
-              <br>Clase a la que pertenece: <span class="name" *ngIf="userName">{{ userName }}</span>
+              Nombre del usuario: <span class="name" *ngIf="user">{{ user.name }}</span>
+              <br>Clase a la que pertenece: <span class="name" *ngIf="classroom">{{ classroom.name }}</span>
 
           </mat-card-content>
       </mat-card>

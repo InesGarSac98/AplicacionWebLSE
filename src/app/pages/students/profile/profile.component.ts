@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { Classroom } from 'src/api/models/classroom.model';
+import { Student } from 'src/api/models/student.model';
 import { User } from 'src/api/models/user.model';
+import { ClassroomsService } from 'src/api/services/classrooms-service/classrooms.service';
+import { StudentsService } from 'src/api/services/students-service/students.service';
 import { UsersService } from 'src/api/services/users-service/users.service';
 
 @Component({
@@ -10,15 +14,28 @@ import { UsersService } from 'src/api/services/users-service/users.service';
 })
 export class ProfileComponent implements OnInit {
 
-    public userName: string;
+    public user: User;
+    public student: Student;
+    public classroom: Classroom;
 
-    constructor(private userService: UsersService) {
+    constructor(
+        private userService: UsersService,
+        private studentService: StudentsService,
+        private classroomService: ClassroomsService
+    ) {
 
     }
 
     public ngOnInit(): void {
         this.userService.getUserLoged()
-            .subscribe((user: User) => this.userName = user.name);
+            .subscribe((user: User) => this.user = user);
+
+        this.studentService.getStudentLoged()
+            .subscribe((student: Student) => {
+                this.student = student;
+                this.classroomService.getClassroom(student.classroomId)
+                    .subscribe((classroom: Classroom) => this.classroom = classroom);
+            });
     }
 
     icons: Icons[] = [

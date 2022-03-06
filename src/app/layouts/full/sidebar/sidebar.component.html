@@ -3,8 +3,9 @@
 </div>
 
 <div class="user-profile" >
-
+    <mat-divider></mat-divider>
     <div class="profile-text"><a [matMenuTriggerFor]="sdprofile" class="" *ngIf="userName"> {{ userName }}</a></div>
+    <mat-divider></mat-divider>
     <mat-menu #sdprofile="matMenu" class="mymegamenu">
         <button mat-menu-item>
             <mat-icon>power_off</mat-icon> Settings </button>

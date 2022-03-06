@@ -18,6 +18,7 @@ import { GameComponent } from './game/game.component';
 import { ReviewComponent } from './review/review.component';
 import { ProgressComponent } from './progress/progress.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { DictionaryComponent } from 'src/app/shared/dictionary/dictionary.component';
 
 
 
@@ -40,7 +41,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     GamesListComponent,
     GameComponent,
     ReviewComponent,
-    ProgressComponent
+    ProgressComponent,
+    DictionaryComponent
   ]
 })
 export class StudentsModule {}

@@ -3,12 +3,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { ClassroomGame } from 'src/api/models/classroomGame';
 import { ClassroomWord } from 'src/api/models/classroomWord';
+import { Game } from 'src/api/models/game.model';
 import { Student } from 'src/api/models/student.model';
 import { User } from 'src/api/models/user.model';
 import { ClassroomsService } from 'src/api/services/classrooms-service/classrooms.service';
 import { UsersService } from 'src/api/services/users-service/users.service';
-import { WordsService } from 'src/api/services/words-service/words.service';
+import { GameDetailDialogComponent } from 'src/app/shared/dialog/game-detail-dialog/game-detail-dialog.component';
 import { WordDetailsDialogComponent } from 'src/app/shared/dialog/word-details-dialog/word-details-dialog.component';
 
 @Component({
@@ -25,31 +27,32 @@ export class ClassroomComponent implements OnInit {
     public studentsClassroomList: IStudentClassroomList[];
     public wordsClassroomList: IWordClassroomList[];
     public classroom: IStudentClassroomList[];
+    public gamesClassroomList: IGameClassroomList[];
 
     //list
-    public items: IStudentClassroomList[] = [];
-    public itemsChange = new EventEmitter<IStudentClassroomList[]>();
     public dataSourceStudents: MatTableDataSource<IStudentClassroomList>;
     public dataSourceWords: MatTableDataSource<IWordClassroomList>;
+    public dataSourceGames: MatTableDataSource<IGameClassroomList>;
     public displayedColumnsStudents: string[];
     public displayedColumnsWords: string[];
+    public displayedColumnsGames: string[];
     @ViewChild('studentsPaginator') public studentsPaginator : MatPaginator;
     @ViewChild('wordsPaginator') public wordsPaginator : MatPaginator;
+    @ViewChild('gamesPaginator') public gamesPaginator : MatPaginator;
 
     constructor(
         private route: ActivatedRoute,
         private userService: UsersService,
         private matDialog: MatDialog,
-        private wordsService: WordsService,
         private classroomService: ClassroomsService
     ) {
         this.displayedColumnsStudents = ['name','showButton'];
         this.displayedColumnsWords = ['name','showButton'];
+        this.displayedColumnsGames = ['image','name','showButton'];
     }
 
     public ngOnInit(): void{
         this.classroomId = this.route.snapshot.params['classroomId'];
-        this.wordId = this.route.snapshot.params['wordId'];
         console.log(this.classroomId);
 
         this.userService.getUserLoged()
@@ -57,6 +60,7 @@ export class ClassroomComponent implements OnInit {
 
         this.loadStudents();
         this.loadWords();
+        this.loadGames();
     }
 
     public searchTextChange(searchText: string, dataSource: MatTableDataSource<any>): void {
@@ -67,22 +71,48 @@ export class ClassroomComponent implements OnInit {
         dataSource.filter = JSON.stringify(filterObj);
     }
 
-    public openWord(): void {
+    public showWordButtonClicked(id: number): void {
         this.matDialog.open(
             WordDetailsDialogComponent,
             {
                 data: {
-                    wordName: 'patata',
-                    wordVideo: 'url del video',
-                    wordImage: 'url de al imagen'
+                    word: this.wordsClassroomList.find(x => x.id === id)
                 }
             }
         );
     }
+    public showGameButtonClicked(id: number): void {
+        let dialogRef = this.matDialog.open(
+            GameDetailDialogComponent,
+            {
+                data: {
+                    game: this.gamesClassroomList.find(x => x.id === id)
+                }
+            }
+        );
+
+        dialogRef.afterClosed().subscribe(result =>{
+            console.log('The dialog was closed')
+        });
+    }
+
+    public showStudentButtonClicked(id: number): void {
+        /*let dialogRef = this.matDialog.open(
+            GameDetailDialogComponent,
+            {
+                data: {
+                    game: this.fullGamesList.find(x => x.id === id)
+                }
+            }
+        );
+
+        dialogRef.afterClosed().subscribe(result =>{
+            console.log('The dialog was closed')
+        });*/
+    }
 
     private setDataSourceSearchTextFilterPredicate(dataSource: MatTableDataSource<any>, searchPropertyName: string) {
         dataSource.filterPredicate = (data: any, filter: string) => {
-            debugger;
             const filterObj = JSON.parse(filter);
 
             if (filterObj.searchText?.length === 0 || data[searchPropertyName].toLowerCase().indexOf(filterObj.searchText.toLowerCase()) > -1) {
@@ -131,6 +161,23 @@ export class ClassroomComponent implements OnInit {
             });
     }
 
+    private loadGames() {
+        this.classroomService.getGamesListClassroom(this.classroomId)
+            .subscribe((games: ClassroomGame[]) => {
+                this.gamesClassroomList = games.map(g => {
+                    let result = new IGameClassroomList();
+                    result.id = g.id;
+                    result.gameId = g.gameId;
+                    result.name = g.game.name;
+                    result.image = g.game.image;
+                    return result;
+                });
+                this.dataSourceGames = new MatTableDataSource<IGameClassroomList>(this.gamesClassroomList);
+                this.dataSourceGames.paginator = this.gamesPaginator;
+                this.setDataSourceSearchTextFilterPredicate(this.dataSourceGames, 'name');
+            });
+    }
+
 }
 
 export class IStudentClassroomList {
@@ -152,4 +199,11 @@ export class IWordClassroomList {
     image: string;
     video: string;
     videoDefinition: string;
+}
+
+export class IGameClassroomList {
+    id: number;
+    gameId: number;
+    name: string;
+    image: string;
 }

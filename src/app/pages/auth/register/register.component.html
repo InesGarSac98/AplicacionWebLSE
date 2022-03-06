@@ -7,34 +7,30 @@
                     <mat-card-title>
                         Registro
                     </mat-card-title>
-
+                    <form [formGroup]="formGroup" (submit)="saveStudent()">
                     <mat-card-content>
-                        <form [formGroup]="formGroup">
-                            <app-user-form-group
-                                [formGroup]="formGroup"
-                                [emailLabel]="'Nickname'"
-                                [emailPlaceholder]="'Ej. innesgs'"
-                            >
+
+                            <app-user-form-group [formGroup]="formGroup" [emailLabel]="'Nickname'"
+                                [emailPlaceholder]="'Ej. innesgs'">
                             </app-user-form-group>
 
-                            <app-student-form-group
-                                [formGroup]="formGroup"
-                            >
+                            <app-student-form-group [formGroup]="formGroup">
                             </app-student-form-group>
                             <br>
-                        </form>
 
-                        <mat-card-actions>
-                            <br>
-                            ¿Ya tiene cuenta?
-                            <a [routerLink]="['/login']"> Iniciar sesión</a>
-                            <div class="button-flex-container">
-                                <button mat-raised-button color="primary"
-                                    (click)="saveStudent()"
-                                    [disabled]="!IsStudentFormValid()">Guardar</button>
-                            </div>
-                        </mat-card-actions>
+
+                            <mat-card-actions>
+                                <br>
+                                ¿Ya tiene cuenta?
+                                <a [routerLink]="['/login']"> Iniciar sesión</a>
+                                <div class="button-flex-container">
+                                    <button mat-raised-button color="primary" type="submit"
+                                        [disabled]="!IsStudentFormValid()">Guardar</button>
+                                </div>
+                            </mat-card-actions>
+
                     </mat-card-content>
+                </form>
                 </div>
 
             </mat-tab>
@@ -44,35 +40,30 @@
                     <mat-card-title>
                         Registro
                     </mat-card-title>
-
+                    <form [formGroup]="formGroup"  (click)="saveTeacher()">
                     <mat-card-content>
-                        <form [formGroup]="formGroup">
-                            <app-user-form-group
-                                [formGroup]="formGroup"
-                                [emailLabel]="'Email'"
-                                [emailPlaceholder]="'Ej. innes@gmail.com'"
-                            >
+
+                            <app-user-form-group [formGroup]="formGroup" [emailLabel]="'Email'"
+                                [emailPlaceholder]="'Ej. innes@gmail.com'">
                             </app-user-form-group>
 
-                            <app-teacher-form-group
-                                [formGroup]="formGroup"
-                            >
+                            <app-teacher-form-group [formGroup]="formGroup">
                             </app-teacher-form-group>
 
                             <br>
-                        </form>
+
 
                         <mat-card-actions>
                             <br>
                             ¿Ya tiene cuenta?
                             <a [routerLink]="['/login']"> Iniciar sesión</a>
                             <div class="button-flex-container">
-                                <button mat-raised-button color="primary"
-                                    (click)="saveTeacher()"
+                                <button mat-raised-button type="submit" color="primary"
                                     [disabled]="!IsTeacherFormValid()">Guardar</button>
                             </div>
                         </mat-card-actions>
                     </mat-card-content>
+                </form>
                 </div>
             </mat-tab>
 

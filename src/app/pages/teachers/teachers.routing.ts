@@ -8,6 +8,7 @@ import { ClassroomFormComponent } from './classroom-form/classroom-form.componen
 import { GamesListComponent } from './games/game-list/games-list.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AddWordsComponent } from './add-words/add-words.component';
+import { AddGamesComponent } from './add-games/add-games.component';
 
 export const TeachersRoutes: Routes = [
     {
@@ -54,6 +55,11 @@ export const TeachersRoutes: Routes = [
                         path: 'add-words',
                         pathMatch: 'full',
                         component: AddWordsComponent
+                    },
+                    {
+                        path: 'add-games',
+                        pathMatch: 'full',
+                        component: AddGamesComponent
                     },
                 ]
             },

@@ -19,6 +19,7 @@ import { GameComponent } from '../students/game/game.component';
 import { GamesListComponent } from './games/game-list/games-list.component';
 import { ClassroomFormComponent } from './classroom-form/classroom-form.component';
 import { AddWordsComponent } from './add-words/add-words.component';
+import { AddGamesComponent } from './add-games/add-games.component';
 
 
 
@@ -41,7 +42,8 @@ import { AddWordsComponent } from './add-words/add-words.component';
     ClassroomListComponent,
     GamesListComponent,
     ClassroomFormComponent,
-    AddWordsComponent
+    AddWordsComponent,
+    AddGamesComponent
   ]
 })
 export class TeachersModule {}

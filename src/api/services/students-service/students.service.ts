@@ -2,21 +2,28 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Student } from 'src/api/models/student.model';
+import { CommonApiService } from '../common-api/common-api.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class StudentsService {
+export class StudentsService extends CommonApiService {
 
-    constructor(private http: HttpClient) { }
+    constructor(http: HttpClient) {
+        super(http);
+    }
 
     // Métodos para crear un nuevo profesor en la bbdd
     public getStudents(): Observable<Student[]> {
-        return this.http.get<Student[]>('/api/students');
+        return this.get<Student[]>('/api/students');
+    }
+
+    public getStudentLoged(): Observable<Student> {
+        return this.get<Student>('/api/students/student-loged');
     }
 
     public createNewStudents(student: Student): Observable<Student> {
-        return this.http.post<Student>('/api/students', student);
+        return this.post<Student>('/api/students', student);
     }
 
 }

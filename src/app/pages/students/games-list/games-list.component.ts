@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Classroom } from 'src/api/models/classroom.model';
+import { ClassroomGame } from 'src/api/models/classroomGame';
+import { Student } from 'src/api/models/student.model';
+import { ClassroomsService } from 'src/api/services/classrooms-service/classrooms.service';
+import { StudentsService } from 'src/api/services/students-service/students.service';
 
 
 @Component({
@@ -7,20 +12,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./games-list.component.scss']
 })
 export class GamesListComponent implements OnInit {
-
-    public games: IGame[];
     public value = 40;
 
-    public ngOnInit(): void {
-        this.games = [
-            {id:1,name:"memory",image:"./assets/images/games/memory.png"},
-            {id:2, name:"quiz",image:"./assets/images/games/quiz.png"}
-        ]
-    }
-}
+    public student: Student;
+    public classroomGames: ClassroomGame[];
 
-export class IGame {
-    id: number;
-    name: string;
-    image: string;
+    constructor(
+        private studentService: StudentsService,
+        private classroomService: ClassroomsService
+    ) {
+
+    }
+
+    public ngOnInit(): void {
+        this.studentService.getStudentLoged()
+            .subscribe((student: Student) => {
+                this.student = student;
+                this.classroomService.getGamesListClassroom(student.classroomId)
+                    .subscribe((classroomGames: ClassroomGame[]) => this.classroomGames = classroomGames);
+            });
+    }
 }

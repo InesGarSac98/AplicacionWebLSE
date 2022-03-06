@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Classroom } from 'src/api/models/classroom.model';
+import { ClassroomGame } from 'src/api/models/classroomGame';
 import { ClassroomWord } from 'src/api/models/classroomWord';
 import { Student } from 'src/api/models/student.model';
 import { CommonApiService } from '../common-api/common-api.service';
@@ -20,6 +21,10 @@ export class ClassroomsService extends CommonApiService {
         return this.get<Classroom[]>('/api/classrooms');
     }
 
+    public getClassroom(classroomId: number): Observable<Classroom> {
+        return this.get<Classroom>('/api/classrooms/' + classroomId);
+    }
+
     public createNewClassroom(classroom: Classroom): Observable<Classroom> {
         return this.post<Classroom>('/api/classrooms', classroom);
     }
@@ -34,5 +39,9 @@ export class ClassroomsService extends CommonApiService {
 
     public getWordsListClassroom(classroomId:number): Observable<ClassroomWord[]> {
         return this.get<ClassroomWord[]>('/api/classrooms/' + classroomId + '/words');
+    }
+
+    public getGamesListClassroom(classroomId:number): Observable<ClassroomGame[]> {
+        return this.get<ClassroomGame[]>('/api/classrooms/' + classroomId + '/games');
     }
 }

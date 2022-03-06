@@ -1,0 +1,9 @@
+<div *ngIf="timeValue || timeValue === 0">
+    <mat-progress-bar class="mat-progressbar-blue" *ngIf="timeValue >= maxTimeValue * 0.5" mode="determinate" [value]="100*timeValue/maxTimeValue"></mat-progress-bar>
+    <mat-progress-bar class="mat-progressbar-yellow" *ngIf="timeValue >= maxTimeValue * 0.2 && timeValue < maxTimeValue * 0.5" mode="determinate" [value]="100*timeValue/maxTimeValue"></mat-progress-bar>
+    <mat-progress-bar class="mat-progressbar-red" *ngIf="timeValue < maxTimeValue * 0.2" mode="determinate" [value]="100*timeValue/maxTimeValue"></mat-progress-bar>
+</div>
+<div *ngIf="timeValue || timeValue === 0">
+    Tiempo restante: <p>{{getLeftTimeString(timeValue)}}</p>
+</div>
+

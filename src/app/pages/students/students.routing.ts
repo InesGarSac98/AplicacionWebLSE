@@ -31,6 +31,8 @@ export const StudentsRoutes: Routes = [
     },
     {
         path: 'review',
+        pathMatch: 'full',
         component: ReviewComponent
     }
+
 ];

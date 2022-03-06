@@ -1,0 +1,27 @@
+//TODO: ESTILOS TABLA GLOBALES
+
+.mat-column-showButton{
+    text-align: right;
+}
+
+.mat-column-name,
+.mat-column-viewName {
+    width: 2rem;
+    text-align: left;
+}
+
+.mat-column-image {
+    width: 50px;
+    text-align: left;
+}
+
+table.mat-table{
+    width: 94%;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+mat-grid-tile{
+    align-items: center;
+    justify-content: center;
+}

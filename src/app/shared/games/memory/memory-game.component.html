@@ -1,20 +1,29 @@
+<button mat-icon-button (click)="back()">
+    <mat-icon>keyboard_backspace</mat-icon>
+</button>
 <div class="game-body">
-    <div id="tablero">
-        <mat-grid-list [cols]="4" rowHeight="90px" >
-            <mat-grid-tile *ngFor="let tarjeta of tarjetas; let i = index" class="area-tarjeta" (click)="seleccionarTarjeta(tarjetaHtml)">
-                <div #tarjetaHtml class="tarjeta" id="{{'tarjeta' + i}}">
-                    <div class="cara trasera" id="{{'trasera' + i}}" mat-card-title>
-                        <img [src]="tarjeta" width="85" height="85">
+    <app-game-timer (timeOverEvent)="timeOver()"></app-game-timer>
+    <div id="board">
+        <mat-grid-list [cols]="4" rowHeight="100px" >
+            <mat-grid-tile *ngFor="let boardCard of boardCards; let i = index" (click)="selectBoardCard(boardCardHtml, boardCard)">
+                <div #boardCardHtml class="tarjeta" id="{{'boardCard' + boardCard.contentType + boardCard.wordId}}">
+                    <div class="cara trasera" id="{{'trasera' + boardCard.contentType + boardCard.wordId}}" mat-card-title>
+                        <img class="img-card" *ngIf="boardCard.contentType === 'img'" [src]="boardCard.content">
+                        <p class="text-card"*ngIf="boardCard.contentType === 'text'">{{boardCard.content}}</p>
                     </div>
-                    <div class="cara superior">
+                    <div class="cara">
                         <mat-icon>help_outline</mat-icon>
                     </div>
                 </div>
             </mat-grid-tile>
         </mat-grid-list>
     </div>
-    <br>
-    <div class="nuevo-juego" (click)="generarTablero()">
-        New Game
+
+    <div *ngIf="gameFinished">
+        <h1>HAS GANADO!!</h1>
     </div>
+    <br>
+    <button mat-raised-button class="nuevo-juego" (click)="generateBoard()">
+        ¡Jugar!
+    </button>
 </div>

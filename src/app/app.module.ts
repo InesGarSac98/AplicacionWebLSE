@@ -21,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DialogsComponent } from './shared/dialog/dialogs/dialogs.component';
 import { MatButtonModule } from '@angular/material/button';
 import { WordDetailsDialogComponent } from './shared/dialog/word-details-dialog/word-details-dialog.component';
+import { GameDetailDialogComponent } from './shared/dialog/game-detail-dialog/game-detail-dialog.component';
 import { TwoSideMultiSelectComponent } from './shared/two-side-multi-select/two-side-multi-select/two-side-multi-select.component';
 
 
@@ -32,7 +33,8 @@ import { TwoSideMultiSelectComponent } from './shared/two-side-multi-select/two-
         SpinnerComponent,
         AppSidebarComponent,
         DialogsComponent,
-        WordDetailsDialogComponent
+        WordDetailsDialogComponent,
+        GameDetailDialogComponent
     ],
     entryComponents:[DialogsComponent, WordDetailsDialogComponent],
     imports: [

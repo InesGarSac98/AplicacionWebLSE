@@ -9,7 +9,7 @@ export class CommonApiService {
 
     constructor(private http: HttpClient) { }
 
-    public get<T>(url: string): Observable<T> {
+    protected get<T>(url: string): Observable<T> {
         const token = localStorage.getItem("token");
         return this.http
             .get<T>(url, {
@@ -19,7 +19,7 @@ export class CommonApiService {
             });
     }
 
-    public delete<T>(url: string): Observable<T> {
+    protected delete<T>(url: string): Observable<T> {
         const token = localStorage.getItem("token");
         return this.http
             .delete<T>(url, {
@@ -29,7 +29,7 @@ export class CommonApiService {
             });
     }
 
-    public post<T>(url: string, body: any): Observable<T> {
+    protected post<T>(url: string, body: any): Observable<T> {
         const token = localStorage.getItem("token");
         return this.http.post<T>(
             url,
