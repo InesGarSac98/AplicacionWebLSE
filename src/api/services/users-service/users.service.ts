@@ -24,11 +24,11 @@ export class UsersService extends CommonApiService {
         return this.post<User>('/api/users', user);
     }
 
-    public login(name:string, password: string): Observable<any> {
+    public login(email:string, password: string): Observable<any> {
         return this.post<User>(
             '/api/users/login/',
             {
-                name: name,
+                email: email,
                 password: password
             });
     }

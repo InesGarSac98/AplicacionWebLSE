@@ -22,6 +22,7 @@ export class GameTimerComponent implements OnInit {
         this.maxTimeValue = maxTimeValue;
         this.timeValue = maxTimeValue;
         this.lastTime = Date.now()/1000;
+        this.isStopped = false;
         setTimeout(() => this.updateTimer(), 100);
     }
 

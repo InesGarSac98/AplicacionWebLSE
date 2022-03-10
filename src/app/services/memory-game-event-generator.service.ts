@@ -149,6 +149,33 @@ export class MemoryGameEventGeneratorService {
         return startEvent;
     }
 
+    public generateAbandoneEvent(boardCards: BoardCard[], pairsAchieved: BoardCard[], selectedCards: BoardCard[], gameId: number, studentId: number, score:number, leftTime: number): GameEvent {
+        const memoryGameEvent: MemoryGameEvent = {
+            type: MemoryGameEventTypes.GAME_FINISHED,
+            score: score,
+            board: boardCards.map(tile => {
+                const memoryGameEventTile: MemoryGameEventBoardTile = {
+                    wordId: tile.wordId,
+                    status: this.getBoardTileStatus(tile, pairsAchieved, selectedCards),
+                    contentType: tile.contentType,
+                    content: tile.content
+                };
+                return memoryGameEventTile;
+            })
+        };
+
+        const startEvent: GameEvent = {
+            gameId: gameId,
+            studentId: studentId,
+            date: new Date(),
+            leftTime: leftTime,
+            status: GameStatuses.ABANDONE,
+            events: JSON.stringify(memoryGameEvent)
+        };
+
+        return startEvent;
+    }
+
     public generateLoseEvent(boardCards: BoardCard[], pairsAchieved: BoardCard[], selectedCards: BoardCard[], gameId: number, studentId: number, score:number, leftTime: number): GameEvent {
         const memoryGameEvent: MemoryGameEvent = {
             type: MemoryGameEventTypes.GAME_FINISHED,

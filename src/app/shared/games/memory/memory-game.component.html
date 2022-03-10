@@ -1,4 +1,4 @@
-<button mat-icon-button (click)="back()">
+<button mat-icon-button (click)="goBack()">
     <mat-icon>keyboard_backspace</mat-icon>
 </button>
 <div class="game-body">
@@ -19,11 +19,19 @@
         </mat-grid-list>
     </div>
 
-    <div *ngIf="gameFinished">
+    <div *ngIf="gameFinished && numPairsAchieved === maxPairs">
         <h1>HAS GANADO!!</h1>
     </div>
+    <div *ngIf="gameFinished && numPairsAchieved !== maxPairs">
+        <h1>HAS PERDIDO PANOLI!!</h1>
+    </div>
     <br>
-    <button mat-raised-button class="nuevo-juego" (click)="generateBoard()">
-        ¡Jugar!
-    </button>
+    <div>
+        <button mat-raised-button class="nuevo-juego" (click)="generateBoard()">
+            ¡Jugar!
+        </button>
+        <button mat-raised-button class="nuevo-juego" (click)="abandoned()">
+            Abandonar
+        </button>
+    </div>
 </div>

@@ -1,18 +1,23 @@
-<mat-card >
+<mat-grid-list [ngClass]="rotateClass ? 'quizz-content' : ''" *ngIf="this.cardQuiz" cols="2" rowHeight="2:1">
     <div *ngIf="currentQuiz < 3">
-            <mat-card-title>{{cardQuiz[currentQuiz].question}}</mat-card-title>
-            <mat-grid-list cols="2" class="list-group" *ngFor="let quiz of cardQuiz[currentQuiz].answer">
+            <mat-grid-title>
+                <h4 *ngIf="!cardQuiz[currentQuiz].showImage">{{cardQuiz[currentQuiz].question}}</h4>
+                <img *ngIf="cardQuiz[currentQuiz].showImage" [src]="cardQuiz[currentQuiz].question" />
+            </mat-grid-title>
+            <mat-grid-tile *ngFor="let quiz of cardQuiz[currentQuiz].answer">
                 <label>
-                    <mat-grid-title class="list-group-items" [correctAnswer]="quiz.correct">
+                    <mat-card class="list-group-answers" [correctAnswer]="quiz.correct">
                         <input type="radio" name="options" (change)="onAnswer(quiz.correct)" [disabled]="answerSelected">
-                        <img width="20%" height="20%" [src]="quiz.option">
-                    </mat-grid-title>
+                        <img *ngIf="quiz.showImage" width="45%" height="45%" style="margin-left: 100px;margin-right: 100px;" [src]="quiz.option">
+                        <p *ngIf="!quiz.showImage" style="margin-left: 100px;margin-right: 100px;">{{quiz.option}}</p>
+                    </mat-card>
                 </label>
-            </mat-grid-list>
-            <p class="text-center">
+             </mat-grid-tile>
+             <p class="text-center">
                 {{currentQuiz + 1}} of {{cardQuiz.length}}
             </p>
     </div>
+
     <div *ngIf="currentQuiz > 2">
         <button class="btn btn-success btn-black" (click)="showResult()">Show Result</button>
         <div class="text-center" *ngIf="result">
@@ -21,4 +26,4 @@
 
     </div>
 
-</mat-card>
+</mat-grid-list>

@@ -6,9 +6,11 @@ mat-sidenav {
   width: 240px;
   padding-top: 0px;
 }
+
 #snav{
     box-shadow:  1px 0px 10px rgba(0, 0, 0, 0.5);
-    background: #BBDEFB;
+    //background: #BBDEFB;
+    background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url('/assets/images/background/background.webp');
     .mat-list-item {
         height: auto;
         &:hover{
@@ -27,15 +29,19 @@ mat-sidenav {
             align-items: center;
             display: flex;
             font-size: 15px;
-            color: $white;
+            color: $themecolor-alt;
             font-weight: bold;
+            mat-icon{
+                color: $themecolor-alt;
+            }
         }
         &.selected > .mat-list-item-content > a{
-            background: $themecolor-sidebar;
+            background: $themecolor-alt;
             border-radius: $radius;
-            color:#2196F3;
+            //color:#2196F3;
+            color:#fafafa;
             mat-icon{
-                color:#2196F3;
+                color:#fafafa;
             }
 
         }

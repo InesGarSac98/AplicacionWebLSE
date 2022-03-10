@@ -16,8 +16,13 @@ export class DialogsComponent implements OnInit {
   ngOnInit() {
   }
 
-  public close(){
+  public aceppt(){
       this.dialogRef.close();
-      this.router.navigate(['/login'])
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
   }
+
+  public close(){
+    this.dialogRef.close();
+}
 }

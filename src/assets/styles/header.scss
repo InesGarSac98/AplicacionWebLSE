@@ -3,7 +3,7 @@
 *******************/
 .mat-toolbar{
     box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.5);
-    background: #64B5F6;
+    background: $themecolor-alt;
     &.topbar{
         padding: 0px 15px;
     }
@@ -30,11 +30,11 @@
  Icons
 *******************/
 .mat-icon, .mat-icon-button{
-    color: #2196F3;
+    color: #fafafa;
     margin-right: 10px;
     a{
-        color: #2196F3;
-    text-decoration: none;
+        color: #fafafa;
+        text-decoration: none;
     }
 }
 

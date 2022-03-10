@@ -26,14 +26,16 @@ export class MemoryGameComponent implements OnInit {
     public boardCards: BoardCard[];
     public maxTimeValue: number = 2*60;
     public gameFinished: boolean = false;
+    public isAbandoned: boolean = false;
+    public score: number;
+    public numPairsAchieved: number;
+    public maxPairs: number = 6;
+
     private selecciones: BoardCard[];
     private pairsAchieved: BoardCard[];
     private availableWords: Word[];
-    private numPairsAchieved: number;
-    private maxPairs: number = 6;
     private studentId: number;
     private isTimeOver: boolean;
-    public score: number;
 
     constructor(
         private sanitizer: DomSanitizer,
@@ -89,10 +91,10 @@ export class MemoryGameComponent implements OnInit {
             this.boardCards.sort(() => Math.random() - 0.5); //Para que las tarjetas aparezcan de manera aleatoria
         }
 
+        this.gameTimer.startTimer(this.maxTimeValue);
+
         const startEvent = this.memoryGameEventGeneratorService.generateStartEvent(this.boardCards, this.gameId, this.studentId, this.gameTimer.getLeftTime());
         this.gameEventService.createGameEvent(startEvent).subscribe();
-
-        this.gameTimer.startTimer(this.maxTimeValue);
     }
 
     public selectBoardCard(boardCardHtmlElement: HTMLElement, boardCard: BoardCard): void {
@@ -113,10 +115,17 @@ export class MemoryGameComponent implements OnInit {
 
     public timeOver(): void {
         this.isTimeOver = true;
+        this.gameFinished = this.checkWin();
     }
 
-    public back():void{
+    public goBack():void{
         this.router.navigate(['/students/games']);
+    }
+
+    public abandoned():void{
+        this.isAbandoned = true;
+        this.gameFinished = this.checkWin();
+        window.location.reload();
     }
 
     private unselect(): void {
@@ -157,7 +166,7 @@ export class MemoryGameComponent implements OnInit {
 
                     const pairSuccessEvent = this.memoryGameEventGeneratorService.generatePairSuccessEvent(this.boardCards, this.pairsAchieved, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime());
                     this.gameEventService.createGameEvent(pairSuccessEvent).subscribe();
-                    this.gameFinished = this.checkWin()
+                    this.gameFinished = this.checkWin();
                 }
             }
             this.selecciones = [];
@@ -165,18 +174,19 @@ export class MemoryGameComponent implements OnInit {
     }
 
     private checkWin(): boolean {
-        const isGameFinished = this.numPairsAchieved === this.maxPairs || this.isTimeOver;// || this.abandone;
+        const isGameFinished = this.gameFinished || this.numPairsAchieved === this.maxPairs || this.isTimeOver || this.isAbandoned;
 
         if(isGameFinished){
+
             this.gameTimer.stopTimer();
             if (this.numPairsAchieved === this.maxPairs){
                 const winEvent = this.memoryGameEventGeneratorService.generateWinEvent(this.boardCards, this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime());
                 this.gameEventService.createGameEvent(winEvent).subscribe();
             }
-            //else if (this.abandone){
-                //const abandoneEvent = this.memoryGameEventGeneratorService.generateAbandoneEvent(this.boardCards, this.gameId, this.studentId, this.score);
-                //this.gameEventService.createGameEvent(abandoneEvent).subscribe();
-            //}
+            else if (this.isAbandoned){
+                const abandoneEvent = this.memoryGameEventGeneratorService.generateAbandoneEvent(this.boardCards,this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score,this.gameTimer.getLeftTime());
+                this.gameEventService.createGameEvent(abandoneEvent).subscribe();
+            }
             else {
                 const loseEvent = this.memoryGameEventGeneratorService.generateLoseEvent(this.boardCards, this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime());
                 this.gameEventService.createGameEvent(loseEvent).subscribe();
