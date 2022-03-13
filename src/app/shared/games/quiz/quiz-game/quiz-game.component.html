@@ -1,22 +1,26 @@
-<mat-grid-list [ngClass]="rotateClass ? 'quizz-content' : ''" *ngIf="this.cardQuiz" cols="2" rowHeight="2:1">
-    <div *ngIf="currentQuiz < 3">
-            <mat-grid-title>
+<div [ngClass]="rotateClass ? 'quizz-content' : ''" *ngIf="this.cardQuiz" cols="2" rowHeight="2:1">
+    <div class="row" *ngIf="currentQuiz < 3">
+            <div>
                 <h4 *ngIf="!cardQuiz[currentQuiz].showImage">{{cardQuiz[currentQuiz].question}}</h4>
                 <img *ngIf="cardQuiz[currentQuiz].showImage" [src]="cardQuiz[currentQuiz].question" />
-            </mat-grid-title>
-            <mat-grid-tile *ngFor="let quiz of cardQuiz[currentQuiz].answer">
-                <label>
-                    <mat-card class="list-group-answers" [correctAnswer]="quiz.correct">
-                        <input type="radio" name="options" (change)="onAnswer(quiz.correct)" [disabled]="answerSelected">
-                        <img *ngIf="quiz.showImage" width="45%" height="45%" style="margin-left: 100px;margin-right: 100px;" [src]="quiz.option">
-                        <p *ngIf="!quiz.showImage" style="margin-left: 100px;margin-right: 100px;">{{quiz.option}}</p>
-                    </mat-card>
-                </label>
-             </mat-grid-tile>
+            </div>
+            <div class="list-group">
+                <div class="col d-flex">
+                    <div *ngFor="let quiz of cardQuiz[currentQuiz].answer">
+                        <label>
+                            <div class="list-group-answers" [correctAnswer]="quiz.correct">
+                                <input type="radio" name="options" (change)="onAnswer(quiz.correct)" [disabled]="answerSelected">
+                                <img *ngIf="quiz.showImage" [src]="quiz.option">
+                                <p *ngIf="!quiz.showImage">{{quiz.option}}</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
              <p class="text-center">
                 {{currentQuiz + 1}} of {{cardQuiz.length}}
             </p>
-    </div>
+        </div>
 
     <div *ngIf="currentQuiz > 2">
         <button class="btn btn-success btn-black" (click)="showResult()">Show Result</button>
@@ -26,4 +30,4 @@
 
     </div>
 
-</mat-grid-list>
+</div>

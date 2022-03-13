@@ -1,15 +1,29 @@
 input{
     visibility: hidden;
 }
+.list-group{
+    align-items: center;
+    transition: transform .2s;
+        .list-group-answers{
+            list-style: none;
+            cursor: pointer;
+            height: auto;
+            width: auto;
+            align-items: center;
+            margin-left: 2em;
+            margin-right: 2em;
+            img{
+                height: 10em;
+                width: 10em;
 
-.list-group-answers{
-    list-style: none;
-    cursor: pointer;
-    height: auto;
+            }
+        }
 }
+
 
 .list-group-answers:hover{
     background-color: rgb(226, 226, 226);
+    transform: scale(1.5);
 }
 
 .quizz-content {
