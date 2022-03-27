@@ -1,11 +1,192 @@
-<mat-card>
+<div class="container">
+  <div class="col-md-12">
+    <div class="card">
+        <div class="card-header card-header-tabs card-header-info">
+            <div class="nav-tabs-navigation">
+                <div class="nav-tabs-wrapper">
+                    <ul class="nav nav-tabs" data-tabs="tabs">
+                        <li class="nav-item">
+                            <a mat-button class="nav-link active" href="#classroom" data-toggle="tab">
+                                <i class="material-icons">face</i> Lista de clase
+                                <div class="ripple-container"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a mat-button class="nav-link" href="#words" data-toggle="tab">
+                                <i class="material-icons">pan_tool_alt</i> Palabras
+                                <div class="ripple-container"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a mat-button class="nav-link" href="#games" data-toggle="tab">
+                                <i class="material-icons">extension</i> Juegos
+                                <div class="ripple-container"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="tab-content">
+                <div class="tab-pane active" id="classroom">
+                    <table class="table">
+                        <tbody>
+                            <div>
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Buscador de alumnos</mat-label>
+                                    <input matInput type="text"
+                                        (input)="searchTextChange($event.target.value, dataSourceStudents)"
+                                        placeholder="Buscar..." name="filterItems" />
+                                </mat-form-field>
+                            </div>
+
+                            <div>
+                                <table mat-table [dataSource]="dataSourceStudents" matSortDisableClear>
+                                    <ng-container matColumnDef="name">
+                                        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                                        <td mat-cell *matCellDef="let item">{{item.name}}</td>
+
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="showButton">
+                                        <th mat-header-cell *matHeaderCellDef></th>
+                                        <td mat-cell *matCellDef="let item">
+                                            <button mat-icon-button class="mat-icon-show" (click)="showStudentButtonClicked(item.id)">
+                                                <mat-icon>remove_red_eye</mat-icon>
+                                            </button>
+                                        </td>
+
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsStudents"></tr>
+
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsStudents"></tr>
+
+                                </table>
+                                <mat-paginator #studentsPaginator [length]="dataSourceStudents?.data.length"
+                                    [pageSizeOptions]="[10, 25, 50]"></mat-paginator>
+                            </div>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane" id="words">
+                    <table class="table">
+                        <tbody>
+                            <div>
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Buscador de palabras</mat-label>
+                                    <input matInput type="text"
+                                        (input)="searchTextChange($event.target.value, dataSourceWords)"
+                                        placeholder="Buscar..." name="filterItems" />
+                                </mat-form-field>
+                            </div>
+                            <button mat-button justify="end"><a [routerLink]="['add-words']">+ Añadir
+                                    palabra</a></button>
+
+                            <div>
+                                <table mat-table [dataSource]="dataSourceWords" matSortDisableClear>
+                                    <ng-container matColumnDef="name">
+                                        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                                        <td mat-cell *matCellDef="let item">{{item.name}}</td>
+
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="showButton">
+                                        <th mat-header-cell *matHeaderCellDef></th>
+                                        <td mat-cell *matCellDef="let item">
+                                            <button mat-icon-button class="mat-icon-show" (click)="showWordButtonClicked(item.id)">
+                                                <mat-icon>remove_red_eye</mat-icon>
+                                            </button>
+                                        </td>
+
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsWords"></tr>
+
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsWords"></tr>
+
+                                </table>
+                                <mat-paginator #wordsPaginator [length]="dataSourceWords?.data.length"
+                                    [pageSizeOptions]="[10, 25, 50]"></mat-paginator>
+                            </div>
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane" id="games">
+                    <table class="table">
+                        <tbody>
+                            <div>
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Buscador de juegos</mat-label>
+                                    <input matInput type="text"
+                                        (input)="searchTextChange($event.target.value, dataSourceGames)"
+                                        placeholder="Buscar..." name="filterItems" />
+                                    <button matSuffix mat-button>
+                                        <mat-icon>search</mat-icon>
+                                    </button>
+                                </mat-form-field>
+                            </div>
+                            <button mat-button justify="end"><a [routerLink]="['add-games']">+ Añadir juego</a></button>
+
+                            <div>
+                                <table mat-table [dataSource]="dataSourceGames" matSortDisableClear>
+
+                                    <ng-container matColumnDef="image">
+                                        <th mat-header-cell *matHeaderCellDef></th>
+                                        <td mat-cell *matCellDef="let item">
+                                            <img [src]="item.image" width="40" height="40" />
+                                        </td>
+
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="name">
+                                        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                                        <td mat-cell *matCellDef="let item">{{item.name}}</td>
+
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="showButton">
+                                        <th mat-header-cell *matHeaderCellDef></th>
+                                        <td mat-cell *matCellDef="let item">
+                                            <button mat-icon-button class="mat-icon-show" (click)="showGameButtonClicked(item.id)">
+                                                <mat-icon>remove_red_eye</mat-icon>
+                                            </button>
+                                        </td>
+
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsGames"></tr>
+
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsGames"></tr>
+
+                                </table>
+                                <mat-paginator #gamesPaginator [length]="dataSourceGames?.data.length"
+                                    [pageSizeOptions]="[10, 25, 50]"></mat-paginator>
+                            </div>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+<!-- <mat-card>
     <mat-tab-group>
         <mat-tab label="Lista de Clase">
             <mat-form-field appearance="standard">
                 <mat-label>Buscador de alumnos</mat-label>
                 <input matInput type="text" (input)="searchTextChange($event.target.value, dataSourceStudents)" placeholder="Buscar..."name="filterItems" />
                 <button matSuffix mat-button><mat-icon >search</mat-icon></button>
-
             </mat-form-field>
             <div>
                 <table mat-table [dataSource]="dataSourceStudents" matSortDisableClear>
@@ -32,30 +213,15 @@
                 </table>
                 <mat-paginator #studentsPaginator [length]="dataSourceStudents?.data.length" [pageSizeOptions]="[10, 25, 50]"></mat-paginator>
               </div>
-            <!-- <mat-selection-list [multiple]="false">
-                <mat-list-option *ngFor="let nameStudent of studentsClassroomList">
-                    <ul>
-                        <li>
-                            <mat-icon>accessibility</mat-icon>
-                            {{nameStudent.name}}
-                        </li>
-                    </ul>
 
-
-                </mat-list-option>
-            </mat-selection-list> -->
         </mat-tab>
         <mat-tab label="Palabras">
             <mat-form-field appearance="standard">
                 <mat-label>Buscador de palabras</mat-label>
                 <input matInput type="text" (input)="searchTextChange($event.target.value, dataSourceWords)"  placeholder="Buscar..." name="filterItems" />
                 <button matSuffix mat-button><mat-icon >search</mat-icon></button>
-
             </mat-form-field>
             <button mat-button justify="end"><a [routerLink]="['add-words']">+ Añadir palabra</a></button>
-
-
-
 
             <div>
                 <table mat-table [dataSource]="dataSourceWords" matSortDisableClear>
@@ -86,9 +252,9 @@
 
 
         </mat-tab>
-        <mat-tab label="Juegos"> Juegos
+        <mat-tab label="Juegos">
             <mat-form-field appearance="standard">
-                <mat-label>Buscador de palabras</mat-label>
+                <mat-label>Buscador de juegos</mat-label>
                 <input matInput type="text" (input)="searchTextChange($event.target.value, dataSourceGames)"  placeholder="Buscar..." name="filterItems" />
                 <button matSuffix mat-button><mat-icon >search</mat-icon></button>
 
@@ -132,4 +298,4 @@
               </div>
         </mat-tab>
     </mat-tab-group>
-</mat-card>
+</mat-card> -->

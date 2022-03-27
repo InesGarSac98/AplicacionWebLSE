@@ -6,5 +6,7 @@ export interface GameEvent{
     status: GameStatuses;
     date: Date;
     leftTime: number;
+    gamePlayId: number;
+    score: number;
     events: string;
 }

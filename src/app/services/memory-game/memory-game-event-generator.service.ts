@@ -17,7 +17,6 @@ export class MemoryGameEventGeneratorService {
     public generateStartEvent(boardCards: BoardCard[], gameId: number, studentId: number, leftTime: number): GameEvent {
         const memoryGameEvent: MemoryGameEvent = {
             type: MemoryGameEventTypes.GAME_START,
-            score: 0,
             board: boardCards.map(tile => {
                 const memoryGameEventTile: MemoryGameEventBoardTile = {
                     wordId: tile.wordId,
@@ -34,6 +33,8 @@ export class MemoryGameEventGeneratorService {
             studentId: studentId,
             date: new Date(),
             leftTime: leftTime,
+            gamePlayId: -1,
+            score: 0,
             status: GameStatuses.STARTING,
             events: JSON.stringify(memoryGameEvent)
         };
@@ -41,10 +42,9 @@ export class MemoryGameEventGeneratorService {
         return startEvent;
     }
 
-    public generateCardClickedEvent(boardCards: BoardCard[], pairsAchieved: BoardCard[], selectedCards: BoardCard[], gameId: number, studentId: number, score:number, leftTime: number): GameEvent {
+    public generateCardClickedEvent(boardCards: BoardCard[], pairsAchieved: BoardCard[], selectedCards: BoardCard[], gameId: number, studentId: number, score:number, leftTime: number, gamePlayId: number): GameEvent {
         const memoryGameEvent: MemoryGameEvent = {
             type: MemoryGameEventTypes.CARD_CLICKED,
-            score: score,
             board: boardCards.map(tile => {
                 const memoryGameEventTile: MemoryGameEventBoardTile = {
                     wordId: tile.wordId,
@@ -56,22 +56,23 @@ export class MemoryGameEventGeneratorService {
             })
         };
 
-        const startEvent: GameEvent = {
+        const cardClickedEvent: GameEvent = {
             gameId: gameId,
             studentId: studentId,
             date: new Date(),
             leftTime: leftTime,
+            gamePlayId: gamePlayId,
+            score: score,
             status: GameStatuses.IN_PROGRESS,
             events: JSON.stringify(memoryGameEvent)
         };
 
-        return startEvent;
+        return cardClickedEvent;
     }
 
-    public generatePairSuccessEvent(boardCards: BoardCard[], pairsAchieved: BoardCard[], gameId: number, studentId: number, score:number, leftTime: number): GameEvent {
+    public generatePairSuccessEvent(boardCards: BoardCard[], pairsAchieved: BoardCard[], gameId: number, studentId: number, score:number, leftTime: number, gamePlayId: number): GameEvent {
         const memoryGameEvent: MemoryGameEvent = {
             type: MemoryGameEventTypes.PAIR_SUCCESS,
-            score: score,
             board: boardCards.map(tile => {
                 const memoryGameEventTile: MemoryGameEventBoardTile = {
                     wordId: tile.wordId,
@@ -83,22 +84,23 @@ export class MemoryGameEventGeneratorService {
             })
         };
 
-        const startEvent: GameEvent = {
+        const pairSuccessEvent: GameEvent = {
             gameId: gameId,
             studentId: studentId,
             date: new Date(),
             leftTime: leftTime,
+            gamePlayId: gamePlayId,
+            score: score,
             status: GameStatuses.IN_PROGRESS,
             events: JSON.stringify(memoryGameEvent)
         };
 
-        return startEvent;
+        return pairSuccessEvent;
     }
 
-    public generatePairFailEvent(boardCards: BoardCard[], pairsAchieved: BoardCard[], gameId: number, studentId: number, score:number, leftTime: number): GameEvent {
+    public generatePairFailEvent(boardCards: BoardCard[], pairsAchieved: BoardCard[], gameId: number, studentId: number, score:number, leftTime: number, gamePlayId: number): GameEvent {
         const memoryGameEvent: MemoryGameEvent = {
             type: MemoryGameEventTypes.PAIR_FAIL,
-            score: score,
             board: boardCards.map(tile => {
                 const memoryGameEventTile: MemoryGameEventBoardTile = {
                     wordId: tile.wordId,
@@ -110,22 +112,23 @@ export class MemoryGameEventGeneratorService {
             })
         };
 
-        const startEvent: GameEvent = {
+        const pairFailEvent: GameEvent = {
             gameId: gameId,
             studentId: studentId,
             date: new Date(),
             leftTime: leftTime,
+            gamePlayId: gamePlayId,
+            score: score,
             status: GameStatuses.IN_PROGRESS,
             events: JSON.stringify(memoryGameEvent)
         };
 
-        return startEvent;
+        return pairFailEvent;
     }
 
-    public generateWinEvent(boardCards: BoardCard[], pairsAchieved: BoardCard[], selectedCards: BoardCard[], gameId: number, studentId: number, score:number, leftTime: number): GameEvent {
+    public generateWinEvent(boardCards: BoardCard[], pairsAchieved: BoardCard[], selectedCards: BoardCard[], gameId: number, studentId: number, score:number, leftTime: number, gamePlayId: number): GameEvent {
         const memoryGameEvent: MemoryGameEvent = {
             type: MemoryGameEventTypes.GAME_FINISHED,
-            score: score,
             board: boardCards.map(tile => {
                 const memoryGameEventTile: MemoryGameEventBoardTile = {
                     wordId: tile.wordId,
@@ -137,22 +140,23 @@ export class MemoryGameEventGeneratorService {
             })
         };
 
-        const startEvent: GameEvent = {
+        const winEvent: GameEvent = {
             gameId: gameId,
             studentId: studentId,
             date: new Date(),
             leftTime: leftTime,
+            gamePlayId: gamePlayId,
+            score: score,
             status: GameStatuses.WIN,
             events: JSON.stringify(memoryGameEvent)
         };
 
-        return startEvent;
+        return winEvent;
     }
 
-    public generateAbandoneEvent(boardCards: BoardCard[], pairsAchieved: BoardCard[], selectedCards: BoardCard[], gameId: number, studentId: number, score:number, leftTime: number): GameEvent {
+    public generateAbandoneEvent(boardCards: BoardCard[], pairsAchieved: BoardCard[], selectedCards: BoardCard[], gameId: number, studentId: number, score:number, leftTime: number, gamePlayId: number): GameEvent {
         const memoryGameEvent: MemoryGameEvent = {
             type: MemoryGameEventTypes.GAME_FINISHED,
-            score: score,
             board: boardCards.map(tile => {
                 const memoryGameEventTile: MemoryGameEventBoardTile = {
                     wordId: tile.wordId,
@@ -164,22 +168,23 @@ export class MemoryGameEventGeneratorService {
             })
         };
 
-        const startEvent: GameEvent = {
+        const abandoneEvent: GameEvent = {
             gameId: gameId,
             studentId: studentId,
             date: new Date(),
             leftTime: leftTime,
+            gamePlayId: gamePlayId,
+            score: score,
             status: GameStatuses.ABANDONE,
             events: JSON.stringify(memoryGameEvent)
         };
 
-        return startEvent;
+        return abandoneEvent;
     }
 
-    public generateLoseEvent(boardCards: BoardCard[], pairsAchieved: BoardCard[], selectedCards: BoardCard[], gameId: number, studentId: number, score:number, leftTime: number): GameEvent {
+    public generateLoseEvent(boardCards: BoardCard[], pairsAchieved: BoardCard[], selectedCards: BoardCard[], gameId: number, studentId: number, score:number, leftTime: number, gamePlayId: number): GameEvent {
         const memoryGameEvent: MemoryGameEvent = {
             type: MemoryGameEventTypes.GAME_FINISHED,
-            score: score,
             board: boardCards.map(tile => {
                 const memoryGameEventTile: MemoryGameEventBoardTile = {
                     wordId: tile.wordId,
@@ -191,16 +196,18 @@ export class MemoryGameEventGeneratorService {
             })
         };
 
-        const startEvent: GameEvent = {
+        const loseEvent: GameEvent = {
             gameId: gameId,
             studentId: studentId,
             date: new Date(),
             leftTime: leftTime,
+            gamePlayId: gamePlayId,
+            score: score,
             status: GameStatuses.LOSE,
             events: JSON.stringify(memoryGameEvent)
         };
 
-        return startEvent;
+        return loseEvent;
     }
 
     private getBoardTileStatus(tile: BoardCard, pairsAchieved: BoardCard[], selectedCards: BoardCard[]) : MemoryGameEventBoardTileStatus {

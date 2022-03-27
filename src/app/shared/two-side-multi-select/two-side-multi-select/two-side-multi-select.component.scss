@@ -9,4 +9,13 @@
     text-align: right;
 }
 
-
+.card-title-align-middle {
+    margin-top: 0.35rem;
+}
+.col-1, .col {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    &.card-title-back-button {
+        width: fit-content;
+    }
+}

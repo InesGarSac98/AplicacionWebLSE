@@ -10,7 +10,7 @@ import { GameEventService } from 'src/api/services/game-event-service/game-event
 import { StudentsService } from 'src/api/services/students-service/students.service';
 import { UsersService } from 'src/api/services/users-service/users.service';
 import { WordsService } from 'src/api/services/words-service/words.service';
-import { MemoryGameEventGeneratorService } from 'src/app/services/memory-game-event-generator.service';
+import { MemoryGameEventGeneratorService } from 'src/app/services/memory-game/memory-game-event-generator.service';
 import { GameTimerComponent } from '../../game-timer/game-timer.component';
 
 @Component({
@@ -36,6 +36,8 @@ export class MemoryGameComponent implements OnInit {
     private availableWords: Word[];
     private studentId: number;
     private isTimeOver: boolean;
+    private goBackLink: string;
+    private gamePlayId: number;
 
     constructor(
         private sanitizer: DomSanitizer,
@@ -55,9 +57,11 @@ export class MemoryGameComponent implements OnInit {
 
         this.userService.getUserLoged().subscribe((user: User) => {
             if (user.role === 'STUDENT') {
+                this.goBackLink = '/students/games';
                 this.getStudentWords();
             }
             else if (user.role === 'TEACHER') {
+                this.goBackLink = '/teachers/games';
                 this.getTeacherWords();
             }
         });
@@ -69,12 +73,14 @@ export class MemoryGameComponent implements OnInit {
         this.score = 0;
         this.numPairsAchieved = 0;
         this.gameFinished = false;
+        this.isAbandoned = false;
         this.isTimeOver = false;
         let board = document.getElementById("board");
 
         this.availableWords.sort(() => Math.random() - 0.5);
 
         if (board !== null && board !== undefined) {
+            console.log("Aqui no esta entrando")
             this.boardCards = [];
             for (let i = 0; i < this.maxPairs; i++) {
                 this.boardCards.push({
@@ -94,7 +100,7 @@ export class MemoryGameComponent implements OnInit {
         this.gameTimer.startTimer(this.maxTimeValue);
 
         const startEvent = this.memoryGameEventGeneratorService.generateStartEvent(this.boardCards, this.gameId, this.studentId, this.gameTimer.getLeftTime());
-        this.gameEventService.createGameEvent(startEvent).subscribe();
+        this.gameEventService.createGameEvent(startEvent).subscribe(event => this.gamePlayId = event.gamePlayId);
     }
 
     public selectBoardCard(boardCardHtmlElement: HTMLElement, boardCard: BoardCard): void {
@@ -104,7 +110,7 @@ export class MemoryGameComponent implements OnInit {
             boardCardHtmlElement.style.transform = "rotateY(180deg)";
             this.selecciones.push(boardCard);
             const cardClickedEvent = this.memoryGameEventGeneratorService
-                .generateCardClickedEvent(this.boardCards, this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime());
+                .generateCardClickedEvent(this.boardCards, this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime(), this.gamePlayId);
             this.gameEventService.createGameEvent(cardClickedEvent).subscribe();
         }
 
@@ -119,13 +125,12 @@ export class MemoryGameComponent implements OnInit {
     }
 
     public goBack():void{
-        this.router.navigate(['/students/games']);
+        this.router.navigate([this.goBackLink]);
     }
 
     public abandoned():void{
         this.isAbandoned = true;
         this.gameFinished = this.checkWin();
-        window.location.reload();
     }
 
     private unselect(): void {
@@ -152,7 +157,7 @@ export class MemoryGameComponent implements OnInit {
                     tarjeta1.style.transform = "rotateY(0deg)";
                     tarjeta2.style.transform = "rotateY(0deg)";
 
-                    const pairFailEvent = this.memoryGameEventGeneratorService.generatePairFailEvent(this.boardCards, this.pairsAchieved, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime());
+                    const pairFailEvent = this.memoryGameEventGeneratorService.generatePairFailEvent(this.boardCards, this.pairsAchieved, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime(), this.gamePlayId);
                     this.gameEventService.createGameEvent(pairFailEvent).subscribe();
 
                 } else { //Si coincide cambio color
@@ -164,7 +169,7 @@ export class MemoryGameComponent implements OnInit {
 
                     this.score += 10;
 
-                    const pairSuccessEvent = this.memoryGameEventGeneratorService.generatePairSuccessEvent(this.boardCards, this.pairsAchieved, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime());
+                    const pairSuccessEvent = this.memoryGameEventGeneratorService.generatePairSuccessEvent(this.boardCards, this.pairsAchieved, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime(), this.gamePlayId);
                     this.gameEventService.createGameEvent(pairSuccessEvent).subscribe();
                     this.gameFinished = this.checkWin();
                 }
@@ -180,15 +185,15 @@ export class MemoryGameComponent implements OnInit {
 
             this.gameTimer.stopTimer();
             if (this.numPairsAchieved === this.maxPairs){
-                const winEvent = this.memoryGameEventGeneratorService.generateWinEvent(this.boardCards, this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime());
+                const winEvent = this.memoryGameEventGeneratorService.generateWinEvent(this.boardCards, this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime(), this.gamePlayId);
                 this.gameEventService.createGameEvent(winEvent).subscribe();
             }
             else if (this.isAbandoned){
-                const abandoneEvent = this.memoryGameEventGeneratorService.generateAbandoneEvent(this.boardCards,this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score,this.gameTimer.getLeftTime());
+                const abandoneEvent = this.memoryGameEventGeneratorService.generateAbandoneEvent(this.boardCards,this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score,this.gameTimer.getLeftTime(), this.gamePlayId);
                 this.gameEventService.createGameEvent(abandoneEvent).subscribe();
             }
             else {
-                const loseEvent = this.memoryGameEventGeneratorService.generateLoseEvent(this.boardCards, this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime());
+                const loseEvent = this.memoryGameEventGeneratorService.generateLoseEvent(this.boardCards, this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime(), this.gamePlayId);
                 this.gameEventService.createGameEvent(loseEvent).subscribe();
             }
         }
@@ -197,7 +202,10 @@ export class MemoryGameComponent implements OnInit {
 
     private getTeacherWords() {
         this.wordsService.getWordsList()
-            .subscribe((words: Word[]) => this.availableWords = words);
+            .subscribe(async (words: Word[]) => {
+                this.availableWords = words;
+                await this.generateBoard();
+            });
     }
 
     private getStudentWords() {
@@ -205,9 +213,11 @@ export class MemoryGameComponent implements OnInit {
             .subscribe((student: Student) => {
                 this.studentId = student.id;
                 this.classroomService.getWordsListClassroom(student.classroomId)
-                    .subscribe((classroomWords: ClassroomWord[]) => this.availableWords = classroomWords
-                        .map((classroomWord: ClassroomWord) => classroomWord.word)
-                    )
+                    .subscribe(async (classroomWords: ClassroomWord[]) => {
+                        this.availableWords = classroomWords
+                            .map((classroomWord: ClassroomWord) => classroomWord.word);
+                        await this.generateBoard();
+                    })
                 });
     }
 }

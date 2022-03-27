@@ -37,18 +37,18 @@ export class MenuItems {
         this.role = role.toLowerCase();
         if (this.role === 'student') {
             this.MENUITEMS = [
-                { state: 'students/profile', type: 'link', name: 'Profile', icon: 'school' },
-                { state: 'students/games', type: 'link', name: 'Games', icon: 'casino' },
-                { state: 'students/progress', type: 'link', name: 'Progress', icon: 'poll' },
-                { state: 'students/review', type: 'link', name: 'Review', icon: 'sync' }
+                { state: 'students/profile', type: 'link', name: 'Perfil', icon: 'school' },
+                { state: 'students/games', type: 'link', name: 'Juegos', icon: 'casino' },
+                { state: 'students/progress', type: 'link', name: 'Progreso', icon: 'poll' },
+                { state: 'students/review', type: 'link', name: 'Diccionario', icon: 'sync' }
 
             ];
         }
         else if (this.role === 'teacher') {
             this.MENUITEMS = [
-                { state: 'teachers/profile', type: 'link', name: 'Profile', icon: 'school' },
-                { state: 'teachers/games', type: 'link', name: 'Games', icon: 'casino' },
-                { state: 'teachers/classrooms', type: 'link', name: 'Classrooms', icon: 'supervisor_account' }
+                { state: 'teachers/profile', type: 'link', name: 'Perfil', icon: 'school' },
+                { state: 'teachers/games', type: 'link', name: 'Juegos', icon: 'casino' },
+                { state: 'teachers/classrooms', type: 'link', name: 'Clases', icon: 'supervisor_account' }
 
             ];
         }

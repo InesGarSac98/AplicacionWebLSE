@@ -2,9 +2,15 @@
     <mat-icon>keyboard_backspace</mat-icon>
 </button>
 <div class="game-body">
-    <app-game-timer (timeOverEvent)="timeOver()"></app-game-timer>
+    <div class="row game-header">
+        <div class="col"></div>
+        <div class="col-lg-6">
+            <app-game-timer (timeOverEvent)="timeOver()"></app-game-timer>
+        </div>
+        <div class="col"><strong>Puntuación:</strong> {{score}}</div>
+    </div>
     <div id="board">
-        <mat-grid-list [cols]="4" rowHeight="100px" >
+        <mat-grid-list *ngIf="!gameFinished" [cols]="4" rowHeight="100px" >
             <mat-grid-tile *ngFor="let boardCard of boardCards; let i = index" (click)="selectBoardCard(boardCardHtml, boardCard)">
                 <div #boardCardHtml class="tarjeta" id="{{'boardCard' + boardCard.contentType + boardCard.wordId}}">
                     <div class="cara trasera" id="{{'trasera' + boardCard.contentType + boardCard.wordId}}" mat-card-title>
@@ -23,14 +29,14 @@
         <h1>HAS GANADO!!</h1>
     </div>
     <div *ngIf="gameFinished && numPairsAchieved !== maxPairs">
-        <h1>HAS PERDIDO PANOLI!!</h1>
+        <h1>HAS PERDIDO!!</h1>
     </div>
     <br>
     <div>
-        <button mat-raised-button class="nuevo-juego" (click)="generateBoard()">
+        <button *ngIf="gameFinished" mat-raised-button class="nuevo-juego" (click)="generateBoard()">
             ¡Jugar!
         </button>
-        <button mat-raised-button class="nuevo-juego" (click)="abandoned()">
+        <button *ngIf="!gameFinished" mat-raised-button class="nuevo-juego" (click)="abandoned()">
             Abandonar
         </button>
     </div>

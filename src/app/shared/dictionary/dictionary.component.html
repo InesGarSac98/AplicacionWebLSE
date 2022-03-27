@@ -2,10 +2,9 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header card-header-info">
-                <h4 class="card-title ">Simple Table</h4>
-                <p class="card-category"> Here is a subtitle for this table</p>
+                <h4 class="card-title ">Diccionario</h4>
             </div>
-            <mat-radio-group aria-label="Select an option" (change)="radioButtonFilterChange($event)">
+            <mat-radio-group class="d-flex justify-content-center" aria-label="Select an option" (change)="radioButtonFilterChange($event)">
                 <mat-radio-button value="filterAll" checked="true">Todas</mat-radio-button>
                 <mat-radio-button value="filterSelected">Aprendidas</mat-radio-button>
                 <mat-radio-button value="filterUnselected">No aprendidas</mat-radio-button>

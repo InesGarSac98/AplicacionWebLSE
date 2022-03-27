@@ -53,7 +53,6 @@ export class ClassroomComponent implements OnInit {
 
     public ngOnInit(): void{
         this.classroomId = this.route.snapshot.params['classroomId'];
-        console.log(this.classroomId);
 
         this.userService.getUserLoged()
             .subscribe((user: User) => this.userName = user.name);

@@ -24,7 +24,10 @@ export class TwoSideMultiSelectComponent implements OnInit, AfterViewInit {
 	public pendingSelection: PendingSelection;
     public radioButtonFilter: string = 'filterAll';
 	@Input() public items: SelectableItem[] = [];
+    @Input() public cardTitle: string;
+    @Input() public viewNameColumnName: string;
     @Output() public itemsChange = new EventEmitter<SelectableItem[]>();
+    @Output() public goBackClicked = new EventEmitter();
     public filterItems = '';
     public displayedColumns: string[];
     @Input() public dataSource: MatTableDataSource<SelectableItem>;

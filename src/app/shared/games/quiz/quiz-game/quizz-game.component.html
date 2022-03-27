@@ -1,0 +1,56 @@
+<button mat-icon-button (click)="goBack()">
+    <mat-icon>keyboard_backspace</mat-icon>
+</button>
+<div class="game-body">
+    <div class="row game-header">
+        <div class="col"></div>
+        <div class="col-lg-6">
+            <app-game-timer (timeOverEvent)="timeOver()"></app-game-timer>
+        </div>
+        <div class="col"><strong>Puntuación:</strong> {{score}}</div>
+    </div>
+    <div [ngClass]="rotateClass ? 'quizz-content' : ''" *ngIf="this.cardQuiz" cols="2" rowHeight="2:1">
+        <div class="row" *ngIf="!gameFinished">
+                <div>
+                    <h4 *ngIf="!cardQuiz[currentQuiz].showImage">{{cardQuiz[currentQuiz].question}}</h4>
+                    <img *ngIf="cardQuiz[currentQuiz].showImage" [src]="cardQuiz[currentQuiz].question" />
+                </div>
+                <div class="list-group">
+                    <div class="mt-4 d-flex">
+                        <div *ngFor="let answer of cardQuiz[currentQuiz].answer">
+                            <label>
+                                <div class="list-group-answers" [correctAnswer]="answer.correct">
+                                    <input type="radio" name="options" (change)="onAnswer(answer)" [disabled]="answerSelected">
+                                    <img *ngIf="answer.showImage" [src]="answer.option">
+                                    <p *ngIf="!answer.showImage">{{answer.option}}</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-center">
+                    {{currentQuiz + 1}} of {{cardQuiz.length}}
+                </p>
+            </div>
+
+        <div *ngIf="gameFinished" class="text-center">
+            Correct Answers: {{correctAnswers}} | Incorrect Answers: {{incorrectAnswers}}
+        </div>
+
+    </div>
+    <div *ngIf="gameFinished && !(isTimeOver || isAbandoned)">
+        <h1>HAS GANADO!!</h1>
+    </div>
+    <div *ngIf="gameFinished && (isTimeOver || isAbandoned)">
+        <h1>HAS PERDIDO!!</h1>
+    </div>
+    <br>
+    <div>
+        <button *ngIf="gameFinished" mat-raised-button class="nuevo-juego" (click)="getQuizzGameQuestions()">
+            ¡Jugar!
+        </button>
+        <button *ngIf="!gameFinished" mat-raised-button class="nuevo-juego" (click)="abandoned()">
+            Abandonar
+        </button>
+    </div>
+</div>

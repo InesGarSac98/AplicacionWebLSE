@@ -1,4 +1,140 @@
-<div class="content">
+<mat-form-field appearance="fill">
+    <mat-label>Favorite food</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let classroom of classrooms" >
+        <p>{{classroom.name}}</p>
+
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+
+<!-- <div *ngIf="statistiscLoaded" class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">emoji_events</i>
+                    </div>
+                    <p class="card-category">Victorias</p>
+                    <h3 class="card-title">{{totalWins}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        Ratio de victorias: {{totalWins}}/{{totalGameplays}} ({{(100 * totalWins / totalGameplays).toFixed(0)}} %)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-danger card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">sentiment_dissatisfied</i>
+                    </div>
+                    <p class="card-category">Derrotas y Abandonos</p>
+                    <h3 class="card-title">{{totalLose + totalAbandone}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        Ratio de derrotas: {{totalLose}}/{{totalGameplays}} ({{(100 * totalLose / totalGameplays).toFixed(0)}} %) <br>
+                        Ratio de abandonos: {{totalAbandone}}/{{totalGameplays}} ({{(100 * totalAbandone / totalGameplays).toFixed(0)}} %)
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">trending_up</i>
+                    </div>
+                    <p class="card-category">Puntuación</p>
+                    <h3 class="card-title">{{totalScore}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        Puntuación máxima: {{maxScore}} ptos<br>
+                        Puntuación media: {{averageScore.toFixed(0)}} ptos
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-info card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">schedule</i>
+                    </div>
+                    <p class="card-category">Tiempo</p>
+                    <h3 class="card-title">{{getTimeFormated(totalTime)}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        Tiempo medio: {{getTimeFormated(averageTime)}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card card-chart">
+                <div class="card-header card-header-success">
+                    <div class="ct-chart" id="dailySalesChart"></div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Daily Sales</h4>
+                    <p class="card-category">
+                        <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">access_time</i> updated 4 minutes ago
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-chart">
+                <div class="card-header card-header-warning">
+                    <div class="ct-chart" id="websiteViewsChart"></div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Email Subscriptions</h4>
+                    <p class="card-category">Last Campaign Performance</p>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">access_time</i> campaign sent 2 days ago
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-chart">
+                <div class="card-header card-header-danger">
+                    <div class="ct-chart" id="completedTasksChart"></div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Completed Tasks</h4>
+                    <p class="card-category">Last Campaign Performance</p>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">access_time</i> campaign sent 2 days ago
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> -->
+
+<!-- <div class="content">
   <div fxLayout="column" >
       <mat-card >
           <mat-card-header>
@@ -7,16 +143,14 @@
               </mat-card-title>
           </mat-card-header>
 
-          <img mat-card-image class="img-profile" src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+          <img mat-card-image class="img-profile" src="assets/images/users/monigote.png">
           <mat-card-content>
-              Nombre del usuario: <span class="name" *ngIf="userName"> userName </span>
-              <br>Clase a la que pertenece: 2ºC - Primaria
-
-          </mat-card-content>
+              Nombre del usuario: <span class="name" *ngIf="userName"> {{userName}} </span>
+        </mat-card-content>
       </mat-card>
   </div>
 
-</div>
+</div> -->
 
 
 
