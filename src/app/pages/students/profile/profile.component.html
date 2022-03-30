@@ -33,7 +33,7 @@
                 </div>
                 <div class="card-footer">
                     <div class="stats">
-                        Ratio de victorias: {{totalWins}}/{{totalGameplays}} ({{(100 * totalWins / totalGameplays).toFixed(0)}} %)
+                        Ratio de victorias: {{totalWins}}/{{totalGameplays}} ({{(totalGameplays === 0 ? 0 : (100 * totalWins / totalGameplays)).toFixed(0)}} %)
                     </div>
                 </div>
             </div>
@@ -49,8 +49,8 @@
                 </div>
                 <div class="card-footer">
                     <div class="stats">
-                        Ratio de derrotas: {{totalLose}}/{{totalGameplays}} ({{(100 * totalLose / totalGameplays).toFixed(0)}} %) <br>
-                        Ratio de abandonos: {{totalAbandone}}/{{totalGameplays}} ({{(100 * totalAbandone / totalGameplays).toFixed(0)}} %)
+                        Ratio de derrotas: {{totalLose}}/{{totalGameplays}} ({{(totalGameplays === 0 ? 0 : (100 * totalLose / totalGameplays)).toFixed(0)}} %) <br>
+                        Ratio de abandonos: {{totalAbandone}}/{{totalGameplays}} ({{(totalGameplays === 0 ? 0 : (100 * totalAbandone / totalGameplays)).toFixed(0)}} %)
 
                     </div>
                 </div>

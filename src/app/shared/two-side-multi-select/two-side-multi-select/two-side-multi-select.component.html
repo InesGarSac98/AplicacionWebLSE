@@ -13,21 +13,21 @@
                     </div>
                 </div>
             </div>
-
-            <div class="d-flex justify-content-center">
-                <mat-radio-group  aria-label="Select an option" (change)="radioButtonFilterChange($event)">
-                    <mat-radio-button value="filterAll" checked="true">Todos</mat-radio-button>
-                    <mat-radio-button value="filterSelected">Seleccionados</mat-radio-button>
-                    <mat-radio-button value="filterUnselected">No seleccionados</mat-radio-button>
-                </mat-radio-group>
-            </div>
-
-            <mat-form-field appearance="standard">
-                <mat-label>Buscador de {{cardTitle}}</mat-label>
-                <input matInput type="text" placeholder="Buscar..." (input)="searchTextChange($event.target.value)" name="filterItems" />
-                <button matSuffix mat-button><mat-icon >search</mat-icon></button>
-            </mat-form-field>
             <div class="card-body">
+                <div class="d-flex justify-content-center">
+                    <mat-radio-group  aria-label="Select an option" (change)="radioButtonFilterChange($event)">
+                        <mat-radio-button value="filterAll" checked="true">Todos</mat-radio-button>
+                        <mat-radio-button value="filterSelected">Seleccionados</mat-radio-button>
+                        <mat-radio-button value="filterUnselected">No seleccionados</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <mat-form-field appearance="standard">
+                    <mat-label>Buscador de {{cardTitle}}</mat-label>
+                    <input matInput type="text" placeholder="Buscar..." (input)="searchTextChange($event.target.value)" name="filterItems" />
+                    <button matSuffix mat-button><mat-icon >search</mat-icon></button>
+                </mat-form-field>
+
                 <div class="table-responsive">
                     <table mat-table [dataSource]="dataSource" matSortDisableClear>
                         <ng-container matColumnDef="isChecked">
@@ -47,7 +47,7 @@
                         <ng-container matColumnDef="showButton">
                             <th mat-header-cell *matHeaderCellDef></th>
                             <td mat-cell *matCellDef="let item" justify="end">
-                                <button mat-icon-button class="mat-icon-show" alt="Añadir preguntas" (click)="showItemButtonClicked.emit(item.id)">
+                                <button mat-icon-button class="mat-icon-show" alt="Añadir preguntas" (click)="editButtonCommand()">
                                     <mat-icon>edit</mat-icon>
                                 </button>
                                 <button mat-icon-button class="mat-icon-show" (click)="showItemButtonClicked.emit(item.id)">

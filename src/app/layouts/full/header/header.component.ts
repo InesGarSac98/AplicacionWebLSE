@@ -10,7 +10,7 @@ import { DialogsComponent } from 'src/app/shared/dialog/dialogs/dialogs.componen
 export class AppHeaderComponent {
     constructor(public dialog: MatDialog){}
 
-    openDialog(): void{
+    public openDialog(): void{
         let dialogRef = this.dialog.open(DialogsComponent);
 
         dialogRef.afterClosed().subscribe(result =>{

@@ -1,6 +1,6 @@
 
 
-export interface StudentStatistics{
+export interface Statistics{
     duration:number;
     date:number;
     status:number;

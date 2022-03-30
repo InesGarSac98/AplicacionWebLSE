@@ -1,0 +1,98 @@
+<div class="content">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-info">
+                <div class="row">
+                    <div class="col-1 card-title-back-button">
+                        <button mat-icon-button class="mat-icon-header" (click)="goBackClicked.emit()">
+                            <mat-icon>keyboard_backspace</mat-icon>
+                        </button>
+                    </div>
+                    <div class="col">
+                        <h4 class="card-title card-title-align-middle"></h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <form [formGroup]="formGroup">
+                    <div class="row">
+                        <mat-label>Tiempo por pregunta</mat-label>
+                        <mat-form-field appearance="fill">
+                            <input matInput formControlName="time" type="number">
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <div formControlName="questions" class="col">
+                            Preguntas
+                        </div>
+                        <div class="col">
+                            <button mat-mini-fab (click)="addCard()"class="button" color="accent">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <mat-accordion>
+                        <mat-expansion-panel #expansionPanel [expanded]="true" *ngFor="let addedCard of questionsFormArray.controls; let i = index">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <div *ngIf="!expansionPanel.expanded" class="col">
+                                        <p>{{patata.value}}</p>
+                                    </div>
+                                </mat-panel-title>
+                                <mat-panel-description>
+
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <div class="row">
+                                <div class="col">
+                                    <p formControlName="question" >Pregunta</p>
+                                </div>
+                                <div class="col">
+                                    <input #patata type="text">
+                                </div>
+                                <div class="row">
+                                    <mat-slide-toggle formControlName="isImage">Imagen</mat-slide-toggle>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <p formControlName="answers">Respuestas</p>
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">Opción</div>
+                                        <div class="col">Imagen</div>
+                                        <div class="col">Correcta</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col"><input type="text"></div>
+                                        <div class="col"><mat-slide-toggle></mat-slide-toggle></div>
+                                        <div class="col"><mat-radio-button name="opcionCorrecta" value="1"></mat-radio-button></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col"><input type="text"></div>
+                                        <div class="col"><mat-slide-toggle></mat-slide-toggle></div>
+                                        <div class="col"><mat-radio-button name="opcionCorrecta" value="2"></mat-radio-button></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col"><input type="text"></div>
+                                        <div class="col"><mat-slide-toggle></mat-slide-toggle></div>
+                                        <div class="col"><mat-radio-button name="opcionCorrecta" value="3"></mat-radio-button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <div>
+                        <button mat-mini-fab (click)="addCard()"class="buttonAdd" color="accent">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

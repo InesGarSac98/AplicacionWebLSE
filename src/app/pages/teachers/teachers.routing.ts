@@ -9,6 +9,7 @@ import { GamesListComponent } from './games/game-list/games-list.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AddWordsComponent } from './add-words/add-words.component';
 import { AddGamesComponent } from './add-games/add-games.component';
+import { AddQuestionComponent } from 'src/app/shared/add-questions/add-question/add-question.component';
 
 export const TeachersRoutes: Routes = [
     {
@@ -60,6 +61,11 @@ export const TeachersRoutes: Routes = [
                         path: 'add-games',
                         pathMatch: 'full',
                         component: AddGamesComponent
+                    },
+                    {
+                        path: 'add-question',
+                        pathMatch: 'full',
+                        component: AddQuestionComponent
                     },
                 ]
             },

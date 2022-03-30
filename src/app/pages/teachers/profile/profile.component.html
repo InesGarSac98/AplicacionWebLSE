@@ -1,16 +1,12 @@
 <mat-form-field appearance="fill">
-    <mat-label>Favorite food</mat-label>
-    <mat-select>
-      <mat-option *ngFor="let classroom of classrooms" >
-        <p>{{classroom.name}}</p>
-
-      </mat-option>
+    <mat-label>Selecione la clase</mat-label>
+    <mat-select (valueChange)="getClassroomStatistics($event)">
+      <mat-option *ngFor="let classroom of classrooms" value="{{classroom.id}}">{{classroom.name}}</mat-option>
     </mat-select>
   </mat-form-field>
 
 
-
-<!-- <div *ngIf="statistiscLoaded" class="container-fluid">
+<div *ngIf="statistiscLoaded" class="container-fluid">
     <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
@@ -23,7 +19,7 @@
                 </div>
                 <div class="card-footer">
                     <div class="stats">
-                        Ratio de victorias: {{totalWins}}/{{totalGameplays}} ({{(100 * totalWins / totalGameplays).toFixed(0)}} %)
+                        Ratio de victorias: {{totalWins}}/{{totalGameplays}} ({{(totalGameplays === 0 ? 0 : (100 * totalWins / totalGameplays)).toFixed(0)}} %)
                     </div>
                 </div>
             </div>
@@ -39,8 +35,8 @@
                 </div>
                 <div class="card-footer">
                     <div class="stats">
-                        Ratio de derrotas: {{totalLose}}/{{totalGameplays}} ({{(100 * totalLose / totalGameplays).toFixed(0)}} %) <br>
-                        Ratio de abandonos: {{totalAbandone}}/{{totalGameplays}} ({{(100 * totalAbandone / totalGameplays).toFixed(0)}} %)
+                        Ratio de derrotas: {{totalLose}}/{{totalGameplays}} ({{(totalGameplays === 0 ? 0 : (100 * totalLose / totalGameplays)).toFixed(0)}} %) <br>
+                        Ratio de abandonos: {{totalAbandone}}/{{totalGameplays}} ({{(totalGameplays === 0 ? 0 : (100 * totalAbandone / totalGameplays)).toFixed(0)}} %)
 
                     </div>
                 </div>
@@ -132,25 +128,7 @@
         </div>
     </div>
 
-</div> -->
-
-<!-- <div class="content">
-  <div fxLayout="column" >
-      <mat-card >
-          <mat-card-header>
-              <mat-card-title>
-                  Perfil
-              </mat-card-title>
-          </mat-card-header>
-
-          <img mat-card-image class="img-profile" src="assets/images/users/monigote.png">
-          <mat-card-content>
-              Nombre del usuario: <span class="name" *ngIf="userName"> {{userName}} </span>
-        </mat-card-content>
-      </mat-card>
-  </div>
-
-</div> -->
+</div>
 
 
 

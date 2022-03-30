@@ -7,22 +7,19 @@ import { MemoryGameComponent } from './games/memory/memory-game.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { QuizzGameComponent } from './games/quiz/quiz-game/quizz-game.component';
-import { MatCard, MatCardModule } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { TwoSideMultiSelectComponent } from './two-side-multi-select/two-side-multi-select/two-side-multi-select.component';
 import { ScrollingModule} from '@angular/cdk/scrolling';
-import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
-import { MatSelectionList } from '@angular/material/list';
-import { FilterViewNamePipe } from './pipes/filter.pipe';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
-import { FilterCheckedStatePipe } from './pipes/filterCheckedState/filter-checked-state.pipe';
 import { MatTableModule } from '@angular/material/table';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { DictionaryComponent } from './dictionary/dictionary.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { GameTimerComponent } from './game-timer/game-timer.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const components = [
     AccordionAnchorDirective,
@@ -52,7 +49,8 @@ const components = [
       MatTableModule,
       MatPaginatorModule,
       MatInputModule,
-      MatProgressBarModule
+      MatProgressBarModule,
+      MatExpansionModule
   ],
   exports: [
     ...components

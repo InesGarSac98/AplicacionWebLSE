@@ -3,12 +3,13 @@ import { FormControl, Validators } from '@angular/forms';
 import { Classroom } from 'src/api/models/classroom.model';
 import { GameStatuses } from 'src/api/models/GameEvents/gameStatuses';
 import { Student } from 'src/api/models/student.model';
-import { StudentStatistics } from 'src/api/models/studentStatistics.model';
+import { Statistics } from 'src/api/models/statistics.model';
 import { User } from 'src/api/models/user.model';
 import { ClassroomsService } from 'src/api/services/classrooms-service/classrooms.service';
 import { StatisticsService } from 'src/api/services/statistics-service/statistics.service';
 import { TeachersService } from 'src/api/services/teachers-service/teachers.service';
 import { UsersService } from 'src/api/services/users-service/users.service';
+import { Teacher } from 'src/api/models/teacher.model';
 
 @Component({
   selector: 'app-profile',
@@ -40,27 +41,31 @@ export class ProfileComponent implements OnInit {
         private statisticsService: StatisticsService,
         private classroomService: ClassroomsService,
         private teacherService: TeachersService
-        ) {
+    ) {
 
     }
 
     public ngOnInit(): void {
         this.userService.getUserLoged()
-            .subscribe((user: User) => this.teacherService.getTeacherByUserId(user.id));
+            .subscribe((user: User) => {
+                this.teacherService.getTeacherByUserId(user.id)
+                    .subscribe((teacher: Teacher) => {
+                        this.classroomService.getTeacherClassrooms(teacher.id)
+                            .subscribe((classrooms: Classroom[])=>{
 
-        this.getStatisticsStudentLoged();
-
-        this.classroomService.getTeacherClassrooms(2)
-        .subscribe((classrooms: Classroom[])=>{
-            console.log(classrooms);
-            this.classrooms = classrooms.map(c => {
-                let result = new IClassroomList();
-                result.id = c.id;
-                result.name = c.name;
-                result.numStudents = c.students.length;
-                return result;
+                                console.log(classrooms);
+                                this.classrooms = classrooms.map(c => {
+                                    let result = new IClassroomList();
+                                    result.id = c.id;
+                                    result.name = c.name;
+                                    result.numStudents = c.students.length;
+                                    return result;
+                                });
+                            });
+                    })
             });
-        });
+
+
 
             //TODO: Coger la lista de alumnos
         //TODO: Pasar el id del alumno
@@ -85,34 +90,17 @@ export class ProfileComponent implements OnInit {
             seconds + 's' ;
     }
 
-    //TODO: Cargo los estudiantes dependiendo la clase y muestro sus estadísticas
-    private loadStudents() {
-        this.classroomService.getStudentsListClassroom(this.classroomId)
-            .subscribe((student: Student[]) => {
-                this.getStatisticsStudentLoged();
-                this.studentsClassroomList = student.map(s => {
-                    let result = new IStudentClassroomList();
-                    result.id = s.id;
-                    result.name = s.user.name;
-                    result.image = "./assets/images/games/memory.png";
-                    return result;
-                });
-
-            });
-    }
-
-
-    private getStatisticsStudentLoged() {
-        this.statisticsService.getStudentStatistics(5).subscribe((statistics: StudentStatistics[]) => {
+    public getClassroomStatistics(classroomId: number) {
+        this.statisticsService.getClassroomStatistics(classroomId).subscribe((statistics: Statistics[]) => {
             this.totalWins = statistics.filter(x => x.status === GameStatuses.WIN).length;
             this.totalLose = statistics.filter(x => x.status === GameStatuses.LOSE).length;
             this.totalAbandone = statistics.filter(x => x.status === GameStatuses.ABANDONE).length;
             this.totalGameplays = statistics.length;
             this.totalScore = statistics.map(x => x.score).reduce((accumulated, current) => accumulated + current, 0);
-            this.maxScore = Math.max(...statistics.map(x => x.score));
-            this.averageScore = this.totalScore / this.totalGameplays;
+            this.maxScore = Math.max(...statistics.map(x => x.score), 0);
+            this.averageScore = this.totalGameplays === 0 ? 0 : this.totalScore / this.totalGameplays;
             this.totalTime = statistics.map(x => x.duration).reduce((accumulated, current) => accumulated + current, 0);
-            this.averageTime = this.totalTime / this.totalGameplays;
+            this.averageTime = this.totalGameplays === 0 ? 0 : this.totalTime / this.totalGameplays;
 
             this.statistiscLoaded = true;
         });

@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Classroom } from 'src/api/models/classroom.model';
 import { GameStatuses } from 'src/api/models/GameEvents/gameStatuses';
 import { Student } from 'src/api/models/student.model';
-import { StudentStatistics } from 'src/api/models/studentStatistics.model';
+import { Statistics } from 'src/api/models/statistics.model';
 import { User } from 'src/api/models/user.model';
 import { ClassroomsService } from 'src/api/services/classrooms-service/classrooms.service';
 import { StatisticsService } from 'src/api/services/statistics-service/statistics.service';
@@ -66,16 +66,16 @@ export class ProfileComponent implements OnInit {
       ];
 
     private getStatisticsStudentLoged() {
-        this.statisticsService.getStudentStatistics(this.student.id).subscribe((statistics: StudentStatistics[]) => {
+        this.statisticsService.getStudentStatistics(this.student.id).subscribe((statistics: Statistics[]) => {
             this.totalWins = statistics.filter(x => x.status === GameStatuses.WIN).length;
             this.totalLose = statistics.filter(x => x.status === GameStatuses.LOSE).length;
             this.totalAbandone = statistics.filter(x => x.status === GameStatuses.ABANDONE).length;
             this.totalGameplays = statistics.length;
             this.totalScore = statistics.map(x => x.score).reduce((accumulated, current) => accumulated + current, 0);
-            this.maxScore = Math.max(...statistics.map(x => x.score));
-            this.averageScore = this.totalScore / this.totalGameplays;
+            this.maxScore = Math.max(...statistics.map(x => x.score), 0);
+            this.averageScore = this.totalGameplays === 0 ? 0 : this.totalScore / this.totalGameplays;
             this.totalTime = statistics.map(x => x.duration).reduce((accumulated, current) => accumulated + current, 0);
-            this.averageTime = this.totalTime / this.totalGameplays;
+            this.averageTime = this.totalGameplays === 0 ? 0 : this.totalTime / this.totalGameplays;
 
             this.statistiscLoaded = true;
         });
