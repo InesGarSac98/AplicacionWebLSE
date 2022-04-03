@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ClassroomWord } from 'src/api/models/classroomWord';
+import { ClassroomWord } from 'src/api/models/classroomWord.model';
 import { QuizzGameQuestion } from 'src/api/models/quizzGameQuestion.model';
 import { Student } from 'src/api/models/student.model';
 import { User } from 'src/api/models/user.model';
@@ -121,7 +121,6 @@ export class QuizzGameComponent implements OnInit {
         this.quizzGameQuestionservice.getQuizzGameQuestionsByWordId(this.wordIds)
             .subscribe((questions: QuizzGameQuestion[]) => {
                 this.availableQuestions = questions;
-                //Barajar preguntas y coger 6
                 this.availableQuestions.sort(() => Math.random() - 0.5);
                 this.cardQuiz = [];
                 for (let i = 0; i < this.MAX_QUESTIONS; i++) {
@@ -129,18 +128,19 @@ export class QuizzGameComponent implements OnInit {
                     this.cardQuiz.push({
                         questionId: element.id,
                         question: element.name,
-                        showImage: element.showImage,
+                        questionImg: element.word.image,
+                        isImage: element.isImage,
                         answer: element.answers.map(a => (
                             {
                                 answerId: a.id,
-                                option: a.name,
-                                correct: a.correct,
-                                showImage: a.showImage
+                                option: a.isImage ? a.word.image : a.word.name,
+                                correct: a.isCorrect,
+                                isImage: a.isImage
                             } as IAnswer)).sort(() => Math.random() - 0.5)
                     });
                 }
                 this.score = 0;
-                this.gameFinished =  false;
+                this.gameFinished = false;
                 this.isTimeOver = false;
                 this.isAbandoned = false;
                 this.gameTimer.startTimer(this.maxTimeValue);
@@ -198,20 +198,19 @@ export class QuizzGameComponent implements OnInit {
                     })
             });
     }
-    //TODO: Pedir las palabras de la clase -> Con el wordId, pedir las preguntas que tengan ese wordId -> De todas esas questions, barajo y cojo el nº de preguntas que sean.
-    //Barajo las respuestas y las pinto en el jego
 }
 
 export class IAnswer {
     answerId: number;
     option: string;
-    showImage: boolean;
+    isImage: boolean;
     correct: boolean;
 }
 
 export class IQuiz {
     questionId: number;
     question: string;
-    showImage: boolean;
+    questionImg: string;
+    isImage: boolean;
     answer: IAnswer[];
 }

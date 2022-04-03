@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ClassroomWord } from 'src/api/models/classroomWord';
+import { ClassroomWord } from 'src/api/models/classroomWord.model';
 import { CommonApiService } from '../common-api/common-api.service';
 
 @Injectable({

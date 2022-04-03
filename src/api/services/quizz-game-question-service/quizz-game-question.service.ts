@@ -16,4 +16,22 @@ export class QuizzGameQuestionService extends CommonApiService{
     public getQuizzGameQuestionsByWordId(wordIds: number[]): Observable<QuizzGameQuestion[]> {
         return this.get<QuizzGameQuestion[]>('/api/quizzGameQuestions?wordId='+ wordIds.join(','));
     }
+
+    public createQuizzGameQuestion(question: QuizzGameQuestion): Observable<QuizzGameQuestion>{
+        return this.post<QuizzGameQuestion>('/api/quizzGameQuestions', question);
+    }
+
+    public updateQuizzGameQuestion(question: QuizzGameQuestion): Observable<QuizzGameQuestion>{
+        return this.put<QuizzGameQuestion>('/api/quizzGameQuestions/' + question.id, question);
+    }
+
+    public deleteQuizzGameQuestion(id: number): Observable<void>{
+        return this.delete<void>('/api/quizzGameQuestions/' + id);
+    }
+
+    public getQuizzGameQuestionsByConfigurationId(configurationId: number): Observable<QuizzGameQuestion[]> {
+        return this.get<QuizzGameQuestion[]>('/api/quizzGameQuestions?configurationId='+ configurationId);
+    }
+
+
 }

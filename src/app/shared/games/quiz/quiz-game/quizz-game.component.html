@@ -12,8 +12,8 @@
     <div [ngClass]="rotateClass ? 'quizz-content' : ''" *ngIf="this.cardQuiz" cols="2" rowHeight="2:1">
         <div class="row" *ngIf="!gameFinished">
                 <div>
-                    <h4 *ngIf="!cardQuiz[currentQuiz].showImage">{{cardQuiz[currentQuiz].question}}</h4>
-                    <img *ngIf="cardQuiz[currentQuiz].showImage" [src]="cardQuiz[currentQuiz].question" />
+                    <h4>{{cardQuiz[currentQuiz].question}}</h4>
+                    <img *ngIf="cardQuiz[currentQuiz].isImage" [src]="cardQuiz[currentQuiz].questionImg" />
                 </div>
                 <div class="list-group">
                     <div class="mt-4 d-flex">
@@ -21,8 +21,8 @@
                             <label>
                                 <div class="list-group-answers" [correctAnswer]="answer.correct">
                                     <input type="radio" name="options" (change)="onAnswer(answer)" [disabled]="answerSelected">
-                                    <img *ngIf="answer.showImage" [src]="answer.option">
-                                    <p *ngIf="!answer.showImage">{{answer.option}}</p>
+                                    <img *ngIf="answer.isImage" [src]="answer.option">
+                                    <p *ngIf="!answer.isImage">{{answer.option}}</p>
                                 </div>
                             </label>
                         </div>

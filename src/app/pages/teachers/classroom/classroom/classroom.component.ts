@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { ClassroomGame } from 'src/api/models/classroomGame';
-import { ClassroomWord } from 'src/api/models/classroomWord';
+import { ClassroomWord } from 'src/api/models/classroomWord.model';
 import { Game } from 'src/api/models/game.model';
 import { Student } from 'src/api/models/student.model';
 import { User } from 'src/api/models/user.model';

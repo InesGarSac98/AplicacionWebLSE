@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-
-import { AuthenticationGuard } from 'src/app/guards/authentication.guard';
 import { GameComponent } from '../students/game/game.component';
 import { ClassroomListComponent } from './classroom-list/classroom-list.component';
 import { ClassroomComponent } from './classroom/classroom/classroom.component';
@@ -9,7 +7,7 @@ import { GamesListComponent } from './games/game-list/games-list.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AddWordsComponent } from './add-words/add-words.component';
 import { AddGamesComponent } from './add-games/add-games.component';
-import { AddQuestionComponent } from 'src/app/shared/add-questions/add-question/add-question.component';
+import { GameConfigurationComponent } from './game-configuration/game-configuration.component';
 
 export const TeachersRoutes: Routes = [
     {
@@ -59,13 +57,18 @@ export const TeachersRoutes: Routes = [
                     },
                     {
                         path: 'add-games',
-                        pathMatch: 'full',
-                        component: AddGamesComponent
-                    },
-                    {
-                        path: 'add-question',
-                        pathMatch: 'full',
-                        component: AddQuestionComponent
+                        children:[
+                            {
+                                path: '',
+                                pathMatch: 'full',
+                                component: AddGamesComponent
+                            },
+                            {
+                                path: ':gameId',
+                                pathMatch: 'full',
+                                component: GameConfigurationComponent
+                            },
+                        ]
                     },
                 ]
             },

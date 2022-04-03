@@ -1,0 +1,98 @@
+<div class="content">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-info">
+                <div class="row">
+                    <div class="col-1 card-title-back-button">
+                        <button mat-icon-button class="mat-icon-header" (click)="goBackClicked.emit()">
+                            <mat-icon>keyboard_backspace</mat-icon>
+                        </button>
+                    </div>
+                    <div class="col">
+                        <h4 class="card-title card-title-align-middle"></h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <form *ngIf="formGroupIsLoaded" [formGroup]="formGroup" (submit)="saveGameConfiguration()">
+                    <div class="row">
+                        <mat-label>Tiempo de Juego</mat-label>
+                            <input formControlName="time" type="number">
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            Preguntas
+                        </div>
+                        <div class="col">
+                            <button type="button" mat-mini-fab (click)="addCard()"class="button" color="accent">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <mat-accordion>
+                        <mat-expansion-panel #expansionPanel [expanded]="true" *ngFor="let questionFormGroup of questionsFormArray.controls; let i = index">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <div *ngIf="!expansionPanel.expanded" class="col">
+                                        <p>{{questionFormGroup.controls.question.value}}</p>
+                                    </div>
+                                </mat-panel-title>
+                                <mat-panel-description>
+
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <div [formGroup]="questionFormGroup">
+                                <div class="row">
+                                    <div class="col">
+                                        <p>Pregunta</p>
+                                    </div>
+                                    <div class="col">
+                                        <input formControlName="question" type="text">
+                                    </div>
+                                    <div class="col">
+                                        <mat-slide-toggle formControlName="isImage">Imagen</mat-slide-toggle>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <p>Respuestas</p>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">Opción</div>
+                                            <div class="col">Correcta</div>
+                                        </div>
+                                        <div class="row" [formGroup]="answerFormGroup" *ngFor="let answerFormGroup of questionFormGroup.controls.answers.controls; let j = index">
+                                            <div class="col">
+                                                <mat-select formControlName="wordId">
+                                                    <mat-option *ngFor="let word of classroomWords" value="{{word.id}}">{{word.name}}</mat-option>
+                                                </mat-select>
+                                            </div>
+                                            <div class="col">
+                                                <mat-slide-toggle formControlName="isCorrect" (change)="correctAnswerSelected(questionFormGroup.controls.answers, j)"></mat-slide-toggle>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="button" mat-mini-fab (click)="deleteCard()"class="buttonAdd" color="accent">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <div>
+                        <button type="button" mat-mini-fab (click)="addCard()"class="buttonAdd" color="accent">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+                    <button mat-raised-button [disabled]="!formGroup.valid" color="primary"type="submit">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

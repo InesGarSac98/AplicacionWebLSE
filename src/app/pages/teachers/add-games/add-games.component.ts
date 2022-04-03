@@ -77,6 +77,10 @@ export class AddGamesComponent implements OnInit {
         });
     }
 
+    public editSelectedGameConfiguration(id: number): void {
+        this.router.navigate(['/teachers/classrooms/' + this.classroomId + '/add-games/' + id]);
+    }
+
     public async saveGamesSelection(): Promise<void> {
 
         const gameIdsToDelete = this.existingClassroomGames

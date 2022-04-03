@@ -2,6 +2,7 @@
     <div class="card-body">
         <app-two-side-multi-select *ngIf="dataLoaded" [(items)]="gamesAssociation"
             [cardTitle]="'juegos'" [viewNameColumnName]="'Juego'"
+            (editItemButtonClicked)="editSelectedGameConfiguration($event)"
             (showItemButtonClicked)="showSelectedGame($event)"
             (goBackClicked)="returnGamesSelection()">
         </app-two-side-multi-select>

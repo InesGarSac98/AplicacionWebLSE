@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { ClassroomWord } from 'src/api/models/classroomWord';
+import { ClassroomWord } from 'src/api/models/classroomWord.model';
 import { Student } from 'src/api/models/student.model';
 import { User } from 'src/api/models/user.model';
 import { Word } from 'src/api/models/word.model';

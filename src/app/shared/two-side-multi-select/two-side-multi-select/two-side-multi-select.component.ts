@@ -3,7 +3,6 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatRadioChange } from '@angular/material/radio';
 import { MatTableDataSource } from '@angular/material/table';
-import { Route, Router } from '@angular/router';
 
 interface PendingSelection {
 	[ key: number ]: boolean;
@@ -33,11 +32,12 @@ export class TwoSideMultiSelectComponent implements OnInit, AfterViewInit {
     public displayedColumns: string[];
     @Input() public dataSource: MatTableDataSource<SelectableItem>;
     @Output() public showItemButtonClicked = new EventEmitter<number>();
+    @Output() public editItemButtonClicked = new EventEmitter<number>();
     @ViewChild(MatPaginator) paginator: MatPaginator;
     public classroomId: number;
 
 
-    constructor( private router: Router) {
+    constructor() {
         this.displayedColumns = ['isChecked','viewName','showButton'];
     }
 
@@ -97,10 +97,6 @@ export class TwoSideMultiSelectComponent implements OnInit, AfterViewInit {
         if (!foundItem) return;
 
         foundItem.isChecked = event.checked;
-	}
-
-    public editButtonCommand() : void {
-        this.router.navigate(['/teachers/classrooms/add-games/add-question']);
 	}
 
 	private sortSelectableItemsOperator(a: SelectableItem, b: SelectableItem) : number {

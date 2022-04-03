@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Classroom } from 'src/api/models/classroom.model';
 import { ClassroomGame } from 'src/api/models/classroomGame';
-import { ClassroomWord } from 'src/api/models/classroomWord';
+import { ClassroomWord } from 'src/api/models/classroomWord.model';
 import { Student } from 'src/api/models/student.model';
 import { CommonApiService } from '../common-api/common-api.service';
 

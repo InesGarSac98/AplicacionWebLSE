@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ClassroomWord } from 'src/api/models/classroomWord';
+import { ClassroomWord } from 'src/api/models/classroomWord.model';
 import { Word } from 'src/api/models/word.model';
 import { ClassroomsService } from 'src/api/services/classrooms-service/classrooms.service';
 import { ClassroomWordsService } from 'src/api/services/classroomWords-service/classroomWords.service';

@@ -41,4 +41,16 @@ export class CommonApiService {
             });
     }
 
+    protected put<T>(url: string, body: any): Observable<T> {
+        const token = localStorage.getItem("token");
+        return this.http.put<T>(
+            url,
+            body,
+            {
+                headers: token ? {
+                    "Authorization": "Bearer " + token
+                } : {}
+            });
+    }
+
 }
