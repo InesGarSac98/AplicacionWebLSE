@@ -6,7 +6,6 @@ import { ClassroomsService } from 'src/api/services/classrooms-service/classroom
 import { TeachersService } from 'src/api/services/teachers-service/teachers.service';
 import { UsersService } from 'src/api/services/users-service/users.service';
 
-
 @Component({
     selector: 'app-student-classroom-list',
     templateUrl: './classroom-list.component.html',
@@ -42,6 +41,10 @@ export class ClassroomListComponent implements OnInit {
                             });
                     })
             });
+    }
+
+    public deleteClass(classroomId: number) {
+        this.classroomsService.deleteClassroom(classroomId).subscribe();
     }
 }
 

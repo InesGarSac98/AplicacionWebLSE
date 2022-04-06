@@ -1,5 +1,4 @@
-
 <container-element [ngSwitch]="gameId">
-    <app-memory-game-configuration *ngSwitchCase="1" [gameId]="gameId" [classroomId]="classroomId"></app-memory-game-configuration>
-    <app-quizz-game-configuration-add-question *ngSwitchCase="2" [gameId]="gameId" [classroomId]="classroomId"></app-quizz-game-configuration-add-question>
+    <app-memory-game-configuration *ngSwitchCase="1" [gameId]="gameId" [classroomId]="classroomId" (goBackClicked)="goBackClicked()"></app-memory-game-configuration>
+    <app-quizz-game-configuration-add-question *ngSwitchCase="2" [gameId]="gameId" [classroomId]="classroomId" (goBackClicked)="goBackClicked()"></app-quizz-game-configuration-add-question>
 </container-element>

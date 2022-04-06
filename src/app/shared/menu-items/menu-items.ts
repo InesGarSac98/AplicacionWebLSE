@@ -47,7 +47,6 @@ export class MenuItems {
         else if (this.role === 'teacher') {
             this.MENUITEMS = [
                 { state: 'teachers/profile', type: 'link', name: 'Perfil', icon: 'school' },
-                { state: 'teachers/games', type: 'link', name: 'Juegos', icon: 'casino' },
                 { state: 'teachers/classrooms', type: 'link', name: 'Clases', icon: 'supervisor_account' }
 
             ];

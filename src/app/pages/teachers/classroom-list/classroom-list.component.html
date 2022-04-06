@@ -9,7 +9,13 @@
             <a [routerLink]="['./',classroom.id]">
                 <mat-card fxLayout="column">
                     <mat-card-title>
-                        <p>{{classroom.name}}</p>
+                        <p>
+                            {{classroom.name}}
+                            <button mat-icon-button class="mat-icon-show" style="float:right;" (click)="deleteClass(item.gameId)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </p>
+
                     </mat-card-title>
                 </mat-card>
             </a>

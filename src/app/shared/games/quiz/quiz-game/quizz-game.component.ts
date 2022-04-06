@@ -1,19 +1,18 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { ClassroomWord } from 'src/api/models/classroomWord.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { QuizzGameClassroomConfiguration } from 'src/api/models/quizzGameClassroomConfiguration.model';
 import { QuizzGameQuestion } from 'src/api/models/quizzGameQuestion.model';
 import { Student } from 'src/api/models/student.model';
 import { User } from 'src/api/models/user.model';
 import { Word } from 'src/api/models/word.model';
-import { ClassroomsService } from 'src/api/services/classrooms-service/classrooms.service';
 import { GameEventService } from 'src/api/services/game-event-service/game-event.service';
+import { QuizzGameClassroomConfigurationService } from 'src/api/services/quizz-game-classroom-configuration-service/quizz-game-classroom-configuration.service';
 import { QuizzGameQuestionService } from 'src/api/services/quizz-game-question-service/quizz-game-question.service';
 import { StudentsService } from 'src/api/services/students-service/students.service';
 import { UsersService } from 'src/api/services/users-service/users.service';
 import { WordsService } from 'src/api/services/words-service/words.service';
 import { QuizzGameEventGeneratorService } from 'src/app/services/quizz-game/quizz-game-event-generator.service';
 import { GameTimerComponent } from 'src/app/shared/game-timer/game-timer.component';
-import { BoardCard } from '../../memory/memory-game.component';
 
 @Component({
     selector: 'app-quizz-game',
@@ -32,14 +31,16 @@ export class QuizzGameComponent implements OnInit {
     public gameFinished: boolean = false;
     public isAbandoned: boolean = false;
     public isTimeOver: boolean = false;
-    public maxTimeValue: number = 2*60;
+    public currentConfigurationId: number;
+    public currentConfiguration: QuizzGameClassroomConfiguration;
+    public currentQuestions: QuizzGameQuestion[];
+    public classroomId: number;
 
     currentQuiz = 0;
     answerSelected = false;
     correctAnswers = 0;
     incorrectAnswers = 0;
     result = false;
-    private availableWords: Word[];
     private availableQuestions: QuizzGameQuestion[];
     private studentId: number;
     private wordIds: number[];
@@ -49,25 +50,26 @@ export class QuizzGameComponent implements OnInit {
     private readonly MAX_QUESTIONS = 3;
 
     constructor(
+        private route: ActivatedRoute,
         private userService: UsersService,
         private wordsService: WordsService,
-        private classroomService: ClassroomsService,
         private studentService: StudentsService,
         private quizzGameQuestionservice: QuizzGameQuestionService,
         private gameEventService: GameEventService,
         private quizzGameEventGeneratorService: QuizzGameEventGeneratorService,
+        private quizzGameClassroomConfigurationService: QuizzGameClassroomConfigurationService,
         private router: Router
     ) { }
 
     public ngOnInit(): void {
-
         this.userService.getUserLoged().subscribe((user: User) => {
             if (user.role === 'STUDENT') {
                 this.goBackLink = '/students/games';
                 this.getStudentQuestions();
             }
             else if (user.role === 'TEACHER') {
-                this.goBackLink = '/teachers/games';
+                this.classroomId = this.route.snapshot.params['classroomId'];
+                this.goBackLink = '/teachers/classrooms/' + this.classroomId ;
                 this.getTeacherQuestions();
             }
         });
@@ -118,7 +120,7 @@ export class QuizzGameComponent implements OnInit {
     }
 
     public getQuizzGameQuestions() {
-        this.quizzGameQuestionservice.getQuizzGameQuestionsByWordId(this.wordIds)
+        this.quizzGameQuestionservice.getQuizzGameQuestionsByConfigurationId(this.currentConfiguration.id)
             .subscribe((questions: QuizzGameQuestion[]) => {
                 this.availableQuestions = questions;
                 this.availableQuestions.sort(() => Math.random() - 0.5);
@@ -139,11 +141,16 @@ export class QuizzGameComponent implements OnInit {
                             } as IAnswer)).sort(() => Math.random() - 0.5)
                     });
                 }
+
                 this.score = 0;
                 this.gameFinished = false;
-                this.isTimeOver = false;
                 this.isAbandoned = false;
-                this.gameTimer.startTimer(this.maxTimeValue);
+                this.isTimeOver = false;
+                this.currentQuiz = 0;
+                this.answerSelected = false;
+                this.correctAnswers = 0;
+                this.incorrectAnswers = 0;
+                this.gameTimer.startTimer(this.currentConfiguration.time);
 
                 const startEvent = this.quizzGameEventGeneratorService.generateStartEvent(this.cardQuiz, this.gameId, this.studentId, this.gameTimer.getLeftTime());
                 this.gameEventService.createGameEvent(startEvent).subscribe(event => this.gamePlayId = event.gamePlayId);
@@ -156,7 +163,7 @@ export class QuizzGameComponent implements OnInit {
         if(isGameFinished){
 
             this.gameTimer.stopTimer();
-            if (this.currentQuiz >= this.MAX_QUESTIONS - 1){
+            if (this.currentQuiz >= this.MAX_QUESTIONS - 1 && this.correctAnswers > this.MAX_QUESTIONS / 2){
                 const winEvent = this.quizzGameEventGeneratorService.generateWinEvent(
                     this.cardQuiz, this.gameId, this.studentId, this.score,
                     this.gameTimer.getLeftTime(), this.gamePlayId);
@@ -177,25 +184,24 @@ export class QuizzGameComponent implements OnInit {
     }
 
     private getTeacherQuestions() {
-        this.wordsService.getWordsList()
-            .subscribe((words: Word[]) => {
-                this.availableWords = words;
-                this.wordIds = words.map(word => word.id);
-                this.getQuizzGameQuestions();
-            });
+        this.getQuizGameConfiguration();
     }
 
     private getStudentQuestions() {
         this.studentService.getStudentLoged()
             .subscribe((student: Student) => {
                 this.studentId = student.id;
-                this.classroomService.getWordsListClassroom(student.classroomId)
-                    .subscribe((classroomWords: ClassroomWord[]) => {
-                        this.availableWords = classroomWords
-                            .map((classroomWord: ClassroomWord) => classroomWord.word);
-                        this.wordIds = classroomWords.map(classroomWords => classroomWords.id);
-                        this.getQuizzGameQuestions();
-                    })
+                this.classroomId = student.classroomId;
+                this.getQuizGameConfiguration();
+            });
+    }
+
+    private getQuizGameConfiguration() {
+        this.quizzGameClassroomConfigurationService.getQuizzGameClassroomConfigurationByClassroomId(this.classroomId)
+            .subscribe((currentConfiguration: QuizzGameClassroomConfiguration) => {
+                this.currentConfiguration = currentConfiguration;
+                this.currentConfigurationId = currentConfiguration.id;
+                this.getQuizzGameQuestions();
             });
     }
 }

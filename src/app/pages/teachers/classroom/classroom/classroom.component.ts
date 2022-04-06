@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClassroomGame } from 'src/api/models/classroomGame';
 import { ClassroomWord } from 'src/api/models/classroomWord.model';
 import { Game } from 'src/api/models/game.model';
@@ -42,6 +42,7 @@ export class ClassroomComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
+        private router: Router,
         private userService: UsersService,
         private matDialog: MatDialog,
         private classroomService: ClassroomsService
@@ -80,6 +81,7 @@ export class ClassroomComponent implements OnInit {
             }
         );
     }
+
     public showGameButtonClicked(id: number): void {
         let dialogRef = this.matDialog.open(
             GameDetailDialogComponent,
@@ -93,6 +95,10 @@ export class ClassroomComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result =>{
             console.log('The dialog was closed')
         });
+    }
+
+    public playGameButtonClicked(id: number): void {
+        this.router.navigate(['/teachers/classrooms', this.classroomId, 'games', id]);
     }
 
     public showStudentButtonClicked(id: number): void {

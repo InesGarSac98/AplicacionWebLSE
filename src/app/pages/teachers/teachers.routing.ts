@@ -21,15 +21,6 @@ export const TeachersRoutes: Routes = [
         component: ProfileComponent
     },
     {
-        path: 'games',
-        pathMatch: 'full',
-        component: GamesListComponent
-    },
-    {
-        path: 'games/:gameId',
-        component: GameComponent
-    },
-    {
         path: 'classrooms',
         children: [
             {
@@ -49,6 +40,11 @@ export const TeachersRoutes: Routes = [
                         path: '',
                         pathMatch: 'full',
                         component: ClassroomComponent
+                    },
+                    {
+                        path: 'games/:gameId',
+                        pathMatch: 'full',
+                        component: GameComponent
                     },
                     {
                         path: 'add-words',

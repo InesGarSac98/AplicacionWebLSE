@@ -64,15 +64,6 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
             });
     }
 
-    private loadFormGroup() {
-        this.formGroup = new FormGroup({
-            id: new FormControl(this.currentConfiguration ? this.currentConfiguration.id : ''),
-            time: new FormControl(this.currentConfiguration ? this.currentConfiguration.time : '', [Validators.required]),
-            questions: new FormArray(this.currentConfiguration ? this.getCurrentQuestionsFormArray() : [])
-        });
-        this.formGroupIsLoaded = true;
-    }
-
     public addCard(): void {
         (this.formGroup.controls.questions as FormArray).push(new FormGroup({
             id: new FormControl(''),
@@ -104,8 +95,11 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
         }
     }
 
-    public deleteCard(){
-        console.log("borrando tarjeta pulsado");
+    public deleteCard(questionId: number, index: number) {
+        this.quizzGameQuestionService.deleteQuizzGameQuestion(questionId)
+            .subscribe(() => {
+                (this.formGroup.controls.questions as FormArray).removeAt(index);
+            });
     }
 
     public saveGameConfiguration() {
@@ -128,6 +122,15 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
                     this.saveQuestions(quizzGameClassroomConfiguration.id);
                 });
         }
+    }
+
+    private loadFormGroup() {
+        this.formGroup = new FormGroup({
+            id: new FormControl(this.currentConfiguration ? this.currentConfiguration.id : ''),
+            time: new FormControl(this.currentConfiguration ? this.currentConfiguration.time : '', [Validators.required]),
+            questions: new FormArray(this.currentConfiguration ? this.getCurrentQuestionsFormArray() : [])
+        });
+        this.formGroupIsLoaded = true;
     }
 
     private saveQuestions(quizzGameClassroomConfigurationId: number) {
@@ -172,7 +175,7 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
 
     }
 
-    public getCurrentQuestionsFormArray(): FormGroup[] {
+    private getCurrentQuestionsFormArray(): FormGroup[] {
         const questionsFormArray: FormGroup[] = [];
 
         this.currentQuestions.forEach(q => {
@@ -188,6 +191,7 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
                 id: new FormControl(q.id),
                 question: new FormControl(q.name, [Validators.maxLength(100), Validators.required]),
                 isImage: new FormControl(q.isImage, [Validators.required]),
+                wordId: new FormControl(q.wordId),
                 answers: answersFormArray
             }));
         })

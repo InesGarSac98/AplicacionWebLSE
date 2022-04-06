@@ -9,7 +9,7 @@
                         </button>
                     </div>
                     <div class="col">
-                        <h4 class="card-title card-title-align-middle"></h4>
+                        <h4 class="card-title card-title-align-middle">Patataaaaaaaaaaaaaaaaaaaaaaa</h4>
                     </div>
                 </div>
             </div>
@@ -31,14 +31,14 @@
                         </div>
                     </div>
                     <mat-accordion>
-                        <mat-expansion-panel #expansionPanel [expanded]="true" *ngFor="let questionFormGroup of questionsFormArray.controls; let i = index">
+                        <mat-expansion-panel #expansionPanel *ngFor="let questionFormGroup of questionsFormArray.controls; let i = index">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
                                     <div *ngIf="!expansionPanel.expanded" class="col">
                                         <p>{{questionFormGroup.controls.question.value}}</p>
                                     </div>
                                 </mat-panel-title>
-                                <mat-panel-description>
+                            <mat-panel-description>
 
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
@@ -66,7 +66,7 @@
                                         <div class="row" [formGroup]="answerFormGroup" *ngFor="let answerFormGroup of questionFormGroup.controls.answers.controls; let j = index">
                                             <div class="col">
                                                 <mat-select formControlName="wordId">
-                                                    <mat-option *ngFor="let word of classroomWords" value="{{word.id}}">{{word.name}}</mat-option>
+                                                    <mat-option *ngFor="let word of classroomWords" [value]="word.id">{{word.name}}</mat-option>
                                                 </mat-select>
                                             </div>
                                             <div class="col">
@@ -77,14 +77,14 @@
                                 </div>
                             </div>
                             <div>
-                                <button type="button" mat-mini-fab (click)="deleteCard()"class="buttonAdd" color="accent">
+                                <button type="button" mat-mini-fab (click)="deleteCard(questionFormGroup.controls.id.value, i)" color="accent">
                                     <mat-icon>delete</mat-icon>
                                 </button>
                             </div>
                         </mat-expansion-panel>
                     </mat-accordion>
                     <div>
-                        <button type="button" mat-mini-fab (click)="addCard()"class="buttonAdd" color="accent">
+                        <button type="button" mat-mini-fab (click)="addCard()" class="buttonAdd" color="accent">
                             <mat-icon>add</mat-icon>
                         </button>
                     </div>

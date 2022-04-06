@@ -14,7 +14,7 @@ export class MemoryGameClassroomConfigurationService extends CommonApiService{
     }
 
     public getMemoryGameClassroomConfigurationByClassroomId(classroomId: number): Observable<MemoryGameClassroomConfiguration> {
-        return this.get("/api/memoryGameClassroomConfiguration?classroomId=" + classroomId);
+        return this.get<MemoryGameClassroomConfiguration>("/api/memoryGameClassroomConfiguration?classroomId=" + classroomId);
     }
 
     public createMemoryGameClassroomConfiguration(memoryGameClassroomConfiguration: MemoryGameClassroomConfiguration): Observable<MemoryGameClassroomConfiguration> {
@@ -30,4 +30,5 @@ export class MemoryGameClassroomConfigurationService extends CommonApiService{
             memoryGameClassroomConfiguration
         );
     }
+
 }

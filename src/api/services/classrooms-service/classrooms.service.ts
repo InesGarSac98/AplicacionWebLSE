@@ -29,6 +29,10 @@ export class ClassroomsService extends CommonApiService {
         return this.post<Classroom>('/api/classrooms', classroom);
     }
 
+    public deleteClassroom(classroomId: number): Observable<Classroom> {
+        return this.delete<Classroom>('/api/classrooms/' + classroomId);
+    }
+
     public getTeacherClassrooms(teacherId: number): Observable<Classroom[]>{
         return this.get<Classroom[]>('/api/teachers/'+ teacherId + '/classrooms');
     }

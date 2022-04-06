@@ -102,7 +102,7 @@ export class AddGamesComponent implements OnInit {
         this.router.navigate(['/teachers/classrooms/', this.classroomId]);
     }
 
-    public returnGamesSelection():void{
+    public returnGamesSelection(): void {
         this.router.navigate(['/teachers/classrooms/', this.classroomId]);
     }
 

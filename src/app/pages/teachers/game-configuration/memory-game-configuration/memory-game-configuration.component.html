@@ -1,3 +1,30 @@
-<p>
-  app-memory-game-configuration works!
-</p>
+<div class="content">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-info">
+                <div class="row">
+                    <div class="col-1 card-title-back-button">
+                        <button mat-icon-button class="mat-icon-header" (click)="goBackClicked.emit()">
+                            <mat-icon>keyboard_backspace</mat-icon>
+                        </button>
+                    </div>
+                    <div class="col">
+                        <h4 class="card-title card-title-align-middle">Patataaaaaaaaaaaaaaaaaaaaaaa</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <form *ngIf="formGroupIsLoaded" [formGroup]="formGroup" (submit)="saveGameConfiguration()">
+                    <div class="row">
+                        <mat-label>Tiempo de Juego</mat-label>
+                            <input formControlName="time" type="number">
+                    </div>
+                    <button mat-raised-button [disabled]="!formGroup.valid" color="primary"type="submit">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

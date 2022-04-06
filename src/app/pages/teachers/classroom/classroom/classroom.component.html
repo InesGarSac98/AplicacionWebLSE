@@ -151,6 +151,9 @@
                                         <ng-container matColumnDef="showButton">
                                             <th mat-header-cell *matHeaderCellDef></th>
                                             <td mat-cell *matCellDef="let item">
+                                                <button mat-icon-button class="mat-icon-show" (click)="playGameButtonClicked(item.gameId)">
+                                                    <mat-icon>play_arrow</mat-icon>
+                                                </button>
                                                 <button mat-icon-button class="mat-icon-show" (click)="showGameButtonClicked(item.id)">
                                                     <mat-icon>remove_red_eye</mat-icon>
                                                 </button>
