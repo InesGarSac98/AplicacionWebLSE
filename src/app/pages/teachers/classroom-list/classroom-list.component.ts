@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Classroom } from 'src/api/models/classroom.model';
 import { Teacher } from 'src/api/models/teacher.model';
@@ -18,7 +19,8 @@ export class ClassroomListComponent implements OnInit {
     constructor(
         private classroomsService: ClassroomsService,
         private userService: UsersService,
-        private teacherService: TeachersService
+        private teacherService: TeachersService,
+        private http: HttpClient
     ) {
 
     }
@@ -37,14 +39,18 @@ export class ClassroomListComponent implements OnInit {
                                     result.name = c.name;
                                     result.numStudents = c.students.length;
                                     return result;
-                                });
+                                }).sort((a, b) => a.name > b.name ? 1 : -1);
+                                this.classroomsService.findWordInArasaac('patata').subscribe( x => console.log(x))
                             });
                     })
             });
     }
 
     public deleteClass(classroomId: number) {
-        this.classroomsService.deleteClassroom(classroomId).subscribe();
+        this.classroomsService.deleteClassroom(classroomId)
+            .subscribe(_ => {
+                this.classrooms.splice(this.classrooms.findIndex(c => c.id === classroomId), 1);
+            });
     }
 }
 

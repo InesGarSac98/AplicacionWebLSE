@@ -5,7 +5,34 @@
       </button>
 
     <p>Palabra: {{word.name}}</p>
-    <img [src]="word.image" width="250" height="250">
-    <video [src]="word.video" width="250" height="250" autoplay [controls]="false" loop></video>
-    <video [src]="word.videoDefinition" width="250" height="250" autoplay [controls]="false" loop></video>
+
+    <div class="container">
+		<div class="row">
+				<div class="col-md-4">
+						<div class="pt-4">
+								<div class="p-2">
+										<p class="text-center">LETRA</p>
+								</div>
+								<img class="image-border" [src]="word.image" width="200" height="200">
+						</div>
+				</div>
+				<div class="col-md-4">
+						<div class="pt-4">
+								<div class="p-2">
+										<p class="text-center">SIGNACIÓN</p>
+								</div>
+								<video class="image-border" [src]="word.video" width="200" height="200" autoplay [controls]="false" loop></video>
+						</div>
+				</div>
+				<div class="col-md-4">
+						<div class="pt-4 ">
+								<div class="p-2">
+										<p class="text-center">DEFINICIÓN</p>
+								</div>
+								<video class="image-border" [src]="word.videoDefinition" width="200" height="200" autoplay [controls]="false" loop></video>
+						</div>
+				</div>
+
+		</div>
 </div>
+

@@ -6,19 +6,49 @@
     </div>
     <div class="row">
         <div fxFlex="25%" *ngFor="let classroom of classrooms">
-            <a [routerLink]="['./',classroom.id]">
-                <mat-card fxLayout="column">
-                    <mat-card-title>
+            <mat-card fxLayout="column">
+                <mat-card-title>
+                    <a [routerLink]="['./',classroom.id]">
                         <p>
                             {{classroom.name}}
-                            <button mat-icon-button class="mat-icon-show" style="float:right;" (click)="deleteClass(item.gameId)">
-                                <mat-icon>delete</mat-icon>
-                            </button>
                         </p>
-
-                    </mat-card-title>
-                </mat-card>
-            </a>
+                    </a>
+                    <button mat-icon-button class="mat-icon-show" style="float:right;" (click)="deleteClass(classroom.id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-card-title>
+            </mat-card>
         </div>
     </div>
 </div>
+
+<!--
+<h1>ESTAS SON LAS CLASES QUE TIENES</h1>
+
+<div class="content">
+    <div>
+        <button mat-button><a [routerLink]="['classrooms-form']">+ Añadir clase</a></button>
+    </div>
+    <div class="row" *ngIf="classrooms.length > 0">
+        <div class="row" style="width: 100%;" *ngFor="let caca of [].constructor(1 + ((classrooms.length - (classrooms.length % 4)) / 4)); let i = index;">
+            <div style="width: 25%;" *ngFor="let classroom of classrooms.slice(i*4, (i+1)*4)">
+                <div style="position:relative;">
+                    <a [routerLink]="['./',classroom.id]" style="position:absolute;width: 100%;">
+                        <mat-card fxLayout="column">
+                            <mat-card-title>
+                                <p>
+                                    {{classroom.name}}
+                                </p>
+                            </mat-card-title>
+                        </mat-card>
+                    </a>
+                    <div style="width: 95%;position:absolute;">
+                        <button mat-icon-button class="mat-icon-show" style="float:right;" (click)="deleteClass(item.gameId)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

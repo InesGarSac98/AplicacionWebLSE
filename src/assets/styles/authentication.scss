@@ -2,6 +2,7 @@
     width: 50%;
     height: auto;
     margin-left: 25%;
+    align-content: center;
 }
 
 .in{
@@ -13,6 +14,9 @@
     align-items: center;
     padding-top: 5%;
     padding-bottom: 20%;
+    background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url('/assets/images/background/background.webp');
+    width: auto;
+    height: auto;
 }
 
 .button-flex-container {
@@ -26,6 +30,7 @@
 mat-form-field{
     width: 100%;
 }
+
 
 .button-flex-container{
     float: right;

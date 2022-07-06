@@ -11,7 +11,6 @@
 	text-align: center;
 }
 
-
 .cara {
 	position: absolute;
 	backface-visibility: hidden;
@@ -19,8 +18,8 @@
 	justify-content: center;
 	align-items: center;
     cursor: pointer;
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
     border-radius: 10%;
     border: 2px solid;
 
@@ -50,11 +49,11 @@
         text-align: center;
     }
     img{
-        background-color: rgb(23, 0, 151);
+        background-color: rgb(151, 0, 0);
         align-items: center;
         justify-content: center;
-        width: 80px;
-        height: 80px;
+        width: 80%;
+        height: 80%;
     }
 }
 

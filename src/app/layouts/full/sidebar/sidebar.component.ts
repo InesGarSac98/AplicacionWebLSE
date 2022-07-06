@@ -3,6 +3,8 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { MenuItems } from '../../../shared/menu-items/menu-items';
 import { UsersService } from 'src/api/services/users-service/users.service';
 import { User } from 'src/api/models/user.model';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogsComponent } from 'src/app/shared/dialog/dialogs/dialogs.component';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -18,7 +20,8 @@ export class AppSidebarComponent implements OnDestroy {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     public menuItems: MenuItems,
-    private userService: UsersService
+    private userService: UsersService,
+    public dialog: MatDialog
   ) {
     this.mobileQuery = media.matchMedia('(min-width: 768px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -35,5 +38,12 @@ export class AppSidebarComponent implements OnDestroy {
             this.userName = user.name;
             this.menuItems.setUserLoggedRole(user.role);
         });
-}
+    }
+    public openDialog(): void{
+        let dialogRef = this.dialog.open(DialogsComponent);
+
+        dialogRef.afterClosed().subscribe(result =>{
+            console.log('The dialog was closed')
+        });
+    }
 }

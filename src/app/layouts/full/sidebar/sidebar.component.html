@@ -2,21 +2,6 @@
     <app-clock></app-clock>
 </div>
 
-<!-- <div class="user-profile" >
-    <mat-divider></mat-divider>
-    <div class="profile-text"><a [matMenuTriggerFor]="sdprofile" class="" *ngIf="userName"> {{ userName }}</a></div>
-    <mat-divider></mat-divider>
-    <mat-menu #sdprofile="matMenu" class="mymegamenu">
-        <button mat-menu-item>
-            <mat-icon>power_off</mat-icon> Settings </button>
-        <button mat-menu-item>
-            <mat-icon>account_box</mat-icon> Profile </button>
-        <button mat-menu-item>
-            <mat-icon>notifications_off</mat-icon> Disable notifications </button>
-        <button mat-menu-item>
-            <mat-icon>exit_to_app</mat-icon> Sign Out </button>
-    </mat-menu>
-</div> -->
 <mat-nav-list appAccordion>
     <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="selected" group="{{menuitem.state}}">
         <a class="" appAccordionToggle [routerLink]="['/' + menuitem.state]" *ngIf="menuitem.type === 'link'">
@@ -30,3 +15,7 @@
     </mat-list-item>
 
 </mat-nav-list>
+
+<div>
+    <button mat-icon-button class="mat-icon-exit" (click)="openDialog()"><mat-icon>exit_to_app</mat-icon></button>
+</div>
