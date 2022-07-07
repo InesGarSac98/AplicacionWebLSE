@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { TwoSideMultiSelectComponent } from './two-side-multi-select.component';
+import { TeacherDictionaryComponent } from './teacher-dictionary.component';
 
-describe('TwoSideMultiSelectComponent', () => {
-  let component: TwoSideMultiSelectComponent;
-  let fixture: ComponentFixture<TwoSideMultiSelectComponent>;
+describe('TeacherDictionaryComponent', () => {
+  let component: TeacherDictionaryComponent;
+  let fixture: ComponentFixture<TeacherDictionaryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TwoSideMultiSelectComponent ]
+      declarations: [ TeacherDictionaryComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TwoSideMultiSelectComponent);
+    fixture = TestBed.createComponent(TeacherDictionaryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

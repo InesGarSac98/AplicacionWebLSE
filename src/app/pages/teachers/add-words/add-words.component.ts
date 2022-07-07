@@ -7,7 +7,7 @@ import { ClassroomsService } from 'src/api/services/classrooms-service/classroom
 import { ClassroomWordsService } from 'src/api/services/classroomWords-service/classroomWords.service';
 import { WordsService } from 'src/api/services/words-service/words.service';
 import { WordDetailsDialogComponent } from 'src/app/shared/dialog/word-details-dialog/word-details-dialog.component';
-import { SelectableItem } from 'src/app/shared/two-side-multi-select/two-side-multi-select/two-side-multi-select.component';
+import { CellDefinition, SelectableItem } from 'src/app/shared/multi-select-list/multi-select-list.component';
 
 @Component({
   selector: 'app-add-words',
@@ -21,6 +21,7 @@ export class AddWordsComponent implements OnInit {
     public wordsAssociation: SelectableItem[] = [];
     private fullWordsList: Word[];
     private existingClassroomWords: ClassroomWord[];
+    public wordCellDefinitions: CellDefinition[];
 
     constructor(
         private classroomService: ClassroomsService,
@@ -29,7 +30,15 @@ export class AddWordsComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         public dialog: MatDialog
-        ) { }
+        ) {
+            this.wordCellDefinitions = [
+                {
+                    header: 'Palabra',
+                    itemKey: 'viewName',
+                    isImage: false
+                }
+            ];
+        }
 
     public ngOnInit() {
         this.classroomId = this.route.snapshot.params['classroomId'];
@@ -97,10 +106,6 @@ export class AddWordsComponent implements OnInit {
             await this.classroomWordsService.createClassroomWord(wordId, this.classroomId).toPromise();
         }
 
-        this.router.navigate(['/teachers/classrooms/', this.classroomId]);
-    }
-
-    public returnWordsSelection():void{
         this.router.navigate(['/teachers/classrooms/', this.classroomId]);
     }
 }

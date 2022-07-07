@@ -2,10 +2,8 @@ import { Routes } from '@angular/router';
 
 import { ProfileComponent } from './profile/profile.component';
 import { GamesListComponent } from './games-list/games-list.component';
-import { AuthenticationGuard } from 'src/app/guards/authentication.guard';
 import { GameComponent } from './game/game.component';
-import { ProgressComponent } from './progress/progress.component';
-import { ReviewComponent } from './review/review.component';
+import { StudentDictionaryComponent } from './dictionary/student-dictionary.component';
 
 export const StudentsRoutes: Routes = [
     {
@@ -26,13 +24,8 @@ export const StudentsRoutes: Routes = [
         component: GameComponent
     },
     {
-        path: 'progress',
-        component: ProgressComponent
-    },
-    {
-        path: 'review',
+        path: 'dictionary',
         pathMatch: 'full',
-        component: ReviewComponent
+        component: StudentDictionaryComponent
     }
-
 ];

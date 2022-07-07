@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClassroomWord } from 'src/api/models/classroomWord.model';
 import { Student } from 'src/api/models/student.model';
 import { User } from 'src/api/models/user.model';
@@ -30,6 +30,7 @@ export class MemoryGameComponent implements OnInit {
     public score: number;
     public numPairsAchieved: number;
     public maxPairs: number = 6;
+    public classroomId: number;
 
     private selecciones: BoardCard[];
     private pairsAchieved: BoardCard[];
@@ -47,7 +48,8 @@ export class MemoryGameComponent implements OnInit {
         private studentService: StudentsService,
         private memoryGameEventGeneratorService: MemoryGameEventGeneratorService,
         private gameEventService: GameEventService,
-        private router: Router
+        private router: Router,
+        private route: ActivatedRoute
         ) { }
 
     public ngOnInit(): void {
@@ -61,7 +63,8 @@ export class MemoryGameComponent implements OnInit {
                 this.getStudentWords();
             }
             else if (user.role === 'TEACHER') {
-                this.goBackLink = '/teachers/games';
+                this.classroomId = this.route.snapshot.params['classroomId'];
+                this.goBackLink = '/teachers/classrooms/' + this.classroomId;
                 this.getTeacherWords();
             }
         });

@@ -23,7 +23,7 @@ export class GameConfigurationComponent implements OnInit {
     }
 
     public goBackClicked(){
-        this.router.navigate(['teachers/classrooms', this.classroomId, 'add-games']);
+        this.router.navigate(['teachers/classrooms', this.classroomId], {queryParams: {tab:2}});
     }
 
 }

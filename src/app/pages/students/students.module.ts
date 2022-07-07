@@ -15,10 +15,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { GamesListComponent } from './games-list/games-list.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { GameComponent } from './game/game.component';
-import { ReviewComponent } from './review/review.component';
-import { ProgressComponent } from './progress/progress.component';
+import { StudentDictionaryComponent } from './dictionary/student-dictionary.component';
+import { ProgressComponent } from './profile/progress/progress.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { DictionaryComponent } from 'src/app/shared/dictionary/dictionary.component';
 
 
 
@@ -33,16 +32,14 @@ import { DictionaryComponent } from 'src/app/shared/dictionary/dictionary.compon
     FlexLayoutModule,
     MatTabsModule,
     SharedModule,
-
   ],
   providers: [],
   declarations: [
     ProfileComponent,
     GamesListComponent,
     GameComponent,
-    ReviewComponent,
-    ProgressComponent,
-    DictionaryComponent
+    StudentDictionaryComponent,
+    ProgressComponent
   ]
 })
 export class StudentsModule {}

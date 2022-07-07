@@ -7,7 +7,7 @@ import { ClassroomGamesService } from 'src/api/services/classroomGames-service/c
 import { ClassroomsService } from 'src/api/services/classrooms-service/classrooms.service';
 import { GamesService } from 'src/api/services/games-service/games.service';
 import { GameDetailDialogComponent } from 'src/app/shared/dialog/game-detail-dialog/game-detail-dialog.component';
-import { SelectableItem } from 'src/app/shared/two-side-multi-select/two-side-multi-select/two-side-multi-select.component';
+import { CellDefinition, SelectableItem } from 'src/app/shared/multi-select-list/multi-select-list.component';
 
 @Component({
   selector: 'app-add-games',
@@ -18,9 +18,10 @@ export class AddGamesComponent implements OnInit {
 
     public classroomId: number;
     public dataLoaded: boolean = false;
-    public gamesAssociation: SelectableItem[] = [];
+    public gamesAssociation: GameSelectableItem[] = [];
     private fullGamesList: Game[];
     private existingClassroomGames: ClassroomGame[];
+    public gameCellDefinitions: CellDefinition[];
 
     constructor(
         private classroomService: ClassroomsService,
@@ -29,7 +30,20 @@ export class AddGamesComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         public dialog: MatDialog
-        ) { }
+        ) {
+            this.gameCellDefinitions = [
+                {
+                    header: '',
+                    itemKey: 'image',
+                    isImage: true
+                },
+                {
+                    header: 'Juego',
+                    itemKey: 'viewName',
+                    isImage: false
+                }
+            ];
+        }
 
     public ngOnInit() {
         this.classroomId = this.route.snapshot.params['classroomId'];
@@ -38,7 +52,7 @@ export class AddGamesComponent implements OnInit {
             .subscribe((games: ClassroomGame[]) => {
                 this.existingClassroomGames = games;
                 this.gamesAssociation = games.map(g => {
-                    let result = new SelectableItem();
+                    let result = new GameSelectableItem();
                     result.id = g.game.id;
                     result.viewName = g.game.name;
                     result.isChecked = true;
@@ -48,14 +62,16 @@ export class AddGamesComponent implements OnInit {
                 this.gamesService.getGamesList()
                     .subscribe((games: Game[]) => {
                         let mappedGames = games.map(g => {
-                            let result = new SelectableItem();
+                            let result = new GameSelectableItem();
                             result.id = g.id;
                             result.viewName = g.name;
+                            result.image = g.image;
                             result.isChecked = false;
                             return result;
                         });
 
                         this.fullGamesList = games;
+                        this.gamesAssociation.forEach(g => g.image = mappedGames.find(x => x.id === g.id)?.image ?? '');
                         this.gamesAssociation = this.gamesAssociation.concat(mappedGames.filter(x => !this.gamesAssociation.some(y => y.id === x.id)));
                         this.dataLoaded = true;
                     });
@@ -102,8 +118,11 @@ export class AddGamesComponent implements OnInit {
         this.router.navigate(['/teachers/classrooms/', this.classroomId]);
     }
 
-    public returnGamesSelection(): void {
-        this.router.navigate(['/teachers/classrooms/', this.classroomId]);
+    public playGameButtonClicked(id: number): void {
+        this.router.navigate(['/teachers/classrooms', this.classroomId, 'games', id]);
     }
+}
 
+class GameSelectableItem extends SelectableItem {
+    image: string;
 }

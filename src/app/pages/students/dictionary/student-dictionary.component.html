@@ -1,0 +1,21 @@
+<div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-info">
+                <div class="row">
+                    <div class="col">
+                        <h4 class="card-title card-title-align-middle">Diccionario</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <app-multi-select-list *ngIf="dataLoaded" [(items)]="wordsAssociation"
+                    [cellDefinitions]="dictionaryCellDefinitions"
+                    [showCheckColumn]="false"
+                    (showItemButtonClicked)="showSelectedWord($event)">
+                </app-multi-select-list>
+                <button mat-raised-button color="primary" (click)="returnWordsSelection()"> Volver</button>
+            </div>
+        </div>
+    </div>
+</div>

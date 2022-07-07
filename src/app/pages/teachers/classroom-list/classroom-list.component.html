@@ -4,20 +4,23 @@
     <div>
         <button mat-button><a [routerLink]="['classrooms-form']">+ Añadir clase</a></button>
     </div>
-    <div class="row">
+
+    <div class="row align-items-center">
         <div fxFlex="25%" *ngFor="let classroom of classrooms">
-            <mat-card fxLayout="column">
-                <mat-card-title>
-                    <a [routerLink]="['./',classroom.id]">
-                        <p>
-                            {{classroom.name}}
-                        </p>
-                    </a>
-                    <button mat-icon-button class="mat-icon-show" style="float:right;" (click)="deleteClass(classroom.id)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </mat-card-title>
-            </mat-card>
+            <h5 class="card-header d-flex justify-content-between align-items-center">
+                <a [routerLink]="['./',classroom.id]">
+                    {{classroom.name}}
+                </a>
+                <button mat-icon-button [routerLink]="['./',classroom.id]">
+                    <mat-icon>remove_red_eye</mat-icon>
+                </button>
+                <button mat-icon-button (click)="deleteClass(classroom.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+
+                <!-- Wrap with <div>...buttons...</div> if you have multiple buttons -->
+              </h5>
+
         </div>
     </div>
 </div>

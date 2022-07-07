@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { QuizzGameComponent } from './games/quiz/quiz-game/quizz-game.component';
 import { MatCardModule } from '@angular/material/card';
-import { TwoSideMultiSelectComponent } from './two-side-multi-select/two-side-multi-select/two-side-multi-select.component';
+import { MultiSelectListComponent } from './multi-select-list/multi-select-list.component';
 import { ScrollingModule} from '@angular/cdk/scrolling';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
@@ -28,8 +28,8 @@ const components = [
     ClockComponent,
     MemoryGameComponent,
     QuizzGameComponent,
-    TwoSideMultiSelectComponent,
-    GameTimerComponent
+    MultiSelectListComponent,
+    GameTimerComponent,
 ]
 
 @NgModule({

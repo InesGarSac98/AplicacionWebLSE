@@ -22,6 +22,7 @@ import { AddGamesComponent } from './add-games/add-games.component';
 import { GameConfigurationComponent } from './game-configuration/game-configuration.component';
 import { QuizzGameConfigurationAddQuestionComponent } from './game-configuration/quizz-game-configuration-add-question/quizz-game-configuration-add-question.component';
 import { MemoryGameConfigurationComponent } from './game-configuration/memory-game-configuration/memory-game-configuration.component';
+import { TeacherDictionaryComponent } from './teacher-dictionary/teacher-dictionary.component';
 
 
 
@@ -48,7 +49,8 @@ import { MemoryGameConfigurationComponent } from './game-configuration/memory-ga
     AddGamesComponent,
     QuizzGameConfigurationAddQuestionComponent,
     MemoryGameConfigurationComponent,
-    GameConfigurationComponent
+    GameConfigurationComponent,
+    TeacherDictionaryComponent
   ]
 })
 export class TeachersModule {}

@@ -3,11 +3,9 @@ import { GameComponent } from '../students/game/game.component';
 import { ClassroomListComponent } from './classroom-list/classroom-list.component';
 import { ClassroomComponent } from './classroom/classroom/classroom.component';
 import { ClassroomFormComponent } from './classroom-form/classroom-form.component';
-import { GamesListComponent } from './games/game-list/games-list.component';
 import { ProfileComponent } from './profile/profile.component';
-import { AddWordsComponent } from './add-words/add-words.component';
-import { AddGamesComponent } from './add-games/add-games.component';
 import { GameConfigurationComponent } from './game-configuration/game-configuration.component';
+import { TeacherDictionaryComponent } from './teacher-dictionary/teacher-dictionary.component';
 
 export const TeachersRoutes: Routes = [
     {
@@ -47,18 +45,8 @@ export const TeachersRoutes: Routes = [
                         component: GameComponent
                     },
                     {
-                        path: 'add-words',
-                        pathMatch: 'full',
-                        component: AddWordsComponent
-                    },
-                    {
                         path: 'add-games',
                         children:[
-                            {
-                                path: '',
-                                pathMatch: 'full',
-                                component: AddGamesComponent
-                            },
                             {
                                 path: ':gameId',
                                 pathMatch: 'full',
@@ -69,5 +57,10 @@ export const TeachersRoutes: Routes = [
                 ]
             },
         ]
+    },
+    {
+        path: 'dictionary',
+        pathMatch: 'full',
+        component: TeacherDictionaryComponent
     },
 ];

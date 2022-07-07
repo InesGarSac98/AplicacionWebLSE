@@ -47,14 +47,10 @@ export class ProfileComponent implements OnInit {
         this.studentService.getStudentLoged()
             .subscribe((student: Student) => {
                 this.student = student;
-                this.getStatisticsStudentLoged();
-                console.log(this.student.id)
+                this.getStudentStatistics();
                 this.classroomService.getClassroom(student.classroomId)
                     .subscribe((classroom: Classroom) => this.classroom = classroom);
         });
-
-
-
     }
 
     icons: Icons[] = [
@@ -65,7 +61,7 @@ export class ProfileComponent implements OnInit {
         {value: '5', viewValue: 'Git', image: 'https://www.itsolutionstuff.com/category-images/git.png'}
       ];
 
-    private getStatisticsStudentLoged() {
+    private getStudentStatistics() {
         this.statisticsService.getStudentStatistics(this.student.id).subscribe((statistics: Statistics[]) => {
             this.totalWins = statistics.filter(x => x.status === GameStatuses.WIN).length;
             this.totalLose = statistics.filter(x => x.status === GameStatuses.LOSE).length;

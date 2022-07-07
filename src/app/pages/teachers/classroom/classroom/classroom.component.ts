@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Classroom } from 'src/api/models/classroom.model';
 import { ClassroomGame } from 'src/api/models/classroomGame';
 import { ClassroomWord } from 'src/api/models/classroomWord.model';
 import { Game } from 'src/api/models/game.model';
@@ -22,11 +23,12 @@ export class ClassroomComponent implements OnInit {
 
     public classroomId: number;
     public wordId: number;
+    public initialTab: number;
     public dataLoaded: boolean = false;
     public userName: string;
     public studentsClassroomList: IStudentClassroomList[];
     public wordsClassroomList: IWordClassroomList[];
-    public classroom: IStudentClassroomList[];
+    public classroom: IClassroom;
     public gamesClassroomList: IGameClassroomList[];
 
     //list
@@ -55,12 +57,18 @@ export class ClassroomComponent implements OnInit {
     public ngOnInit(): void{
         this.classroomId = this.route.snapshot.params['classroomId'];
 
+        let tabQueryParam = this.route.snapshot.queryParams['tab'];
+        this.initialTab = (tabQueryParam === null || tabQueryParam === undefined) ?
+            this.initialTab = 0 :
+            this.initialTab = parseInt(tabQueryParam);
+
         this.userService.getUserLoged()
             .subscribe((user: User) => this.userName = user.name);
 
+        this.loadClassroom();
         this.loadStudents();
         this.loadWords();
-        this.loadGames();
+        //this.loadGames();
     }
 
     public searchTextChange(searchText: string, dataSource: MatTableDataSource<any>): void {
@@ -95,10 +103,6 @@ export class ClassroomComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result =>{
             console.log('The dialog was closed')
         });
-    }
-
-    public playGameButtonClicked(id: number): void {
-        this.router.navigate(['/teachers/classrooms', this.classroomId, 'games', id]);
     }
 
     public showStudentButtonClicked(id: number): void {
@@ -150,6 +154,17 @@ export class ClassroomComponent implements OnInit {
             });
     }
 
+    private loadClassroom() {
+        this.classroomService.getClassroom(this.classroomId)
+            .subscribe((classroom: Classroom) => {
+                this.classroom = new IClassroom();
+                this.classroom.id = classroom.id;
+                this.classroom.name = classroom.name;
+                this.classroom.code = classroom.classroomCode;
+                this.dataLoaded = true;
+            });
+    }
+
     private loadStudents() {
         this.classroomService.getStudentsListClassroom(this.classroomId)
             .subscribe((students: Student[]) => {
@@ -189,6 +204,12 @@ export class IStudentClassroomList {
     id: number;
     name: string;
     image: string;
+}
+
+class IClassroom {
+    id: number;
+    name: string;
+    code: string;
 }
 
 export class IWordList {

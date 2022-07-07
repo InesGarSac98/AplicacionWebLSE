@@ -3,7 +3,7 @@
 </div>
 
 <mat-nav-list appAccordion>
-    <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="selected" group="{{menuitem.state}}">
+    <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="" class="{{ rla.isActive ? 'selected' : ''}}" group="{{menuitem.state}}" #rla="routerLinkActive">
         <a class="" appAccordionToggle [routerLink]="['/' + menuitem.state]" *ngIf="menuitem.type === 'link'">
             <mat-icon>{{ menuitem.icon }}</mat-icon>
             <span>{{ menuitem.name }}</span>

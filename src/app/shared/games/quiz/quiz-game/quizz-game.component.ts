@@ -27,7 +27,7 @@ export class QuizzGameComponent implements OnInit {
 
     public cardQuiz: IQuiz[];
     public rotateClass: boolean = true;
-    public score: number;
+    public score: number = 0;
     public gameFinished: boolean = false;
     public isAbandoned: boolean = false;
     public isTimeOver: boolean = false;
@@ -69,7 +69,7 @@ export class QuizzGameComponent implements OnInit {
             }
             else if (user.role === 'TEACHER') {
                 this.classroomId = this.route.snapshot.params['classroomId'];
-                this.goBackLink = '/teachers/classrooms/' + this.classroomId ;
+                this.goBackLink = '/teachers/classrooms/' + this.classroomId;
                 this.getTeacherQuestions();
             }
         });
