@@ -1,21 +1,10 @@
-.cards{
-    width: 50%;
-    height: 50%;
-    margin: auto;
-}
-
-img{
-    margin-left: 20%;
-}
-
 h1{
     text-align: center;
 }
 
-mat-progress-spinner{
-    margin: auto;
-}
-
-mat-card-title{
-    font-size: 20%;
+img{
+    height: fit-content;
+    vertical-align: middle;
+    align-items: center;
+    width: 40%;
 }

@@ -31,6 +31,7 @@ export class QuizzGameComponent implements OnInit {
     public gameFinished: boolean = false;
     public isAbandoned: boolean = false;
     public isTimeOver: boolean = false;
+    public isWin: boolean = false;
     public currentConfigurationId: number;
     public currentConfiguration: QuizzGameClassroomConfiguration;
     public currentQuestions: QuizzGameQuestion[];
@@ -47,7 +48,7 @@ export class QuizzGameComponent implements OnInit {
     private goBackLink: string;
     private gamePlayId: number;
 
-    private readonly MAX_QUESTIONS = 3;
+    private MAX_QUESTIONS: number;
 
     constructor(
         private route: ActivatedRoute,
@@ -146,6 +147,7 @@ export class QuizzGameComponent implements OnInit {
                 this.gameFinished = false;
                 this.isAbandoned = false;
                 this.isTimeOver = false;
+                this.isWin = false;
                 this.currentQuiz = 0;
                 this.answerSelected = false;
                 this.correctAnswers = 0;
@@ -164,6 +166,7 @@ export class QuizzGameComponent implements OnInit {
 
             this.gameTimer.stopTimer();
             if (this.currentQuiz >= this.MAX_QUESTIONS - 1 && this.correctAnswers > this.MAX_QUESTIONS / 2){
+                this.isWin = true;
                 const winEvent = this.quizzGameEventGeneratorService.generateWinEvent(
                     this.cardQuiz, this.gameId, this.studentId, this.score,
                     this.gameTimer.getLeftTime(), this.gamePlayId);
@@ -201,6 +204,7 @@ export class QuizzGameComponent implements OnInit {
             .subscribe((currentConfiguration: QuizzGameClassroomConfiguration) => {
                 this.currentConfiguration = currentConfiguration;
                 this.currentConfigurationId = currentConfiguration.id;
+                this.MAX_QUESTIONS = currentConfiguration.numberOfQuestions;
                 this.getQuizzGameQuestions();
             });
     }

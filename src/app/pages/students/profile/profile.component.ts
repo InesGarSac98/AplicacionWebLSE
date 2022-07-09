@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
     public averageScore: number;
     public totalTime: number;
     public averageTime: number;
+    public alert:boolean = false;
 
     constructor(
         private userService: UsersService,
@@ -43,6 +44,7 @@ export class ProfileComponent implements OnInit {
     public ngOnInit(): void {
         this.userService.getUserLoged()
             .subscribe((user: User) => this.user = user);
+            this.alert = true;
 
         this.studentService.getStudentLoged()
             .subscribe((student: Student) => {
@@ -53,13 +55,6 @@ export class ProfileComponent implements OnInit {
         });
     }
 
-    icons: Icons[] = [
-        {value: '1', viewValue: 'Laravel', image: 'https://www.itsolutionstuff.com/category-images/laravel.svg'},
-        {value: '2', viewValue: 'Angular', image: 'https://www.itsolutionstuff.com/category-images/angular.svg'},
-        {value: '3', viewValue: 'Bootstrap', image: 'https://www.itsolutionstuff.com/category-images/bootstrap.svg'},
-        {value: '4', viewValue: 'JS', image: 'https://www.itsolutionstuff.com/category-images/javascript.svg'},
-        {value: '5', viewValue: 'Git', image: 'https://www.itsolutionstuff.com/category-images/git.png'}
-      ];
 
     private getStudentStatistics() {
         this.statisticsService.getStudentStatistics(this.student.id).subscribe((statistics: Statistics[]) => {

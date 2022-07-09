@@ -1,6 +1,10 @@
 <div class="clock">
     <app-clock></app-clock>
 </div>
+<p class="info">
+    {{"Nombre: "+ userName}} <br>
+    {{"Curso: "+ userClassroom}}
+</p>
 
 <mat-nav-list appAccordion>
     <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="" class="{{ rla.isActive ? 'selected' : ''}}" group="{{menuitem.state}}" #rla="routerLinkActive">
@@ -16,6 +20,4 @@
 
 </mat-nav-list>
 
-<div>
-    <button mat-icon-button class="mat-icon-exit" (click)="openDialog()"><mat-icon>exit_to_app</mat-icon></button>
-</div>
+

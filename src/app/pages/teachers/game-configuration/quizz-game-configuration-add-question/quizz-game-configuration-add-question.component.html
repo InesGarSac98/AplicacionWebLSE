@@ -9,7 +9,7 @@
                         </button>
                     </div>
                     <div class="col">
-                        <h4 class="card-title card-title-align-middle">Patataaaaaaaaaaaaaaaaaaaaaaa</h4>
+                        <h4 class="card-title card-title-align-middle">Configuración</h4>
                     </div>
                 </div>
             </div>
@@ -17,8 +17,14 @@
             <div class="card-body">
                 <form *ngIf="formGroupIsLoaded" [formGroup]="formGroup" (submit)="saveGameConfiguration()">
                     <div class="row">
-                        <mat-label>Tiempo de Juego</mat-label>
+                        <div class="col">
+                            <mat-label>Tiempo de Juego</mat-label>
                             <input formControlName="time" type="number">
+                        </div>
+                        <div class="col">
+                            <mat-label>Número de preguntas</mat-label>
+                            <input formControlName="numberOfQuestions" type="number" [min]="0" [max]="questionsFormArray.controls.length">
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col">

@@ -23,7 +23,6 @@
 .button-flex-container {
     display: flex;
     width: auto;
-    justify-content: flex-end;
     float: left;
 }
 
@@ -35,4 +34,8 @@ mat-form-field{
 
 .button-flex-container{
     float: right;
+}
+
+.btn-login-register{
+    padding-right: 2rem;
 }

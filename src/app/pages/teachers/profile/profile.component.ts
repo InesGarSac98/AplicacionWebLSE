@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Classroom } from 'src/api/models/classroom.model';
 import { GameStatuses } from 'src/api/models/GameEvents/gameStatuses';
@@ -35,6 +35,7 @@ export class ProfileComponent implements OnInit {
     public student: Student;
     public classrooms: IClassroomList[];
 
+    @ViewChild('toastPrueba') elToast :ElementRef;
 
     constructor(
         private userService: UsersService,
@@ -46,6 +47,7 @@ export class ProfileComponent implements OnInit {
     }
 
     public ngOnInit(): void {
+        //this.elToast.toast('show');
         this.userService.getUserLoged()
             .subscribe((user: User) => {
                 this.teacherService.getTeacherByUserId(user.id)

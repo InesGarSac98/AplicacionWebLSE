@@ -44,7 +44,7 @@ export class ClassroomListComponent implements OnInit {
                                     result.numStudents = c.students.length;
                                     return result;
                                 }).sort((a, b) => a.name > b.name ? 1 : -1);
-                                this.classroomsService.findWordInArasaac('patata').subscribe( x => console.log(x))
+                                //this.classroomsService.findWordInArasaac('patata').subscribe( x => console.log(x))
                             });
                     })
             });

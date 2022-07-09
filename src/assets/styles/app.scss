@@ -24,8 +24,8 @@ body {
   font-family: $bodyfont;
   margin: 0;
   overflow-x: hidden;
-  height: auto;
-  width: auto;
+//   height: auto;
+//   width: auto;
 
   //   background-color:#E3F2FD!important;
 
@@ -144,10 +144,10 @@ td, th {
 .mat-raised-button:hover{
     background-color: #2196F3;
 }
-.mat-icon{
-    color: #2196F3;
+// .mat-icon{
+//     color: #2196F3;
 
-}
-.mat-icon:hover{
-    color: #94ccf9;
-}
+// }
+// .mat-icon:hover{
+//     color: #94ccf9;
+// }

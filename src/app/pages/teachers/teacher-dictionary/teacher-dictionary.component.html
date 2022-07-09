@@ -1,3 +1,26 @@
-<p>
-  teacher-dictionary works!
-</p>
+<div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-info">
+                <div class="row">
+                    <div class="col center-block">
+                        <h4 class="card-title card-title-align-middle">Diccionario</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <app-multi-select-list *ngIf="dataLoaded" [(items)]="wordsAssociation"
+                    [cellDefinitions]="dictionaryCellDefinitions"
+                    [showIsCheckedFilter]="false"
+                    [showCheckColumn]="false"
+                    (showItemButtonClicked)="showSelectedWord($event)">
+
+                    <button class="arasaac-btn" additionalButton matSuffix mat-raised-button (click)="showSelectedWord($event)">Buscar en ARASAAC</button>
+                </app-multi-select-list>
+                <button mat-raised-button color="primary" (click)="returnWordsSelection()"> Volver</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

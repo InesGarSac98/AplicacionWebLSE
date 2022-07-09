@@ -11,7 +11,6 @@ import { Student } from 'src/api/models/student.model';
 import { User } from 'src/api/models/user.model';
 import { ClassroomsService } from 'src/api/services/classrooms-service/classrooms.service';
 import { UsersService } from 'src/api/services/users-service/users.service';
-import { GameDetailDialogComponent } from 'src/app/shared/dialog/game-detail-dialog/game-detail-dialog.component';
 import { WordDetailsDialogComponent } from 'src/app/shared/dialog/word-details-dialog/word-details-dialog.component';
 
 @Component({
@@ -88,36 +87,6 @@ export class ClassroomComponent implements OnInit {
                 }
             }
         );
-    }
-
-    public showGameButtonClicked(id: number): void {
-        let dialogRef = this.matDialog.open(
-            GameDetailDialogComponent,
-            {
-                data: {
-                    game: this.gamesClassroomList.find(x => x.id === id)
-                }
-            }
-        );
-
-        dialogRef.afterClosed().subscribe(result =>{
-            console.log('The dialog was closed')
-        });
-    }
-
-    public showStudentButtonClicked(id: number): void {
-        /*let dialogRef = this.matDialog.open(
-            GameDetailDialogComponent,
-            {
-                data: {
-                    game: this.fullGamesList.find(x => x.id === id)
-                }
-            }
-        );
-
-        dialogRef.afterClosed().subscribe(result =>{
-            console.log('The dialog was closed')
-        });*/
     }
 
     private setDataSourceSearchTextFilterPredicate(dataSource: MatTableDataSource<any>, searchPropertyName: string) {

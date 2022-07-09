@@ -4,16 +4,19 @@ import { Router } from '@angular/router';
 import { Word } from 'src/api/models/word.model';
 
 @Component({
-  selector: 'app-word-details-dialog',
-  templateUrl: './word-details-dialog.component.html',
-  styleUrls: ['./word-details-dialog.component.scss']
+  selector: 'app-dialog-template',
+  templateUrl: './dialog-template.component.html',
+  styleUrls: ['./dialog-template.component.scss']
 })
-export class WordDetailsDialogComponent implements OnInit {
+export class DialogTemplateComponent implements OnInit {
 
     public word: Word;
+    @Input() public showEditButton: boolean = true;
+    @Input() public showWordDetails: boolean = true;
+    @Input() public closeSession: boolean = true;
 
     constructor(private router: Router,
-        public dialogRef: MatDialogRef<WordDetailsDialogComponent>,
+        public dialogRef: MatDialogRef<DialogTemplateComponent>,
         @Inject (MAT_DIALOG_DATA) public data: any) {
             this.word = data.word;
         }
@@ -28,5 +31,12 @@ export class WordDetailsDialogComponent implements OnInit {
     public close() {
         this.dialogRef.close();
     }
+
+    public acceptEndSession() {
+        this.dialogRef.close();
+        localStorage.removeItem('token');
+        this.router.navigate(['/login']);
+    }
+
 
 }

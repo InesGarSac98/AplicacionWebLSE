@@ -21,9 +21,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DialogsComponent } from './shared/dialog/dialogs/dialogs.component';
 import { MatButtonModule } from '@angular/material/button';
 import { WordDetailsDialogComponent } from './shared/dialog/word-details-dialog/word-details-dialog.component';
-import { GameDetailDialogComponent } from './shared/dialog/game-detail-dialog/game-detail-dialog.component';
-import { MultiSelectListComponent } from './shared/multi-select-list/multi-select-list.component';
 import { DeleteComponent } from './shared/dialog/dialogs/delete/delete.component';
+import { DialogTemplateComponent } from './shared/dialog/dialog-template/dialog-template.component';
 
 
 @NgModule({
@@ -36,7 +35,7 @@ import { DeleteComponent } from './shared/dialog/dialogs/delete/delete.component
         DialogsComponent,
         DeleteComponent,
         WordDetailsDialogComponent,
-        GameDetailDialogComponent
+        DialogTemplateComponent
     ],
     entryComponents:[DialogsComponent, WordDetailsDialogComponent],
     imports: [

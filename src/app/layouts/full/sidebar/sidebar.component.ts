@@ -5,6 +5,10 @@ import { UsersService } from 'src/api/services/users-service/users.service';
 import { User } from 'src/api/models/user.model';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogsComponent } from 'src/app/shared/dialog/dialogs/dialogs.component';
+import { StudentsService } from 'src/api/services/students-service/students.service';
+import { Student } from 'src/api/models/student.model';
+import { Classroom } from 'src/api/models/classroom.model';
+import { ClassroomsService } from 'src/api/services/classrooms-service/classrooms.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -13,6 +17,9 @@ import { DialogsComponent } from 'src/app/shared/dialog/dialogs/dialogs.componen
 export class AppSidebarComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
   public userName: string;
+  public student: Student;
+  public classroom: Classroom;
+  public userClassroom: number;
 
   private _mobileQueryListener: () => void;
 
@@ -21,6 +28,8 @@ export class AppSidebarComponent implements OnDestroy {
     media: MediaMatcher,
     public menuItems: MenuItems,
     private userService: UsersService,
+    private studentService: StudentsService,
+    private classroomService: ClassroomsService,
     public dialog: MatDialog
   ) {
     this.mobileQuery = media.matchMedia('(min-width: 768px)');
@@ -38,6 +47,15 @@ export class AppSidebarComponent implements OnDestroy {
             this.userName = user.name;
             this.menuItems.setUserLoggedRole(user.role);
         });
+        this.studentService.getStudentLoged()
+            .subscribe((student: Student) => {
+                this.student = student;
+                this.classroomService.getClassroom(student.classroomId)
+                    .subscribe((classroom: Classroom) => this.classroom = classroom);
+                    this.userClassroom = student.classroomId;
+        });
+
+
     }
     public openDialog(): void{
         let dialogRef = this.dialog.open(DialogsComponent);

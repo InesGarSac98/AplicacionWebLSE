@@ -88,8 +88,13 @@ use profile section -> donde aparece el nombre
     border-top-color: white;
 }
 
-div > .mat-icon-exit{
-    position: absolute;
-    bottom: 3%;
-    right: 5%;
+.info{
+    height: 45px;
+    padding: 0 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    display: flex;
+    font-size: 15px;
+    color: $themecolor-alt;
+    font-weight: bold;
 }

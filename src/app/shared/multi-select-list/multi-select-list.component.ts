@@ -31,6 +31,7 @@ export class MultiSelectListComponent implements OnInit, AfterViewInit {
     public radioButtonFilter: string = 'filterAll';
 	@Input() public items: SelectableItem[] = [];
     @Input() public cardTitle: string;
+    @Input() public showIsCheckedFilter: boolean = true;
     @Input() public showCheckColumn: boolean = true;
     @Input() public showEditButton: boolean = true;
     @Input() public showDetailsButton: boolean = true;

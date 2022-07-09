@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, Routes } from '@angular/router';
 import { User } from 'src/api/models/user.model';
@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
     public formGroup: FormGroup;
     public hide = true;
     private message ='';
+
 
     public ngOnInit() {
         this.formGroup = new FormGroup({

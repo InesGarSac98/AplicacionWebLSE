@@ -6,7 +6,6 @@ import { Game } from 'src/api/models/game.model';
 import { ClassroomGamesService } from 'src/api/services/classroomGames-service/classroomGames.service';
 import { ClassroomsService } from 'src/api/services/classrooms-service/classrooms.service';
 import { GamesService } from 'src/api/services/games-service/games.service';
-import { GameDetailDialogComponent } from 'src/app/shared/dialog/game-detail-dialog/game-detail-dialog.component';
 import { CellDefinition, SelectableItem } from 'src/app/shared/multi-select-list/multi-select-list.component';
 
 @Component({
@@ -78,26 +77,12 @@ export class AddGamesComponent implements OnInit {
             });
     }
 
-    public showSelectedGame(id: number): void {
-        let dialogRef = this.dialog.open(
-            GameDetailDialogComponent,
-            {
-                data: {
-                    game: this.fullGamesList.find(x => x.id === id)
-                }
-            }
-        );
-
-        dialogRef.afterClosed().subscribe(result =>{
-            console.log('The dialog was closed')
-        });
-    }
 
     public editSelectedGameConfiguration(id: number): void {
         this.router.navigate(['/teachers/classrooms/' + this.classroomId + '/add-games/' + id]);
     }
 
-    public async saveGamesSelection(): Promise<void> {
+    public async saveGamesSelection(id: number): Promise<void> {
 
         const gameIdsToDelete = this.existingClassroomGames
             .filter(x => !this.gamesAssociation.find(y => y.id === x.gameId)?.isChecked)
@@ -115,7 +100,8 @@ export class AddGamesComponent implements OnInit {
             await this.classroomGamesService.createClassroomGame(wordId, this.classroomId).toPromise();
         }
 
-        this.router.navigate(['/teachers/classrooms/', this.classroomId]);
+        this.router.navigate(['/teachers/classrooms/' + this.classroomId + '/add-games/' + id]);
+        window.location.reload();
     }
 
     public playGameButtonClicked(id: number): void {

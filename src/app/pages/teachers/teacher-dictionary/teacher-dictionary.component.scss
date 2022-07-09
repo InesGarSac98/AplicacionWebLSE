@@ -1,0 +1,36 @@
+#cuadricula {
+    display: grid;
+    grid-template-columns:repeat(4, minmax(auto,auto));
+    grid-template-rows:repeat(auto-fill, 100px);
+    grid-auto-flow: row;  /* or 'column', 'row dense', 'column dense' */
+    width:50%;
+    // max-width:500px;
+    // min-width:270px;
+    height: 300px;
+    margin:0 auto;
+  }
+.arasaac-btn{
+    background-color: rgb(139, 195, 74);
+}
+
+  .item p {
+    justify-self: center;
+    align-self: center;
+    color:white;
+  }
+
+  /*unimportant stuff*/
+  body {
+    font-family: Verdana, Geneva, sans-serif;
+    line-height: 2em;
+    background-color:#222;
+    color:#777;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .radios{width:50%;
+    max-width:500px;
+    min-width:270px;
+    margin:1em auto;
+  }

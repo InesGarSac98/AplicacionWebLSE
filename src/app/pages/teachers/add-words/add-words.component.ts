@@ -107,5 +107,8 @@ export class AddWordsComponent implements OnInit {
         }
 
         this.router.navigate(['/teachers/classrooms/', this.classroomId]);
+
+        //TODO: Sacar un modal avisando de que se han guardado
+
     }
 }

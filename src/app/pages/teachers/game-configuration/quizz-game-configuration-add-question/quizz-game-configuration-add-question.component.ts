@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ClassroomWord } from 'src/api/models/classroomWord.model';
 import { QuizzGameAnswer } from 'src/api/models/quizzGameAnswer.model';
 import { QuizzGameClassroomConfiguration } from 'src/api/models/quizzGameClassroomConfiguration.model';
@@ -27,6 +27,16 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
     public currentQuestions: QuizzGameQuestion[];
     public formGroupIsLoaded: boolean = false;
 
+    private readonly numberOfQuestionsValidator: ValidatorFn = (abstractControl: AbstractControl) => {
+        const fg = abstractControl as FormGroup;
+        const numberOfQuestions = fg?.get('numberOfQuestions')?.value;
+        const createdQuestions = fg?.get('questions')?.value?.length;
+
+        return numberOfQuestions !== null && createdQuestions !== null && numberOfQuestions <= createdQuestions
+            ? null
+            : { numberOfQuestions: true };
+    };
+
     public get questionsFormArray() {
         return (this.formGroup.controls.questions as FormArray);
     }
@@ -51,7 +61,7 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
                             (currentQuestions: QuizzGameQuestion[]) => {
                                 this.currentQuestions = currentQuestions;
                             },
-                            () => {},
+                            () => { },
                             () => this.loadFormGroup()
                         );
                 },
@@ -96,17 +106,23 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
     }
 
     public deleteCard(questionId: number, index: number) {
-        this.quizzGameQuestionService.deleteQuizzGameQuestion(questionId)
-            .subscribe(() => {
-                (this.formGroup.controls.questions as FormArray).removeAt(index);
-            });
+        if (this.currentConfiguration) {
+            this.quizzGameQuestionService.deleteQuizzGameQuestion(questionId)
+                .subscribe(() => {
+                    (this.formGroup.controls.questions as FormArray).removeAt(index);
+                });
+        }
+        else {
+            (this.formGroup.controls.questions as FormArray).removeAt(index);
+        }
     }
 
     public saveGameConfiguration() {
         const config = {
             gameId: this.gameId,
             classroomId: this.classroomId,
-            time: this.formGroup.controls.time.value
+            time: this.formGroup.controls.time.value,
+            numberOfQuestions: this.formGroup.controls.numberOfQuestions.value
         } as QuizzGameClassroomConfiguration;
 
         if (!this.currentConfiguration) {
@@ -128,8 +144,12 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
         this.formGroup = new FormGroup({
             id: new FormControl(this.currentConfiguration ? this.currentConfiguration.id : ''),
             time: new FormControl(this.currentConfiguration ? this.currentConfiguration.time : '', [Validators.required]),
+            numberOfQuestions: new FormControl(
+                this.currentConfiguration ? this.currentConfiguration.numberOfQuestions : '',
+                [Validators.required, Validators.min(1)]
+            ),
             questions: new FormArray(this.currentConfiguration ? this.getCurrentQuestionsFormArray() : [])
-        });
+        }, { validators: this.numberOfQuestionsValidator });
         this.formGroupIsLoaded = true;
     }
 
@@ -150,7 +170,7 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
                 this.quizzGameQuestionService.createQuizzGameQuestion(question);
 
             observableSaveQuestion.subscribe((quizzGameQuestion: QuizzGameQuestion) => {
-                    this.saveAnswers((questionFormControl as FormGroup).controls.answers, quizzGameQuestion);
+                this.saveAnswers((questionFormControl as FormGroup).controls.answers, quizzGameQuestion);
             });
 
         }

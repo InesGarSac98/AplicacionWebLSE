@@ -1,24 +1,16 @@
-<!-- <div class="content">
-  <div fxLayout="column" >
-      <mat-card >
-          <mat-card-header>
-              <mat-card-title>
-                  Perfil
-              </mat-card-title>
-          </mat-card-header>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-success alert-dismissable fade show" data-autohide="true" data-delay="3000" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                Bienvenido
+            </div>
+        </div>
+    </div>
 
-
-
-          <img mat-card-image class="img-profile" src="assets/images/users/monigote.png">
-          <mat-card-content>
-              Nombre del usuario: <span class="name" *ngIf="user">{{ user.name }}</span>
-              <br>Clase a la que pertenece: <span class="name" *ngIf="classroom">{{ classroom.name }}</span>
-
-          </mat-card-content>
-      </mat-card>
-  </div>
-
-</div> -->
+</div>
 
 <div *ngIf="statistiscLoaded" class="container-fluid">
     <div class="row">
@@ -33,7 +25,8 @@
                 </div>
                 <div class="card-footer">
                     <div class="stats">
-                        Ratio de victorias: {{totalWins}}/{{totalGameplays}} ({{(totalGameplays === 0 ? 0 : (100 * totalWins / totalGameplays)).toFixed(0)}} %)
+                        Ratio de victorias: {{totalWins}}/{{totalGameplays}} ({{(totalGameplays === 0 ? 0 : (100 *
+                        totalWins / totalGameplays)).toFixed(0)}} %)
                     </div>
                 </div>
             </div>
@@ -49,8 +42,10 @@
                 </div>
                 <div class="card-footer">
                     <div class="stats">
-                        Ratio de derrotas: {{totalLose}}/{{totalGameplays}} ({{(totalGameplays === 0 ? 0 : (100 * totalLose / totalGameplays)).toFixed(0)}} %) <br>
-                        Ratio de abandonos: {{totalAbandone}}/{{totalGameplays}} ({{(totalGameplays === 0 ? 0 : (100 * totalAbandone / totalGameplays)).toFixed(0)}} %)
+                        Ratio de derrotas: {{totalLose}}/{{totalGameplays}} ({{(totalGameplays === 0 ? 0 : (100 *
+                        totalLose / totalGameplays)).toFixed(0)}} %) <br>
+                        Ratio de abandonos: {{totalAbandone}}/{{totalGameplays}} ({{(totalGameplays === 0 ? 0 : (100 *
+                        totalAbandone / totalGameplays)).toFixed(0)}} %)
 
                     </div>
                 </div>
@@ -100,7 +95,9 @@
                 </div>
                 <div class="card-body">
                     <p class="card-category">
-                        <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
+                        <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today
+                        sales.
+                    </p>
                 </div>
                 <div class="card-footer">
                     <div class="stats">
@@ -149,4 +146,3 @@
     </div>
 
 </div>
-

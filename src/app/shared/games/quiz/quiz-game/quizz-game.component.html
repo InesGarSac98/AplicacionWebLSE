@@ -9,16 +9,16 @@
         </div>
         <div class="col"><strong>Puntuación:</strong> {{score}}</div>
     </div>
-    <div [ngClass]="rotateClass ? 'quizz-content' : ''" *ngIf="this.cardQuiz" cols="2" rowHeight="2:1">
+    <div  *ngIf="this.cardQuiz" cols="2" rowHeight="2:1">
         <div class="row" *ngIf="!gameFinished">
-                <div>
+                <div class="question">
                     <h4>{{cardQuiz[currentQuiz].question}}</h4>
                     <img *ngIf="cardQuiz[currentQuiz].isImage" [src]="cardQuiz[currentQuiz].questionImg" />
                 </div>
                 <div class="list-group">
                     <div class="mt-4 d-flex">
                         <div *ngFor="let answer of cardQuiz[currentQuiz].answer">
-                            <label>
+                            <label [ngClass]="rotateClass ? 'quizz-content' : ''">
                                 <div class="list-group-answers" [correctAnswer]="answer.correct">
                                     <input type="radio" name="options" (change)="onAnswer(answer)" [disabled]="answerSelected">
                                     <img *ngIf="answer.isImage" [src]="answer.option">
@@ -38,11 +38,11 @@
         </div>
 
     </div>
-    <div *ngIf="gameFinished && !(isTimeOver || isAbandoned)">
-        <h1>HAS GANADO!!</h1>
+    <div *ngIf="gameFinished && isWin && !(isTimeOver || isAbandoned)">
+        <h4>El juego ha terminado, ¿quieres volver a jugar?</h4>
     </div>
-    <div *ngIf="gameFinished && (isTimeOver || isAbandoned)">
-        <h1>HAS PERDIDO!!</h1>
+    <div *ngIf="gameFinished && (!isWin || isTimeOver || isAbandoned)">
+        <h4>¡Vuelve a intentarlo de nuevo!</h4>
     </div>
     <br>
     <div>
