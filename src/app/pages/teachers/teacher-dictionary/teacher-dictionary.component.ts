@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ClassroomWord } from 'src/api/models/classroomWord.model';
 import { Word } from 'src/api/models/word.model';
-import { ClassroomWordsService } from 'src/api/services/classroomWords-service/classroomWords.service';
+import { TeachersService } from 'src/api/services/teachers-service/teachers.service';
 import { WordsService } from 'src/api/services/words-service/words.service';
-import { WordDetailsDialogComponent } from 'src/app/shared/dialog/word-details-dialog/word-details-dialog.component';
-import { CellDefinition, SelectableItem } from 'src/app/shared/multi-select-list/multi-select-list.component';
+import { AppComponent } from 'src/app/app.component';
+import { DialogButton, DialogTemplateComponent } from 'src/app/shared/dialog/dialog-template/dialog-template.component';
+import { CellDefinition } from 'src/app/shared/multi-select-list/multi-select-list.component';
+import { NotificationComponent } from 'src/app/shared/notification/notification.component';
 
 @Component({
   selector: 'app-teacher-dictionary',
@@ -15,20 +16,29 @@ import { CellDefinition, SelectableItem } from 'src/app/shared/multi-select-list
 })
 
 export class TeacherDictionaryComponent implements OnInit {
-    public classroomId: number;
+    public teacherId: number;
     public dataLoaded: boolean = false;
     public wordsAssociation: WordItemList[] = [];
     private fullWordsList: Word[];
-    private existingClassroomWords: ClassroomWord[];
     public dictionaryCellDefinitions: CellDefinition[];
+    public arasaacWord: ArasaacWord | null;
+    public wordToShowDetails: Word;
+    public arasaacDialogButtons: DialogButton[];
+    private notifications: NotificationComponent;
+
+    @ViewChild('searchInArasaacDialogTemplate') public searchInArasaacDialogTemplate: TemplateRef<any>;
+    @ViewChild('wordDetailsDialogTemplate') public wordDetailsDialogTemplate: TemplateRef<any>;
 
     constructor(
-        private classroomWordsService: ClassroomWordsService,
+        app: AppComponent,
         private wordsService: WordsService,
-        private route: ActivatedRoute,
         private router: Router,
-        public dialog: MatDialog
+        private route: ActivatedRoute,
+        public dialog: MatDialog,
+        private teacherService: TeachersService
         ) {
+            this.notifications = app.getNotificationsComponent();
+
             this.dictionaryCellDefinitions = [
                 {
                     header: 'Palabra',
@@ -41,11 +51,21 @@ export class TeacherDictionaryComponent implements OnInit {
                     isImage: false
                 }
             ];
+
+            this.arasaacDialogButtons = [
+                {
+                    text: 'Añadir',
+                    clicked: () => this.saveWordFromArasaac()
+                },
+                {
+                    text: 'Salir',
+                    clicked: () => this.closeArasaacDialog()
+                }
+            ]
         }
 
     public ngOnInit() {
-        this.classroomId = this.route.snapshot.params['classroomId'];
-
+        this.teacherService.getTeacherLoged().subscribe(x => this.teacherId = x.id);
 
         this.wordsService.getWordsList()
             .subscribe((words: Word[]) => {
@@ -66,40 +86,70 @@ export class TeacherDictionaryComponent implements OnInit {
 
     public showSelectedWord(id: number): void {
         //this.wordsService.getWord(name)
+        const word = this.fullWordsList.find(x => x.id === id);
 
-        let dialogRef = this.dialog.open(
-            WordDetailsDialogComponent,
+        if (!word) return;
+
+        this.wordToShowDetails = word;
+
+        this.dialog.open(
+            DialogTemplateComponent,
             {
                 data: {
-                    word: this.fullWordsList.find(x => x.id === id)
+                    template: this.wordDetailsDialogTemplate,
+                    dialogButtons: [],
+                    dialogTitle: word.name
                 }
             }
         );
-
-        dialogRef.afterClosed().subscribe(result =>{
-            console.log('The dialog was closed')
-        });
     }
 
     public showWordFromArasaac(id: number): void {
-
         let dialogRef = this.dialog.open(
-            WordDetailsDialogComponent,
+            DialogTemplateComponent,
             {
                 data: {
-                    word: this.fullWordsList.find(x => x.id === id)
+                    template: this.searchInArasaacDialogTemplate,
+                    dialogButtons: this.arasaacDialogButtons,
+                    dialogTitle: 'Buscar en ARASAAC'
                 }
             }
         );
-
-        dialogRef.afterClosed().subscribe(result =>{
-            console.log('The dialog was closed')
-        });
+        dialogRef.afterClosed().subscribe(() => this.arasaacWord = null);
     }
 
 
     public returnWordsSelection():void{
         this.router.navigate(['/students/profile/']);
+    }
+
+    public searchInArasaac(text: string): void {
+        this.wordsService.findWordInArasaac(text)
+            .subscribe((arasaacWord: ArasaacWord) => {
+                this.arasaacWord = arasaacWord;
+            });
+    }
+
+    public saveWordFromArasaac(): void {
+        if (!this.arasaacWord) return;
+
+        let word = {
+            image: this.arasaacWord.image,
+            video: this.arasaacWord.video,
+            videoDefinition: this.arasaacWord.videoDefinition,
+            name: this.arasaacWord.name,
+            teacherId: this.teacherId
+        } as Word;
+
+        this.wordsService.saveWord(word)
+            .subscribe(
+                () => location.reload(),
+                error => this.notifications.pushNotification(error, 'error')
+            );
+    }
+
+    public closeArasaacDialog(): void {
+        console.log('closeArasaacDialog');
     }
 }
 
@@ -108,4 +158,11 @@ export class WordItemList {
     viewName: string;
     owner: string;
     isChecked: boolean;
+}
+
+class ArasaacWord {
+    name: string;
+    image: string;
+    video: string;
+    videoDefinition: string;
 }

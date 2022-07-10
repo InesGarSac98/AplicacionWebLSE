@@ -10,6 +10,8 @@ import { StatisticsService } from 'src/api/services/statistics-service/statistic
 import { TeachersService } from 'src/api/services/teachers-service/teachers.service';
 import { UsersService } from 'src/api/services/users-service/users.service';
 import { Teacher } from 'src/api/models/teacher.model';
+import { NotificationComponent } from 'src/app/shared/notification/notification.component';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-profile',
@@ -35,18 +37,20 @@ export class ProfileComponent implements OnInit {
     public student: Student;
     public classrooms: IClassroomList[];
 
-    @ViewChild('toastPrueba') elToast :ElementRef;
+    private notifications: NotificationComponent;
 
     constructor(
+        app: AppComponent,
         private userService: UsersService,
         private statisticsService: StatisticsService,
         private classroomService: ClassroomsService,
         private teacherService: TeachersService
     ) {
-
+        this.notifications = app.getNotificationsComponent();
     }
 
     public ngOnInit(): void {
+        this.notifications.pushNotification('hola mundo', 'success');
         //this.elToast.toast('show');
         this.userService.getUserLoged()
             .subscribe((user: User) => {

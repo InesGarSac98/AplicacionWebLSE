@@ -6,8 +6,12 @@
             </div>
             <div class="card-body">
                 <div *ngIf="dataLoaded">
-                    <p>Nombre: {{classroom.name}}</p>
-                    <p>Código: {{classroom.code}}</p>
+                    <p class="col">Nombre: {{classroom.name}}</p>
+                    <div class="row">
+                        <p class="col-2">Código: {{classroom.code}}</p>
+                        <button mat-raised-button class="col-1 btn-copy" [cdkCopyToClipboard]="getClassroomCode(classroom.code)"><mat-icon>file_copy</mat-icon></button>
+                    </div>
+
                 </div>
             </div>
         </div>

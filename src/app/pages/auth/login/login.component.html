@@ -33,6 +33,9 @@
                         </div>
                     </mat-card-actions>
                 </mat-card-content>
+                <div *ngIf="formGroup.errors?.unauthenticated" class="error-auth">
+                    Usuario y contraseña incorrectos
+                   </div>
             </form>
 
         </div>

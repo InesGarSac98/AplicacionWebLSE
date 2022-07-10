@@ -20,4 +20,12 @@ export class WordsService extends CommonApiService {
     public getWord(name: string): Observable<Word> {
         return this.get<Word>('/api/words/' + name);
     }
+
+    public findWordInArasaac(word: string): Observable<any> {
+        return this.get<any>('/api/words/' + word + '/find-in-arasaac');
+    }
+
+    public saveWord(word: Word): Observable<Word> {
+        return this.post<Word>('/api/words', word);
+    }
 }

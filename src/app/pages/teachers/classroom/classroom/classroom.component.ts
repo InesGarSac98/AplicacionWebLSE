@@ -12,6 +12,7 @@ import { User } from 'src/api/models/user.model';
 import { ClassroomsService } from 'src/api/services/classrooms-service/classrooms.service';
 import { UsersService } from 'src/api/services/users-service/users.service';
 import { WordDetailsDialogComponent } from 'src/app/shared/dialog/word-details-dialog/word-details-dialog.component';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
     selector: 'app-classroom',
@@ -46,7 +47,8 @@ export class ClassroomComponent implements OnInit {
         private router: Router,
         private userService: UsersService,
         private matDialog: MatDialog,
-        private classroomService: ClassroomsService
+        private classroomService: ClassroomsService,
+        private clipboard: Clipboard
     ) {
         this.displayedColumnsStudents = ['name','showButton'];
         this.displayedColumnsWords = ['name','showButton'];
@@ -167,6 +169,9 @@ export class ClassroomComponent implements OnInit {
             });
     }
 
+    public getClassroomCode(classroomCode: string) {
+        this.clipboard.copy(classroomCode);
+    }
 }
 
 export class IStudentClassroomList {

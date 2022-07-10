@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NotificationComponent } from './shared/notification/notification.component';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+    @ViewChild(NotificationComponent) private notifications: NotificationComponent;
+
+    public getNotificationsComponent(): NotificationComponent {
+        return this.notifications;
+    }
 }

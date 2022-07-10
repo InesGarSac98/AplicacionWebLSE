@@ -7,6 +7,8 @@ import { User } from 'src/api/models/user.model';
 import { ClassroomsService } from 'src/api/services/classrooms-service/classrooms.service';
 import { TeachersService } from 'src/api/services/teachers-service/teachers.service';
 import { UsersService } from 'src/api/services/users-service/users.service';
+import { AppComponent } from 'src/app/app.component';
+import { NotificationComponent } from 'src/app/shared/notification/notification.component';
 
 @Component({
     selector: 'app-classroom-form',
@@ -15,12 +17,16 @@ import { UsersService } from 'src/api/services/users-service/users.service';
 })
 export class ClassroomFormComponent implements OnInit {
 
+    private notifications: NotificationComponent;
     constructor(
+        app: AppComponent,
         private router: Router,
         private classroomsService: ClassroomsService,
         private userService: UsersService,
         private teacherService: TeachersService
-    ) { }
+    ) {
+        this.notifications = app.getNotificationsComponent();
+     }
 
     public formGroup: FormGroup;
 
@@ -46,6 +52,7 @@ export class ClassroomFormComponent implements OnInit {
                             });
                     });
             });
+            this.notifications.pushNotification('La clase ha sido guardada correctamente', 'success');
     }
 
 }

@@ -20,6 +20,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { GameTimerComponent } from './game-timer/game-timer.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { NotificationComponent } from './notification/notification.component';
+import { DialogTemplateComponent } from './dialog/dialog-template/dialog-template.component';
 
 const components = [
     AccordionAnchorDirective,
@@ -30,6 +32,8 @@ const components = [
     QuizzGameComponent,
     MultiSelectListComponent,
     GameTimerComponent,
+    NotificationComponent,
+    DialogTemplateComponent
 ]
 
 @NgModule({

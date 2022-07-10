@@ -18,6 +18,10 @@ export class TeachersService extends CommonApiService {
         return this.get<Teacher[]>('/api/teachers');
     }
 
+    public getTeacherLoged(): Observable<Teacher> {
+        return this.get<Teacher>('/api/teachers/teacher-loged');
+    }
+
     public getTeacherByUserId(userId: number): Observable<Teacher> {
         return this.get<Teacher>('/api/teachers?userId='+ userId);
     }

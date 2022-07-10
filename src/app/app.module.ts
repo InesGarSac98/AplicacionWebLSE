@@ -22,7 +22,6 @@ import { DialogsComponent } from './shared/dialog/dialogs/dialogs.component';
 import { MatButtonModule } from '@angular/material/button';
 import { WordDetailsDialogComponent } from './shared/dialog/word-details-dialog/word-details-dialog.component';
 import { DeleteComponent } from './shared/dialog/dialogs/delete/delete.component';
-import { DialogTemplateComponent } from './shared/dialog/dialog-template/dialog-template.component';
 
 
 @NgModule({
@@ -35,7 +34,6 @@ import { DialogTemplateComponent } from './shared/dialog/dialog-template/dialog-
         DialogsComponent,
         DeleteComponent,
         WordDetailsDialogComponent,
-        DialogTemplateComponent
     ],
     entryComponents:[DialogsComponent, WordDetailsDialogComponent],
     imports: [

@@ -33,10 +33,6 @@ export class ClassroomsService extends CommonApiService {
         return this.delete<Classroom>('/api/classrooms/' + classroomId);
     }
 
-    public findWordInArasaac(word: string): Observable<any> {
-        return this.get<any>('/api/classrooms/find-in-arasaac/' + word);
-    }
-
     public getTeacherClassrooms(teacherId: number): Observable<Classroom[]>{
         return this.get<Classroom[]>('/api/teachers/'+ teacherId + '/classrooms');
     }

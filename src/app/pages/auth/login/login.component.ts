@@ -40,13 +40,15 @@ export class LoginComponent implements OnInit {
                         this.router.navigate(['/students/profile']);
                     }
                     else if (user.role === 'TEACHER') {
-                        console.log("Soy profesor")
+                        console.log("Soy profesor");
                         this.router.navigate(['/teachers/profile']);
                     }
                 });
 
             }, (error) => {
                 this.message = error;
+                console.log("Contraseña incorrecta");
+                this.formGroup.setErrors({ unauthenticated: true });
             }
         )
 
