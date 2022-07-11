@@ -50,7 +50,6 @@ export class ProfileComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.notifications.pushNotification('hola mundo', 'success');
         //this.elToast.toast('show');
         this.userService.getUserLoged()
             .subscribe((user: User) => {
@@ -79,11 +78,6 @@ export class ProfileComponent implements OnInit {
 
 
     }
-
-    icons: Icons[] = [
-        {value: '1', viewValue: 'Laravel', image: 'https://www.itsolutionstuff.com/category-images/laravel.svg'},
-        {value: '2', viewValue: 'Angular', image: 'https://www.itsolutionstuff.com/category-images/angular.svg'}
-    ];
 
 
     public getTimeFormated(time:number):string{

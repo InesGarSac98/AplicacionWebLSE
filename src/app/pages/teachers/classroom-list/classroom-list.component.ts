@@ -7,7 +7,9 @@ import { User } from 'src/api/models/user.model';
 import { ClassroomsService } from 'src/api/services/classrooms-service/classrooms.service';
 import { TeachersService } from 'src/api/services/teachers-service/teachers.service';
 import { UsersService } from 'src/api/services/users-service/users.service';
+import { AppComponent } from 'src/app/app.component';
 import { DeleteComponent } from 'src/app/shared/dialog/dialogs/delete/delete.component';
+import { NotificationComponent } from 'src/app/shared/notification/notification.component';
 
 @Component({
     selector: 'app-student-classroom-list',
@@ -18,15 +20,17 @@ export class ClassroomListComponent implements OnInit {
 
     public classrooms: IClassroomList[];
     public x : boolean;
+    private notifications: NotificationComponent;
 
     constructor(
+        app: AppComponent,
         private classroomsService: ClassroomsService,
         private userService: UsersService,
         private teacherService: TeachersService,
         private http: HttpClient,
         public dialog: MatDialog
     ) {
-
+        this.notifications = app.getNotificationsComponent();
     }
 
     public ngOnInit(): void {
@@ -63,8 +67,10 @@ export class ClassroomListComponent implements OnInit {
                     .subscribe(_ => {
                         this.classrooms.splice(this.classrooms.findIndex(c => c.id === classroomId), 1);
                     });
+                    this.notifications.pushNotification('La clase ha sido borrada correctamente', 'success');
             }
         });
+
     }
 }
 

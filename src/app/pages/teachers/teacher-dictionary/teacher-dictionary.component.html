@@ -31,7 +31,7 @@
                 <mat-form-field appearance="standard">
                     <mat-label>Buscar en ARASAAC</mat-label>
                     <input #searchInput matInput type="text" placeholder="Buscar..." name="filterItems" />
-                    <button (click)="searchInArasaac(searchInput.value)"><mat-icon matSuffix>search</mat-icon></button>
+                    <button type="submit" (click)="searchInArasaac(searchInput.value)"><mat-icon matSuffix>search</mat-icon></button>
                 </mat-form-field>
             </div>
         </div>

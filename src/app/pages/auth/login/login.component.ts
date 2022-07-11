@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, Routes } from '@angular/router';
 import { User } from 'src/api/models/user.model';
 import { UsersService } from 'src/api/services/users-service/users.service';
+import { AppComponent } from 'src/app/app.component';
+import { NotificationComponent } from 'src/app/shared/notification/notification.component';
 
 export const publicRoutes: Routes = [
 
@@ -14,11 +16,17 @@ export const publicRoutes: Routes = [
 })
 export class LoginComponent implements OnInit {
 
-    constructor(private router: Router, private userService: UsersService) { }
+    constructor(
+        private router: Router,
+        private userService: UsersService,
+        app: AppComponent,
+    ) {
+        this.notifications = app.getNotificationsComponent();
+    }
     public formGroup: FormGroup;
     public hide = true;
-    private message ='';
-
+    private message = '';
+    private notifications: NotificationComponent;
 
     public ngOnInit() {
         this.formGroup = new FormGroup({
@@ -43,14 +51,16 @@ export class LoginComponent implements OnInit {
                         console.log("Soy profesor");
                         this.router.navigate(['/teachers/profile']);
                     }
+                    this.notifications.pushNotification('Bienvenido '+ user.name, 'success');
                 });
+
 
             }, (error) => {
                 this.message = error;
                 console.log("Contraseña incorrecta");
                 this.formGroup.setErrors({ unauthenticated: true });
             }
-        )
+            )
 
     }
 

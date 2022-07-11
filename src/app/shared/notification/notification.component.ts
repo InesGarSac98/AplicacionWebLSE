@@ -28,8 +28,6 @@ export class NotificationComponent implements OnInit {
     }
 
     public notificationLoaded(element: ElementRef): void {
-        console.log('console.log(element);');
-        console.log(element);
 
         setTimeout(() => (element.nativeElement as any).alert('close'), 1500);
     }
@@ -47,7 +45,7 @@ export class NotificationComponent implements OnInit {
     }
 
     private autoHideAlert(id: string): void {
-        setTimeout(() => $('#'+id).alert('close'), 5000);
+        setTimeout(() => $('#'+id).alert('close'), 3000);
     }
 }
 
