@@ -22,6 +22,7 @@ import { GameTimerComponent } from './game-timer/game-timer.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { NotificationComponent } from './notification/notification.component';
 import { DialogTemplateComponent } from './dialog/dialog-template/dialog-template.component';
+import { StatisticsPartsModule } from './statistics-parts/statistics-parts.module';
 
 const components = [
     AccordionAnchorDirective,
@@ -54,7 +55,8 @@ const components = [
       MatPaginatorModule,
       MatInputModule,
       MatProgressBarModule,
-      MatExpansionModule
+      MatExpansionModule,
+      StatisticsPartsModule
   ],
   exports: [
     ...components
