@@ -100,8 +100,7 @@ export class AddGamesComponent implements OnInit {
             await this.classroomGamesService.createClassroomGame(wordId, this.classroomId).toPromise();
         }
 
-        this.router.navigate(['/teachers/classrooms/' + this.classroomId + '/add-games/' + id]);
-        window.location.reload();
+        //this.router.navigate(['/teachers/classrooms/' + this.classroomId + '/add-games/' + id]);
     }
 
     public playGameButtonClicked(id: number): void {

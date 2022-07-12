@@ -106,7 +106,7 @@ export class AddWordsComponent implements OnInit {
             await this.classroomWordsService.createClassroomWord(wordId, this.classroomId).toPromise();
         }
 
-        this.router.navigate(['/teachers/classrooms/', this.classroomId]);
+        //this.router.navigate(['/teachers/classrooms/', this.classroomId]);
 
         //TODO: Sacar un modal avisando de que se han guardado
 

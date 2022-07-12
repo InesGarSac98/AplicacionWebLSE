@@ -1,12 +1,9 @@
-import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Classroom } from 'src/api/models/classroom.model';
-import { ClassroomGame } from 'src/api/models/classroomGame';
-import { ClassroomWord } from 'src/api/models/classroomWord.model';
-import { Game } from 'src/api/models/game.model';
 import { Student } from 'src/api/models/student.model';
 import { User } from 'src/api/models/user.model';
 import { ClassroomsService } from 'src/api/services/classrooms-service/classrooms.service';
@@ -44,7 +41,6 @@ export class ClassroomComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private router: Router,
         private userService: UsersService,
         private matDialog: MatDialog,
         private classroomService: ClassroomsService,
@@ -68,8 +64,6 @@ export class ClassroomComponent implements OnInit {
 
         this.loadClassroom();
         this.loadStudents();
-        this.loadWords();
-        //this.loadGames();
     }
 
     public searchTextChange(searchText: string, dataSource: MatTableDataSource<any>): void {
@@ -105,26 +99,6 @@ export class ClassroomComponent implements OnInit {
         });
     }
 
-    private loadWords() {
-        this.classroomService.getWordsListClassroom(this.classroomId)
-            .subscribe((words: ClassroomWord[]) => {
-                console.log(words);
-                this.wordsClassroomList = words.map(w => {
-                    let result = new IWordClassroomList();
-                    result.id = w.id;
-                    result.wordId = w.word.id;
-                    result.name = w.word.name;
-                    result.image = w.word.image;
-                    result.video = w.word.video;
-                    result.videoDefinition = w.word.videoDefinition;
-                    return result;
-                });
-                this.dataSourceWords = new MatTableDataSource<IWordClassroomList>(this.wordsClassroomList);
-                this.dataSourceWords.paginator = this.wordsPaginator;
-                this.setDataSourceSearchTextFilterPredicate(this.dataSourceWords, 'name');
-            });
-    }
-
     private loadClassroom() {
         this.classroomService.getClassroom(this.classroomId)
             .subscribe((classroom: Classroom) => {
@@ -152,25 +126,8 @@ export class ClassroomComponent implements OnInit {
             });
     }
 
-    private loadGames() {
-        this.classroomService.getGamesListClassroom(this.classroomId)
-            .subscribe((games: ClassroomGame[]) => {
-                this.gamesClassroomList = games.map(g => {
-                    let result = new IGameClassroomList();
-                    result.id = g.id;
-                    result.gameId = g.gameId;
-                    result.name = g.game.name;
-                    result.image = g.game.image;
-                    return result;
-                });
-                this.dataSourceGames = new MatTableDataSource<IGameClassroomList>(this.gamesClassroomList);
-                this.dataSourceGames.paginator = this.gamesPaginator;
-                this.setDataSourceSearchTextFilterPredicate(this.dataSourceGames, 'name');
-            });
-    }
-
-    public getClassroomCode(classroomCode: string) {
-        this.clipboard.copy(classroomCode);
+    public copyToClipboard() {
+        this.clipboard.copy(this.classroom.code);
     }
 }
 

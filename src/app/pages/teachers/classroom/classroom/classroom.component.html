@@ -9,7 +9,7 @@
                     <p class="col">Nombre: {{classroom.name}}</p>
                     <div class="row">
                         <p class="col-2">Código: {{classroom.code}}</p>
-                        <button mat-raised-button class="col-1 btn-copy" [cdkCopyToClipboard]="getClassroomCode(classroom.code)"><mat-icon>file_copy</mat-icon></button>
+                        <button mat-raised-button class="col-1 btn-copy" (click)="copyToClipboard()"><mat-icon>file_copy</mat-icon></button>
                     </div>
 
                 </div>
@@ -23,19 +23,19 @@
                     <div class="nav-tabs-wrapper">
                         <ul class="nav nav-tabs" data-tabs="tabs">
                             <li class="nav-item">
-                                <a mat-button class="nav-link" [ngClass]="initialTab === 0 ? 'active' : ''" href="#classroom" data-toggle="tab">
+                                <a mat-button class="nav-link {{initialTab === 0 ? 'active' : ''}}" href="#classroom-tab" data-toggle="tab">
                                     <i class="material-icons">face</i> Lista de clase
                                     <div class="ripple-container"></div>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a mat-button class="nav-link" [ngClass]="initialTab === 1 ? 'active' : ''" href="#words" data-toggle="tab">
+                                <a mat-button class="nav-link {{initialTab === 1 ? 'active' : ''}}" href="#words-tab" data-toggle="tab">
                                     <i class="material-icons">pan_tool_alt</i> Palabras
                                     <div class="ripple-container"></div>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a mat-button class="nav-link" [ngClass]="initialTab === 2 ? 'active' : ''" href="#games" data-toggle="tab">
+                                <a mat-button class="nav-link {{initialTab === 2 ? 'active' : ''}}" href="#games-tab" data-toggle="tab">
                                     <i class="material-icons">extension</i> Juegos
                                     <div class="ripple-container"></div>
                                 </a>
@@ -46,7 +46,7 @@
             </div>
             <div class="card-body">
                 <div class="tab-content">
-                    <div class="tab-pane" [ngClass]="initialTab === 0 ? 'active' : ''" id="classroom">
+                    <div class="tab-pane {{initialTab === 0 ? 'active' : ''}}" id="classroom-tab">
                         <table class="table">
                             <tbody>
                                 <div>
@@ -87,10 +87,10 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane" [ngClass]="initialTab === 1 ? 'active' : ''" id="words">
+                    <div class="tab-pane {{initialTab === 1 ? 'active' : ''}}" id="words-tab">
                         <app-add-words></app-add-words>
                     </div>
-                    <div class="tab-pane" [ngClass]="initialTab === 2 ? 'active' : ''" id="games">
+                    <div class="tab-pane {{initialTab === 2 ? 'active' : ''}}" id="games-tab">
                         <app-add-games></app-add-games>
                     </div>
                 </div>
