@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,8 +8,9 @@ import { Student } from 'src/api/models/student.model';
 import { User } from 'src/api/models/user.model';
 import { ClassroomsService } from 'src/api/services/classrooms-service/classrooms.service';
 import { UsersService } from 'src/api/services/users-service/users.service';
-import { WordDetailsDialogComponent } from 'src/app/shared/dialog/word-details-dialog/word-details-dialog.component';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { Word } from 'src/api/models/word.model';
+import { DialogTemplateComponent } from 'src/app/shared/dialog/dialog-template/dialog-template.component';
 
 @Component({
     selector: 'app-classroom',
@@ -23,6 +24,8 @@ export class ClassroomComponent implements OnInit {
     public initialTab: number;
     public dataLoaded: boolean = false;
     public userName: string;
+    private fullWordsList: Word[];
+    public wordToShowDetails: Word;
     public studentsClassroomList: IStudentClassroomList[];
     public wordsClassroomList: IWordClassroomList[];
     public classroom: IClassroom;
@@ -38,13 +41,15 @@ export class ClassroomComponent implements OnInit {
     @ViewChild('studentsPaginator') public studentsPaginator : MatPaginator;
     @ViewChild('wordsPaginator') public wordsPaginator : MatPaginator;
     @ViewChild('gamesPaginator') public gamesPaginator : MatPaginator;
+    @ViewChild('wordDetailsDialogTemplate') public wordDetailsDialogTemplate: TemplateRef<any>;
 
     constructor(
         private route: ActivatedRoute,
         private userService: UsersService,
         private matDialog: MatDialog,
         private classroomService: ClassroomsService,
-        private clipboard: Clipboard
+        private clipboard: Clipboard,
+        public dialog: MatDialog,
     ) {
         this.displayedColumnsStudents = ['name','showButton'];
         this.displayedColumnsWords = ['name','showButton'];
@@ -75,11 +80,19 @@ export class ClassroomComponent implements OnInit {
     }
 
     public showWordButtonClicked(id: number): void {
-        this.matDialog.open(
-            WordDetailsDialogComponent,
+        const word = this.fullWordsList.find(x => x.id === id);
+
+        if (!word) return;
+
+        this.wordToShowDetails = word;
+
+        this.dialog.open(
+            DialogTemplateComponent,
             {
                 data: {
-                    word: this.wordsClassroomList.find(x => x.id === id)
+                    template: this.wordDetailsDialogTemplate,
+                    dialogButtons: [],
+                    dialogTitle: word.name
                 }
             }
         );

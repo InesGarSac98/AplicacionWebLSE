@@ -19,3 +19,33 @@
         </div>
     </div>
 </div>
+<ng-template #wordDetailsDialogTemplate>
+    <div body class="container">
+        <div *ngIf="wordToShowDetails" class="row">
+            <ng-container [ngTemplateOutlet]="wordDetails" [ngTemplateOutletContext]="{word: wordToShowDetails}"></ng-container>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #wordDetails let-word="word">
+    <div class="col-md-4 pt-4">
+        <div class="p-2">
+            <p class="text-center">IMAGEN</p>
+        </div>
+        <img class="image-border" [src]="word.image" width="200" height="200">
+    </div>
+    <div class="col-md-4 pt-4">
+        <div class="p-2">
+            <p class="text-center">SIGNACIÓN</p>
+        </div>
+        <video class="image-border" [src]="word.video" width="200" height="200"
+            autoplay [controls]="false" loop></video>
+    </div>
+    <div class="col-md-4 pt-4">
+        <div class="p-2">
+            <p class="text-center">DEFINICIÓN</p>
+        </div>
+        <video class="image-border" [src]="word.videoDefinition" width="200" height="200"
+            autoplay [controls]="false" loop></video>
+    </div>
+</ng-template>

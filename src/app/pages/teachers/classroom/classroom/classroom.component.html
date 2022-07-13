@@ -9,7 +9,7 @@
                     <p class="col">Nombre: {{classroom.name}}</p>
                     <div class="row">
                         <p class="col-2">Código: {{classroom.code}}</p>
-                        <button mat-raised-button class="col-1 btn-copy" (click)="copyToClipboard()"><mat-icon>file_copy</mat-icon></button>
+                        <button mat-raised-button matTooltip="Copiar código" class="col-1 btn-copy" (click)="copyToClipboard()"><mat-icon>file_copy</mat-icon></button>
                     </div>
 
                 </div>
@@ -96,7 +96,7 @@
                 </div>
             </div>
         </div>
-</div>
+    </div>
 </div>
 
 

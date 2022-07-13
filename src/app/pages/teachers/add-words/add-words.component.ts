@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClassroomWord } from 'src/api/models/classroomWord.model';
@@ -6,7 +6,7 @@ import { Word } from 'src/api/models/word.model';
 import { ClassroomsService } from 'src/api/services/classrooms-service/classrooms.service';
 import { ClassroomWordsService } from 'src/api/services/classroomWords-service/classroomWords.service';
 import { WordsService } from 'src/api/services/words-service/words.service';
-import { WordDetailsDialogComponent } from 'src/app/shared/dialog/word-details-dialog/word-details-dialog.component';
+import { DialogTemplateComponent } from 'src/app/shared/dialog/dialog-template/dialog-template.component';
 import { CellDefinition, SelectableItem } from 'src/app/shared/multi-select-list/multi-select-list.component';
 
 @Component({
@@ -20,8 +20,10 @@ export class AddWordsComponent implements OnInit {
     public dataLoaded: boolean = false;
     public wordsAssociation: SelectableItem[] = [];
     private fullWordsList: Word[];
+    public wordToShowDetails: Word;
     private existingClassroomWords: ClassroomWord[];
     public wordCellDefinitions: CellDefinition[];
+    @ViewChild('wordDetailsDialogTemplate') public wordDetailsDialogTemplate: TemplateRef<any>;
 
     constructor(
         private classroomService: ClassroomsService,
@@ -73,19 +75,22 @@ export class AddWordsComponent implements OnInit {
 
     public showSelectedWord(id: number): void {
         //this.wordsService.getWord(name)
+        const word = this.fullWordsList.find(x => x.id === id);
 
-        let dialogRef = this.dialog.open(
-            WordDetailsDialogComponent,
+        if (!word) return;
+
+        this.wordToShowDetails = word;
+
+        this.dialog.open(
+            DialogTemplateComponent,
             {
                 data: {
-                    word: this.fullWordsList.find(x => x.id === id)
+                    template: this.wordDetailsDialogTemplate,
+                    dialogButtons: [],
+                    dialogTitle: word.name
                 }
             }
         );
-
-        dialogRef.afterClosed().subscribe(result =>{
-            console.log('The dialog was closed')
-        });
     }
 
     public async saveWordsSelection(): Promise<void> {

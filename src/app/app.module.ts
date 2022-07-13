@@ -20,7 +20,6 @@ import { AuthModule } from './pages/auth/auth.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogsComponent } from './shared/dialog/dialogs/dialogs.component';
 import { MatButtonModule } from '@angular/material/button';
-import { WordDetailsDialogComponent } from './shared/dialog/word-details-dialog/word-details-dialog.component';
 import { DeleteComponent } from './shared/dialog/dialogs/delete/delete.component';
 
 
@@ -33,9 +32,8 @@ import { DeleteComponent } from './shared/dialog/dialogs/delete/delete.component
         AppSidebarComponent,
         DialogsComponent,
         DeleteComponent,
-        WordDetailsDialogComponent,
     ],
-    entryComponents:[DialogsComponent, WordDetailsDialogComponent],
+    entryComponents:[DialogsComponent],
     imports: [
         CommonModule,
         BrowserModule,
