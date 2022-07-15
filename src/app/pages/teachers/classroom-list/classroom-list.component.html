@@ -2,7 +2,7 @@
 
 <div class="content">
     <div>
-        <button mat-button><a [routerLink]="['classrooms-form']">+ Añadir clase</a></button>
+        <button mat-button matTooltip="Añadir clase" matTooltipPosition="right"><a [routerLink]="['classrooms-form']">+ Añadir clase</a></button>
     </div>
 
     <div class="row">
@@ -11,10 +11,10 @@
                 <a [routerLink]="['./',classroom.id]">
                     {{classroom.name}}
                 </a>
-                <button mat-icon-button class="mat-icon-show" [routerLink]="['./',classroom.id]">
+                <button mat-icon-button class="mat-icon-show" matTooltip="Editar clase" [routerLink]="['./',classroom.id]">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-icon-button class="mat-icon-show" (click)="deleteClass(classroom.id)">
+                <button mat-icon-button class="mat-icon-show" matTooltip="Borrar clase" (click)="deleteClass(classroom.id)">
                     <mat-icon>delete</mat-icon>
                 </button>
 

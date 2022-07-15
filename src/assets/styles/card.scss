@@ -460,8 +460,8 @@ label {
     vertical-align: middle;
     border-style: none; }
 
-  svg:not(:root) {
-    overflow: hidden; }
+//   svg:not(:root) {
+//     overflow: hidden; }
 
   table {
     border-collapse: collapse; }
@@ -3812,6 +3812,7 @@ label {
         color: #ffffff; }
 
   .card {
+    width: fit-content;
     position: relative;
     display: -webkit-box;
     display: -ms-flexbox;

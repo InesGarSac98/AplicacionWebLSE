@@ -1,17 +1,3 @@
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="alert alert-success alert-dismissable fade show" data-autohide="true" data-delay="3000" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                Bienvenido
-            </div>
-        </div>
-    </div>
-
-</div>
-
 <div *ngIf="statistiscLoaded" class="container-fluid">
     <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-6">
@@ -147,6 +133,44 @@
             </div>
         </div>
     </div>
+    <div class="col">
+        <div class="card card-chart" style="width: fit-content;">
+            <div class="card-header card-header-danger">
+                <div class="ct-chart" id="completedTasksChart">
+                    <h4 class="card-title">Victorias/Derrotas/Abandonos</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <ngx-charts-line-chart *ngIf="winLoseDayChart?.length > 0"
+                    [view]="view"
+                    [scheme]="colorScheme"
+                    [legend]="legend"
+                    [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel"
+                    [rotateXAxisTicks]="true"
+                    [xAxis]="xAxis"
+                    [yAxis]="yAxis"
+                    [xAxisLabel]="xAxisLabel"
+                    [yAxisLabel]="yAxisLabel"
+                    [timeline]="timeline"
+                    [legendPosition]="'below'"
+                    [legendTitle]="''"
+                    [results]="winLoseDayChart"
+                    (select)="onSelect($event)"
+                    (activate)="onActivate($event)"
+                    (deactivate)="onDeactivate($event)"
+                    >
+                </ngx-charts-line-chart>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <i class="material-icons">access_time</i> Julio
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="row">
         <app-student-progress></app-student-progress>
     </div>

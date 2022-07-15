@@ -1,8 +1,7 @@
 
-
 export interface Statistics{
-    duration:number;
-    date:number;
-    status:number;
-    score:number;
+    duration: number;
+    date: Date;
+    status: number;
+    score: number;
 }
