@@ -3,9 +3,10 @@
         <app-multi-select-list *ngIf="dataLoaded" [(items)]="wordsAssociation"
             [cardTitle]="'Añadir palabras'" [cellDefinitions]="wordCellDefinitions"
             [showEditButton]="false"
+            [showDeleteButton]="false"
             (showItemButtonClicked)="showSelectedWord($event)">
         </app-multi-select-list>
-        <button mat-raised-button color="primary" (click)="saveWordsSelection()">Guardar</button>
+        <button mat-raised-button color="primary" [disabled]="!isSaveButtonEnabled" (click)="saveWordsSelection()">Guardar</button>
     </div>
 </div>
 

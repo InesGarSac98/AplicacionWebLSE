@@ -8,7 +8,8 @@ import { UsersService } from 'src/api/services/users-service/users.service';
 import { WordsService } from 'src/api/services/words-service/words.service';
 import { AppComponent } from 'src/app/app.component';
 import { DialogButton, DialogTemplateComponent } from 'src/app/shared/dialog/dialog-template/dialog-template.component';
-import { CellDefinition } from 'src/app/shared/multi-select-list/multi-select-list.component';
+import { DeleteComponent } from 'src/app/shared/dialog/dialogs/delete/delete.component';
+import { CellDefinition, MultiSelectListComponent } from 'src/app/shared/multi-select-list/multi-select-list.component';
 import { NotificationComponent } from 'src/app/shared/notification/notification.component';
 
 @Component({
@@ -32,6 +33,7 @@ export class TeacherDictionaryComponent implements OnInit {
 
     @ViewChild('searchInArasaacDialogTemplate') public searchInArasaacDialogTemplate: TemplateRef<any>;
     @ViewChild('wordDetailsDialogTemplate') public wordDetailsDialogTemplate: TemplateRef<any>;
+    @ViewChild('wordsTableComponent') public wordsTableComponent: MultiSelectListComponent;
 
     constructor(
         app: AppComponent,
@@ -127,6 +129,36 @@ export class TeacherDictionaryComponent implements OnInit {
         dialogRef.afterClosed().subscribe(() => this.arasaacWord = null);
     }
 
+    public deleteWord(id: number) {
+
+        const wordToDelete = this.wordsAssociation.find(c => c.id === id);
+
+        if (!wordToDelete) return;
+
+        if (wordToDelete.owner === 'Sistema') {
+            this.notifications.pushNotification('No está permitido borrar palabras del sistema', 'error');
+            return;
+        }
+
+        let dialogRef = this.dialog.open(DeleteComponent);
+
+        dialogRef.afterClosed().subscribe(result =>{
+            console.log('The dialog was closed')
+            if(result){
+                this.wordsService.deleteWord(id)
+                    .subscribe(_ => {
+                        this.wordsAssociation.splice(this.wordsAssociation.findIndex(c => c.id === id), 1);
+                        this.wordsTableComponent.refreshDataTable(this.wordsAssociation);
+                        this.notifications.pushNotification('La palabra ha sido borrada correctamente', 'success');
+                    },
+                    (error) => {
+                        this.notifications.pushNotification('Error al intentar borrar la palabra', 'error');
+                        console.log(error);
+                    });
+            }
+        });
+
+    }
 
     public returnWordsSelection(): void {
         this.router.navigate(['/students/profile/']);
@@ -152,7 +184,15 @@ export class TeacherDictionaryComponent implements OnInit {
 
         this.wordsService.saveWord(word)
             .subscribe(
-                () => location.reload(),
+                (savedWord) => {
+                    this.wordsAssociation.push({
+                        id: savedWord.id,
+                        isChecked: false,
+                        owner: this.userName,
+                        viewName: word.name
+                    } as WordItemList);
+                    this.wordsTableComponent.refreshDataTable(this.wordsAssociation);
+                },
                 error => this.notifications.pushNotification(error, 'error')
             );
     }

@@ -36,14 +36,16 @@ export class MultiSelectListComponent implements OnInit, AfterViewInit {
     @Input() public showEditButton: boolean = true;
     @Input() public showDetailsButton: boolean = true;
     @Input() public showPlayButton: boolean = false;
+    @Input() public showDeleteButton: boolean = true;
     @Input() public cellDefinitions: CellDefinition[] = [];
     @Output() public itemsChange = new EventEmitter<SelectableItem[]>();
     public filterItems = '';
     public displayedColumns: string[];
-    @Input() public dataSource: MatTableDataSource<SelectableItem>;
+    public dataSource: MatTableDataSource<SelectableItem>;
     @Output() public showItemButtonClicked = new EventEmitter<number>();
     @Output() public editItemButtonClicked = new EventEmitter<number>();
     @Output() public playItemButtonClicked = new EventEmitter<number>();
+    @Output() public deleteItemButtonClicked = new EventEmitter<number>();
     @ViewChild(MatPaginator) paginator: MatPaginator;
     public classroomId: number;
 
@@ -116,6 +118,11 @@ export class MultiSelectListComponent implements OnInit, AfterViewInit {
 
         foundItem.isChecked = event.checked;
 	}
+
+    public refreshDataTable(items: SelectableItem[]): void {
+        this.dataSource.data = items.slice().sort(this.sortSelectableItemsOperator);
+        //this.dataSource = new MatTableDataSource<SelectableItem>(items);
+    }
 
 	private sortSelectableItemsOperator(a: SelectableItem, b: SelectableItem) : number {
 		return a.viewName.localeCompare(b.viewName);

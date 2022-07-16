@@ -54,9 +54,6 @@ export class ClassroomListComponent implements OnInit {
     }
 
     public deleteClass(classroomId: number) {
-        console.log("public deleteClass(classroomId: number) {");
-        console.log(classroomId);
-
 
         let dialogRef = this.dialog.open(DeleteComponent);
 

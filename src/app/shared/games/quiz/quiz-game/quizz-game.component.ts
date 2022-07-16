@@ -3,11 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { QuizzGameClassroomConfiguration } from 'src/api/models/quizzGameClassroomConfiguration.model';
 import { QuizzGameQuestion } from 'src/api/models/quizzGameQuestion.model';
 import { Student } from 'src/api/models/student.model';
+import { StudentLearnedWord } from 'src/api/models/studentLearnedWords.model';
 import { User } from 'src/api/models/user.model';
 import { Word } from 'src/api/models/word.model';
 import { GameEventService } from 'src/api/services/game-event-service/game-event.service';
 import { QuizzGameClassroomConfigurationService } from 'src/api/services/quizz-game-classroom-configuration-service/quizz-game-classroom-configuration.service';
 import { QuizzGameQuestionService } from 'src/api/services/quizz-game-question-service/quizz-game-question.service';
+import { StudentLearnedWordsService } from 'src/api/services/student-learned-words-service/student-learned-words.service';
 import { StudentsService } from 'src/api/services/students-service/students.service';
 import { UsersService } from 'src/api/services/users-service/users.service';
 import { WordsService } from 'src/api/services/words-service/words.service';
@@ -58,6 +60,7 @@ export class QuizzGameComponent implements OnInit {
         private quizzGameQuestionservice: QuizzGameQuestionService,
         private gameEventService: GameEventService,
         private quizzGameEventGeneratorService: QuizzGameEventGeneratorService,
+        private studentLearnedWordsService: StudentLearnedWordsService,
         private quizzGameClassroomConfigurationService: QuizzGameClassroomConfigurationService,
         private router: Router
     ) { }
@@ -80,10 +83,22 @@ export class QuizzGameComponent implements OnInit {
     public onAnswer(option: IAnswer) {
         this.rotateClass = false;
         this.answerSelected = true;
-
         if (option.correct) {
             this.correctAnswers++;
             this.score += 10;
+
+            const wordId = this.availableQuestions
+                .find(q => q.id === this.cardQuiz[this.currentQuiz].questionId)
+                ?.answers.find(a => a.id === option.answerId)
+                ?.wordId;
+
+            const studentLearnedWord = {
+                date: new Date(),
+                gameId: this.gameId,
+                studentId: this.studentId,
+                wordId: wordId
+            } as StudentLearnedWord;
+            this.studentLearnedWordsService.saveStudentLearnedWords(studentLearnedWord).subscribe();
         } else {
             this.incorrectAnswers++;
             this.score += 5;

@@ -1,0 +1,16 @@
+<ngx-charts-bar-chart *ngIf="winLoseDayChart?.length > 0"
+    [scheme]="learnedWordsByGameChartInputData.colorScheme"
+    [legend]="learnedWordsByGameChartInputData.legend"
+    [showXAxisLabel]="learnedWordsByGameChartInputData.showXAxisLabel"
+    [showYAxisLabel]="learnedWordsByGameChartInputData.showYAxisLabel"
+    [xAxis]="learnedWordsByGameChartInputData.xAxis"
+    [yAxis]="learnedWordsByGameChartInputData.yAxis"
+    [xAxisLabel]="learnedWordsByGameChartInputData.xAxisLabel"
+    [yAxisLabel]="learnedWordsByGameChartInputData.yAxisLabel"
+    [timeline]="learnedWordsByGameChartInputData.timeline"
+    [rotateXAxisTicks]="true"
+    [legendPosition]="'below'"
+    [legendTitle]="''"
+    [results]="learnedWordsByGameChart"
+    >
+</ngx-charts-bar-chart>

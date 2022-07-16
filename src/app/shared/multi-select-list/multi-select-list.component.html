@@ -54,6 +54,9 @@
                     <button *ngIf="showPlayButton" mat-icon-button class="mat-icon-show" (click)="playItemButtonClicked.emit(item.id)">
                         <mat-icon>play_arrow</mat-icon>
                     </button>
+                    <button *ngIf="showDeleteButton" mat-icon-button class="mat-icon-show" (click)="deleteItemButtonClicked.emit(item.id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
                 </td>
             </ng-container>
 

@@ -13,12 +13,11 @@ import { StudentsRoutes } from './students.routing';
 import { ProfileComponent } from './profile/profile.component';
 
 import { GamesListComponent } from './games-list/games-list.component';
-import { BrowserModule } from '@angular/platform-browser';
 import { GameComponent } from './game/game.component';
 import { StudentDictionaryComponent } from './dictionary/student-dictionary.component';
 import { ProgressComponent } from './profile/progress/progress.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { StatisticsPartsModule } from 'src/app/shared/statistics-parts/statistics-parts.module';
 
 
 
@@ -33,7 +32,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     FlexLayoutModule,
     MatTabsModule,
     SharedModule,
-    NgxChartsModule
+    StatisticsPartsModule
   ],
   providers: [
     DatePipe

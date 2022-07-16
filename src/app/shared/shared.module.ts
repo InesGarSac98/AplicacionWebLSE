@@ -23,6 +23,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { NotificationComponent } from './notification/notification.component';
 import { DialogTemplateComponent } from './dialog/dialog-template/dialog-template.component';
 import { StatisticsPartsModule } from './statistics-parts/statistics-parts.module';
+import { StudentStatisticsComponent } from './statistics-parts/student-statistics/student-statistics.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 const components = [
     AccordionAnchorDirective,

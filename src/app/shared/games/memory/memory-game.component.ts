@@ -3,10 +3,12 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClassroomWord } from 'src/api/models/classroomWord.model';
 import { Student } from 'src/api/models/student.model';
+import { StudentLearnedWord } from 'src/api/models/studentLearnedWords.model';
 import { User } from 'src/api/models/user.model';
 import { Word } from 'src/api/models/word.model';
 import { ClassroomsService } from 'src/api/services/classrooms-service/classrooms.service';
 import { GameEventService } from 'src/api/services/game-event-service/game-event.service';
+import { StudentLearnedWordsService } from 'src/api/services/student-learned-words-service/student-learned-words.service';
 import { StudentsService } from 'src/api/services/students-service/students.service';
 import { UsersService } from 'src/api/services/users-service/users.service';
 import { WordsService } from 'src/api/services/words-service/words.service';
@@ -48,6 +50,7 @@ export class MemoryGameComponent implements OnInit {
         private studentService: StudentsService,
         private memoryGameEventGeneratorService: MemoryGameEventGeneratorService,
         private gameEventService: GameEventService,
+        private studentLearnedWordsService: StudentLearnedWordsService,
         private router: Router,
         private route: ActivatedRoute
         ) { }
@@ -199,6 +202,17 @@ export class MemoryGameComponent implements OnInit {
                 const loseEvent = this.memoryGameEventGeneratorService.generateLoseEvent(this.boardCards, this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime(), this.gamePlayId);
                 this.gameEventService.createGameEvent(loseEvent).subscribe();
             }
+
+            this.pairsAchieved.forEach(p => {
+                const studentLearnedWord = {
+                    date: new Date(),
+                    gameId: this.gameId,
+                    studentId: this.studentId,
+                    wordId: p.wordId
+                } as StudentLearnedWord;
+                this.studentLearnedWordsService.saveStudentLearnedWords(studentLearnedWord).subscribe();
+            });
+
         }
         return isGameFinished;
     }

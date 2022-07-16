@@ -9,11 +9,12 @@
                 </div>
             </div>
             <div class="card-body">
-                <app-multi-select-list *ngIf="dataLoaded" [(items)]="wordsAssociation"
+                <app-multi-select-list #wordsTableComponent *ngIf="dataLoaded" [(items)]="wordsAssociation"
                     [cellDefinitions]="dictionaryCellDefinitions"
                     [showIsCheckedFilter]="false"
                     [showCheckColumn]="false"
-                    (showItemButtonClicked)="showSelectedWord($event)">
+                    (showItemButtonClicked)="showSelectedWord($event)"
+                    (deleteItemButtonClicked)="deleteWord($event)">
 
                     <button class="arasaac-btn" additionalButton matSuffix mat-raised-button (click)="showWordFromArasaac()">Buscar en ARASAAC</button>
                 </app-multi-select-list>
@@ -31,8 +32,16 @@
                 <mat-form-field appearance="standard">
                     <mat-label>Buscar en ARASAAC</mat-label>
                     <input #searchInput matInput type="text" placeholder="Buscar..." name="filterItems" />
-                    <button type="submit" (click)="searchInArasaac(searchInput.value)"><mat-icon matSuffix>search</mat-icon></button>
+                    <mat-icon-button matSuffix type="submit" (click)="searchInArasaac(searchInput.value)"><mat-icon>search</mat-icon></mat-icon-button>
+                    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                        <mat-icon style="background-color: red;">close</mat-icon>
+                    </button>
                 </mat-form-field>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="row" role="status" *ngIf="!arasaacWord">
+                Cargando...
             </div>
         </div>
         <div *ngIf="arasaacWord" class="row">

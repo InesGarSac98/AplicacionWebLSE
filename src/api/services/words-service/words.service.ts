@@ -28,4 +28,8 @@ export class WordsService extends CommonApiService {
     public saveWord(word: Word): Observable<Word> {
         return this.post<Word>('/api/words', word);
     }
+
+    public deleteWord(wordId: number): Observable<Word> {
+        return this.delete<Word>('/api/words/' + wordId);
+    }
 }
