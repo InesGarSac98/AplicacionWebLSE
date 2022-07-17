@@ -24,8 +24,7 @@ export class StudentLearnedWordsChartComponent implements OnInit {
     constructor(
         private studentLearnedWordsService: StudentLearnedWordsService,
         private classroomService: ClassroomsService,
-    )
-    {
+    ) {
         this.learnedWordsByGameChartInputData = {
             legend: true,
             showLabels: true,
@@ -46,6 +45,14 @@ export class StudentLearnedWordsChartComponent implements OnInit {
     public async ngOnInit() {
         this.games = (await this.classroomService.getGamesListClassroom(this.student.classroomId).toPromise()).map(x => x.game);
         this.getStudentLearnedWords();
+    }
+
+    public showOnlyIntegersAxisValues(val: number) {
+        if (val % 1 === 0) {
+            return val.toLocaleString();
+        } else {
+            return '';
+        }
     }
 
     private getStudentLearnedWords() {

@@ -13,7 +13,10 @@ export class StudentsService extends CommonApiService {
         super(http);
     }
 
-    // Métodos para crear un nuevo profesor en la bbdd
+    public getStudent(studentId: number): Observable<Student> {
+        return this.get<Student>('/api/students/' + studentId);
+    }
+
     public getStudents(): Observable<Student[]> {
         return this.get<Student[]>('/api/students');
     }

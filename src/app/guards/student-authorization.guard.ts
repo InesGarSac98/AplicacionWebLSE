@@ -12,7 +12,6 @@ export class StudentAuthorizationGuard implements CanActivate {
 
     public async canActivate(): Promise<boolean> {
         const response = (await this.userService.getUserLoged().toPromise());
-        console.log(response);
 
         return response.role === 'STUDENT';
     }

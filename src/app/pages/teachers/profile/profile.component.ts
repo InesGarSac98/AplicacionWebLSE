@@ -57,8 +57,6 @@ export class ProfileComponent implements OnInit {
                     .subscribe((teacher: Teacher) => {
                         this.classroomService.getTeacherClassrooms(teacher.id)
                             .subscribe((classrooms: Classroom[])=>{
-
-                                console.log(classrooms);
                                 this.classrooms = classrooms.map(c => {
                                     let result = new IClassroomList();
                                     result.id = c.id;

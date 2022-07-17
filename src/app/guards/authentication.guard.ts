@@ -20,7 +20,6 @@ export class AuthenticationGuard implements CanActivate {
         }
 
         const response = (await this.userService.validateToken().toPromise());
-        console.log(response);
 
         return true;
     }

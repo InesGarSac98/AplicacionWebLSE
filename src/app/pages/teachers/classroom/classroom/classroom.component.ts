@@ -49,6 +49,7 @@ export class ClassroomComponent implements OnInit {
         private matDialog: MatDialog,
         private classroomService: ClassroomsService,
         private clipboard: Clipboard,
+        private router: Router,
         public dialog: MatDialog,
     ) {
         this.displayedColumnsStudents = ['name','showButton'];
@@ -77,6 +78,10 @@ export class ClassroomComponent implements OnInit {
         filterObj['searchText'] = searchText;
 
         dataSource.filter = JSON.stringify(filterObj);
+    }
+
+    public showStudentButtonClicked(studentId: number): void {
+        this.router.navigate(['teachers/classrooms/' + this.classroomId + '/student-statistics', studentId]);
     }
 
     public showWordButtonClicked(id: number): void {

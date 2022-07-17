@@ -40,7 +40,6 @@ export class ClassroomListComponent implements OnInit {
                     .subscribe((teacher: Teacher) => {
                         this.classroomsService.getTeacherClassrooms(teacher.id)
                             .subscribe((classrooms: Classroom[]) => {
-                                console.log(classrooms);
                                 this.classrooms = classrooms.map(c => {
                                     let result = new IClassroomList();
                                     result.id = c.id;
@@ -57,8 +56,7 @@ export class ClassroomListComponent implements OnInit {
 
         let dialogRef = this.dialog.open(DeleteComponent);
 
-        dialogRef.afterClosed().subscribe(result =>{
-            console.log('The dialog was closed')
+        dialogRef.afterClosed().subscribe(result => {
             if(result){
                 this.classroomsService.deleteClassroom(classroomId)
                     .subscribe(_ => {

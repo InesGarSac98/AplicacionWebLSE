@@ -86,7 +86,6 @@ export class MemoryGameComponent implements OnInit {
         this.availableWords.sort(() => Math.random() - 0.5);
 
         if (board !== null && board !== undefined) {
-            console.log("Aqui no esta entrando")
             this.boardCards = [];
             for (let i = 0; i < this.maxPairs; i++) {
                 this.boardCards.push({

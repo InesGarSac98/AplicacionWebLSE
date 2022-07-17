@@ -19,7 +19,6 @@ export class GameConfigurationComponent implements OnInit {
     ngOnInit() {
         this.gameId = this.route.snapshot.params['gameId'];
         this.classroomId = this.route.snapshot.params['classroomId'];
-        console.log(this.gameId);
     }
 
     public goBackClicked(){

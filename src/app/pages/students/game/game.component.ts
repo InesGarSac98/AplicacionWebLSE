@@ -13,8 +13,6 @@ export class GameComponent implements OnInit {
 
     ngOnInit() {
         this.gameId = this.route.snapshot.params['gameId'];
-        console.log(this.gameId);
-
     }
 
 }

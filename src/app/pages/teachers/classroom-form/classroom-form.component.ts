@@ -46,8 +46,6 @@ export class ClassroomFormComponent implements OnInit {
                         this.formGroup.controls.teacherId.setValue(teacher.id);
                         this.classroomsService.createNewClassroom(this.formGroup.value)
                             .subscribe((classroom: Classroom) => {
-                                console.log(classroom);
-
                                 this.router.navigate(['/teachers/classrooms']);
                             });
                     });

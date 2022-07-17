@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
                         this.router.navigate(['/students/profile']);
                     }
                     else if (user.role === 'TEACHER') {
-                        console.log("Soy profesor");
                         this.router.navigate(['/teachers/profile']);
                     }
                     this.notifications.pushNotification('Bienvenido '+ user.name, 'success');
@@ -57,7 +56,6 @@ export class LoginComponent implements OnInit {
 
             }, (error) => {
                 this.message = error;
-                console.log("Contraseña incorrecta");
                 this.formGroup.setErrors({ unauthenticated: true });
             }
             )

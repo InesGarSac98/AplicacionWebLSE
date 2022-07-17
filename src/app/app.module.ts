@@ -1,12 +1,15 @@
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AppRoutes } from './app.routing';
 import { AppComponent } from './app.component';
+import localeEs from '@angular/common/locales/es'
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeEs, 'es');
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FullComponent } from './layouts/full/full.component';
@@ -50,8 +53,9 @@ import { DeleteComponent } from './shared/dialog/dialogs/delete/delete.component
     ],
     providers: [
         {
-            provide: LocationStrategy,
-            useClass: PathLocationStrategy
+            //provide: LocationStrategy,
+            useClass: PathLocationStrategy,
+            provide: LOCALE_ID, useValue: 'es'
         }
     ],
     bootstrap: [AppComponent]

@@ -61,7 +61,6 @@ export class AppSidebarComponent implements OnDestroy {
         let dialogRef = this.dialog.open(DialogsComponent);
 
         dialogRef.afterClosed().subscribe(result =>{
-            console.log('The dialog was closed')
         });
     }
 }

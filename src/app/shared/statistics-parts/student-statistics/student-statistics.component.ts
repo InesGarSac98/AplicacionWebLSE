@@ -20,6 +20,15 @@ export class StudentStatisticsComponent implements OnInit {
 
     public winLoseChartInputData: NgxInputData;
 
+
+
+
+    public currentDate = new Date();
+    public currentMonth = new Date().getMonth()+1;
+    public curr = new Date();
+    public firstday = new Date(this.curr.setDate(this.curr.getDate() - this.curr.getDay()-6));
+    public lastday = new Date(this.curr.setDate(this.curr.getDate() - this.curr.getDay()+7));
+
     public totalWins: number;
     public totalGameplays: number;
     public totalLose: number;
@@ -32,6 +41,9 @@ export class StudentStatisticsComponent implements OnInit {
     public winLoseDayChart: Serie[];
 
     public statistiscLoaded: boolean = false;
+    public bestOfDay: BestStudentStatistics;
+    public bestOfWeek: BestStudentStatistics;
+    public bestOfMonth: BestStudentStatistics;
 
     constructor(
         private datepipe: DatePipe,
@@ -56,7 +68,85 @@ export class StudentStatisticsComponent implements OnInit {
 
     public ngOnInit() {
         this.getStudentStatistics();
+        this.getClassroomStatistics();
+    }
 
+    public showOnlyIntegersAxisValues(val: number) {
+        if (val % 1 === 0) {
+            return val.toLocaleString();
+        } else {
+            return '';
+        }
+    }
+
+    private getClassroomStatistics() {
+        this.statisticsService.getClassroomStatistics(this.student.classroomId).subscribe((statistics: Statistics[]) => {
+            const distinctDays = [...new Set(statistics.map(x => this.datepipe.transform(x.date, 'yyyy-MM-dd') || ''))];
+            const distinctStudents = [...new Set(statistics.map(x => x.studentId))];
+            this.bestOfDay = { wins: undefined, loses: undefined, played: undefined, score: undefined };
+            this.bestOfWeek = { wins: undefined, loses: undefined, played: undefined, score: undefined };
+            this.bestOfMonth = { wins: undefined, loses: undefined, played: undefined, score: undefined };
+
+            distinctStudents.forEach(studentId => {
+                let today: Date = new Date();
+                let winsByDay: SerieData[] = this.groupByDay(statistics.filter(x => x.status === GameStatuses.WIN && x.studentId === studentId), distinctDays);
+                this.classroomStudentBestStatistics('wins', winsByDay, today, studentId, statistics);
+
+                let losesByDay: SerieData[] = this.groupByDay(statistics.filter(x => (x.status === GameStatuses.ABANDONE || x.status === GameStatuses.LOSE) && x.studentId === studentId), distinctDays);
+                this.classroomStudentBestStatistics('loses', losesByDay, today, studentId, statistics);
+
+                let playsByDay: SerieData[] = this.groupByDay(statistics.filter(x => x.studentId === studentId), distinctDays);
+                this.classroomStudentBestStatistics('played', playsByDay, today, studentId, statistics);
+
+                let scoreByDay: SerieData[] = this.groupScoreByDay(statistics.filter(x => x.studentId === studentId), distinctDays);
+                this.classroomStudentBestStatistics('score', scoreByDay, today, studentId, statistics);
+            });
+        });
+    }
+
+    private classroomStudentBestStatistics(bestKey: string, statisticsByDay: SerieData[], today: Date, studentId: number, statistics: Statistics[]) {
+        const hasToUpdateBestStatistics = (best: SerieData | undefined, current: SerieData | undefined) => {
+            return (best === undefined && current !== undefined) ||
+                (best !== undefined && current !== undefined && best.value < current.value);
+        };
+
+        let todayStatistics = statisticsByDay.find(x => x.name === this.datepipe.transform(today, 'yyyy-MM-dd'));
+        let weekStatistics = { name: studentId + '', value: statisticsByDay.filter(x => x.name >= (this.datepipe.transform(this.firstDayOfWeek(today), 'yyyy-MM-dd') || '')).reduce((acc, curr) => { return acc + curr.value; }, 0) } as SerieData;
+        let monthStatistics = { name: studentId + '', value: statisticsByDay.filter(x => x.name > (this.datepipe.transform(new Date(today).setDate(1), 'yyyy-MM-dd') || '')).reduce((acc, curr) => { return acc + curr.value; }, 0) } as SerieData;
+
+        if (hasToUpdateBestStatistics((this.bestOfDay as any)[bestKey], todayStatistics)) {
+            const todayName = todayStatistics?.name || '';
+            (this.bestOfDay as any)[bestKey] = {
+                name: statistics.find(s => s.studentId.toString() === todayName)?.studentName || '',
+                value: todayStatistics?.value || 0
+            };
+        }
+
+        if (hasToUpdateBestStatistics((this.bestOfWeek as any)[bestKey], weekStatistics)) {
+            const weekName = weekStatistics?.name || '';
+            (this.bestOfWeek as any)[bestKey] = {
+                name: statistics.find(s => s.studentId.toString() === weekName)?.studentName || '',
+                value: weekStatistics?.value || 0
+            };
+        }
+
+        if (hasToUpdateBestStatistics((this.bestOfMonth as any)[bestKey], monthStatistics)) {
+            const monthName = monthStatistics?.name || '';
+            (this.bestOfMonth as any)[bestKey] = {
+                name: statistics.find(s => s.studentId.toString() === monthName)?.studentName || '',
+                value: monthStatistics?.value || 0
+            };
+        }
+    }
+
+    private firstDayOfWeek(date: Date) {
+        const dayOfWeek = date.getDay();
+        const firstDayOfWeek = new Date(date);
+        const diff = dayOfWeek >= 1 ? dayOfWeek - 1 : 6 - dayOfWeek
+
+        firstDayOfWeek.setDate(date.getDate() - diff)
+
+        return firstDayOfWeek
     }
 
     private groupByDay(arr: Statistics[], keys: string[]): SerieData[] {
@@ -71,6 +161,23 @@ export class StudentStatisticsComponent implements OnInit {
             const key: any = this.datepipe.transform(s.date, 'yyyy-MM-dd') || '';
             let data: SerieData = seriesData.find(x => x.name === key) as SerieData;
             data.value++;
+        });
+
+        return seriesData;
+    }
+
+    private groupScoreByDay(arr: Statistics[], keys: string[]): SerieData[] {
+        let seriesData: SerieData[] = keys.map(k => {
+            return {
+                name: k,
+                value: 0
+            };
+        })
+
+        arr.forEach(s => {
+            const key: any = this.datepipe.transform(s.date, 'yyyy-MM-dd') || '';
+            let data: SerieData = seriesData.find(x => x.name === key) as SerieData;
+            data.value += s.score;
         });
 
         return seriesData;
@@ -116,4 +223,11 @@ export class StudentStatisticsComponent implements OnInit {
             (minutes > 0 ? minutes + 'min ' : '') +
             seconds + 's' ;
     }
+}
+
+class BestStudentStatistics {
+    wins: SerieData | undefined;
+    loses: SerieData | undefined;
+    played: SerieData | undefined;
+    score: SerieData | undefined;
 }

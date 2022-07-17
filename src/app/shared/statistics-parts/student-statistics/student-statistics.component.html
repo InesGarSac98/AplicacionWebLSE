@@ -80,14 +80,14 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <p class="card-category">Partidas ganadas: 8 <span class="text-success"> Jose</span></p>
-                    <p class="card-category">Partidas perdidas: 10 <span class="text-danger"> Raúl</span></p>
-                    <p class="card-category">Partidas jugadas: 13 <span class="text-success"> Raúl</span></p>
-                    <p class="card-category">Puntuación total: 180 <span class="text-success"> Jose</span></p>
+                    <p *ngIf="bestOfDay?.wins" class="card-category">Partidas ganadas: {{bestOfDay.wins.value}} <span class="text-success">{{bestOfDay.wins.name}}</span></p>
+                    <p *ngIf="bestOfDay?.loses" class="card-category">Partidas perdidas: {{bestOfDay.loses.value}} <span class="text-danger"> {{bestOfDay.loses.name}}</span></p>
+                    <p *ngIf="bestOfDay?.played" class="card-category">Partidas jugadas: {{bestOfDay.played.value}} <span class="text-success"> {{bestOfDay.played.name}}</span></p>
+                    <p *ngIf="bestOfDay?.score" class="card-category">Puntuación total: {{bestOfDay.score.value}} <span class="text-success"> {{bestOfDay.score.name}}</span></p>
                 </div>
                 <div class="card-footer">
                     <div class="stats">
-                        <i class="material-icons">access_time</i> Martes 12 de Julio
+                        <i class="material-icons">today</i> {{currentDate | date:'EEEE, dd MMM yyyy'}}
                     </div>
                 </div>
             </div>
@@ -100,14 +100,14 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <p class="card-category">Partidas ganadas: 8 <span class="text-success"> Jose</span></p>
-                    <p class="card-category">Partidas perdidas: 10 <span class="text-danger"> Raúl</span></p>
-                    <p class="card-category">Partidas jugadas: 13 <span class="text-success"> Raúl</span></p>
-                    <p class="card-category">Puntuación total: 180 <span class="text-success"> Jose</span></p>
+                    <p *ngIf="bestOfWeek" class="card-category">Partidas ganadas: {{bestOfWeek.wins.value}} <span class="text-success">{{bestOfWeek.wins.name}}</span></p>
+                    <p *ngIf="bestOfWeek?.loses" class="card-category">Partidas perdidas: {{bestOfWeek.loses.value}} <span class="text-danger"> {{bestOfWeek.loses.name}}</span></p>
+                    <p *ngIf="bestOfWeek?.played" class="card-category">Partidas jugadas: {{bestOfWeek.played.value}} <span class="text-success"> {{bestOfWeek.played.name}}</span></p>
+                    <p *ngIf="bestOfWeek?.score" class="card-category">Puntuación total: {{bestOfWeek.score.value}} <span class="text-success"> {{bestOfWeek.score.name}}</span></p>
                 </div>
                 <div class="card-footer">
                     <div class="stats">
-                        <i class="material-icons">access_time</i> 11 de Julio al 17 de Julio
+                        <i class="material-icons">date_range</i> {{firstday | date:'EEEE, dd MMM yyyy'}} - {{lastday | date:'EEEE, dd MMM yyyy'}}
                     </div>
                 </div>
             </div>
@@ -120,14 +120,14 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <p class="card-category">Partidas ganadas: 8 <span class="text-success"> Jose</span></p>
-                    <p class="card-category">Partidas perdidas: 10 <span class="text-danger"> Raúl</span></p>
-                    <p class="card-category">Partidas jugadas: 13 <span class="text-success"> Raúl</span></p>
-                    <p class="card-category">Puntuación total: 180 <span class="text-success"> Jose</span></p>
+                    <p *ngIf="bestOfMonth" class="card-category">Partidas ganadas: {{bestOfMonth.wins.value}} <span class="text-success">{{bestOfMonth.wins.name}}</span></p>
+                    <p *ngIf="bestOfMonth?.loses" class="card-category">Partidas perdidas: {{bestOfMonth.loses.value}} <span class="text-danger"> {{bestOfMonth.loses.name}}</span></p>
+                    <p *ngIf="bestOfMonth?.played" class="card-category">Partidas jugadas: {{bestOfMonth.played.value}} <span class="text-success"> {{bestOfMonth.played.name}}</span></p>
+                    <p *ngIf="bestOfMonth?.score" class="card-category">Puntuación total: {{bestOfMonth.score.value}} <span class="text-success"> {{bestOfMonth.score.name}}</span></p>
                 </div>
                 <div class="card-footer">
                     <div class="stats">
-                        <i class="material-icons">access_time</i> Julio
+                        <i class="material-icons">calendar_today</i> {{currentDate | date:'MMMM'}}
                     </div>
                 </div>
             </div>
@@ -152,6 +152,7 @@
                             [yAxis]="winLoseChartInputData.yAxis"
                             [xAxisLabel]="winLoseChartInputData.xAxisLabel"
                             [yAxisLabel]="winLoseChartInputData.yAxisLabel"
+                            [yAxisTickFormatting]="showOnlyIntegersAxisValues"
                             [timeline]="winLoseChartInputData.timeline"
                             [rotateXAxisTicks]="true"
                             [legendPosition]="'below'"

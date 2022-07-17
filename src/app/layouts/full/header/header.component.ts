@@ -14,7 +14,6 @@ export class AppHeaderComponent {
         let dialogRef = this.dialog.open(DialogsComponent);
 
         dialogRef.afterClosed().subscribe(result =>{
-            console.log('The dialog was closed')
         });
     }
 }

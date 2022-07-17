@@ -66,7 +66,7 @@ export class TeacherDictionaryComponent implements OnInit {
             },
             {
                 text: 'Salir',
-                clicked: () => this.closeArasaacDialog()
+                clicked: () => {}
             }
         ]
     }
@@ -142,8 +142,7 @@ export class TeacherDictionaryComponent implements OnInit {
 
         let dialogRef = this.dialog.open(DeleteComponent);
 
-        dialogRef.afterClosed().subscribe(result =>{
-            console.log('The dialog was closed')
+        dialogRef.afterClosed().subscribe(result => {
             if(result){
                 this.wordsService.deleteWord(id)
                     .subscribe(_ => {
@@ -153,7 +152,6 @@ export class TeacherDictionaryComponent implements OnInit {
                     },
                     (error) => {
                         this.notifications.pushNotification('Error al intentar borrar la palabra', 'error');
-                        console.log(error);
                     });
             }
         });
@@ -195,10 +193,6 @@ export class TeacherDictionaryComponent implements OnInit {
                 },
                 error => this.notifications.pushNotification(error, 'error')
             );
-    }
-
-    public closeArasaacDialog(): void {
-        console.log('closeArasaacDialog');
     }
 }
 

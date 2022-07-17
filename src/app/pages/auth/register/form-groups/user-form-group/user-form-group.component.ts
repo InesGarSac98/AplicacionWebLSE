@@ -20,9 +20,7 @@ export class UserFormGroupComponent implements OnInit {
     }
 
     public ngOnInit() {
-        setTimeout(()=> console.log(this.userFormGroup.controls), 3000);
 
-        setTimeout(()=> console.log(this.formGroup.get('user.name')), 5000);
     }
 
 

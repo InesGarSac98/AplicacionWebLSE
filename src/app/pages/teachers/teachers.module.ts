@@ -2,7 +2,7 @@ import 'hammerjs';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { DemoMaterialModule } from 'src/app/demo-material-module';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -23,6 +23,8 @@ import { GameConfigurationComponent } from './game-configuration/game-configurat
 import { QuizzGameConfigurationAddQuestionComponent } from './game-configuration/quizz-game-configuration-add-question/quizz-game-configuration-add-question.component';
 import { MemoryGameConfigurationComponent } from './game-configuration/memory-game-configuration/memory-game-configuration.component';
 import { TeacherDictionaryComponent } from './teacher-dictionary/teacher-dictionary.component';
+import { SingleStudentStatisticsComponent } from './single-student-statistics/single-student-statistics.component';
+import { StatisticsPartsModule } from 'src/app/shared/statistics-parts/statistics-parts.module';
 
 
 
@@ -37,8 +39,11 @@ import { TeacherDictionaryComponent } from './teacher-dictionary/teacher-diction
     FlexLayoutModule,
     MatTabsModule,
     SharedModule,
+    StatisticsPartsModule
   ],
-  providers: [],
+  providers: [
+    DatePipe
+  ],
   declarations: [
     ProfileComponent,
     ClassroomComponent,
@@ -50,7 +55,8 @@ import { TeacherDictionaryComponent } from './teacher-dictionary/teacher-diction
     QuizzGameConfigurationAddQuestionComponent,
     MemoryGameConfigurationComponent,
     GameConfigurationComponent,
-    TeacherDictionaryComponent
+    TeacherDictionaryComponent,
+    SingleStudentStatisticsComponent
   ]
 })
 export class TeachersModule {}
