@@ -13,12 +13,13 @@
                     [cellDefinitions]="dictionaryCellDefinitions"
                     [showIsCheckedFilter]="false"
                     [showCheckColumn]="false"
+                    [showEditButton]="false"
                     (showItemButtonClicked)="showSelectedWord($event)"
                     (deleteItemButtonClicked)="deleteWord($event)">
 
                     <button class="arasaac-btn" additionalButton matSuffix mat-raised-button (click)="showWordFromArasaac()">Buscar en ARASAAC</button>
                 </app-multi-select-list>
-                <button mat-raised-button color="primary" (click)="returnWordsSelection()"> Volver</button>
+                <!-- <button mat-raised-button color="primary" (click)="returnWordsSelection()"> Volver</button> -->
             </div>
         </div>
     </div>

@@ -3,18 +3,28 @@ h1{
 }
 
 h5{
-    text-align: center;
+    font-size: 3rem;
+    align-self: center;
     width: fit-content;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
 a{
     text-decoration: none;
 }
 
+.bin{
+    width: fit-content;
+}
+
 .card-header{
     width: fit-content;
 }
 
+.card{
+    transition:0.5s;
+    cursor:pointer;
+}
 
 
 

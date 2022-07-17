@@ -6,7 +6,9 @@ import { Game } from 'src/api/models/game.model';
 import { ClassroomGamesService } from 'src/api/services/classroomGames-service/classroomGames.service';
 import { ClassroomsService } from 'src/api/services/classrooms-service/classrooms.service';
 import { GamesService } from 'src/api/services/games-service/games.service';
+import { AppComponent } from 'src/app/app.component';
 import { CellDefinition, SelectableItem } from 'src/app/shared/multi-select-list/multi-select-list.component';
+import { NotificationComponent } from 'src/app/shared/notification/notification.component';
 
 @Component({
   selector: 'app-add-games',
@@ -21,8 +23,10 @@ export class AddGamesComponent implements OnInit {
     private fullGamesList: Game[];
     private existingClassroomGames: ClassroomGame[];
     public gameCellDefinitions: CellDefinition[];
+    private notifications: NotificationComponent;
 
     constructor(
+        app: AppComponent,
         private classroomService: ClassroomsService,
         private classroomGamesService: ClassroomGamesService,
         private gamesService: GamesService,
@@ -30,6 +34,7 @@ export class AddGamesComponent implements OnInit {
         private router: Router,
         public dialog: MatDialog
         ) {
+            this.notifications = app.getNotificationsComponent();
             this.gameCellDefinitions = [
                 {
                     header: '',
@@ -100,7 +105,7 @@ export class AddGamesComponent implements OnInit {
             await this.classroomGamesService.createClassroomGame(wordId, this.classroomId).toPromise();
         }
 
-        //this.router.navigate(['/teachers/classrooms/' + this.classroomId + '/add-games/' + id]);
+        this.notifications.pushNotification('Se han asociado los juegos a la clase correctamente', 'success');
     }
 
     public playGameButtonClicked(id: number): void {

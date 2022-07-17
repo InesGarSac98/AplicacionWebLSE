@@ -9,6 +9,8 @@ import { ClassroomsService } from 'src/api/services/classrooms-service/classroom
 import { QuizzGameAnswerService } from 'src/api/services/quizz-game-answer-service/quizz-game-answer.service';
 import { QuizzGameClassroomConfigurationService } from 'src/api/services/quizz-game-classroom-configuration-service/quizz-game-classroom-configuration.service';
 import { QuizzGameQuestionService } from 'src/api/services/quizz-game-question-service/quizz-game-question.service';
+import { AppComponent } from 'src/app/app.component';
+import { NotificationComponent } from 'src/app/shared/notification/notification.component';
 
 @Component({
     selector: 'app-quizz-game-configuration-add-question',
@@ -26,6 +28,7 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
     public currentConfiguration: QuizzGameClassroomConfiguration;
     public currentQuestions: QuizzGameQuestion[];
     public formGroupIsLoaded: boolean = false;
+    private notifications: NotificationComponent;
 
     private readonly numberOfQuestionsValidator: ValidatorFn = (abstractControl: AbstractControl) => {
         const fg = abstractControl as FormGroup;
@@ -42,11 +45,14 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
     }
 
     constructor(
+        app: AppComponent,
         private quizzGameClassroomConfigurationService: QuizzGameClassroomConfigurationService,
         private quizzGameQuestionService: QuizzGameQuestionService,
         private classroomService: ClassroomsService,
         private quizzGameAnswerService: QuizzGameAnswerService,
-    ) { }
+    ) {
+        this.notifications = app.getNotificationsComponent();
+    }
 
     public ngOnInit() {
         this.formGroupIsLoaded = false;
@@ -138,6 +144,7 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
                     this.saveQuestions(quizzGameClassroomConfiguration.id);
                 });
         }
+        this.notifications.pushNotification('La configuración se ha guardado correctamente', 'success');
     }
 
     private loadFormGroup() {

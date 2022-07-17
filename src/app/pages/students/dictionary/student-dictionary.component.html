@@ -12,9 +12,11 @@
                 <app-multi-select-list *ngIf="dataLoaded" [(items)]="wordsAssociation"
                     [cellDefinitions]="dictionaryCellDefinitions"
                     [showCheckColumn]="false"
+                    [showDeleteButton]="false"
+                    [showEditButton]="false"
                     (showItemButtonClicked)="showSelectedWord($event)">
                 </app-multi-select-list>
-                <button mat-raised-button color="primary" (click)="returnWordsSelection()"> Volver</button>
+                <!-- <button mat-raised-button color="primary" (click)="returnWordsSelection()"> Volver</button> -->
             </div>
         </div>
     </div>

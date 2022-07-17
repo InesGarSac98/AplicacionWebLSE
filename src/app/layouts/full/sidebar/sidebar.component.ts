@@ -21,6 +21,7 @@ export class AppSidebarComponent implements OnDestroy {
   public classroom: Classroom;
   public userClassroom: number;
 
+
   private _mobileQueryListener: () => void;
 
   constructor(

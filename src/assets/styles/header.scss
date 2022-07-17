@@ -30,6 +30,7 @@
  Icons
 *******************/
 .mat-icon, .mat-icon-button {
+    width: fit-content;
     &.mat-icon-header{
         color: #fafafa;
         vertical-align: middle;

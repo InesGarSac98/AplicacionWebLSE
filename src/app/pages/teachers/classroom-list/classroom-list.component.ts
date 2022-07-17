@@ -33,6 +33,7 @@ export class ClassroomListComponent implements OnInit {
         this.notifications = app.getNotificationsComponent();
     }
 
+
     public ngOnInit(): void {
         this.userService.getUserLoged()
             .subscribe((user: User) => {
