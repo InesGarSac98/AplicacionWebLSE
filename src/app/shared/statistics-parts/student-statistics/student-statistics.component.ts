@@ -30,7 +30,6 @@ export class StudentStatisticsComponent implements OnInit {
     public totalTime: number;
     public averageTime: number;
     public winLoseDayChart: Serie[];
-    public learnedWordsByGameChart: Serie[];
 
     public statistiscLoaded: boolean = false;
 
@@ -59,8 +58,6 @@ export class StudentStatisticsComponent implements OnInit {
         this.getStudentStatistics();
 
     }
-
-
 
     private groupByDay(arr: Statistics[], keys: string[]): SerieData[] {
         let seriesData: SerieData[] = keys.map(k => {
@@ -119,7 +116,4 @@ export class StudentStatisticsComponent implements OnInit {
             (minutes > 0 ? minutes + 'min ' : '') +
             seconds + 's' ;
     }
-
 }
-
-

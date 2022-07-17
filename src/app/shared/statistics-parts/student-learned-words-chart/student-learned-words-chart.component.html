@@ -1,16 +1,19 @@
-<ngx-charts-bar-chart *ngIf="winLoseDayChart?.length > 0"
-    [scheme]="learnedWordsByGameChartInputData.colorScheme"
-    [legend]="learnedWordsByGameChartInputData.legend"
-    [showXAxisLabel]="learnedWordsByGameChartInputData.showXAxisLabel"
-    [showYAxisLabel]="learnedWordsByGameChartInputData.showYAxisLabel"
-    [xAxis]="learnedWordsByGameChartInputData.xAxis"
-    [yAxis]="learnedWordsByGameChartInputData.yAxis"
-    [xAxisLabel]="learnedWordsByGameChartInputData.xAxisLabel"
-    [yAxisLabel]="learnedWordsByGameChartInputData.yAxisLabel"
-    [timeline]="learnedWordsByGameChartInputData.timeline"
-    [rotateXAxisTicks]="true"
-    [legendPosition]="'below'"
-    [legendTitle]="''"
-    [results]="learnedWordsByGameChart"
-    >
-</ngx-charts-bar-chart>
+<div style="max-height: inherit; margin-right: inherit;">
+    <ngx-charts-bar-horizontal *ngIf="learnedWordsByGameChart?.length > 0"
+        [scheme]="learnedWordsByGameChartInputData.colorScheme"
+        [legend]="learnedWordsByGameChartInputData.legend"
+        [showXAxisLabel]="learnedWordsByGameChartInputData.showXAxisLabel"
+        [showYAxisLabel]="learnedWordsByGameChartInputData.showYAxisLabel"
+        [xAxis]="learnedWordsByGameChartInputData.xAxis"
+        [yAxis]="learnedWordsByGameChartInputData.yAxis"
+        [xAxisLabel]="learnedWordsByGameChartInputData.xAxisLabel"
+        [yAxisLabel]="learnedWordsByGameChartInputData.yAxisLabel"
+        [timeline]="learnedWordsByGameChartInputData.timeline"
+        [barPadding]="20"
+        [rotateXAxisTicks]="true"
+        [legendPosition]="'below'"
+        [legendTitle]="''"
+        [results]="learnedWordsByGameChart"
+        >
+    </ngx-charts-bar-horizontal>
+</div>
