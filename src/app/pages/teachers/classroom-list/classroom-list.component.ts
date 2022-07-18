@@ -33,6 +33,11 @@ export class ClassroomListComponent implements OnInit {
         this.notifications = app.getNotificationsComponent();
     }
 
+    public getColor(i: number): string {
+        const colors = ["#BFEBFF", "#FDFFB5", "#ABDA9E", "#D5C3A5", "#FFABAB"];
+
+        return colors[i % (colors.length)];
+    }
 
     public ngOnInit(): void {
         this.userService.getUserLoged()

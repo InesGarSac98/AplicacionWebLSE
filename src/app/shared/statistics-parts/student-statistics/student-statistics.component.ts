@@ -26,8 +26,8 @@ export class StudentStatisticsComponent implements OnInit {
     public currentDate = new Date();
     public currentMonth = new Date().getMonth()+1;
     public curr = new Date();
-    public firstday = new Date(this.curr.setDate(this.curr.getDate() - this.curr.getDay()-6));
-    public lastday = new Date(this.curr.setDate(this.curr.getDate() - this.curr.getDay()+7));
+    public firstday: Date;
+    public lastday: Date;
 
     public totalWins: number;
     public totalGameplays: number;
@@ -67,6 +67,9 @@ export class StudentStatisticsComponent implements OnInit {
     }
 
     public ngOnInit() {
+        this.firstday = this.firstDayOfWeek(new Date());
+        this.lastday = new Date(this.firstday);
+        this.lastday.setDate(this.firstday.getDate() + 6);
         this.getStudentStatistics();
         this.getClassroomStatistics();
     }
@@ -111,8 +114,11 @@ export class StudentStatisticsComponent implements OnInit {
         };
 
         let todayStatistics = statisticsByDay.find(x => x.name === this.datepipe.transform(today, 'yyyy-MM-dd'));
-        let weekStatistics = { name: studentId + '', value: statisticsByDay.filter(x => x.name >= (this.datepipe.transform(this.firstDayOfWeek(today), 'yyyy-MM-dd') || '')).reduce((acc, curr) => { return acc + curr.value; }, 0) } as SerieData;
-        let monthStatistics = { name: studentId + '', value: statisticsByDay.filter(x => x.name > (this.datepipe.transform(new Date(today).setDate(1), 'yyyy-MM-dd') || '')).reduce((acc, curr) => { return acc + curr.value; }, 0) } as SerieData;
+
+        let weekData = statisticsByDay.filter(x => x.name >= (this.datepipe.transform(this.firstDayOfWeek(today), 'yyyy-MM-dd') || '')).reduce((acc, curr) => { return acc + curr.value; }, 0)
+        let weekStatistics = { name: weekData ? studentId + '' : '' , value: weekData } as SerieData;
+        let monthData = statisticsByDay.filter(x => x.name > (this.datepipe.transform(new Date(today).setDate(1), 'yyyy-MM-dd') || '')).reduce((acc, curr) => { return acc + curr.value; }, 0);
+        let monthStatistics = { name: monthData ? studentId + '' : '' , value: monthData } as SerieData;
 
         if (hasToUpdateBestStatistics((this.bestOfDay as any)[bestKey], todayStatistics)) {
             const todayName = todayStatistics?.name || '';

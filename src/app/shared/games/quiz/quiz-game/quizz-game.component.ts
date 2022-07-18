@@ -135,45 +135,6 @@ export class QuizzGameComponent implements OnInit {
         this.gameFinished = this.checkGameFinished();
     }
 
-    public getQuizzGameQuestions() {
-        this.quizzGameQuestionservice.getQuizzGameQuestionsByConfigurationId(this.currentConfiguration.id)
-            .subscribe((questions: QuizzGameQuestion[]) => {
-                this.availableQuestions = questions;
-                this.availableQuestions.sort(() => Math.random() - 0.5);
-                this.cardQuiz = [];
-                for (let i = 0; i < this.MAX_QUESTIONS; i++) {
-                    const element = this.availableQuestions[i];
-                    this.cardQuiz.push({
-                        questionId: element.id,
-                        question: element.name,
-                        questionImg: element.word.image,
-                        isImage: element.isImage,
-                        answer: element.answers.map(a => (
-                            {
-                                answerId: a.id,
-                                option: a.isImage ? a.word.image : a.word.name,
-                                correct: a.isCorrect,
-                                isImage: a.isImage
-                            } as IAnswer)).sort(() => Math.random() - 0.5)
-                    });
-                }
-
-                this.score = 0;
-                this.gameFinished = false;
-                this.isAbandoned = false;
-                this.isTimeOver = false;
-                this.isWin = false;
-                this.currentQuiz = 0;
-                this.answerSelected = false;
-                this.correctAnswers = 0;
-                this.incorrectAnswers = 0;
-                this.gameTimer.startTimer(this.currentConfiguration.time);
-
-                const startEvent = this.quizzGameEventGeneratorService.generateStartEvent(this.cardQuiz, this.gameId, this.studentId, this.gameTimer.getLeftTime());
-                this.gameEventService.createGameEvent(startEvent).subscribe(event => this.gamePlayId = event.gamePlayId);
-            });
-    }
-
     private checkGameFinished(): boolean {
         const isGameFinished = this.gameFinished || this.isTimeOver || this.isAbandoned || this.currentQuiz >= this.MAX_QUESTIONS - 1;
 
@@ -214,13 +175,46 @@ export class QuizzGameComponent implements OnInit {
             });
     }
 
-    private getQuizGameConfiguration() {
+    public getQuizGameConfiguration() {
         this.quizzGameClassroomConfigurationService.getQuizzGameClassroomConfigurationByClassroomId(this.classroomId)
             .subscribe((currentConfiguration: QuizzGameClassroomConfiguration) => {
                 this.currentConfiguration = currentConfiguration;
                 this.currentConfigurationId = currentConfiguration.id;
                 this.MAX_QUESTIONS = currentConfiguration.numberOfQuestions;
-                this.getQuizzGameQuestions();
+
+                this.availableQuestions = currentConfiguration.questions;
+                this.availableQuestions.sort(() => Math.random() - 0.5);
+                this.cardQuiz = [];
+                for (let i = 0; i < this.MAX_QUESTIONS; i++) {
+                    const element = this.availableQuestions[i];
+                    this.cardQuiz.push({
+                        questionId: element.id,
+                        question: element.name,
+                        questionImg: element.word.image,
+                        isImage: element.isImage,
+                        answer: element.answers.map(a => (
+                            {
+                                answerId: a.id,
+                                option: a.isImage ? a.word.image : a.word.name,
+                                correct: a.isCorrect,
+                                isImage: a.isImage
+                            } as IAnswer)).sort(() => Math.random() - 0.5)
+                    });
+                }
+
+                this.score = 0;
+                this.gameFinished = false;
+                this.isAbandoned = false;
+                this.isTimeOver = false;
+                this.isWin = false;
+                this.currentQuiz = 0;
+                this.answerSelected = false;
+                this.correctAnswers = 0;
+                this.incorrectAnswers = 0;
+                this.gameTimer.startTimer(this.currentConfiguration.time);
+
+                const startEvent = this.quizzGameEventGeneratorService.generateStartEvent(this.cardQuiz, this.gameId, this.studentId, this.gameTimer.getLeftTime());
+                this.gameEventService.createGameEvent(startEvent).subscribe(event => this.gamePlayId = event.gamePlayId);
             });
     }
 }

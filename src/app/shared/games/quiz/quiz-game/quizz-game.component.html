@@ -46,7 +46,7 @@
     </div>
     <br>
     <div>
-        <button *ngIf="gameFinished" mat-raised-button class="nuevo-juego" (click)="getQuizzGameQuestions()">
+        <button *ngIf="gameFinished" mat-raised-button class="nuevo-juego" (click)="getQuizGameConfiguration()">
             ¡Jugar!
         </button>
         <button *ngIf="!gameFinished" mat-raised-button class="nuevo-juego" (click)="abandoned()">

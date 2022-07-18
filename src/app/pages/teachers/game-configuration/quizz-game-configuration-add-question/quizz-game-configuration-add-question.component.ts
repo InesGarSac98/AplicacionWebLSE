@@ -61,16 +61,9 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
                 (currentConfiguration: QuizzGameClassroomConfiguration) => {
                     this.currentConfiguration = currentConfiguration;
                     this.currentConfigurationId = currentConfiguration.id;
-
-                    this.quizzGameQuestionService.getQuizzGameQuestionsByConfigurationId(this.currentConfiguration.id)
-                        .subscribe(
-                            (currentQuestions: QuizzGameQuestion[]) => {
-                                this.currentQuestions = currentQuestions;
-                            },
-                            () => { },
-                            () => this.loadFormGroup()
-                        );
+                    this.currentQuestions = currentConfiguration.questions;
                 },
+                () => { },//TODO: notificacion de error
                 () => this.loadFormGroup(),
             );
 

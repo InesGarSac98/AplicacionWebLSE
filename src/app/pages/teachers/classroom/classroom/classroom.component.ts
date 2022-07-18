@@ -147,6 +147,10 @@ export class ClassroomComponent implements OnInit {
     public copyToClipboard() {
         this.clipboard.copy(this.classroom.code);
     }
+
+    public goBackClicked(){
+        this.router.navigate(['teachers/classrooms']);
+    }
 }
 
 export class IStudentClassroomList {

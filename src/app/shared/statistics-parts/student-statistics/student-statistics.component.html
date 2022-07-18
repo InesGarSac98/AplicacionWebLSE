@@ -80,14 +80,14 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <p *ngIf="bestOfDay?.wins" class="card-category">Partidas ganadas: {{bestOfDay.wins.value}} <span class="text-success">{{bestOfDay.wins.name}}</span></p>
-                    <p *ngIf="bestOfDay?.loses" class="card-category">Partidas perdidas: {{bestOfDay.loses.value}} <span class="text-danger"> {{bestOfDay.loses.name}}</span></p>
-                    <p *ngIf="bestOfDay?.played" class="card-category">Partidas jugadas: {{bestOfDay.played.value}} <span class="text-success"> {{bestOfDay.played.name}}</span></p>
-                    <p *ngIf="bestOfDay?.score" class="card-category">Puntuación total: {{bestOfDay.score.value}} <span class="text-success"> {{bestOfDay.score.name}}</span></p>
+                    <p class="card-category">Partidas ganadas: {{bestOfDay?.wins ? bestOfDay.wins.value : 0}} <span class="text-success">{{bestOfDay?.wins ? bestOfDay.wins.name : ''}}</span></p>
+                    <p class="card-category">Partidas perdidas: {{bestOfDay?.loses ? bestOfDay.loses.value: 0}} <span class="text-danger"> {{bestOfDay?.loses ? bestOfDay.loses.name: ''}}</span></p>
+                    <p class="card-category">Partidas jugadas: {{bestOfDay?.played ? bestOfDay.played.value: 0}} <span class="text-success"> {{bestOfDay?.played ? bestOfDay.played.name: ''}}</span></p>
+                    <p class="card-category">Puntuación total: {{bestOfDay?.score ? bestOfDay.score.value: 0}} <span class="text-success"> {{bestOfDay?.score ? bestOfDay.score.name: ''}}</span></p>
                 </div>
                 <div class="card-footer">
                     <div class="stats">
-                        <i class="material-icons">today</i> {{currentDate | date:'EEEE, dd MMM yyyy'}}
+                        <i class="material-icons">today</i> {{currentDate | date:'EEEE, dd MMM'}}
                     </div>
                 </div>
             </div>
@@ -100,14 +100,14 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <p *ngIf="bestOfWeek" class="card-category">Partidas ganadas: {{bestOfWeek.wins.value}} <span class="text-success">{{bestOfWeek.wins.name}}</span></p>
-                    <p *ngIf="bestOfWeek?.loses" class="card-category">Partidas perdidas: {{bestOfWeek.loses.value}} <span class="text-danger"> {{bestOfWeek.loses.name}}</span></p>
-                    <p *ngIf="bestOfWeek?.played" class="card-category">Partidas jugadas: {{bestOfWeek.played.value}} <span class="text-success"> {{bestOfWeek.played.name}}</span></p>
-                    <p *ngIf="bestOfWeek?.score" class="card-category">Puntuación total: {{bestOfWeek.score.value}} <span class="text-success"> {{bestOfWeek.score.name}}</span></p>
+                    <p class="card-category">Partidas ganadas: {{bestOfWeek?.wins ? bestOfWeek.wins.value : 0}} <span class="text-success">{{bestOfWeek?.wins ? bestOfWeek.wins.name : ''}}</span></p>
+                    <p class="card-category">Partidas perdidas: {{bestOfWeek?.loses ? bestOfWeek.loses.value: 0}} <span class="text-danger"> {{bestOfWeek?.loses ? bestOfWeek.loses.name: ''}}</span></p>
+                    <p class="card-category">Partidas jugadas: {{bestOfWeek?.played ? bestOfWeek.played.value: 0}} <span class="text-success"> {{bestOfWeek?.played ? bestOfWeek.played.name: ''}}</span></p>
+                    <p class="card-category">Puntuación total: {{bestOfWeek?.score ? bestOfWeek.score.value: 0}} <span class="text-success"> {{bestOfWeek?.score ? bestOfWeek.score.name: ''}}</span></p>
                 </div>
                 <div class="card-footer">
                     <div class="stats">
-                        <i class="material-icons">date_range</i> {{firstday | date:'EEEE, dd MMM yyyy'}} - {{lastday | date:'EEEE, dd MMM yyyy'}}
+                        <i class="material-icons">date_range</i> {{firstday | date:'EEEE, dd MMM'}} - {{lastday | date:'EEEE, dd MMM'}}
                     </div>
                 </div>
             </div>
@@ -120,10 +120,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <p *ngIf="bestOfMonth" class="card-category">Partidas ganadas: {{bestOfMonth.wins.value}} <span class="text-success">{{bestOfMonth.wins.name}}</span></p>
-                    <p *ngIf="bestOfMonth?.loses" class="card-category">Partidas perdidas: {{bestOfMonth.loses.value}} <span class="text-danger"> {{bestOfMonth.loses.name}}</span></p>
-                    <p *ngIf="bestOfMonth?.played" class="card-category">Partidas jugadas: {{bestOfMonth.played.value}} <span class="text-success"> {{bestOfMonth.played.name}}</span></p>
-                    <p *ngIf="bestOfMonth?.score" class="card-category">Puntuación total: {{bestOfMonth.score.value}} <span class="text-success"> {{bestOfMonth.score.name}}</span></p>
+                    <p *ngIf="bestOfMonth" class="card-category">Partidas ganadas: {{bestOfMonth?.wins ? bestOfMonth.wins.value : 0}} <span class="text-success">{{bestOfMonth?.wins ? bestOfMonth.wins.name : ''}}</span></p>
+                    <p *ngIf="bestOfMonth?.loses" class="card-category">Partidas perdidas: {{bestOfMonth?.loses ? bestOfMonth.loses.value: 0}} <span class="text-danger"> {{bestOfMonth?.loses ? bestOfMonth.loses.name: ''}}</span></p>
+                    <p *ngIf="bestOfMonth?.played" class="card-category">Partidas jugadas: {{bestOfMonth?.played ? bestOfMonth.played.value: 0}}  <span class="text-success"> {{bestOfMonth?.played ? bestOfMonth.played.name: ''}}</span></p>
+                    <p *ngIf="bestOfMonth?.score" class="card-category">Puntuación total: {{bestOfMonth?.score ? bestOfMonth.score.value: 0}}  <span class="text-success"> {{bestOfMonth?.score ? bestOfMonth.score.name: ''}}</span></p>
                 </div>
                 <div class="card-footer">
                     <div class="stats">
