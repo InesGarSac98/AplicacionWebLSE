@@ -25,6 +25,7 @@ import { DialogTemplateComponent } from './dialog/dialog-template/dialog-templat
 import { StatisticsPartsModule } from './statistics-parts/statistics-parts.module';
 import { StudentStatisticsComponent } from './statistics-parts/student-statistics/student-statistics.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { TeacherClassroomStatisticsComponent } from './statistics-parts/teacher-classroom-statistics/teacher-classroom-statistics.component';
 
 const components = [
     AccordionAnchorDirective,

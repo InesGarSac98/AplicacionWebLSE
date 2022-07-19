@@ -1,5 +1,6 @@
 h1{
     text-align: center;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
 h5{
@@ -26,7 +27,17 @@ a{
     cursor:pointer;
 }
 
+.title > a:hover{
+    color: rgb(66, 134, 223);
+}
 
+.externo {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
 
 
 

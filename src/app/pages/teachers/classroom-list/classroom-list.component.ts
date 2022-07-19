@@ -34,7 +34,7 @@ export class ClassroomListComponent implements OnInit {
     }
 
     public getColor(i: number): string {
-        const colors = ["#BFEBFF", "#FDFFB5", "#ABDA9E", "#D5C3A5", "#FFABAB"];
+        const colors = ["#BFEBFF", "#EFDDF7", "#DCF4E7", "#F9FCCF", "#FCD4BD", "#FFC5C5"];
 
         return colors[i % (colors.length)];
     }

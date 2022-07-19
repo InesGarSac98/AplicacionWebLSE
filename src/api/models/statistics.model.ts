@@ -4,6 +4,8 @@ export interface Statistics{
     date: Date;
     status: number;
     score: number;
+    gameId: number;
+    gameName: string;
     studentId: number;
     studentName: string;
 }

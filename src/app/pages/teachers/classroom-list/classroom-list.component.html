@@ -1,47 +1,29 @@
-<h1>ESTAS SON LAS CLASES QUE TIENES</h1>
 
 <div class="content">
     <div>
         <button mat-button matTooltip="Añadir clase" matTooltipPosition="right"><a [routerLink]="['classrooms-form']">+ Añadir clase</a></button>
     </div>
-
-    <!-- <div class="row">
-        <div class="col" *ngFor="let classroom of classrooms">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <a [routerLink]="['./',classroom.id]">
-                    {{classroom.name}}
-                </a>
-                <button mat-icon-button class="mat-icon-show" matTooltip="Editar clase" [routerLink]="['./',classroom.id]">
-                    <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-icon-button class="mat-icon-show" matTooltip="Borrar clase" (click)="deleteClass(classroom.id)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </div>
-        </div>
-    </div> -->
 </div>
 
 <div class="container mt-3">
       <div class="row">
         <div class="col-lg col-md-3 col-sm-6" *ngFor="let classroom of classrooms; let i = index">
             <div #tarjeta class="row card card-block" [style.background-color]="getColor(i)">
-                <div class="row bin">
-                    <button mat-icon-button class="col mat-icon-show" matTooltip="Borrar clase" (click)="deleteClass(classroom.id)">
+                <div class="row bin" style="position: absolute; right: 0;">
+                    <button mat-icon-button class="col mat-icon-quit" matTooltip="Borrar clase" matTooltipPosition="above" (click)="deleteClass(classroom.id)">
                         <mat-icon>close</mat-icon>
                     </button>
                 </div>
-                <h5 class="title mt-3 mb-3">
-                    <a [routerLink]="['./',classroom.id]">
-                        {{classroom.name}}
-                    </a>
-                </h5>
+                <div class="row" class="externo" style="align-self: self-end;">
+                    <h5 class="title mt-3 mb-3">
+                        <a [routerLink]="['./',classroom.id]">
+                            {{classroom.name}}
+                        </a>
+                    </h5>
+                </div>
 
             </div>
         </div>
-
-      </div>
-
     </div>
-
+</div>
 

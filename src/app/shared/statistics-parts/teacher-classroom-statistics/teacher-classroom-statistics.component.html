@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-2">
+        <div class="card card-chart">
+            <div class="card-header card-header-danger">
+                <div class="ct-chart" id="completedTasksChart">
+                    <h4 class="card-title">Victorias/Derrotas/Abandonos</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <div style="margin-right: 1.5em; max-height: 300px;">
+                    <ngx-charts-polar-chart *ngIf="winLoseChartLoaded"
+                        [view]="view"
+                        [scheme]="winLoseChartInputData.colorScheme"
+                        [results]="winLoseChart"
+                        [xAxis]="winLoseChartInputData.xAxis"
+                        [yAxis]="winLoseChartInputData.yAxis"
+                        [legend]="winLoseChartInputData.legend"
+                        [legendTitle]="''"
+                        [legendPosition]="'below'"
+                        [showXAxisLabel]="winLoseChartInputData.showXAxisLabel"
+                        [showYAxisLabel]="winLoseChartInputData.showYAxisLabel"
+                        [rotateXAxisTicks]="true"
+                        [xAxisLabel]="winLoseChartInputData.xAxisLabel"
+                        [yAxisLabel]="winLoseChartInputData.yAxisLabel">
+                    </ngx-charts-polar-chart>
+                </div>
+            </div>
+            <div class="card-footer" style="margin-top:2.5em">
+                <div class="stats">
+                    <i class="material-icons">access_time</i> Julio
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12 col-sm-2">
+        <div class="card card-chart">
+            <div class="card-header card-header-info">
+                <div class="ct-chart" id="completedTasksChart">
+                    <h4 class="card-title">Palabras aprendidas</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <div style="margin-right: 1.5em; max-height: 300px;">
+                    <ngx-charts-bar-horizontal-stacked *ngIf="learnedWordsByGameChartLoaded"
+                        [view]="view"
+                        [scheme]="learnedWordsChartInputData.colorScheme"
+                        [results]="learnedWordsByGameChart"
+                        [xAxis]="learnedWordsChartInputData.xAxis"
+                        [yAxis]="learnedWordsChartInputData.yAxis"
+                        [legend]="learnedWordsChartInputData.legend"
+                        [legendTitle]="''"
+                        [legendPosition]="'below'"
+                        [showXAxisLabel]="learnedWordsChartInputData.showXAxisLabel"
+                        [showYAxisLabel]="learnedWordsChartInputData.showYAxisLabel"
+                        [rotateXAxisTicks]="true"
+                        [xAxisLabel]="learnedWordsChartInputData.xAxisLabel"
+                        [yAxisLabel]="learnedWordsChartInputData.yAxisLabel">
+                    </ngx-charts-bar-horizontal-stacked>
+                </div>
+            </div>
+            <div class="card-footer" style="margin-top:2.5em">
+                <div class="stats">
+                    <i class="material-icons">access_time</i> Julio
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

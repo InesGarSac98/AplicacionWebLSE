@@ -1,6 +1,6 @@
 <mat-form-field appearance="fill">
     <mat-label>Selecione la clase</mat-label>
-    <mat-select (valueChange)="getClassroomStatistics($event)">
+    <mat-select (valueChange)="getClassroomStatisticsOld($event)">
         <mat-option *ngFor="let classroom of classrooms" value="{{classroom.id}}">{{classroom.name}}</mat-option>
     </mat-select>
 </mat-form-field>
@@ -83,24 +83,79 @@
         <div class="col-md-4">
             <div class="card card-chart">
                 <div class="card-header card-header-success">
-                    <div class="ct-chart" id="dailySalesChart"></div>
+                    <div class="ct-chart" id="dailySalesChart">
+                        <h4 class="card-title">Mejor del día</h4>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title">Daily Sales</h4>
-                    <p class="card-category">
-                        <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today
-                        sales.
-                    </p>
+                    <p class="card-category">Partidas ganadas: {{bestOfDay?.wins ? bestOfDay.wins.value : 0}} <span class="text-success">{{bestOfDay?.wins ? bestOfDay.wins.name : ''}}</span></p>
+                    <p class="card-category">Partidas perdidas: {{bestOfDay?.loses ? bestOfDay.loses.value: 0}} <span class="text-danger"> {{bestOfDay?.loses ? bestOfDay.loses.name: ''}}</span></p>
+                    <p class="card-category">Partidas jugadas: {{bestOfDay?.played ? bestOfDay.played.value: 0}} <span class="text-success"> {{bestOfDay?.played ? bestOfDay.played.name: ''}}</span></p>
+                    <p class="card-category">Puntuación total: {{bestOfDay?.score ? bestOfDay.score.value: 0}} <span class="text-success"> {{bestOfDay?.score ? bestOfDay.score.name: ''}}</span></p>
                 </div>
                 <div class="card-footer">
                     <div class="stats">
-                        <i class="material-icons">access_time</i> updated 4 minutes ago
+                        <i class="material-icons">today</i> {{currentDate | date:'EEEE, dd MMM'}}
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="card card-chart">
+                <div class="card-header card-header-warning">
+                    <div class="ct-chart" id="websiteViewsChart">
+                        <h4 class="card-title">Mejor de la semana</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-category">Partidas ganadas: {{bestOfWeek?.wins ? bestOfWeek.wins.value : 0}} <span class="text-success">{{bestOfWeek?.wins ? bestOfWeek.wins.name : ''}}</span></p>
+                    <p class="card-category">Partidas perdidas: {{bestOfWeek?.loses ? bestOfWeek.loses.value: 0}} <span class="text-danger"> {{bestOfWeek?.loses ? bestOfWeek.loses.name: ''}}</span></p>
+                    <p class="card-category">Partidas jugadas: {{bestOfWeek?.played ? bestOfWeek.played.value: 0}} <span class="text-success"> {{bestOfWeek?.played ? bestOfWeek.played.name: ''}}</span></p>
+                    <p class="card-category">Puntuación total: {{bestOfWeek?.score ? bestOfWeek.score.value: 0}} <span class="text-success"> {{bestOfWeek?.score ? bestOfWeek.score.name: ''}}</span></p>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">date_range</i> {{firstday | date:'EEEE, dd MMM'}} - {{lastday | date:'EEEE, dd MMM'}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-chart">
+                <div class="card-header card-header-danger">
+                    <div class="ct-chart" id="completedTasksChart">
+                        <h4 class="card-title">Mejor del mes</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-category">Partidas ganadas: {{bestOfMonth?.wins ? bestOfMonth.wins.value : 0}} <span class="text-success">{{bestOfMonth?.wins ? bestOfMonth.wins.name : ''}}</span></p>
+                    <p class="card-category">Partidas perdidas: {{bestOfMonth?.loses ? bestOfMonth.loses.value: 0}} <span class="text-danger"> {{bestOfMonth?.loses ? bestOfMonth.loses.name: ''}}</span></p>
+                    <p class="card-category">Partidas jugadas: {{bestOfMonth?.played ? bestOfMonth.played.value: 0}}  <span class="text-success"> {{bestOfMonth?.played ? bestOfMonth.played.name: ''}}</span></p>
+                    <p class="card-category">Puntuación total: {{bestOfMonth?.score ? bestOfMonth.score.value: 0}}  <span class="text-success"> {{bestOfMonth?.score ? bestOfMonth.score.name: ''}}</span></p>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">calendar_today</i> {{currentDate | date:'MMMM'}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Estadisticas -->
+    <app-teacher-classroom-statistics *ngIf="rawStatistics?.length > 0" [statistics]="rawStatistics"></app-teacher-classroom-statistics>
 
-
+    <!-- Tabla -->
+    <div>
+        <div class="card-body">
+            <p>hola hola</p>
+            <app-multi-select-list *ngIf="dataLoaded" [(items)]="statisticsAssociation"
+                [cardTitle]="'Añadir palabras'" [cellDefinitions]="wordCellDefinitions"
+                [showEditButton]="false"
+                [showDeleteButton]="false"
+                (showItemButtonClicked)="showSelectedWord($event)">
+            </app-multi-select-list>
+        </div>
     </div>
 
 </div>
+

@@ -25,6 +25,8 @@ import { MemoryGameConfigurationComponent } from './game-configuration/memory-ga
 import { TeacherDictionaryComponent } from './teacher-dictionary/teacher-dictionary.component';
 import { SingleStudentStatisticsComponent } from './single-student-statistics/single-student-statistics.component';
 import { StatisticsPartsModule } from 'src/app/shared/statistics-parts/statistics-parts.module';
+import { TeacherClassroomStatisticsComponent } from 'src/app/shared/statistics-parts/teacher-classroom-statistics/teacher-classroom-statistics.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 
@@ -39,7 +41,8 @@ import { StatisticsPartsModule } from 'src/app/shared/statistics-parts/statistic
     FlexLayoutModule,
     MatTabsModule,
     SharedModule,
-    StatisticsPartsModule
+    StatisticsPartsModule,
+    NgxChartsModule,
   ],
   providers: [
     DatePipe
@@ -56,7 +59,8 @@ import { StatisticsPartsModule } from 'src/app/shared/statistics-parts/statistic
     MemoryGameConfigurationComponent,
     GameConfigurationComponent,
     TeacherDictionaryComponent,
-    SingleStudentStatisticsComponent
+    SingleStudentStatisticsComponent,
+    TeacherClassroomStatisticsComponent
   ]
 })
 export class TeachersModule {}

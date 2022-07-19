@@ -20,9 +20,6 @@ export class StudentStatisticsComponent implements OnInit {
 
     public winLoseChartInputData: NgxInputData;
 
-
-
-
     public currentDate = new Date();
     public currentMonth = new Date().getMonth()+1;
     public curr = new Date();
@@ -216,6 +213,20 @@ export class StudentStatisticsComponent implements OnInit {
             this.totalTime = statistics.map(x => x.duration).reduce((accumulated, current) => accumulated + current, 0);
             this.averageTime = this.totalGameplays === 0 ? 0 : this.totalTime / this.totalGameplays;
 
+
+            let distinctStudents = new Set([...statistics.map(x => x.studentId)]);
+            distinctStudents.forEach(studentId => {
+                let totalWins = statistics.filter(x => x.studentId === studentId && x.status === GameStatuses.WIN).length;
+                console.log(totalWins);
+            });
+            distinctStudents.forEach(studentId => {
+                let totalStudentLose = statistics.filter(x => x.studentId === studentId && x.status === GameStatuses.LOSE).length;
+                console.log(totalStudentLose);
+            });
+            distinctStudents.forEach(studentId => {
+                let totalStudentAbandone = statistics.filter(x => x.studentId === studentId && x.status === GameStatuses.ABANDONE).length;
+                console.log(totalStudentAbandone);
+            });
             this.statistiscLoaded = true;
         });
     }
