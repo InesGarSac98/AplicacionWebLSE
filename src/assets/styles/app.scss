@@ -121,9 +121,10 @@ Mat card
 table {
     width: 100%;
     display: table;
+    overflow: auto;
 }
 td, th {
-    width: 25%;
+    min-width: 25%;
     overflow: hidden;
     max-width: 10rem;
     white-space: nowrap;

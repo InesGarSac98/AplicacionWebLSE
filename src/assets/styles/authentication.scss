@@ -20,10 +20,27 @@
     background-repeat: repeat;
 }
 
+.add-class-form-flex {
+    justify-content: center;
+    align-items: center;
+    padding-top: 5%;
+    padding-bottom: 20%;
+    width: auto;
+    height: auto;
+    background-repeat: repeat;
+}
+
 .button-flex-container {
     display: flex;
     width: auto;
     float: left;
+}
+
+.button-flex-add-class {
+    display: flex;
+    width: auto;
+    float: left;
+    margin-bottom: 2rem;
 }
 
 

@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
     private notifications: NotificationComponent;
     public dataLoaded: boolean = false;
     public winLoseDayChart: Serie[];
-    public dictionaryCellDefinitions: CellDefinition[];
+    public studentsCellDefinitions: CellDefinition[];
     public rawStatistics: Statistics[];
     @Input() public statistics: Statistics[];
     public statisticsAssociation: StatisticsSelectableItem[] = [];
@@ -64,12 +64,7 @@ export class ProfileComponent implements OnInit {
         private teacherService: TeachersService
     ) {
         this.notifications = app.getNotificationsComponent();
-        this.dictionaryCellDefinitions = [
-            {
-                header: '#',
-                itemKey: 'viewName',
-                isImage: false
-            },
+        this.studentsCellDefinitions = [
             {
                 header: 'Alumno',
                 itemKey: 'studentName',
@@ -88,6 +83,16 @@ export class ProfileComponent implements OnInit {
             {
                 header: 'Abandonos',
                 itemKey: 'abandoned',
+                isImage: false
+            },
+            {
+                header: 'Puntuación',
+                itemKey: 'score',
+                isImage: false
+            },
+            {
+                header: 'Tiempo total',
+                itemKey: 'time',
                 isImage: false
             }
         ];
@@ -115,37 +120,10 @@ export class ProfileComponent implements OnInit {
                     })
             });
 
-            this.statisticsService.getClassroomStatistics(this.classroomId).subscribe((statistics: Statistics[]) => {
-            const distinctStudents = new Set([...statistics.map(x => x.studentId)]);
-                distinctStudents.forEach(studentId => {
-                    let totalWins = statistics.filter(x => x.studentId === studentId && x.status === GameStatuses.WIN).length;
-                    console.log(totalWins);
-                });
-                distinctStudents.forEach(studentId => {
-                    let totalStudentLose = statistics.filter(x => x.studentId === studentId && x.status === GameStatuses.LOSE).length;
-                    console.log(totalStudentLose);
-                });
-                distinctStudents.forEach(studentId => {
-                    let totalStudentAbandone = statistics.filter(x => x.studentId === studentId && x.status === GameStatuses.ABANDONE).length;
-                    console.log(totalStudentAbandone);
-                });
 
-                this.statisticsAssociation = statistics.map(s =>{
-                    let result = new StatisticsSelectableItem();
-                    result.id = s.studentId;
-                    result.viewName = s.studentName;
-                    result.isChecked = false;
-                    result.victory = s.status;
-                    result.loss = s.status;
-                    result.abandoned = s.status;
-                    return result;
-                })
-
-            });
 
 
     }
-
 
     public getTimeFormated(time:number):string{
         const hours = Math.floor(time / 60 / 60);
@@ -172,11 +150,37 @@ export class ProfileComponent implements OnInit {
             this.statistiscLoaded = true;
             this.classroomId = classroomId;
             this.getClassroomStatistics();
-            //this.getClassroomStatisticsByStudents();
+            this.getClassroomStatisticsByStudents();
         });
     }
 
-
+    public getClassroomStatisticsByStudents(){
+        this.dataLoaded = false;
+        this.statisticsService.getClassroomStatistics(this.classroomId).subscribe((statistics: Statistics[]) => {
+            const distinctStudents = new Set([...statistics.map(x => x.studentId)]);
+            this.statisticsAssociation = [];
+            distinctStudents.forEach(studentId => {
+                const totalWins = statistics.filter(x => x.studentId === studentId && x.status === GameStatuses.WIN).length;
+                const totalStudentLose = statistics.filter(x => x.studentId === studentId && x.status === GameStatuses.LOSE).length;
+                const totalStudentAbandone = statistics.filter(x => x.studentId === studentId && x.status === GameStatuses.ABANDONE).length;
+                const studentTotalTime = statistics.filter(x => x.studentId === studentId).reduce((acc, curr) => acc + curr.duration, 0);
+                const studentTotalScore = statistics.filter(x => x.studentId === studentId).reduce((acc, curr) => acc + curr.score, 0);
+                const studentName = statistics.find(s => s.studentId === studentId)?.studentName || '';
+                this.statisticsAssociation.push({
+                    id: studentId,
+                    studentName: studentName,
+                    viewName: studentName,
+                    isChecked: false,
+                    victory: totalWins,
+                    loss: totalStudentLose,
+                    abandoned: totalStudentAbandone,
+                    score: studentTotalScore,
+                    time: this.getTimeFormated(studentTotalTime)
+                });
+            });
+            this.dataLoaded = true;
+        });
+    }
 
     public showOnlyIntegersAxisValues(val: number) {
         if (val % 1 === 0) {
@@ -323,5 +327,5 @@ class StatisticsSelectableItem extends SelectableItem {
     loss: number;
     abandoned: number;
     score: number;
-    words: string
+    time: string;
 }

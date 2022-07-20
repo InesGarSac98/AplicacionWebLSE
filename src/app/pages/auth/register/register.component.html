@@ -40,7 +40,7 @@
                     <mat-card-title>
                         Registro
                     </mat-card-title>
-                    <form [formGroup]="formGroup"  (click)="saveTeacher()">
+                    <form [formGroup]="formGroup"  (submit)="saveTeacher()">
                     <mat-card-content>
 
                             <app-user-form-group [formGroup]="formGroup" [emailLabel]="'Email'"

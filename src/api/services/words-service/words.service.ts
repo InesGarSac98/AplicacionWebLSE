@@ -17,10 +17,6 @@ export class WordsService extends CommonApiService {
         return this.get<Word[]>('/api/words');
     }
 
-    public getWord(name: string): Observable<Word> {
-        return this.get<Word>('/api/words/' + name);
-    }
-
     public findWordInArasaac(word: string): Observable<any> {
         return this.get<any>('/api/words/' + word + '/find-in-arasaac');
     }

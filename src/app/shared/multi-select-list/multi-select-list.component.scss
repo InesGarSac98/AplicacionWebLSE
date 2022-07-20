@@ -12,10 +12,8 @@
 .card-title-align-middle {
     margin-top: 0.35rem;
 }
-.col-1, .col {
-    padding-left: 0 ;
-    padding-right: 0 ;
-    &.card-title-back-button {
-        width: fit-content;
-    }
-}
+
+.mat-header-cell, .mat-footer-cell, .mat-cell {
+    min-width: 80px;
+    box-sizing: border-box;
+  }

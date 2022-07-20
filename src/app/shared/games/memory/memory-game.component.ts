@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClassroomWord } from 'src/api/models/classroomWord.model';
 import { Student } from 'src/api/models/student.model';
@@ -41,9 +40,9 @@ export class MemoryGameComponent implements OnInit {
     private isTimeOver: boolean;
     private goBackLink: string;
     private gamePlayId: number;
+    private user: User;
 
     constructor(
-        private sanitizer: DomSanitizer,
         private wordsService: WordsService,
         private userService: UsersService,
         private classroomService: ClassroomsService,
@@ -53,7 +52,8 @@ export class MemoryGameComponent implements OnInit {
         private studentLearnedWordsService: StudentLearnedWordsService,
         private router: Router,
         private route: ActivatedRoute
-        ) { }
+        ) {
+        }
 
     public ngOnInit(): void {
         this.selecciones = [];
@@ -61,6 +61,7 @@ export class MemoryGameComponent implements OnInit {
         //this.generateBoard();
 
         this.userService.getUserLoged().subscribe((user: User) => {
+            this.user = user;
             if (user.role === 'STUDENT') {
                 this.goBackLink = '/students/games';
                 this.getStudentWords();
@@ -104,8 +105,10 @@ export class MemoryGameComponent implements OnInit {
 
         this.gameTimer.startTimer(this.maxTimeValue);
 
-        const startEvent = this.memoryGameEventGeneratorService.generateStartEvent(this.boardCards, this.gameId, this.studentId, this.gameTimer.getLeftTime());
-        this.gameEventService.createGameEvent(startEvent).subscribe(event => this.gamePlayId = event.gamePlayId);
+        if (this.user.role === 'STUDENT') {
+            const startEvent = this.memoryGameEventGeneratorService.generateStartEvent(this.boardCards, this.gameId, this.studentId, this.gameTimer.getLeftTime());
+            this.gameEventService.createGameEvent(startEvent).subscribe(event => this.gamePlayId = event.gamePlayId);
+        }
     }
 
     public selectBoardCard(boardCardHtmlElement: HTMLElement, boardCard: BoardCard): void {
@@ -114,9 +117,12 @@ export class MemoryGameComponent implements OnInit {
         if (boardCardHtmlElement.style.transform != "rotateY(180deg)") {
             boardCardHtmlElement.style.transform = "rotateY(180deg)";
             this.selecciones.push(boardCard);
-            const cardClickedEvent = this.memoryGameEventGeneratorService
-                .generateCardClickedEvent(this.boardCards, this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime(), this.gamePlayId);
-            this.gameEventService.createGameEvent(cardClickedEvent).subscribe();
+
+            if (this.user.role === 'STUDENT') {
+                const cardClickedEvent = this.memoryGameEventGeneratorService
+                    .generateCardClickedEvent(this.boardCards, this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime(), this.gamePlayId);
+                this.gameEventService.createGameEvent(cardClickedEvent).subscribe();
+            }
         }
 
         if (this.selecciones.length == 2) {
@@ -162,8 +168,10 @@ export class MemoryGameComponent implements OnInit {
                     tarjeta1.style.transform = "rotateY(0deg)";
                     tarjeta2.style.transform = "rotateY(0deg)";
 
-                    const pairFailEvent = this.memoryGameEventGeneratorService.generatePairFailEvent(this.boardCards, this.pairsAchieved, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime(), this.gamePlayId);
-                    this.gameEventService.createGameEvent(pairFailEvent).subscribe();
+                    if (this.user.role === 'STUDENT') {
+                        const pairFailEvent = this.memoryGameEventGeneratorService.generatePairFailEvent(this.boardCards, this.pairsAchieved, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime(), this.gamePlayId);
+                        this.gameEventService.createGameEvent(pairFailEvent).subscribe();
+                    }
 
                 } else { //Si coincide cambio color
                     trasera1.style.background = "green";
@@ -174,8 +182,10 @@ export class MemoryGameComponent implements OnInit {
 
                     this.score += 10;
 
-                    const pairSuccessEvent = this.memoryGameEventGeneratorService.generatePairSuccessEvent(this.boardCards, this.pairsAchieved, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime(), this.gamePlayId);
-                    this.gameEventService.createGameEvent(pairSuccessEvent).subscribe();
+                    if (this.user.role === 'STUDENT') {
+                        const pairSuccessEvent = this.memoryGameEventGeneratorService.generatePairSuccessEvent(this.boardCards, this.pairsAchieved, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime(), this.gamePlayId);
+                        this.gameEventService.createGameEvent(pairSuccessEvent).subscribe();
+                    }
                     this.gameFinished = this.checkWin();
                 }
             }
@@ -189,17 +199,19 @@ export class MemoryGameComponent implements OnInit {
         if(isGameFinished){
 
             this.gameTimer.stopTimer();
-            if (this.numPairsAchieved === this.maxPairs){
-                const winEvent = this.memoryGameEventGeneratorService.generateWinEvent(this.boardCards, this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime(), this.gamePlayId);
-                this.gameEventService.createGameEvent(winEvent).subscribe();
-            }
-            else if (this.isAbandoned){
-                const abandoneEvent = this.memoryGameEventGeneratorService.generateAbandoneEvent(this.boardCards,this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score,this.gameTimer.getLeftTime(), this.gamePlayId);
-                this.gameEventService.createGameEvent(abandoneEvent).subscribe();
-            }
-            else {
-                const loseEvent = this.memoryGameEventGeneratorService.generateLoseEvent(this.boardCards, this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime(), this.gamePlayId);
-                this.gameEventService.createGameEvent(loseEvent).subscribe();
+            if (this.user.role === 'STUDENT') {
+                if (this.numPairsAchieved === this.maxPairs){
+                    const winEvent = this.memoryGameEventGeneratorService.generateWinEvent(this.boardCards, this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime(), this.gamePlayId);
+                    this.gameEventService.createGameEvent(winEvent).subscribe();
+                }
+                else if (this.isAbandoned){
+                    const abandoneEvent = this.memoryGameEventGeneratorService.generateAbandoneEvent(this.boardCards,this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score,this.gameTimer.getLeftTime(), this.gamePlayId);
+                    this.gameEventService.createGameEvent(abandoneEvent).subscribe();
+                }
+                else {
+                    const loseEvent = this.memoryGameEventGeneratorService.generateLoseEvent(this.boardCards, this.pairsAchieved, this.selecciones, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime(), this.gamePlayId);
+                    this.gameEventService.createGameEvent(loseEvent).subscribe();
+                }
             }
 
             this.pairsAchieved.forEach(p => {
@@ -209,7 +221,10 @@ export class MemoryGameComponent implements OnInit {
                     studentId: this.studentId,
                     wordId: p.wordId
                 } as StudentLearnedWord;
-                this.studentLearnedWordsService.saveStudentLearnedWords(studentLearnedWord).subscribe();
+
+                if (this.user.role === 'STUDENT') {
+                    this.studentLearnedWordsService.saveStudentLearnedWords(studentLearnedWord).subscribe();
+                }
             });
 
         }

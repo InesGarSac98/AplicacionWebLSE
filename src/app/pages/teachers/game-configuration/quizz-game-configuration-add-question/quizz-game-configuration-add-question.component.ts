@@ -30,6 +30,7 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
     public formGroupIsLoaded: boolean = false;
     private notifications: NotificationComponent;
 
+    public canSave: boolean;
     private readonly numberOfQuestionsValidator: ValidatorFn = (abstractControl: AbstractControl) => {
         const fg = abstractControl as FormGroup;
         const numberOfQuestions = fg?.get('numberOfQuestions')?.value;
@@ -62,8 +63,9 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
                     this.currentConfiguration = currentConfiguration;
                     this.currentConfigurationId = currentConfiguration.id;
                     this.currentQuestions = currentConfiguration.questions;
+                    this.canSave = true;
                 },
-                () => { },//TODO: notificacion de error
+                () => this.loadFormGroup(),
                 () => this.loadFormGroup(),
             );
 
@@ -117,6 +119,7 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
     }
 
     public saveGameConfiguration() {
+        this.canSave = false;
         const config = {
             gameId: this.gameId,
             classroomId: this.classroomId,
@@ -127,14 +130,14 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
         if (!this.currentConfiguration) {
             this.quizzGameClassroomConfigurationService.createQuizzGameClassroomConfiguration(config)
                 .subscribe((quizzGameClassroomConfiguration: QuizzGameClassroomConfiguration) => {
-                    this.saveQuestions(quizzGameClassroomConfiguration.id);
+                    this.saveQuestions(quizzGameClassroomConfiguration.id).then(() => this.canSave = true);
                 });
         }
         else {
             config.id = this.currentConfigurationId;
             this.quizzGameClassroomConfigurationService.updateQuizzGameClassroomConfiguration(config)
                 .subscribe((quizzGameClassroomConfiguration: QuizzGameClassroomConfiguration) => {
-                    this.saveQuestions(quizzGameClassroomConfiguration.id);
+                    this.saveQuestions(quizzGameClassroomConfiguration.id).then(() => this.canSave = true);
                 });
         }
         this.notifications.pushNotification('La configuración se ha guardado correctamente', 'success');
@@ -153,7 +156,7 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
         this.formGroupIsLoaded = true;
     }
 
-    private saveQuestions(quizzGameClassroomConfigurationId: number) {
+    private async saveQuestions(quizzGameClassroomConfigurationId: number) {
         for (let questionFormControl of this.questionsFormArray.controls) {
             const answersFormArray = (questionFormControl.get('answers') as FormArray);
             const correctAnswer = answersFormArray.controls.find(x => x.get('isCorrect')?.value);
@@ -169,14 +172,13 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
                 this.quizzGameQuestionService.updateQuizzGameQuestion(question) :
                 this.quizzGameQuestionService.createQuizzGameQuestion(question);
 
-            observableSaveQuestion.subscribe((quizzGameQuestion: QuizzGameQuestion) => {
-                this.saveAnswers((questionFormControl as FormGroup).controls.answers, quizzGameQuestion);
-            });
-
+            let quizzGameQuestion: QuizzGameQuestion = await observableSaveQuestion.toPromise();
+            questionFormControl.get('id')?.setValue(quizzGameQuestion.id);
+            await this.saveAnswers((questionFormControl as FormGroup).controls.answers, quizzGameQuestion);
         }
     }
 
-    private saveAnswers(answersFormArray: AbstractControl, quizzGameQuestion: QuizzGameQuestion) {
+    private async saveAnswers(answersFormArray: AbstractControl, quizzGameQuestion: QuizzGameQuestion) {
         for (let answerFormControl of (answersFormArray as FormArray).controls) {
             const answer = {
                 id: answerFormControl.get('id')?.value,
@@ -190,7 +192,8 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
                 this.quizzGameAnswerService.updateQuizzGameAnswer(answer) :
                 this.quizzGameAnswerService.createQuizzGameAnswer(answer);
 
-            observableSaveAnswer.subscribe();
+            let createdAnswer: QuizzGameAnswer = await observableSaveAnswer.toPromise();
+            answerFormControl.get('id')?.setValue(createdAnswer.id);
         }
 
     }

@@ -9,7 +9,6 @@
             <div class="card-body">
                 <div style="margin-right: 1.5em; max-height: 300px;">
                     <ngx-charts-polar-chart *ngIf="winLoseChartLoaded"
-                        [view]="view"
                         [scheme]="winLoseChartInputData.colorScheme"
                         [results]="winLoseChart"
                         [xAxis]="winLoseChartInputData.xAxis"
@@ -42,7 +41,6 @@
             <div class="card-body">
                 <div style="margin-right: 1.5em; max-height: 300px;">
                     <ngx-charts-bar-horizontal-stacked *ngIf="learnedWordsByGameChartLoaded"
-                        [view]="view"
                         [scheme]="learnedWordsChartInputData.colorScheme"
                         [results]="learnedWordsByGameChart"
                         [xAxis]="learnedWordsChartInputData.xAxis"

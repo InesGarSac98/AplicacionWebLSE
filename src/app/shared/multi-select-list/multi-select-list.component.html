@@ -42,7 +42,7 @@
                 </td>
             </ng-container>
 
-            <ng-container matColumnDef="showButton">
+            <ng-container *ngIf="hasToShowButtonsColumn" matColumnDef="showButton">
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let item" justify="end">
                     <button *ngIf="showEditButton" mat-icon-button class="mat-icon-show" alt="Añadir preguntas" (click)="editItemButtonClicked.emit(item.id)">

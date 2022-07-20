@@ -53,4 +53,8 @@ export class ClassroomFormComponent implements OnInit {
             this.notifications.pushNotification('La clase ha sido guardada correctamente', 'success');
     }
 
+    public goBackClicked(){
+        this.router.navigate(['teachers/classrooms']);
+    }
+
 }

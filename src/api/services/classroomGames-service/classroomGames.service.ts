@@ -12,10 +12,6 @@ export class ClassroomGamesService extends CommonApiService {
         super(http);
     }
 
-    public getGame(name: string): Observable<ClassroomGame> {
-        return this.get<ClassroomGame>('/api/classroomGames/' + name);
-    }
-
     public createClassroomGame(gameId: number, classroomId: number): Observable<ClassroomGame> {
         return this.post<ClassroomGame>('/api/classroomGames/', { classroomId: classroomId, gameId: gameId });
     }

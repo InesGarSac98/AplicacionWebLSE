@@ -15,7 +15,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { GamesListComponent } from './games-list/games-list.component';
 import { GameComponent } from './game/game.component';
 import { StudentDictionaryComponent } from './dictionary/student-dictionary.component';
-import { ProgressComponent } from './profile/progress/progress.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StatisticsPartsModule } from 'src/app/shared/statistics-parts/statistics-parts.module';
 
@@ -41,8 +40,7 @@ import { StatisticsPartsModule } from 'src/app/shared/statistics-parts/statistic
     ProfileComponent,
     GamesListComponent,
     GameComponent,
-    StudentDictionaryComponent,
-    ProgressComponent
+    StudentDictionaryComponent
   ]
 })
 export class StudentsModule {}

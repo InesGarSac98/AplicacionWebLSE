@@ -24,18 +24,9 @@ export class UsersService extends CommonApiService {
         return this.post<User>('/api/users', user);
     }
 
-    public login(email:string, password: string): Observable<any> {
+    public login(name:string, password: string): Observable<any> {
         return this.post<User>(
             '/api/users/login/',
-            {
-                email: email,
-                password: password
-            });
-    }
-
-    public register(name:string, password: string): Observable<any> {
-        return this.post<User>(
-            '/api/users/register/',
             {
                 name: name,
                 password: password

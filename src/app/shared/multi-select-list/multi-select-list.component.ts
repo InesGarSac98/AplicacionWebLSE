@@ -47,13 +47,14 @@ export class MultiSelectListComponent implements OnInit, AfterViewInit {
     @Output() public playItemButtonClicked = new EventEmitter<number>();
     @Output() public deleteItemButtonClicked = new EventEmitter<number>();
     @ViewChild(MatPaginator) paginator: MatPaginator;
-    public classroomId: number;
 
+    public hasToShowButtonsColumn: boolean;
 
     constructor() {
     }
 
     public ngOnInit(): void {
+        this.hasToShowButtonsColumn = this.showEditButton || this.showDetailsButton || this.showPlayButton || this.showDeleteButton;
         if (this.showCheckColumn) {
             this.displayedColumns = ['isChecked'];
         }
@@ -61,7 +62,10 @@ export class MultiSelectListComponent implements OnInit, AfterViewInit {
             this.displayedColumns = [];
         }
 
-        this.displayedColumns.push(...this.cellDefinitions.map(x => x.itemKey), 'showButton');
+        this.displayedColumns.push(...this.cellDefinitions.map(x => x.itemKey));
+        if (this.hasToShowButtonsColumn) {
+            this.displayedColumns.push('showButton');
+        }
 		this.items = this.items.slice().sort(this.sortSelectableItemsOperator);
         this.dataSource = new MatTableDataSource<SelectableItem>(this.items);
 

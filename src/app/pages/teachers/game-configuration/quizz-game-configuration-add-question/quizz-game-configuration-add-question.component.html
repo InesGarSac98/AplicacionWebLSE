@@ -94,7 +94,7 @@
                             <mat-icon>add</mat-icon>
                         </button>
                     </div>
-                    <button mat-raised-button [disabled]="!formGroup.valid" color="primary"type="submit">Guardar</button>
+                    <button mat-raised-button [disabled]="!formGroup.valid || !canSave" color="primary"type="submit">Guardar</button>
                 </form>
             </div>
         </div>

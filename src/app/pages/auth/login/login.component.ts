@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
     public ngOnInit() {
         this.formGroup = new FormGroup({
-            email: new FormControl('', [Validators.maxLength(100), Validators.required]),
+            name: new FormControl('', [Validators.maxLength(100), Validators.required]),
             password: new FormControl('', [Validators.maxLength(80), Validators.required])
         });
     }
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         // this.router.navigate(['/dashboard']);
 
         this.userService
-            .login(this.formGroup.controls.email.value, this.formGroup.controls.password.value)
+            .login(this.formGroup.controls.name.value, this.formGroup.controls.password.value)
             .subscribe((response: any) => {
                 localStorage.setItem('token', response.token);
                 this.userService.getUserLoged().subscribe((user: User) => {

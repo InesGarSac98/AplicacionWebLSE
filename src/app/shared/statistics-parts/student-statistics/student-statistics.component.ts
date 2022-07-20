@@ -110,10 +110,12 @@ export class StudentStatisticsComponent implements OnInit {
                 (best !== undefined && current !== undefined && best.value < current.value);
         };
 
-        let todayStatistics = statisticsByDay.find(x => x.name === this.datepipe.transform(today, 'yyyy-MM-dd'));
+        let todayData = statisticsByDay.find(x => x.name === this.datepipe.transform(today, 'yyyy-MM-dd'))?.value || 0;
+        let todayStatistics = { name: todayData ? studentId + '' : '' , value: todayData } as SerieData;
 
         let weekData = statisticsByDay.filter(x => x.name >= (this.datepipe.transform(this.firstDayOfWeek(today), 'yyyy-MM-dd') || '')).reduce((acc, curr) => { return acc + curr.value; }, 0)
         let weekStatistics = { name: weekData ? studentId + '' : '' , value: weekData } as SerieData;
+
         let monthData = statisticsByDay.filter(x => x.name > (this.datepipe.transform(new Date(today).setDate(1), 'yyyy-MM-dd') || '')).reduce((acc, curr) => { return acc + curr.value; }, 0);
         let monthStatistics = { name: monthData ? studentId + '' : '' , value: monthData } as SerieData;
 

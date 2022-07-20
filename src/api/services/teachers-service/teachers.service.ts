@@ -13,11 +13,6 @@ export class TeachersService extends CommonApiService {
         super(http);
     }
 
-    // Métodos para crear un nuevo profesor en la bbdd
-    public getTeachers(): Observable<Teacher[]> {
-        return this.get<Teacher[]>('/api/teachers');
-    }
-
     public getTeacherLoged(): Observable<Teacher> {
         return this.get<Teacher>('/api/teachers/teacher-loged');
     }

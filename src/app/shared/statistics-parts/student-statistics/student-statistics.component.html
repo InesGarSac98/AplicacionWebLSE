@@ -80,10 +80,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <p class="card-category">Partidas ganadas: {{bestOfDay?.wins ? bestOfDay.wins.value : 0}} <span class="text-success">{{bestOfDay?.wins ? bestOfDay.wins.name : ''}}</span></p>
-                    <p class="card-category">Partidas perdidas: {{bestOfDay?.loses ? bestOfDay.loses.value: 0}} <span class="text-danger"> {{bestOfDay?.loses ? bestOfDay.loses.name: ''}}</span></p>
-                    <p class="card-category">Partidas jugadas: {{bestOfDay?.played ? bestOfDay.played.value: 0}} <span class="text-success"> {{bestOfDay?.played ? bestOfDay.played.name: ''}}</span></p>
-                    <p class="card-category">Puntuación total: {{bestOfDay?.score ? bestOfDay.score.value: 0}} <span class="text-success"> {{bestOfDay?.score ? bestOfDay.score.name: ''}}</span></p>
+                    <p class="card-category">Partidas ganadas: {{bestOfDay?.wins?.value ? bestOfDay.wins.value : 0}} <span class="text-success"> {{bestOfDay?.wins?.name ? bestOfDay.wins.name : ''}}</span></p>
+                    <p class="card-category">Partidas perdidas: {{bestOfDay?.loses?.value ? bestOfDay.loses.value: 0}} <span class="text-danger"> {{bestOfDay?.loses?.name ? bestOfDay.loses.name: ''}}</span></p>
+                    <p class="card-category">Partidas jugadas: {{bestOfDay?.played?.value ? bestOfDay.played.value: 0}} <span class="text-success"> {{bestOfDay?.played?.name ? bestOfDay.played.name: ''}}</span></p>
+                    <p class="card-category">Puntuación total: {{bestOfDay?.score?.value ? bestOfDay.score.value: 0}} <span class="text-success"> {{bestOfDay?.score?.name ? bestOfDay.score.name: ''}}</span></p>
                 </div>
                 <div class="card-footer">
                     <div class="stats">
@@ -188,10 +188,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <app-student-progress></app-student-progress>
     </div>
 
 </div>

@@ -16,11 +16,6 @@ export class ClassroomsService extends CommonApiService {
         super(http);
     }
 
-    // Métodos para crear una nueva clase en la bbdd
-    public getClassrooms(): Observable<Classroom[]> {
-        return this.get<Classroom[]>('/api/classrooms');
-    }
-
     public getClassroom(classroomId: number): Observable<Classroom> {
         return this.get<Classroom>('/api/classrooms/' + classroomId);
     }

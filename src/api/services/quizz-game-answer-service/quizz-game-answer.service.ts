@@ -13,10 +13,6 @@ export class QuizzGameAnswerService extends CommonApiService{
         super(http);
     }
 
-    public getQuizzGameQuestionsByWordId(wordIds: number[]): Observable<QuizzGameAnswer> {
-        return this.get<QuizzGameAnswer>('/api/quizzGameAnswers?wordId='+ wordIds.join(','));
-    }
-
     public createQuizzGameAnswer(answer: QuizzGameAnswer): Observable<QuizzGameAnswer>{
         return this.post<QuizzGameAnswer>('/api/quizzGameAnswers', answer);
     }

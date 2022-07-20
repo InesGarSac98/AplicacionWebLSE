@@ -63,7 +63,6 @@ export class StudentDictionaryComponent implements OnInit {
     }
 
     public showSelectedWord(id: number): void {
-        //this.wordsService.getWord(name)
         const word = this.fullWordsList.find(x => x.id === id);
 
         if (!word) return;

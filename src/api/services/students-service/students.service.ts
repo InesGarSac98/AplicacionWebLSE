@@ -17,10 +17,6 @@ export class StudentsService extends CommonApiService {
         return this.get<Student>('/api/students/' + studentId);
     }
 
-    public getStudents(): Observable<Student[]> {
-        return this.get<Student[]>('/api/students');
-    }
-
     public getStudentLoged(): Observable<Student> {
         return this.get<Student>('/api/students/student-loged');
     }
@@ -28,5 +24,4 @@ export class StudentsService extends CommonApiService {
     public createNewStudents(student: Student): Observable<Student> {
         return this.post<Student>('/api/students', student);
     }
-
 }

@@ -5,14 +5,11 @@ import { QuizzGameQuestion } from 'src/api/models/quizzGameQuestion.model';
 import { Student } from 'src/api/models/student.model';
 import { StudentLearnedWord } from 'src/api/models/studentLearnedWords.model';
 import { User } from 'src/api/models/user.model';
-import { Word } from 'src/api/models/word.model';
 import { GameEventService } from 'src/api/services/game-event-service/game-event.service';
 import { QuizzGameClassroomConfigurationService } from 'src/api/services/quizz-game-classroom-configuration-service/quizz-game-classroom-configuration.service';
-import { QuizzGameQuestionService } from 'src/api/services/quizz-game-question-service/quizz-game-question.service';
 import { StudentLearnedWordsService } from 'src/api/services/student-learned-words-service/student-learned-words.service';
 import { StudentsService } from 'src/api/services/students-service/students.service';
 import { UsersService } from 'src/api/services/users-service/users.service';
-import { WordsService } from 'src/api/services/words-service/words.service';
 import { QuizzGameEventGeneratorService } from 'src/app/services/quizz-game/quizz-game-event-generator.service';
 import { GameTimerComponent } from 'src/app/shared/game-timer/game-timer.component';
 
@@ -46,27 +43,26 @@ export class QuizzGameComponent implements OnInit {
     result = false;
     private availableQuestions: QuizzGameQuestion[];
     private studentId: number;
-    private wordIds: number[];
     private goBackLink: string;
     private gamePlayId: number;
-
     private MAX_QUESTIONS: number;
+    private user: User;
 
     constructor(
         private route: ActivatedRoute,
         private userService: UsersService,
-        private wordsService: WordsService,
         private studentService: StudentsService,
-        private quizzGameQuestionservice: QuizzGameQuestionService,
         private gameEventService: GameEventService,
         private quizzGameEventGeneratorService: QuizzGameEventGeneratorService,
         private studentLearnedWordsService: StudentLearnedWordsService,
         private quizzGameClassroomConfigurationService: QuizzGameClassroomConfigurationService,
         private router: Router
-    ) { }
+    ) {
+    }
 
     public ngOnInit(): void {
         this.userService.getUserLoged().subscribe((user: User) => {
+            this.user = user;
             if (user.role === 'STUDENT') {
                 this.goBackLink = '/students/games';
                 this.getStudentQuestions();
@@ -98,17 +94,21 @@ export class QuizzGameComponent implements OnInit {
                 studentId: this.studentId,
                 wordId: wordId
             } as StudentLearnedWord;
-            this.studentLearnedWordsService.saveStudentLearnedWords(studentLearnedWord).subscribe();
+            if (this.user.role === 'STUDENT') {
+                this.studentLearnedWordsService.saveStudentLearnedWords(studentLearnedWord).subscribe();
+            }
         } else {
             this.incorrectAnswers++;
             this.score += 5;
         }
 
-        const answerClickedEvent = this.quizzGameEventGeneratorService.generateAnswerClickedEvent(
-            this.cardQuiz, this.cardQuiz[this.currentQuiz].questionId,
-            option.answerId, this.gameId, this.studentId,this.score,
-            this.gameTimer.getLeftTime(), this.gamePlayId);
-        this.gameEventService.createGameEvent(answerClickedEvent).subscribe();
+        if (this.user.role === 'STUDENT') {
+            const answerClickedEvent = this.quizzGameEventGeneratorService.generateAnswerClickedEvent(
+                this.cardQuiz, this.cardQuiz[this.currentQuiz].questionId,
+                option.answerId, this.gameId, this.studentId,this.score,
+                this.gameTimer.getLeftTime(), this.gamePlayId);
+            this.gameEventService.createGameEvent(answerClickedEvent).subscribe();
+        }
 
         this.gameFinished = this.checkGameFinished();
 
@@ -139,24 +139,28 @@ export class QuizzGameComponent implements OnInit {
         const isGameFinished = this.gameFinished || this.isTimeOver || this.isAbandoned || this.currentQuiz >= this.MAX_QUESTIONS - 1;
 
         if(isGameFinished){
-
-            this.gameTimer.stopTimer();
             if (this.currentQuiz >= this.MAX_QUESTIONS - 1 && this.correctAnswers > this.MAX_QUESTIONS / 2){
                 this.isWin = true;
-                const winEvent = this.quizzGameEventGeneratorService.generateWinEvent(
-                    this.cardQuiz, this.gameId, this.studentId, this.score,
-                    this.gameTimer.getLeftTime(), this.gamePlayId);
-                this.gameEventService.createGameEvent(winEvent).subscribe();
             }
-            else if (this.isAbandoned){
-                const abandoneEvent = this.quizzGameEventGeneratorService.generateAbandoneEvent(
-                    this.cardQuiz, this.gameId, this.studentId, this.score,
-                    this.gameTimer.getLeftTime(), this.gamePlayId);
-                this.gameEventService.createGameEvent(abandoneEvent).subscribe();
-            }
-            else {
-                const loseEvent = this.quizzGameEventGeneratorService.generateLoseEvent(this.cardQuiz, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime(), this.gamePlayId);
-                this.gameEventService.createGameEvent(loseEvent).subscribe();
+            this.gameTimer.stopTimer();
+            if (this.user.role === 'STUDENT') {
+                if (this.currentQuiz >= this.MAX_QUESTIONS - 1 && this.correctAnswers > this.MAX_QUESTIONS / 2){
+                    this.isWin = true;
+                    const winEvent = this.quizzGameEventGeneratorService.generateWinEvent(
+                        this.cardQuiz, this.gameId, this.studentId, this.score,
+                        this.gameTimer.getLeftTime(), this.gamePlayId);
+                    this.gameEventService.createGameEvent(winEvent).subscribe();
+                }
+                else if (this.isAbandoned){
+                    const abandoneEvent = this.quizzGameEventGeneratorService.generateAbandoneEvent(
+                        this.cardQuiz, this.gameId, this.studentId, this.score,
+                        this.gameTimer.getLeftTime(), this.gamePlayId);
+                    this.gameEventService.createGameEvent(abandoneEvent).subscribe();
+                }
+                else {
+                    const loseEvent = this.quizzGameEventGeneratorService.generateLoseEvent(this.cardQuiz, this.gameId, this.studentId, this.score, this.gameTimer.getLeftTime(), this.gamePlayId);
+                    this.gameEventService.createGameEvent(loseEvent).subscribe();
+                }
             }
         }
         return isGameFinished;
@@ -213,8 +217,10 @@ export class QuizzGameComponent implements OnInit {
                 this.incorrectAnswers = 0;
                 this.gameTimer.startTimer(this.currentConfiguration.time);
 
-                const startEvent = this.quizzGameEventGeneratorService.generateStartEvent(this.cardQuiz, this.gameId, this.studentId, this.gameTimer.getLeftTime());
-                this.gameEventService.createGameEvent(startEvent).subscribe(event => this.gamePlayId = event.gamePlayId);
+                if (this.user.role === 'STUDENT') {
+                    const startEvent = this.quizzGameEventGeneratorService.generateStartEvent(this.cardQuiz, this.gameId, this.studentId, this.gameTimer.getLeftTime());
+                    this.gameEventService.createGameEvent(startEvent).subscribe(event => this.gamePlayId = event.gamePlayId);
+                }
             });
     }
 }

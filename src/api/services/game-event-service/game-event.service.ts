@@ -16,5 +16,4 @@ export class GameEventService extends CommonApiService {
     public createGameEvent(gameEvent: GameEvent): Observable<GameEvent> {
         return this.post<GameEvent>('/api/gameEvents/', gameEvent);
     }
-
 }
