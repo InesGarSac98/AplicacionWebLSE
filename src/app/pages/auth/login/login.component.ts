@@ -57,8 +57,7 @@ export class LoginComponent implements OnInit {
             }, (error) => {
                 this.message = error;
                 this.formGroup.setErrors({ unauthenticated: true });
-            }
-            )
+            })
 
     }
 

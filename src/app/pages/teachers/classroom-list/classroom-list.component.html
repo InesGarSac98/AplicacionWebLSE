@@ -1,11 +1,12 @@
 
 <div class="content">
     <div>
-        <button mat-button matTooltip="Añadir clase" matTooltipPosition="right"><a [routerLink]="['classrooms-form']">+ Añadir clase</a></button>
+        <!-- <button mat-button matTooltip="Añadir clase" matTooltipPosition="right" ><a [routerLink]="['classrooms-form']">+ Añadir clase</a></button> -->
+        <button mat-button matTooltip="Añadir clase" matTooltipPosition="right" (click)="createNewClassroom()">+ Añadir clase</button>
     </div>
 </div>
 
-<div class="container mt-3">
+<div class="container mt-3" #wordsTableComponent>
       <div class="row">
         <div class="col-lg col-md-3 col-sm-6" *ngFor="let classroom of classrooms; let i = index">
             <div #tarjeta class="row card card-block" [style.background-color]="getColor(i)">
@@ -27,3 +28,23 @@
     </div>
 </div>
 
+<ng-template #wordDetailsDialogTemplate>
+    <div body class="container">
+
+<div class="add-class-form-flex">
+    <mat-card>
+        <div class = "in">
+            <mat-card-content>
+                <form [formGroup]="formGroup">
+                    <mat-form-field  class="width-card">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput formControlName="name">
+                    </mat-form-field>
+                </form>
+            </mat-card-content>
+        </div>
+    </mat-card>
+  </div>
+
+    </div>
+</ng-template>

@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
 
     public formGroup: FormGroup;
     hide = true;
+    private message = '';
 
     constructor(
         private router: Router,
@@ -86,6 +87,9 @@ export class RegisterComponent implements OnInit {
                                 () => this.router.navigate(['/login']));
                     });
 
+            }, (error) => {
+                this.message = error;
+                this.formGroup.setErrors({ unauthenticated: true });
             });
     }
 

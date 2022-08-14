@@ -14,7 +14,7 @@ mat-sidenav {
     .mat-list-item {
         height: auto;
         &:hover{
-            background: none;
+
         }
 
         .mat-list-item-content{
@@ -37,6 +37,7 @@ mat-sidenav {
         }
         &.selected > .mat-list-item-content > a{
             background: $themecolor-alt;
+            box-shadow:  1px 0px 10px rgba(0, 0, 0, 0.5);
             border-radius: $radius;
             //color:#2196F3;
             color:#fafafa;
@@ -44,6 +45,21 @@ mat-sidenav {
                 color:#fafafa;
             }
 
+        }
+        & > .mat-list-item-content > a:hover{
+            background: rgb(195, 221, 255);
+            color: rgb(0, 110, 255);
+            mat-icon{
+                color:rgb(0, 110, 255);
+            }
+        }
+
+        &.selected > .mat-list-item-content > a:hover{
+            background: $themecolor-alt;
+            color:#fafafa;
+            mat-icon{
+                color:#fafafa;
+            }
         }
     }
 }

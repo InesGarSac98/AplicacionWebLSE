@@ -18,11 +18,11 @@ import { Serie } from 'src/app/shared/statistics-parts/Serie';
 import { CellDefinition, SelectableItem } from 'src/app/shared/multi-select-list/multi-select-list.component';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class DashboardComponent implements OnInit {
 
     public statistiscLoaded: boolean = false;
     public userName: string;

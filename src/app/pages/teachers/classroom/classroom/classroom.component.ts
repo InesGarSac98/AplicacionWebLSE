@@ -11,6 +11,8 @@ import { UsersService } from 'src/api/services/users-service/users.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { Word } from 'src/api/models/word.model';
 import { DialogTemplateComponent } from 'src/app/shared/dialog/dialog-template/dialog-template.component';
+import { NotificationComponent } from 'src/app/shared/notification/notification.component';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
     selector: 'app-classroom',
@@ -30,6 +32,7 @@ export class ClassroomComponent implements OnInit {
     public wordsClassroomList: IWordClassroomList[];
     public classroom: IClassroom;
     public gamesClassroomList: IGameClassroomList[];
+    private notifications: NotificationComponent;
 
     //list
     public dataSourceStudents: MatTableDataSource<IStudentClassroomList>;
@@ -44,6 +47,7 @@ export class ClassroomComponent implements OnInit {
     @ViewChild('wordDetailsDialogTemplate') public wordDetailsDialogTemplate: TemplateRef<any>;
 
     constructor(
+        app: AppComponent,
         private route: ActivatedRoute,
         private userService: UsersService,
         private matDialog: MatDialog,
@@ -52,6 +56,7 @@ export class ClassroomComponent implements OnInit {
         private router: Router,
         public dialog: MatDialog,
     ) {
+        this.notifications = app.getNotificationsComponent();
         this.displayedColumnsStudents = ['name','showButton'];
         this.displayedColumnsWords = ['name','showButton'];
         this.displayedColumnsGames = ['image','name','showButton'];
@@ -146,6 +151,7 @@ export class ClassroomComponent implements OnInit {
 
     public copyToClipboard() {
         this.clipboard.copy(this.classroom.code);
+        this.notifications.pushNotification('El código se ha copiado correctamente', 'success');
     }
 
     public goBackClicked(){

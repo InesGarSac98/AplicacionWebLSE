@@ -3,20 +3,6 @@
         <button mat-raised-button (click)="goBackClicked()">
             Volver
         </button>
-        <div class="card">
-            <div class="card-header card-header-tabs card-header-info">
-                <h4 class="card-title card-title-align-middle">Información de la clase</h4>
-            </div>
-            <div class="card-body ml-2">
-                <div *ngIf="dataLoaded">
-                    <p>Clase: {{classroom.name}}</p>
-                    <span class="row">
-                        <p class="col-2">Código: {{classroom.code}}</p>
-                        <mat-icon class="col-1 btn-copy" matTooltip="Copiar código" (click)="copyToClipboard()">file_copy</mat-icon>
-                    </span>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="col-md-12">
         <div class="card">
@@ -39,6 +25,12 @@
                             <li class="nav-item">
                                 <a mat-button class="nav-link {{initialTab === 2 ? 'active' : ''}}" href="#games-tab" data-toggle="tab">
                                     <i class="material-icons">extension</i> Juegos
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a mat-button class="nav-link {{initialTab === 2 ? 'active' : ''}}" href="#info-tab" data-toggle="tab">
+                                    <i class="material-icons">info</i> Información de la clase
                                     <div class="ripple-container"></div>
                                 </a>
                             </li>
@@ -94,6 +86,17 @@
                     </div>
                     <div class="tab-pane {{initialTab === 2 ? 'active' : ''}}" id="games-tab">
                         <app-add-games></app-add-games>
+                    </div>
+                    <div class="tab-pane {{initialTab === 2 ? 'active' : ''}}" id="info-tab">
+                        <div class="card-body ml-2">
+                            <div *ngIf="dataLoaded">
+                                <p><b>Clase:</b> {{classroom.name}}</p>
+                                <span class="row">
+                                    <p class="col-3"><b>Código: </b>{{classroom.code}}</p>
+                                    <mat-icon class="col-7 btn-copy" matTooltip="Copiar código" (click)="copyToClipboard()">file_copy</mat-icon>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

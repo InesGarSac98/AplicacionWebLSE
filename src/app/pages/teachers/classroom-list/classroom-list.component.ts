@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Classroom } from 'src/api/models/classroom.model';
 import { Teacher } from 'src/api/models/teacher.model';
 import { User } from 'src/api/models/user.model';
@@ -8,6 +10,7 @@ import { ClassroomsService } from 'src/api/services/classrooms-service/classroom
 import { TeachersService } from 'src/api/services/teachers-service/teachers.service';
 import { UsersService } from 'src/api/services/users-service/users.service';
 import { AppComponent } from 'src/app/app.component';
+import { DialogTemplateComponent } from 'src/app/shared/dialog/dialog-template/dialog-template.component';
 import { DeleteComponent } from 'src/app/shared/dialog/dialogs/delete/delete.component';
 import { NotificationComponent } from 'src/app/shared/notification/notification.component';
 
@@ -19,8 +22,10 @@ import { NotificationComponent } from 'src/app/shared/notification/notification.
 export class ClassroomListComponent implements OnInit {
 
     public classrooms: IClassroomList[];
+    public createNewClassroomButtons: DialogButton[];
     public x : boolean;
     private notifications: NotificationComponent;
+    @ViewChild('wordDetailsDialogTemplate') public wordDetailsDialogTemplate: TemplateRef<any>;
 
     constructor(
         app: AppComponent,
@@ -28,10 +33,20 @@ export class ClassroomListComponent implements OnInit {
         private userService: UsersService,
         private teacherService: TeachersService,
         private http: HttpClient,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private router: Router,
     ) {
         this.notifications = app.getNotificationsComponent();
+
+        this.createNewClassroomButtons = [
+            {
+                text: 'Añadir',
+                clicked: () => this.saveClassroom()
+            }
+        ]
     }
+
+    public formGroup: FormGroup;
 
     public getColor(i: number): string {
         const colors = ["#BFEBFF", "#EFDDF7", "#DCF4E7", "#F9FCCF", "#FCD4BD", "#FFC5C5"];
@@ -56,6 +71,28 @@ export class ClassroomListComponent implements OnInit {
                             });
                     })
             });
+
+
+    this.formGroup = new FormGroup({
+        name: new FormControl('', [Validators.maxLength(100), Validators.required]),
+        teacherId: new FormControl('')
+    });
+    }
+
+    public saveClassroom(): void {
+        this.userService.getUserLoged()
+            .subscribe((user: User) => {
+                this.teacherService.getTeacherByUserId(user.id)
+                    .subscribe((teacher: Teacher) => {
+                        this.formGroup.controls.teacherId.setValue(teacher.id);
+                        this.classroomsService.createNewClassroom(this.formGroup.value)
+                            .subscribe((classroom: Classroom) => {
+                                this.router.navigate(['/teachers/classrooms/']);
+                            });
+                    });
+            });
+            this.notifications.pushNotification('La clase ha sido guardada correctamente', 'success');
+
     }
 
     public deleteClass(classroomId: number) {
@@ -73,10 +110,30 @@ export class ClassroomListComponent implements OnInit {
         });
 
     }
+
+    public createNewClassroom(): void {
+
+        this.dialog.open(
+            DialogTemplateComponent,
+            {
+                data: {
+                    template: this.wordDetailsDialogTemplate,
+                    dialogButtons: this.createNewClassroomButtons,
+                    dialogTitle: "Añadir clase"
+                }
+            }
+        );
+
+    }
 }
 
 export class IClassroomList {
     id: number;
     name: string;
     numStudents: number;
+}
+
+export class DialogButton {
+    text: string;
+    clicked: Function
 }

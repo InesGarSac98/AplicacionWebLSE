@@ -3,7 +3,7 @@ import { GameComponent } from '../students/game/game.component';
 import { ClassroomListComponent } from './classroom-list/classroom-list.component';
 import { ClassroomComponent } from './classroom/classroom/classroom.component';
 import { ClassroomFormComponent } from './classroom-form/classroom-form.component';
-import { ProfileComponent } from './profile/profile.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { GameConfigurationComponent } from './game-configuration/game-configuration.component';
 import { TeacherDictionaryComponent } from './teacher-dictionary/teacher-dictionary.component';
 import { SingleStudentStatisticsComponent } from './single-student-statistics/single-student-statistics.component';
@@ -17,7 +17,7 @@ export const TeachersRoutes: Routes = [
     {
         path: 'profile',
         pathMatch: 'full',
-        component: ProfileComponent
+        component: DashboardComponent
     },
     {
         path: 'classrooms',

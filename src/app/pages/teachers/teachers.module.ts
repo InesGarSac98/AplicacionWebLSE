@@ -11,7 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { TeachersRoutes } from './teachers.routing';
-import { ProfileComponent } from './profile/profile.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ClassroomComponent } from './classroom/classroom/classroom.component';
 import { ClassroomListComponent } from './classroom-list/classroom-list.component';
@@ -48,7 +48,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     DatePipe
   ],
   declarations: [
-    ProfileComponent,
+    DashboardComponent,
     ClassroomComponent,
     ClassroomListComponent,
     GamesListComponent,

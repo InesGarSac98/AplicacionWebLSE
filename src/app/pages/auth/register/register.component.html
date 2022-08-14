@@ -30,6 +30,9 @@
                             </mat-card-actions>
 
                     </mat-card-content>
+                    <div *ngIf="formGroup.errors?.unauthenticated" class="error-auth">
+                        El usuario ya existe
+                    </div>
                 </form>
                 </div>
 
@@ -63,6 +66,9 @@
                             </div>
                         </mat-card-actions>
                     </mat-card-content>
+                    <div *ngIf="formGroup.errors?.unauthenticated" class="error-auth">
+                        El usuario ya existe
+                    </div>
                 </form>
                 </div>
             </mat-tab>

@@ -30,6 +30,7 @@ export class TeacherDictionaryComponent implements OnInit {
     public wordToShowDetails: Word;
     public arasaacDialogButtons: DialogButton[];
     private notifications: NotificationComponent;
+    public buscar: boolean = false;
 
     @ViewChild('searchInArasaacDialogTemplate') public searchInArasaacDialogTemplate: TemplateRef<any>;
     @ViewChild('wordDetailsDialogTemplate') public wordDetailsDialogTemplate: TemplateRef<any>;
@@ -166,6 +167,7 @@ export class TeacherDictionaryComponent implements OnInit {
             .subscribe((arasaacWord: ArasaacWord) => {
                 this.arasaacWord = arasaacWord;
             });
+        this.buscar = true;
     }
 
     public saveWordFromArasaac(): void {

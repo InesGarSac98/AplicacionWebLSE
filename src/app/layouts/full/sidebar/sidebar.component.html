@@ -1,12 +1,15 @@
-<div class="clock">
+<!-- <div class="clock">
     <app-clock></app-clock>
+</div> -->
+<div>
+    <p class="info">
+        {{"Nombre: "+ userName}}
+    </p>
 </div>
-<p class="info">
-    {{"Nombre: "+ userName}}
-</p>
 
 <mat-nav-list appAccordion>
-    <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="" class="{{ rla.isActive ? 'selected' : ''}}" group="{{menuitem.state}}" #rla="routerLinkActive">
+    <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive=""
+        class="{{ rla.isActive ? 'selected' : ''}}" group="{{menuitem.state}}" #rla="routerLinkActive">
         <a class="" appAccordionToggle [routerLink]="['/' + menuitem.state]" *ngIf="menuitem.type === 'link'">
             <mat-icon>{{ menuitem.icon }}</mat-icon>
             <span>{{ menuitem.name }}</span>
@@ -18,5 +21,3 @@
     </mat-list-item>
 
 </mat-nav-list>
-
-
