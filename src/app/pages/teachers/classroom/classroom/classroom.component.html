@@ -29,7 +29,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a mat-button class="nav-link {{initialTab === 2 ? 'active' : ''}}" href="#info-tab" data-toggle="tab">
+                                <a mat-button class="nav-link {{initialTab === 3 ? 'active' : ''}}" href="#info-tab" data-toggle="tab">
                                     <i class="material-icons">info</i> Información de la clase
                                     <div class="ripple-container"></div>
                                 </a>
@@ -87,7 +87,7 @@
                     <div class="tab-pane {{initialTab === 2 ? 'active' : ''}}" id="games-tab">
                         <app-add-games></app-add-games>
                     </div>
-                    <div class="tab-pane {{initialTab === 2 ? 'active' : ''}}" id="info-tab">
+                    <div class="tab-pane {{initialTab === 3 ? 'active' : ''}}" id="info-tab">
                         <div class="card-body ml-2">
                             <div *ngIf="dataLoaded">
                                 <p><b>Clase:</b> {{classroom.name}}</p>

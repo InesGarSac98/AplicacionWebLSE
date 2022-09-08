@@ -1,11 +1,11 @@
-
-
 .button{
    float: right;
+   bottom: 0.5rem !important;
 }
 
 .buttonAdd{
     align-items: center;
+    top: 1rem;
  }
 
 .pt{
@@ -14,4 +14,23 @@
 
 .pt-2{
     padding-top: 1.4rem !important;
+}
+
+.respuestas{
+    border : 1px solid #4ca7f1;
+    border-radius: 1em;
+}
+
+.boxs{
+    border : 1px solid #4ca7f1;
+    border-radius: 1em;
+    margin-left: 1rem;
+}
+
+.accordion{
+    margin-bottom: 2rem;
+}
+
+.button-submit{
+    margin-top: 2rem;
 }

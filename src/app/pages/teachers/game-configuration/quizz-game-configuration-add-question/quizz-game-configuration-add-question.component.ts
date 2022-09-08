@@ -116,6 +116,7 @@ export class QuizzGameConfigurationAddQuestionComponent implements OnInit {
         else {
             (this.formGroup.controls.questions as FormArray).removeAt(index);
         }
+        this.notifications.pushNotification('La pregunta se ha borrado correctamente', 'error');
     }
 
     public saveGameConfiguration() {

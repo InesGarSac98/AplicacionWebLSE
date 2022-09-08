@@ -18,7 +18,7 @@
                 <form *ngIf="formGroupIsLoaded" [formGroup]="formGroup" (submit)="saveGameConfiguration()">
                     <div class="row">
                         <mat-label>Tiempo de Juego</mat-label>
-                            <input formControlName="time" type="number">
+                            <input formControlName="time" type="number" class="boxs">
                     </div>
                     <button mat-raised-button [disabled]="!formGroup.valid" color="primary"type="submit">Guardar</button>
                 </form>
